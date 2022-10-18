@@ -1,0 +1,78 @@
+/*****************************************************/
+/* Variables for Module "Main"                       */
+/*****************************************************/
+resource_group                  = "Default"
+region                          = "us-south"
+toolchain_name                  = "DevSecOps CD Toolchain - Terraform"
+toolchain_description           = "CD Toolchain created with Template for DevSecOps Best Practices"
+
+/*****************************************************/
+/* Variables for Module "Repositories"               */
+/*****************************************************/
+ibm_cloud_api_key               = ""
+pipeline_repo                   = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-pipelines.git"
+evidence_repo                   = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-evidence-locker.git"
+inventory_repo                  = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
+issues_repo                     = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
+ibm_cloud_api                   = "https://test.cloud.ibm.com"
+
+/*****************************************************/
+/* Variables for Module "Services"                   */
+/*****************************************************/
+cluster_name                    = "my-iks-cluster"
+cluster_namespace               = "dev-ns"
+cluster_region                  = "ibm:ys1:us-south"
+registry_namespace              = "my-icr-ns"
+registry_region                 = "ibm:ys1:us-south"
+sm_name                         = "sm-prod-wdc"
+sm_region                       = "us-east"
+sm_group                        = "Default"
+sm_resource_group               = "default"
+
+cos_api_key = " "
+cos_bucket_name = " "
+cos_endpoint = " "
+
+/*****************************************************/
+/* Variables for Module "Integrations"               */
+/*****************************************************/
+slack_channel_name              = "slack-channel"
+slack_api_token                 = "slack-token"
+slack_user_name                 = "slack-user"
+
+
+/*****************************************************/
+/* Variables for Module "Main"                       */
+/*****************************************************/
+resource_group                  = "default"
+region                          = "eu-gb"
+toolchain_name                  = "DevSecOps CC Toolchain - Terraform"
+toolchain_description           = "Toolchain created with Template for DevSecOps Best Practices"
+
+/*****************************************************/
+/* Variables for Module "Repositories"               */
+/*****************************************************/
+ibm_cloud_api_key               = ""
+pipeline_repo                   = "https://eu-gb.git.cloud.ibm.com/open-toolchain/compliance-pipelines.git"
+evidence_repo                   = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-evidence-repo"
+inventory_repo                  = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-inventory-repo"
+issues_repo                     = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-issues-repo"
+ibm_cloud_api                   = "https://cloud.ibm.com"
+deployment_repo                 = "https://eu-gb.git.cloud.ibm.com/open-toolchain/hello-compliance-deployment.git"
+
+/*****************************************************/
+/* Variables for Module "Services"                   */
+/*****************************************************/
+cluster_name                    = "mycluster-4-devops"
+cluster_namespace               = "mmmm"
+cluster_region                  = "ibm:yp:us-south"
+registry_namespace              = "devsecops-ci-registry"
+registry_region                 = "ibm:yp:us-south"
+
+
+/*****************************************************/
+/* Variables for Module "Integrations"               */
+/*****************************************************/
+slack_channel_name              = "slack-channel"
+slack_api_token                 = "slack-token"
+slack_user_name                 = "slack-user"
