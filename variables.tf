@@ -1,4 +1,4 @@
-variable "resource_group" {
+variable "toolchain_resource_group" {
   type        = string
   description = "Resource group within which toolchain will be created"
   default     = "Default"
@@ -6,7 +6,8 @@ variable "resource_group" {
 
 variable "ibm_cloud_api_key" {
   type        = string
-  description = "IBM Cloud API KEY to fetch cloud resources"
+  description = "IBM Cloud API KEY to fetch/post cloud resources in terraform. Not used in the pipeline, where a secret reference is used instead."
+  sensitive   = true
 }
 
 variable "ibm_cloud_api" {
@@ -15,7 +16,7 @@ variable "ibm_cloud_api" {
   default     = "https://cloud.ibm.com"
 }
 
-variable "region" {
+variable "toolchain_region" {
   type        = string
   description = "IBM Cloud region where your toolchain will be created"
   default     = "us-south"
@@ -30,25 +31,7 @@ variable "toolchain_name" {
 variable "toolchain_description" {
   type        = string
   description = "Description for the Toolchain."
-  default     = "Toolchain created using IBM Cloud Continuous Delivery Service"
-}
-
-variable "cluster_name" {
-  type        = string
-  description = "Name of the kubernetes cluster where the application will be deployed."
-  default     = "MyFreeCluster"
-}
-
-variable "cluster_namespace" {
-  type        = string
-  description = "Name of the kubernetes cluster where the application will be deployed."
-  default     = "prod"
-}
-
-variable "cluster_region" {
-  type        = string
-  description = "Region of the kubernetes cluster where the application will be deployed."
-  default     = "ibm:ys1:us-south"
+  default     = "Toolchain created with terraform template for DevSecOps CC Best Practices"
 }
 
 variable "registry_namespace" {
@@ -67,11 +50,13 @@ variable "sm_name" {
   type        = string
   description = "Name of the Secrets Manager Instance to store the secrets."
 }
-variable "sm_region" {
+
+variable "sm_location" {
   type        = string
-  description = "IBM Cloud Region where the Secrets Manager Instance is created."
+  description = "IBM Cloud location containing the Secrets Manager instance."
   default     = "us-south"
 }
+
 variable "deployment_repo" {
     type        = string
     description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
@@ -80,7 +65,7 @@ variable "deployment_repo" {
 variable "deployment_repo_type" {
     type        = string
     description = "The repository type for deployment repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"    
+    default     = "hostedgit"
 }
 
 variable "pipeline_repo" {
@@ -175,14 +160,14 @@ variable "cos_bucket_name" {
   default     = ""
 }
 
-variable "sm_group" {
+variable "sm_secret_group" {
   type        = string
-  description = "The default Secrets Manager group for your secrets. "
+  description = "The Secrets Manager secret group containing your secrets."
   default     = "Default"
 }
 
 variable "sm_resource_group" {
   type        = string
-  description = "The default Secrets Manager group for your secrets. "
-  default     = "default"
+  description = "The resource group containing the Secrets Manager instance for your secrets."
+  default     = "Default"
 }

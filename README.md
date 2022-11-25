@@ -71,13 +71,13 @@ to setup the provider and go-runtime required for creating the toolchain via ter
 
 | Variable      | Description | 
 | ---           | ----        | 
-| resource_group            | Resource Group for the toolchain     |
-| region                    | IBM Cloud Region for the toolchain |
+| toolchain_resource_group  | Resource Group for the toolchain     |
+| toolchain_region          | IBM Cloud Region for the toolchain |
 | toolchain_name            | Name for the toolchain      |
 | toolchain_description     | Description for the toolchain |
 | app_name                  | Name of the application       |
 | app_image_name            | Name of the docker image for the application     |
-| ibm_cloud_api_key         | Resource Group for the toolchain     |
+| ibm_cloud_api_key         | IBM Cloud API KEY to fetch/post cloud resources in terraform. Not used in the pipeline, where a secret reference is used instead. |
 | ibm_cloud_api             | IBM Cloud API Endpoint     |
 |: Variable for Repositories : |
 | app_repo                  | Git Repository and Issue Tracking (GRIT) repository hosting sample nodejs application |
@@ -91,12 +91,13 @@ to setup the provider and go-runtime required for creating the toolchain via ter
 | issues_repo               | Git Repository and Issue Tracking (GRIT) repository hosting template for Incident/Issues |
 | issues_repo_type          | hostedgit, github     |
 |:    Variables for Services    :|
-| cluster_name              | IBM Cloud IKS Cluster name where the sample application is to be deployed by the toolchain    |
-| cluster_namespace         | Namespace within the IBM Cloud IKS Cluster where the sample application is to be deployed  |
-| cluster_region            | IBM Cloud IKS Cluster region |
 | registry_namespace        | IBM Cloud ICR Namespace where the docker image built for the application is to be pushed |
-| sm_name                   | Name of the Secrets Manager Instance within your account from where secrets are to be referred  |
-
+| sm_resource_group         | The resource group containing the Secrets Manager instance for your secrets. |
+| sm_location               | IBM Cloud location containing the Secrets Manager instance. |
+| sm_name                   | Name of the Secrets Manager instance where the secrets are stored. |
+| sm_secret_group           | The Secrets Manager secret group containing your secrets. |
+| cos_endpoint              | Cloud Object Storage endpoint name |
+| cos_bucket_name           | Cloud Object Storage bucket name |
 
 3. Run the terraform initialization command
 ```
