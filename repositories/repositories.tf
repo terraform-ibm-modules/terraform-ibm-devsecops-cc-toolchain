@@ -1,15 +1,40 @@
+locals {
+  # Note terraform 1.3.x allows startswith() function
+  # but terraform 1.x uses regexall
+  is_staging = length(regexall("^crn:v1:staging:.*$", var.toolchain_crn)) > 0
+  # is_staging = startswith(var.toolchain_crn, "crn:v1:staging:")
+  git_dev = "https://dev.us-south.git.test.cloud.ibm.com"
+  git_mon01 = "https://mon01.git.cloud.ibm.com"
+  git_fr2 = "https://private.eu-fr2.git.cloud.ibm.com"
+  compliance_pipelines_git_server = (
+    (local.is_staging) ? local.git_dev 
+    : (var.toolchain_region == "eu-fr2")? local.git_fr2
+    : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
+  )
+  # in dev/staging, compliance_pipelines_git_server is dev and clone_from_git_server is mon01
+  clone_from_git_server = (
+    (local.is_staging) ? local.git_mon01 : local.compliance_pipelines_git_server
+  )
+
+  deployment_repo_source = (
+    (length(var.deployment_repo_clone_from_url) > 0)? var.deployment_repo_clone_from_url
+    : format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
+  )
+
+}
+
 resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
   toolchain_id = var.toolchain_id
   name         = "deployment-repo"
   initialization {
     type            = "clone_if_not_exists"
-    source_repo_url = var.deployment_repo
+    source_repo_url = local.deployment_repo_source
     private_repo    = true
-    repo_name = join("-", [split(".", split("/", var.deployment_repo)[4])[0], formatdate("DDMMYYYYhhmmss", timestamp())])
+    repo_name       = join("-", [ var.repositories_prefix, "config-repo" ])
   }
   parameters {
-    toolchain_issues_enabled  = false
-    enable_traceability       = false
+    toolchain_issues_enabled = false
+    enable_traceability      = false
   }
 }
 

@@ -12,12 +12,15 @@ module "repositories" {
   source                          = "./repositories"
 
   toolchain_id                    = ibm_cd_toolchain.toolchain_instance.id
+  toolchain_crn                   = ibm_cd_toolchain.toolchain_instance.crn
   toolchain_region                = var.toolchain_region
   deployment_repo                 = var.deployment_repo
   pipeline_repo                   = var.pipeline_repo
   evidence_repo                   = var.evidence_repo
   inventory_repo                  = var.inventory_repo
   issues_repo                     = var.issues_repo
+  deployment_repo_clone_from_url  = var.deployment_repo_clone_from_url
+  repositories_prefix             = var.repositories_prefix
 }
 
 resource "ibm_cd_toolchain_tool_pipeline" "cc_pipeline" {
