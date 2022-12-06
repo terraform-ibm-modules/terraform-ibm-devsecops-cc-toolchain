@@ -21,7 +21,7 @@ deployment_repo                 = "https://eu-gb.git.cloud.ibm.com/open-toolchai
 /* Variables for Module "Services"                   */
 /*****************************************************/
 registry_namespace              = "my-icr-ns"
-registry_region                 = "ibm:ys1:us-south"
+registry_region                 = "ibm:yp:us-south"
 sm_name                         = "sm-prod-wdc"
 sm_location                     = "us-south"
 sm_secret_group                 = "Default"
