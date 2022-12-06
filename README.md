@@ -126,8 +126,26 @@ The following steps will create the default CI toolchain with the example applic
 ```
    terraform apply
 ```
+You should see a similar output
+```
+   secrets_manager_instance_id = "cd1472b8-9a3a-481e-96a1-55515bcc574f"
+   toolchain_id = "847b26ec-d7f4-41b9-a90d-e73ec3a927ce"
+
+```
+
+Take note of the outputs. The values can be used for setting up the DevSecOps Terraform CD and CC toolchains
 
 8. The new toolchain should now be visible in your account
+You can navigate directly to it by going to
+```
+   https://cloud.ibm.com/devops/toolchains/{toolchain_id}?env_id=ibm:yp:us-south
+```
+
+Where {toolchain_id} is replaced with the toolchain_id value from the output
+```
+   https://cloud.ibm.com/devops/toolchains/847b26ec-d7f4-41b9-a90d-e73ec3a927ce?env_id=ibm:yp:us-south
+```
+
 
 ### Complete list of supported variables
 | Variables      | Description | 
