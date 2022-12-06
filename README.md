@@ -127,7 +127,7 @@ The following steps will create the default CI toolchain with the example applic
    terraform apply
 ```
 
-8. The new toolchain should now be visiable in your account
+8. The new toolchain should now be visible in your account
 
 ### Complete list of supported variables
 | Variables      | Description | 
