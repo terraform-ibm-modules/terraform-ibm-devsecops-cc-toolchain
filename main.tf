@@ -48,6 +48,7 @@ module "pipeline-cc" {
   cos_bucket_name           = var.cos_bucket_name
   cos_api_key               = var.cos_api_key
   cos_endpoint              = var.cos_endpoint
+  compliance_base_image     = var.compliance_base_image
 }
 
 module "integrations" {

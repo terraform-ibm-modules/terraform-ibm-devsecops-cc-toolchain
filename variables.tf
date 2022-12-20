@@ -183,3 +183,9 @@ variable "repositories_prefix" {
     description = ""
     default     = "compliance-tf"
 }
+
+variable "compliance_base_image" {
+  type        = string
+  description = "Pipeline baseimage to run most of the built-in pipeline code"
+  default     = ""
+}

@@ -55,3 +55,9 @@ variable "cos_bucket_name" {
 
 variable "cos_endpoint" {
 }
+
+variable "compliance_base_image" {
+  type        = string
+  description = "Pipeline baseimage to run most of the built-in pipeline code"
+  default     = ""
+}

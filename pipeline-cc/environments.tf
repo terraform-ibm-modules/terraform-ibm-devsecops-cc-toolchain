@@ -172,3 +172,10 @@ resource "ibm_cd_tekton_pipeline_property" "ibm_cloud_api" {
   value          = var.ibm_cloud_api
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
+
+resource "ibm_cd_tekton_pipeline_property" "compliance_base_image" {
+  name           = "compliance-baseimage"
+  type           = "text"
+  value          = var.compliance_base_image
+  pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
