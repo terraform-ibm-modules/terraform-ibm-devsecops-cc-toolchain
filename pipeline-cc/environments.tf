@@ -42,7 +42,7 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_environment-tag" {
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_git-token" {
   name           = "git-token"
-  type           = "text"
+  type           = "secure"
   value          = ""
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id     
 }
