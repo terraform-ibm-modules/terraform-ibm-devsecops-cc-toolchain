@@ -34,3 +34,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cc_pipeline_timed_trigger" {
   enabled         = "true"
   cron            = "0 4 * * *"
 }
+
+output "pipeline_id" {
+  value = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}

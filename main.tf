@@ -87,3 +87,7 @@ output "toolchain_id" {
 output "secrets_manager_instance_id" {
   value = module.services.sm_instance_guid
 }
+
+output "cc_pipeline_id" {
+  value = module.pipeline-cc.pipeline_id
+}
