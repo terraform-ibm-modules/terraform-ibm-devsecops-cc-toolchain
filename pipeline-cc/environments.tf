@@ -174,6 +174,7 @@ resource "ibm_cd_tekton_pipeline_property" "ibm_cloud_api" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "compliance_base_image" {
+  count          = (var.compliance_base_image == "") ? 0:1
   name           = "compliance-baseimage"
   type           = "text"
   value          = var.compliance_base_image
