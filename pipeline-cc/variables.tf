@@ -61,3 +61,15 @@ variable "compliance_base_image" {
   description = "Pipeline baseimage to run most of the built-in pipeline code"
   default     = ""
 }
+
+variable "doi_environment" {
+  type = string
+  description = "DevOpsInsights environment for DevSecOps CD deployment"
+  default = ""
+}
+
+variable "doi_toolchain_id" {
+  type = string
+  description = "DevOpsInsights Toolchain ID"
+  default = ""  
+}

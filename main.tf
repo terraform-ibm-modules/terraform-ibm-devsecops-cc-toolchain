@@ -49,6 +49,8 @@ module "pipeline-cc" {
   cos_api_key               = var.cos_api_key
   cos_endpoint              = var.cos_endpoint
   compliance_base_image     = var.compliance_base_image
+  doi_toolchain_id          = var.doi_toolchain_id
+  doi_environment           = var.doi_environment
 }
 
 module "integrations" {
@@ -69,6 +71,7 @@ module "integrations" {
   scc_profile               = var.scc_profile
   scc_scope                 = var.scc_scope
   authorization_policy_creation = var.authorization_policy_creation
+  doi_toolchain_id          = var.doi_toolchain_id
 }
 
 module "services" {

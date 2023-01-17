@@ -195,3 +195,15 @@ variable "authorization_policy_creation" {
     description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
     default     = ""
   }
+
+  variable "doi_environment" {
+  type = string
+  description = "DevOpsInsights environment for DevSecOps CD deployment"
+  default = ""
+}
+
+variable "doi_toolchain_id" {
+  type = string
+  description = "DevOpsInsights Toolchain ID"
+  default = ""  
+}
