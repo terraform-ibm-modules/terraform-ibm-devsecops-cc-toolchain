@@ -189,3 +189,9 @@ variable "compliance_base_image" {
   description = "Pipeline baseimage to run most of the built-in pipeline code"
   default     = ""
 }
+
+variable "authorization_policy_creation" {
+    type        = string
+    description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
+    default     = ""
+  }

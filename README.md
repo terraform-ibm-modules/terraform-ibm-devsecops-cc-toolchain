@@ -155,6 +155,7 @@ Where {toolchain_id} is replaced with the toolchain_id value from the output
 | toolchain_name            | Name for the toolchain      |
 | toolchain_description     | Description for the toolchain |t used in the pipeline, where a secret reference is used instead. |
 |ibm_cloud_api_key          | apikey for the Terraform CLI to access account resources|
+|authorization_policy_creation| Disable Service to Service Authorization Policy creation for secrets resolution. Set to "disabled" if you do not want this policy auto created|
 |**Variables for Repositories** |
 | deployment_repo           | https://us-south.git.cloud.ibm.com/open-toolchain/hello-compliance-deployment| 
 | pipeline_repo              | https://us-south.git.cloud.ibm.com/open-toolchain/compliance-pipelines |

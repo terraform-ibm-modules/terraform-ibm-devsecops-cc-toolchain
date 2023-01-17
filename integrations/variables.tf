@@ -53,3 +53,9 @@ variable "scc_scope" {
 
 variable "ibm_cloud_api_key" {
 }
+
+variable "authorization_policy_creation" {
+    type        = string
+    description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
+    default     = ""
+  }

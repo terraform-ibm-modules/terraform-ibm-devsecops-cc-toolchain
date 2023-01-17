@@ -1,4 +1,5 @@
 resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
+  count = var.authorization_policy_creation == "disabled" ? 0 : 1
   source_service_name         = "toolchain"
   source_resource_instance_id = var.toolchain_id
   target_service_name         = "secrets-manager"

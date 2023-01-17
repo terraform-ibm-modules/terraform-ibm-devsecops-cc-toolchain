@@ -68,6 +68,7 @@ module "integrations" {
   scc_evidence_repo         = module.repositories.evidence_repo_url
   scc_profile               = var.scc_profile
   scc_scope                 = var.scc_scope
+  authorization_policy_creation = var.authorization_policy_creation
 }
 
 module "services" {
