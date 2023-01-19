@@ -34,6 +34,8 @@ sm_resource_group               = "Default"
 /*****************************************************/
 /* Variables for Module "Integrations"               */
 /*****************************************************/
+#doi_toolchain_id                = toolchain Id of the toolchain owning the DevopsInsights integration
+#link_to_doi_toolchain           = false|true (Default: false)
 #authorization_policy_creation   = "disabled"
 #slack_channel_name              = "slack-channel"
 #slack_api_token                 = "slack-token"

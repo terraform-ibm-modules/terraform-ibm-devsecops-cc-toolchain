@@ -171,4 +171,5 @@ Where {toolchain_id} is replaced with the toolchain_id value from the output
 | sm_secret_group           | The Secrets Manager secret group containing your secrets. |
 | cos_endpoint              | Cloud Object Storage endpoint name |
 | cos_bucket_name           | Cloud Object Storage bucket name |
-
+| link_to_doi_toolchain     | Default 'false'. Use a custom tool integration to link to an existing DevOpsInsights integration using 'doi_toolchain_id' |
+| doi_toolchain_id          | The Id of the toolchain containing the instance of DevOpsInsights
