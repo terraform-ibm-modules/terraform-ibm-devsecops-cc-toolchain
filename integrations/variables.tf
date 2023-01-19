@@ -60,5 +60,14 @@ variable "authorization_policy_creation" {
     default     = ""
   }
 
-variable "doi_toolchain_id" {  
+variable "link_to_doi_toolchain" {
+  description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false"
+  type        = bool
+  default     = false
+}
+
+variable "doi_toolchain_id" {
+  type = string
+  description = "DevOpsInsights Toolchain ID to link to"
+  default = ""  
 }
