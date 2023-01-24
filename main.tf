@@ -15,7 +15,6 @@ module "repositories" {
   toolchain_crn                  = ibm_cd_toolchain.toolchain_instance.crn
   toolchain_region               = var.toolchain_region
   deployment_repo                = var.deployment_repo
-  pipeline_repo                  = var.pipeline_repo
   evidence_repo                  = var.evidence_repo
   inventory_repo                 = var.inventory_repo
   issues_repo                    = var.issues_repo
@@ -40,7 +39,7 @@ module "pipeline-cc" {
   registry_namespace    = var.registry_namespace
   registry_region       = var.registry_region
   deployment_repo       = module.repositories.deployment_repo_url
-  pipeline_repo         = module.repositories.pipeline_repo_url
+  pipeline_repo_url     = module.repositories.pipeline_repo_url
   evidence_repo         = module.repositories.evidence_repo_url
   inventory_repo        = module.repositories.inventory_repo_url
   issues_repo           = module.repositories.issues_repo_url
@@ -95,4 +94,9 @@ output "secrets_manager_instance_id" {
 
 output "cc_pipeline_id" {
   value = module.pipeline-cc.pipeline_id
+}
+
+output "pipeline_repo_url" {
+  value       = module.repositories.pipeline_repo_url
+  description = "This repository url contains the tekton definitions for compliance pipelines"
 }

@@ -10,7 +10,7 @@ resource "ibm_cd_tekton_pipeline_definition" "cc_pipeline_definition" {
   source {
      type = "git"
      properties {
-       url    = var.pipeline_repo
+       url    = var.pipeline_repo_url
        branch = var.pipeline_branch
        path   = var.pipeline_path
      }

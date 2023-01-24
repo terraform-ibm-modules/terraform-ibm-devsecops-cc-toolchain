@@ -21,9 +21,7 @@ variable "secret_tool" {
 variable "deployment_repo" {
 }
 
-variable "pipeline_repo" {
-    type        = string
-    description = "The repository url containing pipeline definitions for Compliance CI Toolchain."
+variable "pipeline_repo_url" {
 }
 
 variable "inventory_repo" {

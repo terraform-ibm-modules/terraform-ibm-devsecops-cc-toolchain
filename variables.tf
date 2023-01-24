@@ -68,17 +68,6 @@ variable "deployment_repo_type" {
     default     = "hostedgit"
 }
 
-variable "pipeline_repo" {
-    type        = string
-    description = "This repository contains the tekton definitions for compliance pipelines."
-}
-
-variable "pipeline_repo_type" {
-    type        = string
-    description = "The repository type for pipeline repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
-}
-
 variable "inventory_repo" {
     type        = string
     description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."

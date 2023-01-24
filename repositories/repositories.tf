@@ -42,9 +42,8 @@ resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_repo" {
   toolchain_id = var.toolchain_id
   name         = "pipeline-repo"
   initialization {
-    type         = "link"
-    repo_url     = var.pipeline_repo
-    private_repo = true
+    type = "link"
+    repo_url = format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
   }
   parameters {
     toolchain_issues_enabled = false
@@ -100,6 +99,7 @@ output "deployment_repo_url" {
 
 output "pipeline_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.pipeline_repo.parameters[0].repo_url
+  description = "This repository url contains the tekton definitions for compliance pipelines"
 }
 
 output "inventory_repo_url" {
