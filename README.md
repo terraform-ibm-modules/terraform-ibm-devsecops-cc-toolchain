@@ -156,6 +156,8 @@ Where {toolchain_id} is replaced with the toolchain_id value from the output
 | toolchain_description     | Description for the toolchain |t used in the pipeline, where a secret reference is used instead. |
 |ibm_cloud_api_key          | apikey for the Terraform CLI to access account resources|
 |authorization_policy_creation| Disable Service to Service Authorization Policy creation for secrets resolution. Set to "disabled" if you do not want this policy auto created|
+| pipeline_ibmcloud_api_key_secret_name|Default 'ibmcloud-api-key'. The name of the secret in the secrets provider for the apikey used in the pipeline|
+| cos_api_key_secret_name|Default 'cos-api-key'. The name of the secret in the secrets provider for the COS api key|
 |**Variables for Repositories** |
 | deployment_repo           | https://us-south.git.cloud.ibm.com/open-toolchain/hello-compliance-deployment| 
 | pipeline_repo              | https://us-south.git.cloud.ibm.com/open-toolchain/compliance-pipelines |

@@ -25,10 +25,10 @@ sm_name                         = "sm-prod-wdc"
 sm_location                     = "us-south"
 sm_secret_group                 = "Default"
 sm_resource_group               = "Default"
-
-#cos_api_key = ""
-#cos_bucket_name = ""
-#cos_endpoint = ""
+#pipeline_ibmcloud_api_key_secret_name  = "ibmcloud_api_key"
+#cos_api_key_secret_name        = ""
+#cos_bucket_name                = ""
+#cos_endpoint                   = ""
 
 /*****************************************************/
 /* Variables for Module "Integrations"               */

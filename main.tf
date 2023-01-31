@@ -33,45 +33,46 @@ module "pipeline-cc" {
   source     = "./pipeline-cc"
   depends_on = [module.repositories, module.integrations, module.services]
 
-  ibm_cloud_api         = var.ibm_cloud_api
-  ibm_cloud_api_key     = var.ibm_cloud_api_key
-  pipeline_id           = split("/", ibm_cd_toolchain_tool_pipeline.cc_pipeline.id)[1]
-  registry_namespace    = var.registry_namespace
-  registry_region       = var.registry_region
-  deployment_repo       = module.repositories.deployment_repo_url
-  pipeline_repo_url     = module.repositories.pipeline_repo_url
-  evidence_repo         = module.repositories.evidence_repo_url
-  inventory_repo        = module.repositories.inventory_repo_url
-  issues_repo           = module.repositories.issues_repo_url
-  secret_tool           = module.integrations.secret_tool
-  cos_bucket_name       = var.cos_bucket_name
-  cos_api_key           = var.cos_api_key
-  cos_endpoint          = var.cos_endpoint
-  compliance_base_image = var.compliance_base_image
-  doi_toolchain_id      = var.doi_toolchain_id
-  doi_environment       = var.doi_environment
+  ibm_cloud_api                         = var.ibm_cloud_api
+  ibm_cloud_api_key                     = var.ibm_cloud_api_key
+  pipeline_id                           = split("/", ibm_cd_toolchain_tool_pipeline.cc_pipeline.id)[1]
+  registry_namespace                    = var.registry_namespace
+  registry_region                       = var.registry_region
+  deployment_repo                       = module.repositories.deployment_repo_url
+  pipeline_repo_url                     = module.repositories.pipeline_repo_url
+  evidence_repo                         = module.repositories.evidence_repo_url
+  inventory_repo                        = module.repositories.inventory_repo_url
+  issues_repo                           = module.repositories.issues_repo_url
+  secret_tool                           = module.integrations.secret_tool
+  cos_bucket_name                       = var.cos_bucket_name
+  cos_api_key_secret_name               = var.cos_api_key_secret_name
+  cos_endpoint                          = var.cos_endpoint
+  compliance_base_image                 = var.compliance_base_image
+  doi_toolchain_id                      = var.doi_toolchain_id
+  doi_environment                       = var.doi_environment
+  pipeline_ibmcloud_api_key_secret_name = var.pipeline_ibmcloud_api_key_secret_name
 }
 
 module "integrations" {
   source     = "./integrations"
   depends_on = [module.repositories, module.services]
 
-  ibm_cloud_api_key             = var.ibm_cloud_api_key
-  toolchain_id                  = ibm_cd_toolchain.toolchain_instance.id
-  sm_location                   = var.sm_location
-  sm_resource_group             = var.sm_resource_group
-  sm_name                       = var.sm_name
-  sm_instance_guid              = module.services.sm_instance_guid
-  sm_secret_group               = var.sm_secret_group
-  slack_channel_name            = var.slack_channel_name
-  slack_api_token               = var.slack_api_token
-  slack_user_name               = var.slack_user_name
-  scc_evidence_repo             = module.repositories.evidence_repo_url
-  scc_profile                   = var.scc_profile
-  scc_scope                     = var.scc_scope
-  authorization_policy_creation = var.authorization_policy_creation
-  link_to_doi_toolchain         = var.link_to_doi_toolchain
-  doi_toolchain_id              = var.doi_toolchain_id
+  ibm_cloud_api_key              = var.ibm_cloud_api_key
+  toolchain_id                   = ibm_cd_toolchain.toolchain_instance.id
+  sm_location                    = var.sm_location
+  sm_resource_group              = var.sm_resource_group
+  sm_name                        = var.sm_name
+  sm_instance_guid               = module.services.sm_instance_guid
+  sm_secret_group                = var.sm_secret_group
+  slack_channel_name             = var.slack_channel_name
+  slack_api_token                = var.slack_api_token
+  slack_user_name                = var.slack_user_name
+  scc_evidence_repo              = module.repositories.evidence_repo_url
+  scc_profile                    = var.scc_profile
+  scc_scope                      = var.scc_scope
+  authorization_policy_creation  = var.authorization_policy_creation
+  link_to_doi_toolchain          = var.link_to_doi_toolchain
+  doi_toolchain_id               = var.doi_toolchain_id
 }
 
 module "services" {

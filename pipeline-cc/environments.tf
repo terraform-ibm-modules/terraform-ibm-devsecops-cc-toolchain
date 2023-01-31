@@ -127,14 +127,14 @@ resource "ibm_cd_tekton_pipeline_property" "slack_notifications" {
 resource "ibm_cd_tekton_pipeline_property" "ibmcloud_api_key" {
   name           = "ibmcloud-api-key"
   type           = "secure"
-  value          = format("{vault::%s.ibmcloud-api-key}", var.secret_tool)
+  value          = format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", var.secret_tool)
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cos_api_key" {
   name           = "cos-api-key"
   type           = "secure"
-  value          = format("{vault::%s.cos-api-key}", var.secret_tool)
+  value          = format("{vault::%s.${var.cos_api_key_secret_name}}", var.secret_tool)
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
