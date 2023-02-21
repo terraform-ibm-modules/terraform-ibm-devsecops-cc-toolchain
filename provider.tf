@@ -1,4 +1,4 @@
-provider "ibm" {
-  ibmcloud_api_key = var.ibm_cloud_api_key
-  region           = var.toolchain_region
-}
+#provider "ibm" {
+#  ibmcloud_api_key = var.ibm_cloud_api_key
+#  region           = var.toolchain_region
+#}

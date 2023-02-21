@@ -10,9 +10,9 @@ toolchain_description           = "CC Toolchain created with Template for DevSec
 /* Variables for Module "Repositories"               */
 /*****************************************************/
 ibm_cloud_api_key               = ""
-evidence_repo                   = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-evidence-repo"
-inventory_repo                  = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-inventory-repo"
-issues_repo                     = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-issues-repo"
+evidence_repo_url               = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-evidence-repo"
+inventory_repo_url              = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-inventory-repo"
+issues_repo_url                 = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-issues-repo"
 ibm_cloud_api                   = "https://cloud.ibm.com"
 deployment_repo                 = "https://eu-gb.git.cloud.ibm.com/open-toolchain/hello-compliance-deployment.git"
 

@@ -36,6 +36,15 @@ variable "evidence_repo" {
 variable "issues_repo" {
 }
 
+variable "inventory_repo_url" {
+}
+
+variable "evidence_repo_url" {
+}
+
+variable "issues_repo_url" {    
+}
+
 variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CI Toolchain."

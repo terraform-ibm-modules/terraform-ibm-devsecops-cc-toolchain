@@ -15,9 +15,9 @@ module "repositories" {
   toolchain_crn                  = ibm_cd_toolchain.toolchain_instance.crn
   toolchain_region               = var.toolchain_region
   deployment_repo                = var.deployment_repo
-  evidence_repo                  = var.evidence_repo
-  inventory_repo                 = var.inventory_repo
-  issues_repo                    = var.issues_repo
+  evidence_repo_url              = var.evidence_repo_url
+  inventory_repo_url             = var.inventory_repo_url
+  issues_repo_url                = var.issues_repo_url
   deployment_repo_clone_from_url = var.deployment_repo_clone_from_url
   repositories_prefix            = var.repositories_prefix
 }
@@ -40,9 +40,12 @@ module "pipeline-cc" {
   registry_region                       = var.registry_region
   deployment_repo                       = module.repositories.deployment_repo_url
   pipeline_repo_url                     = module.repositories.pipeline_repo_url
-  evidence_repo                         = module.repositories.evidence_repo_url
-  inventory_repo                        = module.repositories.inventory_repo_url
-  issues_repo                           = module.repositories.issues_repo_url
+  evidence_repo_url                     = module.repositories.evidence_repo_url
+  inventory_repo_url                    = module.repositories.inventory_repo_url
+  issues_repo_url                       = module.repositories.issues_repo_url
+  evidence_repo                         = module.repositories.evidence_repo
+  inventory_repo                        = module.repositories.inventory_repo
+  issues_repo                           = module.repositories.issues_repo
   secret_tool                           = module.integrations.secret_tool
   cos_bucket_name                       = var.cos_bucket_name
   cos_api_key_secret_name               = var.cos_api_key_secret_name

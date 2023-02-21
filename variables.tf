@@ -74,7 +74,7 @@ variable "deployment_repo_type" {
     default     = "hostedgit"
 }
 
-variable "inventory_repo" {
+variable "inventory_repo_url" {
     type        = string
     description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
 }
@@ -85,7 +85,7 @@ variable "inventory_repo_type" {
     default     = "hostedgit"
 }
 
-variable "evidence_repo" {
+variable "evidence_repo_url" {
     type        = string
     description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
 }
@@ -96,7 +96,7 @@ variable "evidence_repo_type" {
     default     = "hostedgit"
 }
 
-variable "issues_repo" {
+variable "issues_repo_url" {
     type        = string
     description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
 }
