@@ -1,6 +1,12 @@
-variable "deployment_repo" {
+variable "deployment_repo_url" {
     type        = string
     description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
+}
+
+variable "pipeline_config_repo_existing_url" {
+}
+
+variable "pipeline_config_repo_branch" {
 }
 
 variable "inventory_repo_url" {

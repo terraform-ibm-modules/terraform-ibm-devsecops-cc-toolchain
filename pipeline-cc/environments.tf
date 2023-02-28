@@ -64,21 +64,22 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube-config" {
 resource "ibm_cd_tekton_pipeline_property" "pipeline_config" {
   name           = "pipeline-config"
   type           = "text"
-  value          = ".pipeline-config.yaml"
+  value          = var.pipeline_config_path
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id    
 }
 
 resource "ibm_cd_tekton_pipeline_property" "pipeline_config_branch" {
   name           = "pipeline-config-branch"
   type           = "text"
-  value          = "master"
+  value          = (var.pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch: var.pipeline_config_repo_branch
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id  
 }
 
 resource "ibm_cd_tekton_pipeline_property" "pipeline_config_repo" {
   name           = "pipeline-config-repo"
-  type           = "text"
-  value          = var.deployment_repo
+  type           = "integration"
+  value          = try(var.pipeline_config_repo[0].tool_id,  var.deployment_repo.tool_id)
+  path           = "parameters.repo_url"
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 

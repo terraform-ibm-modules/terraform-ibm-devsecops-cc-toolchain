@@ -21,7 +21,22 @@ variable "secret_tool" {
 variable "pipeline_ibmcloud_api_key_secret_name" {
 }
 
+variable "deployment_repo_url" {
+}
+
 variable "deployment_repo" {
+}
+
+variable "pipeline_config_repo_existing_url" {
+}
+
+variable "pipeline_config_repo_branch" {
+}
+
+variable "pipeline_config_path" {
+}
+
+variable "pipeline_config_repo" {
 }
 
 variable "pipeline_repo_url" {

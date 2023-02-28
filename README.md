@@ -164,13 +164,21 @@ Where {toolchain_id} is replaced with the toolchain_id value from the output
 | evidence_repo             | The repo url for the Evidence repo created in the CI toolchain | 
 | inventory_repo            | The repo url for the Inventory repo created in the CI toolchain |
 |issues_repo                | The repo url for the Issues repo created in the CI toolchain |
+| pipeline_config_repo_existing_url | The URL of an existing GRIT repository containing the pipeline-config.yaml |
+| pipeline_config_repo_branch  | the branch of the repository containing the pipeline-config.yaml |
+| pipeline_config_path | By default: ".pipeline-config.yaml". The path of the pipeline-config.yaml file in the specified repository|
 |    **Variables for Services**    |
 | registry_namespace        | IBM Cloud ICR Namespace where the docker image built for the application is to be pushed |
 | registry_region           | IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. |
+| enable_secrets_manager    | Bool. Default: true. Use a Secrets Manager integration for the secrets.             |
+| enable_key_protect        | Bool. Default: false. Use a Key Protect integration for the secrets.                |
 | sm_resource_group         | The resource group containing the Secrets Manager instance for your secrets. |
 | sm_location               | IBM Cloud location/region containing the Secrets Manager instance. |
 | sm_name                   | Name of the Secrets Manager instance where the secrets are stored. |
 | sm_secret_group           | The Secrets Manager secret group containing your secrets. |
+| kp_resource_group         | The resource group containing the Key Protect instance for your secrets. |
+| kp_location               | IBM Cloud location/region containing the Key Protect instance.           |
+| kp_name                   | Name of the Key Protect instance where the secrets are stored            |
 | cos_endpoint              | Cloud Object Storage endpoint name |
 | cos_bucket_name           | Cloud Object Storage bucket name |
 | link_to_doi_toolchain     | Default 'false'. Use a custom tool integration to link to an existing DevOpsInsights integration using 'doi_toolchain_id' |

@@ -52,21 +52,14 @@ variable "registry_region" {
   default     = "ibm:yp:us-south"
 }
 
-variable "sm_name" {
-  type        = string
-  description = "Name of the Secrets Manager Instance to store the secrets."
-}
-
-variable "sm_location" {
-  type        = string
-  description = "IBM Cloud location containing the Secrets Manager instance."
-  default     = "us-south"
-}
-
-variable "deployment_repo" {
+variable "deployment_repo_url" {
     type        = string
     description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
+    default     = ""
 }
+
+#variable "deployment_repo" {
+#}
 
 variable "deployment_repo_type" {
     type        = string
@@ -105,6 +98,30 @@ variable "issues_repo_type" {
     type        = string
     description = "The repository type for issues repo. One of [clone, link, hostedgit]"
     default     = "hostedgit"
+}
+
+variable "pipeline_config_repo_existing_url" {
+  type        = string
+  description = "(Optional). Specify a repository containing a custom pipeline-config.yaml file"
+  default     = ""
+}
+
+variable "pipeline_config_repo" {
+  type        = string
+  description = "(Optional). Specify the branch containing the custom pipeline-config.yaml file"
+  default     = ""
+}
+
+variable "pipeline_config_repo_branch" {
+  type        = string
+  description = "(Optional). Specify the branch containing the custom pipeline-config.yaml file"
+  default     = "master"
+}
+
+variable "pipeline_config_path" {
+  type        = string
+  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo"
+  default     = ".pipeline-config.yaml"
 }
 
 variable "slack_api_token" {
@@ -165,6 +182,46 @@ variable "sm_resource_group" {
   type        = string
   description = "The resource group containing the Secrets Manager instance for your secrets."
   default     = "Default"
+}
+
+variable "sm_name" {
+  type        = string
+  description = "Name of the Secrets Manager instance where the secrets are stored."
+  default     = "sm-compliance-secrets"
+}
+
+variable "sm_location" {
+  type        = string
+  description = "IBM Cloud location/region containing the Secrets Manager instance."
+  default     = "us-south"
+}
+
+variable "kp_resource_group" {
+  type        = string
+  description = "The resource group containing the Key Protect instance for your secrets."
+  default     = "Default"
+}
+
+variable "kp_name" {
+  type        = string
+  description = "Name of the Key Protect instance where the secrets are stored."
+  default     = "kp-compliance-secrets"
+}
+
+variable "kp_location" {
+  type        = string
+  description = "IBM Cloud location/region containing the Key Protect instance."
+  default     = "us-south"
+}
+
+variable "enable_key_protect" {
+  type        = bool
+  default     = false
+}
+
+variable "enable_secrets_manager" {
+  type        = bool
+  default     = true
 }
 
 variable "deployment_repo_clone_from_url" {

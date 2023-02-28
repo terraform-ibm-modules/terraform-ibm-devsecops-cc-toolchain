@@ -38,6 +38,21 @@ resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
   }
 }
 
+resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_config_repo_existing_hostedgit" {
+  count = (var.pipeline_config_repo_existing_url == "") ? 0 : 1 
+  toolchain_id = var.toolchain_id
+  name         = "pipeline-config-repo"
+  initialization {
+    type = "link"
+    repo_url = var.pipeline_config_repo_existing_url
+    git_id = ""
+  }
+  parameters {
+    toolchain_issues_enabled = false
+    enable_traceability      = false
+  }
+}
+
 resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_repo" {
   toolchain_id = var.toolchain_id
   name         = "pipeline-repo"
@@ -95,6 +110,14 @@ resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
 
 output "deployment_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.deployment_repo.parameters[0].repo_url
+}
+
+output "deployment_repo" {
+  value = ibm_cd_toolchain_tool_hostedgit.deployment_repo
+}
+
+output "pipeline_config_repo" {
+  value = ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit
 }
 
 output "pipeline_repo_url" {
