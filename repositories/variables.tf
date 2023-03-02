@@ -6,7 +6,16 @@ variable "deployment_repo_url" {
 variable "pipeline_config_repo_existing_url" {
 }
 
-variable "pipeline_config_repo_branch" {
+variable "pipeline_config_repo_existing_branch" {
+}
+
+variable "pipeline_config_repo_clone_from_url" {
+}
+
+variable "pipeline_config_repo_clone_from_branch" {
+}
+
+variable "config_group" {
 }
 
 variable "inventory_repo_url" {

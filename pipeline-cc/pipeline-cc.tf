@@ -31,7 +31,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cc_pipeline_timed_trigger" {
   type            = "timer"
   name            = "CC Timed Trigger"
   event_listener  = "cc-listener"
-  enabled         = "true"
+  enabled         = "false"
   cron            = "0 4 * * *"
 }
 

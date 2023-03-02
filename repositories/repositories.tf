@@ -21,6 +21,12 @@ locals {
     : format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
   )
 
+  pipeline_config_repo_branch = (
+    (var.pipeline_config_repo_existing_branch != "") ? 
+    var.pipeline_config_repo_existing_branch : (var.pipeline_config_repo_clone_from_branch != "") ? 
+    var.pipeline_config_repo_clone_from_branch : "master"
+  )
+
 }
 
 resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
@@ -46,6 +52,25 @@ resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_config_repo_existing_hosted
     type = "link"
     repo_url = var.pipeline_config_repo_existing_url
     git_id = ""
+  }
+  parameters {
+    toolchain_issues_enabled = false
+    enable_traceability      = false
+  }
+}
+
+resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_config_repo_clone_from_hostedgit" {
+  count = (var.pipeline_config_repo_clone_from_url == "") ? 0 : 1 
+
+  toolchain_id = var.toolchain_id
+  name         = "pipeline-config-repo"
+  initialization {
+    type = "clone_if_not_exists"
+    source_repo_url = var.pipeline_config_repo_clone_from_url
+    private_repo = true
+    repo_name = join("-", [ var.repositories_prefix, "pipeline-config-repo" ])
+    git_id = ""    
+    owner_id                 = var.config_group
   }
   parameters {
     toolchain_issues_enabled = false
@@ -117,7 +142,12 @@ output "deployment_repo" {
 }
 
 output "pipeline_config_repo" {
-  value = ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit
+  value = (var.pipeline_config_repo_existing_url == "") ? ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_clone_from_hostedgit : ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit
+}
+
+output "pipeline_config_repo_branch" {
+  value = local.pipeline_config_repo_branch
+  description = "The config or app repo branch containing the .pipeline-config.yaml file; usually main or master."
 }
 
 output "pipeline_repo_url" {
