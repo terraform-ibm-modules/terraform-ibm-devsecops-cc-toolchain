@@ -42,6 +42,11 @@ variable "kp_instance_guid" {
   description = "GUID of the KeyProtect service instance in IBM Cloud"
 }
 
+variable "secret_tool" {
+  type        = string
+  description = "Used as part of secret references to point to the secret store tool integration"
+}
+
 #variable "key_protect_service_auth" {
 #  type        = string
 #  description = "Authorization Permission for the Key Protect Toolchain Service Instance in IBM Cloud"
@@ -75,7 +80,22 @@ variable "scc_profile" {
 variable "scc_scope" {
 }
 
+variable "scc_enable_scc" {
+}
+
+variable "scc_evidence_namespace" {
+}
+
+variable "scc_trigger_scan" {
+}
+
+variable "scc_integration_name" {
+}
+
 variable "ibm_cloud_api_key" {
+}
+
+variable "scc_ibmcloud_api_key_secret_name" {
 }
 
 variable "authorization_policy_creation" {

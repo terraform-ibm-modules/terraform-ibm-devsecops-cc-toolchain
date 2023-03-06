@@ -90,16 +90,19 @@ resource "ibm_cd_toolchain_tool_custom" "cos_integration" {
   }
 }
 
-#resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
-#  toolchain_id = var.toolchain_id
-#  parameters {
-#    name = "Security and Compliance"
-#    evidence_repo_name = var.scc_evidence_repo
-#    scope = var.scc_scope
-#    profile = var.scc_profile
-#    api_key = var.ibm_cloud_api_key
-#  }
-#}
+resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
+  count = (var.scc_enable_scc) ? 1 : 0
+  toolchain_id = var.toolchain_id
+  parameters {
+    name = var.scc_integration_name
+    evidence_namespace = var.scc_evidence_namespace
+    evidence_repo_url = var.scc_evidence_repo
+    trigger_scan = var.scc_trigger_scan
+    scope = var.scc_scope
+    profile = var.scc_profile
+    api_key = format("{vault::%s.${var.scc_ibmcloud_api_key_secret_name}}", var.secret_tool)
+  }
+}
 
 output "secret_tool" {
   value = (var.enable_key_protect) ? local.kp_integration_name : format("%s.%s", local.sm_integration_name, var.sm_secret_group)
