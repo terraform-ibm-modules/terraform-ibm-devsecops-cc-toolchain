@@ -101,3 +101,27 @@ variable "doi_toolchain_id" {
   description = "DevOpsInsights Toolchain ID"
   default = ""  
 }
+
+variable "pipeline_debug" {
+}
+
+variable "opt_in_dynamic_api_scan" {
+}
+
+variable "opt_in_dynamic_ui_scan" {
+}
+
+variable "opt_in_dynamic_scan" {
+}
+
+variable "opt_in_auto_close" {
+}
+
+variable "sonarqube_config" {
+}
+
+variable "slack_notifications" {
+}
+
+variable "environment_tag" {
+}

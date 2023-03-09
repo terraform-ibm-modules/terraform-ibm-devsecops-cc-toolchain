@@ -1,28 +1,28 @@
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-dynamic-api-scan" {
   name           = "opt-in-dynamic-api-scan"
   type           = "text"
-  value          = ""
+  value          = var.opt_in_dynamic_api_scan
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-dynamic-scan" {
   name           = "opt-in-dynamic-scan"
   type           = "text"
-  value          = ""
+  value          = var.opt_in_dynamic_scan
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id 
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-dynamic-ui-scan" {
   name           = "opt-in-dynamic-ui-scan"
   type           = "text"
-  value          = ""
+  value          = var.opt_in_dynamic_ui_scan
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-auto-close" {
   name           = "opt-in-auto-close"
   type           = "text"
-  value          = "1"
+  value          = var.opt_in_auto_close
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id     
 }
 
@@ -36,7 +36,7 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-sonar" {
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_environment-tag" {
   name           = "environment-tag"
   type           = "text"
-  value          = "prod_latest"
+  value          = var.environment_tag
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id     
 }
 
@@ -57,7 +57,7 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube" {
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube-config" {
   name           = "sonarqube-config"
   type           = "text"
-  value          = "default"
+  value          = var.sonarqube_config
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id     
 }
 
@@ -109,8 +109,9 @@ resource "ibm_cd_tekton_pipeline_property" "incident_repo" {
 
 resource "ibm_cd_tekton_pipeline_property" "pipeline_debug" {
   name           = "pipeline-debug"
-  type           = "text"
-  value          = "0"
+  type           = "single_select"
+  enum           = ["0", "1"]
+  value          = var.pipeline_debug
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id  
 }
 
@@ -124,7 +125,7 @@ resource "ibm_cd_tekton_pipeline_property" "pipeline_debug" {
 resource "ibm_cd_tekton_pipeline_property" "slack_notifications" {
   name           = "slack-notifications"
   type           = "text"
-  value          = "0"
+  value          = var.slack_notifications
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id  
 }
 

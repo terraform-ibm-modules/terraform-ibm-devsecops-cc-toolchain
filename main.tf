@@ -82,6 +82,14 @@ module "pipeline-cc" {
   doi_toolchain_id                       = var.doi_toolchain_id
   doi_environment                        = var.doi_environment
   pipeline_ibmcloud_api_key_secret_name  = var.pipeline_ibmcloud_api_key_secret_name
+  pipeline_debug                         = var.pipeline_debug
+  opt_in_dynamic_api_scan                = var.opt_in_dynamic_api_scan
+  opt_in_dynamic_ui_scan                 = var.opt_in_dynamic_ui_scan
+  opt_in_dynamic_scan                    = var.opt_in_dynamic_scan
+  opt_in_auto_close                      = var.opt_in_auto_close
+  sonarqube_config                       = var.sonarqube_config
+  slack_notifications                    = var.slack_notifications
+  environment_tag                        = var.environment_tag
 }
 
 module "integrations" {
@@ -101,9 +109,15 @@ module "integrations" {
   kp_instance_guid                 = module.services.kp_instance_guid
   enable_secrets_manager           = var.enable_secrets_manager
   enable_key_protect               = var.enable_key_protect
+  enable_slack                     = var.enable_slack
+  slack_webhook_secret_name        = var.slack_webhook_secret_name
   slack_channel_name               = var.slack_channel_name
-  slack_api_token                  = var.slack_api_token
-  slack_user_name                  = var.slack_user_name
+  slack_team_name                  = var.slack_team_name
+  slack_pipeline_fail              = var.slack_pipeline_fail
+  slack_pipeline_start             = var.slack_pipeline_start
+  slack_pipeline_success           = var.slack_pipeline_success
+  slack_toolchain_bind             = var.slack_toolchain_bind
+  slack_toolchain_unbind           = var.slack_toolchain_unbind
   scc_evidence_repo                = var.evidence_repo_url
   scc_profile                      = var.scc_profile
   scc_scope                        = var.scc_scope

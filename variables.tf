@@ -214,22 +214,58 @@ variable "compliance_pipeline_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
-variable "slack_api_token" {
+variable "slack_webhook_secret_name" {
   type        = string
-  description = "API Token for Slack Channel"
-  default     = ""
+  description = "Name of the webhook secret in the secret provider."
+  default     = "slack-webhook"
+}
+
+variable "enable_slack" {
+  type        = bool
+  description  = "Default: false. Set to true to create the integration"
+  default     = false
 }
 
 variable "slack_channel_name" {
   type        = string
-  description = "Name of Slack Channel"
-  default     = ""
+  description = "The Slack channel that notifications will be posted to."
+  default     = "my-channel"
 }
 
-variable "slack_user_name" {
+variable "slack_team_name" {
   type        = string
-  description = "Name of Slack User"
-  default     = ""
+  description = "The Slack team name, which is the word or phrase before .slack.com in the team URL."
+  default     = "my-team"
+}
+
+variable "slack_pipeline_fail" {
+  type        = bool
+  description = "Generate pipeline failed notifications."
+  default     = true
+}
+
+variable "slack_pipeline_start" {
+  type        = bool
+  description = "Generate pipeline start notifications."
+  default     = true
+}
+
+variable "slack_pipeline_success" {
+  type        = bool
+  description = "Generate pipeline succeeded notifications."
+  default     = true
+}
+
+variable "slack_toolchain_bind" {
+  type        = bool
+  description = "Generate tool added to toolchain notifications."
+  default     = true
+}
+
+variable "slack_toolchain_unbind" {
+  type        = bool
+  description = "Generate tool removed from toolchain notifications."
+  default     = true
 }
 
 variable "scc_profile" {
@@ -414,4 +450,52 @@ variable "compliance_pipeline_group" {
   type        = string
   description = "Specify user/group for compliance pipline repo"
   default     = ""
+}
+
+variable "pipeline_debug" {
+  type        = string
+  description = "'0' by default. Set to '1' to enable debug logging"
+  default = "0"
+}
+
+variable "opt_in_dynamic_api_scan" {
+  type        = string
+  description = "To enable the OWASP Zap API scan. '1' enable or '0' disable"
+  default     = "1"
+}
+
+variable "opt_in_dynamic_ui_scan" {
+  type        = string
+  description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable"
+  default     = "1"
+}
+
+variable "opt_in_dynamic_scan" {
+  type        = string
+  description = "To enable the OWASP Zap scan. '1' enable or '0' disable"
+  default     = "1"
+}
+
+variable "opt_in_auto_close" {
+  type        = string
+  description = "Enables auto-closing of issues coming from vulnerabilities, once the vulnerability is no longer detected by the CC pipeline run."
+  default     = "1"
+}
+
+variable "sonarqube_config" {
+  type        = string
+  description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
+  default     = "default"
+}
+
+variable "slack_notifications" {
+    type       = string
+    description = "The switch that turns the Slack integration on or off"
+    default    = "0"
+}
+
+variable "environment_tag" {
+    type       = string
+    description = "Tag name that represents the target environment in the inventory. Example: prod_latest"
+    default    = "prod_latest"
 }

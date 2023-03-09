@@ -53,22 +53,31 @@ variable "secret_tool" {
 #  default     = "[\"Viewer\", \"ReaderPlus\"]"
 #}
 
-variable "slack_api_token" {
-  type        = string
-  description = "API Token for Slack Channel"
-  default     = ""
+variable "enable_slack" {
+}
+
+variable "slack_webhook_secret_name" {
 }
 
 variable "slack_channel_name" {
-  type        = string
-  description = "Name of Slack Channel"
-  default     = ""
 }
 
-variable "slack_user_name" {
-  type        = string
-  description = "Name of Slack User"
-  default     = ""
+variable "slack_team_name" {
+}
+
+variable "slack_pipeline_fail" {
+}
+
+variable "slack_pipeline_start" {
+}
+
+variable "slack_pipeline_success" {
+}
+
+variable "slack_toolchain_bind" {
+}
+
+variable "slack_toolchain_unbind" {
 }
 
 variable "scc_evidence_repo" {
