@@ -171,10 +171,10 @@ resource "ibm_cd_tekton_pipeline_property" "doi_toolchain_id" {
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id        
 }
 
-resource "ibm_cd_tekton_pipeline_property" "ibm_cloud_api" {
+resource "ibm_cd_tekton_pipeline_property" "ibmcloud_api" {
   name           = "ibmcloud-api"
   type           = "text"
-  value          = var.ibm_cloud_api
+  value          = var.ibmcloud_api
   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 

@@ -7,10 +7,10 @@ variable "registry_namespace" {
 variable "registry_region" {
 }
 
-variable "ibm_cloud_api" {
+variable "ibmcloud_api" {
 }
 
-variable "ibm_cloud_api_key" {
+variable "ibmcloud_api_key" {
 }
 
 variable "secret_tool" {
@@ -85,15 +85,9 @@ variable "cos_endpoint" {
 }
 
 variable "compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code"
-  default     = ""
 }
 
 variable "doi_environment" {
-  type = string
-  description = "DevOpsInsights environment for DevSecOps CD deployment"
-  default = ""
 }
 
 variable "doi_toolchain_id" {

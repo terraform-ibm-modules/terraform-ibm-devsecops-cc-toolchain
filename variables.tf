@@ -4,7 +4,7 @@ variable "toolchain_resource_group" {
   default     = "Default"
 }
 
-variable "ibm_cloud_api_key" {
+variable "ibmcloud_api_key" {
   type        = string
   description = "IBM Cloud API KEY to fetch/post cloud resources in terraform. Not used in the pipeline, where a secret reference is used instead."
   sensitive   = true
@@ -12,7 +12,7 @@ variable "ibm_cloud_api_key" {
 
 variable "pipeline_ibmcloud_api_key_secret_name" {
   type        = string
-  description = "Name of the Cloud api key secret in the secret provider."
+  description = "Name of the Cloud api-key secret in the secret provider."
   default     = "ibmcloud-api-key"
 }
 
@@ -58,7 +58,7 @@ variable "pipeline_config_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
-variable "ibm_cloud_api" {
+variable "ibmcloud_api" {
   type        = string
   description = "IBM Cloud API Endpoint"
   default     = "https://cloud.ibm.com"
@@ -73,7 +73,7 @@ variable "toolchain_region" {
 variable "toolchain_name" {
   type        = string
   description = "Name of the Toolchain."
-  default     = "Terraform Toolchain Empty"
+  default     = "DevSecOps CC Toolchain - Terraform"
 }
 
 variable "toolchain_description" {
@@ -84,13 +84,13 @@ variable "toolchain_description" {
 
 variable "registry_namespace" {
   type        = string
-  description = "Namespace within the IBM Cloud Container Registry where application image need to be stored."
+  description = "Namespace within the IBM Cloud Container Registry where application images need to be stored."
   default     = "alpha-cd-namespace"
 }
 
 variable "registry_region" {
   type        = string
-  description = "IBM Cloud Region where the IBM Cloud Container Registry where registry is to be created."
+  description = "IBM Cloud Region where the IBM Cloud Container Registry is to be created."
   default     = "ibm:yp:us-south"
 }
 
@@ -144,25 +144,25 @@ variable "issues_repo_type" {
 
 variable "pipeline_config_repo_existing_url" {
   type        = string
-  description = "(Optional). Specify a repository containing a custom pipeline-config.yaml file"
+  description = "Specify a repository containing a custom pipeline-config.yaml file"
   default     = ""
 }
 
 variable "pipeline_config_repo_clone_from_url" {
   type        = string
-  description = "(Optional). Specify a repository to clone that contains a custom pipeline-config.yaml file"
+  description = "Specify a repository to clone that contains a custom pipeline-config.yaml file"
   default     = ""
 }
 
 variable "pipeline_config_repo_branch" {
   type        = string
-  description = "(Optional). Specify a branch of a repository to clone that contains a custom pipeline-config.yaml file"
+  description = "Specify a branch of a repository to clone that contains a custom pipeline-config.yaml file"
   default     = ""
 }
 
 variable "pipeline_config_repo" {
   type        = string
-  description = "(Optional). Specify the branch containing the custom pipeline-config.yaml file"
+  description = "Specify the branch containing the custom pipeline-config.yaml file"
   default     = ""
 }
 
@@ -174,37 +174,37 @@ variable "pipeline_config_path" {
 
 variable "pipeline_config_repo_auth_type" {
   type        = string
-  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
 variable "inventory_repo_auth_type" {
   type        = string
-  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
 variable "issues_repo_auth_type" {
   type        = string
-  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
 variable "evidence_repo_auth_type" {
   type        = string
-  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
 variable "deployment_repo_auth_type" {
   type        = string
-  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
@@ -222,7 +222,7 @@ variable "slack_webhook_secret_name" {
 
 variable "enable_slack" {
   type        = bool
-  description  = "Default: false. Set to true to create the integration"
+  description  = "Set to true to create the integration"
   default     = false
 }
 
@@ -366,11 +366,13 @@ variable "kp_location" {
 
 variable "enable_key_protect" {
   type        = bool
+  description = "Set to enable Key Protect Integration."
   default     = false
 }
 
 variable "enable_secrets_manager" {
   type        = bool
+  description = "Set to enable Secrets Manager Integration."
   default     = true
 }
 
@@ -382,7 +384,7 @@ variable "deployment_repo_clone_from_url" {
 
 variable "repositories_prefix" {
     type        = string
-    description = ""
+    description = "Prefix name for the cloned compliance repos."
     default     = "compliance-tf"
 }
 
@@ -394,7 +396,7 @@ variable "compliance_base_image" {
 
 variable "authorization_policy_creation" {
     type        = string
-    description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
+    description = "Set to disabled if you do not want this policy auto created"
     default     = ""
   }
 
@@ -418,62 +420,62 @@ variable "doi_toolchain_id" {
 
 variable "issues_group" {
   type        = string
-  description = "Specify user/group for issues repo"
+  description = "Specify GitLab user/group for issues repo"
   default     = ""
 }
 
 variable "inventory_group" {
   type        = string
-  description = "Specify user/group for inventory repo"
+  description = "Specify GitLab user/group for inventory repo"
   default     = ""
 }
 
 variable "evidence_group" {
   type        = string
-  description = "Specify user/group for evidence repo"
+  description = "Specify GitLab user/group for evidence repo"
   default     = ""
 }
 
 variable "pipeline_config_group" {
   type        = string
-  description = "Specify user/group for pipeline config repo"
+  description = "Specify GitLab user/group for pipeline config repo"
   default     = ""
 }
 
 variable "deployment_group" {
   type        = string
-  description = "Specify user/group for deployment repo"
+  description = "Specify GitLab user/group for deployment repo"
   default     = ""
 }
 
 variable "compliance_pipeline_group" {
   type        = string
-  description = "Specify user/group for compliance pipline repo"
+  description = "Specify GitLab user/group for compliance pipline repo"
   default     = ""
 }
 
 variable "pipeline_debug" {
   type        = string
-  description = "'0' by default. Set to '1' to enable debug logging"
+  description = "Set to '1' to enable debug logging"
   default = "0"
 }
 
 variable "opt_in_dynamic_api_scan" {
   type        = string
   description = "To enable the OWASP Zap API scan. '1' enable or '0' disable"
-  default     = "1"
+  default     = ""
 }
 
 variable "opt_in_dynamic_ui_scan" {
   type        = string
   description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable"
-  default     = "1"
+  default     = ""
 }
 
 variable "opt_in_dynamic_scan" {
   type        = string
   description = "To enable the OWASP Zap scan. '1' enable or '0' disable"
-  default     = "1"
+  default     = ""
 }
 
 variable "opt_in_auto_close" {

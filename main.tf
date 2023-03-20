@@ -55,8 +55,8 @@ module "pipeline-cc" {
   source     = "./pipeline-cc"
   depends_on = [module.repositories, module.integrations, module.services]
 
-  ibm_cloud_api                          = var.ibm_cloud_api
-  ibm_cloud_api_key                      = var.ibm_cloud_api_key
+  ibmcloud_api                          = var.ibmcloud_api
+  ibmcloud_api_key                      = var.ibmcloud_api_key
   pipeline_id                            = split("/", ibm_cd_toolchain_tool_pipeline.cc_pipeline.id)[1]
   registry_namespace                     = var.registry_namespace
   registry_region                        = var.registry_region
@@ -96,7 +96,7 @@ module "integrations" {
   source     = "./integrations"
   depends_on = [module.services]
 
-  ibm_cloud_api_key                = var.ibm_cloud_api_key
+  ibmcloud_api_key                = var.ibmcloud_api_key
   toolchain_id                     = ibm_cd_toolchain.toolchain_instance.id
   sm_location                      = var.sm_location
   sm_resource_group                = var.sm_resource_group
