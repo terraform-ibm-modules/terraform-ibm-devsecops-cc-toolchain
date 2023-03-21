@@ -10,11 +10,11 @@ toolchain_description           = "CC Toolchain created with Template for DevSec
 /* Variables for Module "Repositories"               */
 /*****************************************************/
 ibmcloud_api_key               = ""
-evidence_repo_url               = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-evidence-repo"
-inventory_repo_url              = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-inventory-repo"
-issues_repo_url                 = "https://eu-gb.git.cloud.ibm.com/padraic.edwards/hello-compliance-app-1011d-issues-repo"
+evidence_repo_url              = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-evidence-locker.git"
+inventory_repo_url             = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
+issues_repo_url                = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
 ibmcloud_api                   = "https://cloud.ibm.com"
-deployment_repo_url                 = "https://eu-gb.git.cloud.ibm.com/open-toolchain/hello-compliance-deployment.git"
+deployment_repo_url            = "https://us-south.git.cloud.ibm.com/open-toolchain/hello-compliance-deployment.git"
 
 /*****************************************************/
 /* Variables for Module "Services"                   */
@@ -25,11 +25,11 @@ sm_name                         = "sm-prod-wdc"
 sm_location                     = "us-south"
 sm_secret_group                 = "Default"
 sm_resource_group               = "Default"
-enable_secrets_manager          = false
-enable_key_protect              = true
-kp_name                         = "kp-prod-dal"
-kp_location                     = "us-south"
-kp_secret_group                 = "Default"
+#enable_secrets_manager          = false
+#enable_key_protect              = true
+#kp_name                         = "kp-prod-dal"
+#kp_location                     = "us-south"
+#kp_secret_group                 = "Default"
 
 #pipeline_ibmcloud_api_key_secret_name  = "ibmcloud_api_key"
 #cos_api_key_secret_name        = ""

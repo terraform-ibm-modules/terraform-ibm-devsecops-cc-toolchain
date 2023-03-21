@@ -307,7 +307,7 @@ variable "scc_trigger_scan" {
 variable "cos_api_key_secret_name" {
   type        = string
   description = "cos api key"
-  default     = ""
+  default     = "cos-api-key"
 }
 
 variable "cos_endpoint" {
