@@ -9,8 +9,8 @@ resource "ibm_cd_toolchain" "toolchain_instance" {
 }
 
 module "repositories" {
-  source = "./repositories"
-  depends_on = [module.integrations]
+  source                                         = "./repositories"
+  depends_on                                     = [module.integrations]
   toolchain_id                                   = ibm_cd_toolchain.toolchain_instance.id
   toolchain_crn                                  = ibm_cd_toolchain.toolchain_instance.crn
   toolchain_region                               = var.toolchain_region
@@ -57,46 +57,46 @@ module "pipeline-cc" {
   source     = "./pipeline-cc"
   depends_on = [module.repositories, module.integrations, module.services]
 
-  ibmcloud_api                           = var.ibmcloud_api
-  ibmcloud_api_key                       = var.ibmcloud_api_key
-  pipeline_id                            = split("/", ibm_cd_toolchain_tool_pipeline.cc_pipeline.id)[1]
-  app_repo_url                           = module.repositories.app_repo_url
-  app_repo                               = module.repositories.app_repo
-  pipeline_repo_url                      = module.repositories.pipeline_repo_url
-  evidence_repo_url                      = module.repositories.evidence_repo_url
-  inventory_repo_url                     = module.repositories.inventory_repo_url
-  issues_repo_url                        = module.repositories.issues_repo_url
-  evidence_repo                          = module.repositories.evidence_repo
-  inventory_repo                         = module.repositories.inventory_repo
-  issues_repo                            = module.repositories.issues_repo
-  pipeline_config_path                   = var.pipeline_config_path
-  pipeline_config_repo                   = module.repositories.pipeline_config_repo
-  pipeline_config_repo_existing_url      = var.pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url    = var.pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch            = module.repositories.pipeline_config_repo_branch
-  secret_tool                            = module.integrations.secret_tool
-  cos_bucket_name                        = var.cos_bucket_name
-  cos_api_key_secret_name                = var.cos_api_key_secret_name
-  cos_endpoint                           = var.cos_endpoint
-  compliance_base_image                  = var.compliance_base_image
-  doi_toolchain_id                       = var.doi_toolchain_id
-  doi_environment                        = var.doi_environment
-  pipeline_ibmcloud_api_key_secret_name  = var.pipeline_ibmcloud_api_key_secret_name
-  pipeline_debug                         = var.pipeline_debug
-  opt_in_dynamic_api_scan                = var.opt_in_dynamic_api_scan
-  opt_in_dynamic_ui_scan                 = var.opt_in_dynamic_ui_scan
-  opt_in_dynamic_scan                    = var.opt_in_dynamic_scan
-  opt_in_auto_close                      = var.opt_in_auto_close
-  sonarqube_config                       = var.sonarqube_config
-  slack_notifications                    = var.slack_notifications
-  environment_tag                        = var.environment_tag
+  ibmcloud_api                          = var.ibmcloud_api
+  ibmcloud_api_key                      = var.ibmcloud_api_key
+  pipeline_id                           = split("/", ibm_cd_toolchain_tool_pipeline.cc_pipeline.id)[1]
+  app_repo_url                          = module.repositories.app_repo_url
+  app_repo                              = module.repositories.app_repo
+  pipeline_repo_url                     = module.repositories.pipeline_repo_url
+  evidence_repo_url                     = module.repositories.evidence_repo_url
+  inventory_repo_url                    = module.repositories.inventory_repo_url
+  issues_repo_url                       = module.repositories.issues_repo_url
+  evidence_repo                         = module.repositories.evidence_repo
+  inventory_repo                        = module.repositories.inventory_repo
+  issues_repo                           = module.repositories.issues_repo
+  pipeline_config_path                  = var.pipeline_config_path
+  pipeline_config_repo                  = module.repositories.pipeline_config_repo
+  pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch           = module.repositories.pipeline_config_repo_branch
+  secret_tool                           = module.integrations.secret_tool
+  cos_bucket_name                       = var.cos_bucket_name
+  cos_api_key_secret_name               = var.cos_api_key_secret_name
+  cos_endpoint                          = var.cos_endpoint
+  compliance_base_image                 = var.compliance_base_image
+  doi_toolchain_id                      = var.doi_toolchain_id
+  doi_environment                       = var.doi_environment
+  pipeline_ibmcloud_api_key_secret_name = var.pipeline_ibmcloud_api_key_secret_name
+  pipeline_debug                        = var.pipeline_debug
+  opt_in_dynamic_api_scan               = var.opt_in_dynamic_api_scan
+  opt_in_dynamic_ui_scan                = var.opt_in_dynamic_ui_scan
+  opt_in_dynamic_scan                   = var.opt_in_dynamic_scan
+  opt_in_auto_close                     = var.opt_in_auto_close
+  sonarqube_config                      = var.sonarqube_config
+  slack_notifications                   = var.slack_notifications
+  environment_tag                       = var.environment_tag
 }
 
 module "integrations" {
   source     = "./integrations"
   depends_on = [module.services]
 
-  ibmcloud_api_key                = var.ibmcloud_api_key
+  ibmcloud_api_key                 = var.ibmcloud_api_key
   toolchain_id                     = ibm_cd_toolchain.toolchain_instance.id
   sm_location                      = var.sm_location
   sm_resource_group                = var.sm_resource_group
@@ -135,14 +135,14 @@ module "integrations" {
 module "services" {
   source = "./services"
 
-  sm_name                 = var.sm_name
-  sm_location             = var.sm_location
-  sm_resource_group       = var.sm_resource_group
-  kp_name                 = var.kp_name
-  kp_location             = var.kp_location
-  kp_resource_group       = var.kp_resource_group
-  enable_secrets_manager  = var.enable_secrets_manager
-  enable_key_protect      = var.enable_key_protect
+  sm_name                = var.sm_name
+  sm_location            = var.sm_location
+  sm_resource_group      = var.sm_resource_group
+  kp_name                = var.kp_name
+  kp_location            = var.kp_location
+  kp_resource_group      = var.kp_resource_group
+  enable_secrets_manager = var.enable_secrets_manager
+  enable_key_protect     = var.enable_key_protect
 }
 
 output "toolchain_id" {

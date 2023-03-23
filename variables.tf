@@ -83,42 +83,42 @@ variable "toolchain_description" {
 }
 
 variable "app_repo_url" {
-    type        = string
-    description = "This Git URL for the application repository."
-    default     = ""
+  type        = string
+  description = "This Git URL for the application repository."
+  default     = ""
 }
 
 variable "inventory_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
+  type        = string
+  description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
 }
 
 variable "inventory_repo_type" {
-    type        = string
-    description = "The repository type for inventory repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
+  type        = string
+  description = "The repository type for inventory repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "evidence_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+  type        = string
+  description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
 }
 
 variable "evidence_repo_type" {
-    type        = string
-    description = "The repository type for evidence repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
+  type        = string
+  description = "The repository type for evidence repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "issues_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  type        = string
+  description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
 }
 
 variable "issues_repo_type" {
-    type        = string
-    description = "The repository type for issues repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
+  type        = string
+  description = "The repository type for issues repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "pipeline_config_repo_existing_url" {
@@ -219,7 +219,7 @@ variable "app_repo_git_id" {
 
 variable "enable_slack" {
   type        = bool
-  description  = "Set to true to create the integration"
+  description = "Set to true to create the integration"
   default     = false
 }
 
@@ -374,9 +374,9 @@ variable "enable_secrets_manager" {
 }
 
 variable "repositories_prefix" {
-    type        = string
-    description = "Prefix name for the cloned compliance repos."
-    default     = "compliance-tf"
+  type        = string
+  description = "Prefix name for the cloned compliance repos."
+  default     = "compliance-tf"
 }
 
 variable "compliance_base_image" {
@@ -386,15 +386,15 @@ variable "compliance_base_image" {
 }
 
 variable "authorization_policy_creation" {
-    type        = string
-    description = "Set to disabled if you do not want this policy auto created"
-    default     = ""
-  }
+  type        = string
+  description = "Set to disabled if you do not want this policy auto created"
+  default     = ""
+}
 
-  variable "doi_environment" {
-  type = string
+variable "doi_environment" {
+  type        = string
   description = "DevOpsInsights environment for DevSecOps CD deployment"
-  default = ""
+  default     = ""
 }
 
 variable "link_to_doi_toolchain" {
@@ -404,9 +404,9 @@ variable "link_to_doi_toolchain" {
 }
 
 variable "doi_toolchain_id" {
-  type = string
+  type        = string
   description = "DevOpsInsights Toolchain ID to link to"
-  default = ""  
+  default     = ""
 }
 
 variable "issues_group" {
@@ -448,7 +448,7 @@ variable "compliance_pipeline_group" {
 variable "pipeline_debug" {
   type        = string
   description = "Set to '1' to enable debug logging"
-  default = "0"
+  default     = "0"
 }
 
 variable "opt_in_dynamic_api_scan" {
@@ -482,13 +482,13 @@ variable "sonarqube_config" {
 }
 
 variable "slack_notifications" {
-    type       = string
-    description = "The switch that turns the Slack integration on or off"
-    default    = "0"
+  type        = string
+  description = "The switch that turns the Slack integration on or off"
+  default     = "0"
 }
 
 variable "environment_tag" {
-    type       = string
-    description = "Tag name that represents the target environment in the inventory. Example: prod_latest"
-    default    = "prod_latest"
+  type        = string
+  description = "Tag name that represents the target environment in the inventory. Example: prod_latest"
+  default     = "prod_latest"
 }
