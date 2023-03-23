@@ -51,37 +51,7 @@ For additional platforms please see https://developer.hashicorp.com/terraform/tu
 
 ## Usage
 
-Before beginning see the [Prerequisites](#prerequisites) and [Required IAM access policies](#iamaccess) sections
-
-### Setup
-The following steps create the out of the box setup for the CC Toolchains. Read through the example .tfvars file for a quick set up and see the [inputs](#inputs) for all modifiable settings. 
-
-- Clone this [repo](https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm) to a local directory
-- `cd` into the cloned directory
-- Run `terraform init` to download the required modules and plugins
-- Supply a `terraform.tfvars` file with the required variables. See the provided example at the root of the repo
-- Rename the `variables.tfvars.example` to `variables.tfvars.example`
-- The snippet below shows the minumum required details to set up the CC toolchains. Read the notes in the sample tfvars file for more details
-- Run `terraform plan -var-files 'path-to-variables.tfvars'` to generate a plan and check to for potential problems
-- Run `terraform apply -var-files 'path-to-variables.tfvars'` to execute the Terraform commands
-
-After a successful Terraform run, login into [IBM Cloud](https://cloud.ibm.com/) and look at the [Toolchains](https://cloud.ibm.com/devops/toolchains?env_id=ibm:yp:us-south) section to find your newly created DevSecOps toolchains.
-
-```hcl
-ibmcloud_api_key          = "{set your ibmcloud apikey}"
-toolchain_region          = "us-south"
-toolchain_name            = "DevSecOps CI Toolchain - Terraform"
-registry_namespace        = "my-namespace"
-registry_region           = "ibm:yp:us-south"
-pipeline_repo             = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-pipelines"
-evidence_repo_url         = "https://us-south.git.cloud.ibm.com/{namespace}/{evidence_repo}"
-inventory_repo_url        = "https://us-south.git.cloud.ibm.com/{namespace}/{inventory_repo}"
-issues_repo_url           = "https://us-south.git.cloud.ibm.com/{namespace}/{issues_repo}"
-sm_name                   = "sm-compliance-secrets"
-sm_location               = "eu-gb"
-sm_resource_group         = "Default"
-sm_secret_group           = "Default"
-```
+ [Required IAM access policies](#iamaccess) sections
 
 ### <a id="prerequisites"></a>Prerequisites
 
@@ -109,6 +79,33 @@ Create an [IBM Cloud Object Storage instance and bucket](https://cloud.ibm.com/d
 
 
 
+### Setup
+The following steps create the out of the box setup for the CC Toolchains. Read through the example .tfvars file for a quick set up and see the [inputs](#inputs) for all modifiable settings. 
+
+- Clone this [repo](https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm) to a local directory
+- `cd` into the cloned directory
+- Run `terraform init` to download the required modules and plugins
+- Supply a `terraform.tfvars` file with the required variables. See the provided example at the root of the repo
+- Rename the `variables.tfvars.example` to `variables.tfvars`
+- The snippet below shows the minumum required details to set up the CC toolchains. Read the notes in the sample tfvars file for more details
+- Run `terraform plan -var-files 'path-to-variables.tfvars'` to generate a plan and check to for potential problems
+- Run `terraform apply -var-files 'path-to-variables.tfvars'` to execute the Terraform commands
+
+After a successful Terraform run, login into [IBM Cloud](https://cloud.ibm.com/) and look at the [Toolchains](https://cloud.ibm.com/devops/toolchains?env_id=ibm:yp:us-south) section to find your newly created DevSecOps toolchains.
+
+```hcl
+ibmcloud_api_key          = "{set your ibmcloud apikey}"
+toolchain_region          = "us-south"
+toolchain_name            = "DevSecOps CI Toolchain - Terraform"
+pipeline_repo             = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-pipelines"
+evidence_repo_url         = "https://us-south.git.cloud.ibm.com/{namespace}/{evidence_repo}"
+inventory_repo_url        = "https://us-south.git.cloud.ibm.com/{namespace}/{inventory_repo}"
+issues_repo_url           = "https://us-south.git.cloud.ibm.com/{namespace}/{issues_repo}"
+sm_name                   = "sm-compliance-secrets"
+sm_location               = "eu-gb"
+sm_resource_group         = "Default"
+sm_secret_group           = "Default"
+```
 
 ## <a id="iamaccess"></a>Required IAM access policies
 
@@ -152,6 +149,12 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_app_group"></a> [app\_group](#input\_app\_group) | Specify user/group for app repo | `string` | `""` | no |
+| <a name="input_app_repo_auth_type"></a> [app\_repo\_auth\_type](#input\_app\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat' | `string` | `"oauth"` | no |
+| <a name="input_app_branch"></a> [app\_branch](#input\_app\_branch) | The default branch of the app repo | `string` | `master` | no |
+| <a name="input_app_repo_git_id"></a> [app\_repo\_git\_id](#input\_app\_repo\_git\_id) | The Git Id of the repository | `string` | `hostedgit` | no |
+| <a name="input_app_repo_git_provider"></a> [app\_repo\_git\_provider](#input\_app\_repo\_git\_provider) | The type of the Git provider | `string` | `hostedgit` | no |
+| <a name="input_app_repo_git_token_secret_name"></a> [app\_repo\_git\_token\_secret\_name](#input\_app\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_authorization_policy_creation"></a> [authorization\_policy\_creation](#input\_authorization\_policy\_creation) | Disable Toolchain Service to Secrets Manager Service auhorization policy creation | `string` | `""` | no |
 | <a name="input_compliance_base_image"></a> [compliance\_base\_image](#input\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code | `string` | `""` | no |
 | <a name="input_compliance_pipeline_group"></a> [compliance\_pipeline\_group](#input\_compliance\_pipeline\_group) | Specify user/group for compliance pipline repo | `string` | `""` | no |
@@ -160,11 +163,6 @@ No resources.
 | <a name="input_cos_api_key_secret_name"></a> [cos\_api\_key\_secret\_name](#input\_cos\_api\_key\_secret\_name) | Name of the cos api key secret in the secret provider. | `string` | `"cos-api-key"` | no |
 | <a name="input_cos_bucket_name"></a> [cos\_bucket\_name](#input\_cos\_bucket\_name) | cos bucket name | `string` | `""` | no |
 | <a name="input_cos_endpoint"></a> [cos\_endpoint](#input\_cos\_endpoint) | cos endpoint name | `string` | `""` | no |
-| <a name="input_deployment_group"></a> [deployment\_group](#input\_deployment\_group) | Specify user/group for deployment repo | `string` | `""` | no |
-| <a name="input_deployment_repo"></a> [deployment\_repo](#input\_deployment\_repo) | This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates. | `string` | `""` | no |
-| <a name="input_deployment_repo_auth_type"></a> [deployment\_repo\_auth\_type](#input\_deployment\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat' | `string` | `"oauth"` | no |
-| <a name="input_deployment_repo_clone_from_url"></a> [deployment\_repo\_clone\_from\_url](#input\_deployment\_repo\_clone\_from\_url) | Override the default deployment by providing your own sample app url, which will be cloned into the app repo. Note, using clone\_if\_not\_exists mode, so if the app repo already exists the repo contents are unchanged. | `string` | `""` | no |
-| <a name="input_deployment_repo_git_token_secret_name"></a> [deployment\_repo\_git\_token\_secret\_name](#input\_deployment\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_doi_environment"></a> [doi\_environment](#input\_doi\_environment) | DevOpsInsights environment for DevSecOps CD deployment | `string` | `""` | no |
 | <a name="input_doi_toolchain_id"></a> [doi\_toolchain\_id](#input\_doi\_toolchain\_id) | DevOpsInsights Toolchain ID to link to | `string` | `""` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Enable the Key Protect integration | `bool` | `false` | no |
@@ -197,8 +195,6 @@ No resources.
 | <a name="input_pipeline_config_repo_git_token_secret_name"></a> [pipeline\_config\_repo\_git\_token\_secret\_name](#input\_pipeline\_config\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_pipeline_debug"></a> [pipeline\_debug](#input\_pipeline\_debug) | '0' by default. Set to '1' to enable debug logging | `string` | `"0"` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_name"></a> [pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud api key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
-| <a name="input_registry_namespace"></a> [registry\_namespace](#input\_registry\_namespace) | Namespace within the IBM Cloud Container Registry where application image need to be stored. | `string` | `"alpha-cd-namespace"` | no |
-| <a name="input_registry_region"></a> [registry\_region](#input\_registry\_region) | IBM Cloud Region where the IBM Cloud Container Registry where registry is to be created. | `string` | `"ibm:yp:us-south"` | no |
 | <a name="input_repositories_prefix"></a> [repositories\_prefix](#input\_repositories\_prefix) | The prefix for the compliance repositories | `string` | `"compliance-tf"` | no |
 | <a name="input_scc_enable_scc"></a> [senable\_scc](#input\_senable\_scc) | Enable the SCC integration | `bool` | `true` | no |
 | <a name="input_scc_evidence_namespace"></a> [sevidence\_namespace](#input\_sevidence\_namespace) | The kind of evidence to be displayed, cc or cd | `string` | `"cc"` | no |

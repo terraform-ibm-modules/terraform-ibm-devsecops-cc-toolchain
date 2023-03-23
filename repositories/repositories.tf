@@ -16,35 +16,55 @@ locals {
     (local.is_staging) ? local.git_mon01 : local.compliance_pipelines_git_server
   )
 
-  deployment_repo_source = (
-    (length(var.deployment_repo_clone_from_url) > 0)? var.deployment_repo_clone_from_url
-    : format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
-  )
-
   pipeline_config_repo_branch = (
     (var.pipeline_config_repo_branch != "") ? 
-    var.pipeline_config_repo_branch : (var.pipeline_config_repo_branch != "") ? 
-    var.pipeline_config_repo_branch : "master"
+    var.pipeline_config_repo_branch : (var.app_repo_branch != "") ? 
+    var.app_repo_branch : "master"
   )
 
+  app_repo_git_provider = ((length(var.app_repo_existing_git_provider) > 0)? var.app_repo_existing_git_provider
+          : "hostedgit"
+        )
+
+  app_repo_git_id = (length(var.app_repo_existing_git_id) > 0)? var.app_repo_existing_git_id : ""
 }
 
-resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
+resource "ibm_cd_toolchain_tool_hostedgit" "app_repo_existing_hostedgit" {
+  count = (local.app_repo_git_provider == "hostedgit") ? 1 : 0
+
   toolchain_id = var.toolchain_id
-  name         = "deployment-repo"
+  name         = "app-repo"
   initialization {
-    type            = "clone_if_not_exists"
-    source_repo_url = local.deployment_repo_source
-    private_repo    = true
-    repo_name       = join("-", [ var.repositories_prefix, "config-repo" ])
-    owner_id        = var.deployment_group
+    type = "link"
+    repo_url  = var.app_repo_existing_url
+    git_id    = local.app_repo_git_id
+    owner_id  = var.app_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
-    auth_type                = var.deployment_repo_auth_type
-    api_token                = ((var.deployment_repo_auth_type == "pat") ? 
-    format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", var.secret_tool) : "")
+    auth_type                = var.app_repo_auth_type
+    api_token                = ((var.app_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.app_repo_git_token_secret_name}}", var.secret_tool) : "")
+  }
+}
+
+resource "ibm_cd_toolchain_tool_githubconsolidated" "app_repo_existing_githubconsolidated" {
+  count = (local.app_repo_git_provider == "githubconsolidated") ? 1 : 0
+
+  toolchain_id = var.toolchain_id
+  name         = "app-repo"
+  initialization {
+    type = "link"
+    repo_url = var.app_repo_existing_url
+    git_id = local.app_repo_git_id
+  }
+  parameters {
+    toolchain_issues_enabled = false
+    enable_traceability      = false
+    auth_type                = var.app_repo_auth_type
+    api_token                = ((var.app_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.app_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -160,12 +180,16 @@ resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
   }
 }
 
-output "deployment_repo_url" {
-  value = ibm_cd_toolchain_tool_hostedgit.deployment_repo.parameters[0].repo_url
+output "app_repo_url" {
+  value = ((local.app_repo_git_provider == "githubconsolidated") ? 
+  ibm_cd_toolchain_tool_githubconsolidated.app_repo_existing_githubconsolidated[0].parameters[0].repo_url : ibm_cd_toolchain_tool_hostedgit.app_repo_existing_hostedgit[0].parameters[0].repo_url
+  )
 }
 
-output "deployment_repo" {
-  value = ibm_cd_toolchain_tool_hostedgit.deployment_repo
+output "app_repo" {
+  value = ((local.app_repo_git_provider == "githubconsolidated") ? 
+  ibm_cd_toolchain_tool_githubconsolidated.app_repo_existing_githubconsolidated : ibm_cd_toolchain_tool_hostedgit.app_repo_existing_hostedgit
+  )
 }
 
 output "pipeline_config_repo" {

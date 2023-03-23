@@ -14,11 +14,13 @@ module "repositories" {
   toolchain_id                                   = ibm_cd_toolchain.toolchain_instance.id
   toolchain_crn                                  = ibm_cd_toolchain.toolchain_instance.crn
   toolchain_region                               = var.toolchain_region
-  deployment_repo_url                            = var.deployment_repo_url
   evidence_repo_url                              = var.evidence_repo_url
   inventory_repo_url                             = var.inventory_repo_url
   issues_repo_url                                = var.issues_repo_url
-  deployment_repo_clone_from_url                 = var.deployment_repo_clone_from_url
+  app_repo_existing_url                          = var.app_repo_url
+  app_repo_existing_git_provider                 = var.app_repo_git_provider
+  app_repo_branch                                = var.app_repo_branch
+  app_repo_existing_git_id                       = var.app_repo_git_id
   repositories_prefix                            = var.repositories_prefix
   pipeline_config_repo_existing_url              = var.pipeline_config_repo_existing_url
   pipeline_config_repo_branch                    = var.pipeline_config_repo_branch
@@ -31,15 +33,15 @@ module "repositories" {
   issues_repo_git_token_secret_name              = var.issues_repo_git_token_secret_name
   inventory_repo_auth_type                       = var.inventory_repo_auth_type
   inventory_repo_git_token_secret_name           = var.inventory_repo_git_token_secret_name
-  deployment_repo_auth_type                      = var.deployment_repo_auth_type
-  deployment_repo_git_token_secret_name          = var.deployment_repo_git_token_secret_name
+  app_repo_auth_type                             = var.app_repo_auth_type
+  app_repo_git_token_secret_name                 = var.app_repo_git_token_secret_name
   compliance_pipeline_repo_auth_type             = var.compliance_pipeline_repo_auth_type
   compliance_pipeline_repo_git_token_secret_name = var.compliance_pipeline_repo_git_token_secret_name
   pipeline_config_group                          = var.pipeline_config_group
   evidence_group                                 = var.evidence_group
   issues_group                                   = var.issues_group
   inventory_group                                = var.inventory_group
-  deployment_group                               = var.deployment_group
+  app_group                                      = var.app_group
   compliance_pipeline_group                      = var.compliance_pipeline_group
   secret_tool                                    = module.integrations.secret_tool
 }
@@ -55,13 +57,11 @@ module "pipeline-cc" {
   source     = "./pipeline-cc"
   depends_on = [module.repositories, module.integrations, module.services]
 
-  ibmcloud_api                          = var.ibmcloud_api
-  ibmcloud_api_key                      = var.ibmcloud_api_key
+  ibmcloud_api                           = var.ibmcloud_api
+  ibmcloud_api_key                       = var.ibmcloud_api_key
   pipeline_id                            = split("/", ibm_cd_toolchain_tool_pipeline.cc_pipeline.id)[1]
-  registry_namespace                     = var.registry_namespace
-  registry_region                        = var.registry_region
-  deployment_repo_url                    = module.repositories.deployment_repo_url
-  deployment_repo                        = module.repositories.deployment_repo
+  app_repo_url                           = module.repositories.app_repo_url
+  app_repo                               = module.repositories.app_repo
   pipeline_repo_url                      = module.repositories.pipeline_repo_url
   evidence_repo_url                      = module.repositories.evidence_repo_url
   inventory_repo_url                     = module.repositories.inventory_repo_url
@@ -143,8 +143,6 @@ module "services" {
   kp_resource_group       = var.kp_resource_group
   enable_secrets_manager  = var.enable_secrets_manager
   enable_key_protect      = var.enable_key_protect
-  registry_namespace      = var.registry_namespace
-  registry_region         = var.registry_region
 }
 
 output "toolchain_id" {

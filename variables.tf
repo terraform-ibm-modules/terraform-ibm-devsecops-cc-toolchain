@@ -46,7 +46,7 @@ variable "compliance_pipeline_git_token_secret_name" {
   default     = "git-token"
 }
 
-variable "deployment_repo_git_token_secret_name" {
+variable "app_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
   default     = "git-token"
@@ -82,31 +82,10 @@ variable "toolchain_description" {
   default     = "Toolchain created with terraform template for DevSecOps CC Best Practices"
 }
 
-variable "registry_namespace" {
-  type        = string
-  description = "Namespace within the IBM Cloud Container Registry where application images need to be stored."
-  default     = "alpha-cd-namespace"
-}
-
-variable "registry_region" {
-  type        = string
-  description = "IBM Cloud Region where the IBM Cloud Container Registry is to be created."
-  default     = "ibm:yp:us-south"
-}
-
-variable "deployment_repo_url" {
+variable "app_repo_url" {
     type        = string
-    description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
+    description = "This Git URL for the application repository."
     default     = ""
-}
-
-#variable "deployment_repo" {
-#}
-
-variable "deployment_repo_type" {
-    type        = string
-    description = "The repository type for deployment repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
 }
 
 variable "inventory_repo_url" {
@@ -196,7 +175,7 @@ variable "evidence_repo_auth_type" {
   default     = "oauth"
 }
 
-variable "deployment_repo_auth_type" {
+variable "app_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
@@ -218,6 +197,24 @@ variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret in the secret provider."
   default     = "slack-webhook"
+}
+
+variable "app_repo_git_provider" {
+  type        = string
+  description = "The type of the Git provider"
+  default     = "hostedgit"
+}
+
+variable "app_repo_branch" {
+  type        = string
+  description = "The default branch of the app repo"
+  default     = "master"
+}
+
+variable "app_repo_git_id" {
+  type        = string
+  description = "The Git Id of the repository"
+  default     = ""
 }
 
 variable "enable_slack" {
@@ -376,12 +373,6 @@ variable "enable_secrets_manager" {
   default     = true
 }
 
-variable "deployment_repo_clone_from_url" {
-    type        = string
-    description = "(Optional) Override the default deployment by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-    default     = ""
-}
-
 variable "repositories_prefix" {
     type        = string
     description = "Prefix name for the cloned compliance repos."
@@ -442,9 +433,9 @@ variable "pipeline_config_group" {
   default     = ""
 }
 
-variable "deployment_group" {
+variable "app_group" {
   type        = string
-  description = "Specify GitLab user/group for deployment repo"
+  description = "Specify GitLab user/group for app repo"
   default     = ""
 }
 

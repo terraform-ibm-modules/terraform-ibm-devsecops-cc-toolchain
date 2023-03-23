@@ -14,13 +14,11 @@ evidence_repo_url              = "https://us-south.git.cloud.ibm.com/open-toolch
 inventory_repo_url             = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
 issues_repo_url                = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
 ibmcloud_api                   = "https://cloud.ibm.com"
-deployment_repo_url            = "https://us-south.git.cloud.ibm.com/open-toolchain/hello-compliance-deployment.git"
+app_repo_url                   = ""
 
 /*****************************************************/
 /* Variables for Module "Services"                   */
 /*****************************************************/
-registry_namespace              = "my-icr-ns"
-registry_region                 = "ibm:yp:us-south"
 sm_name                         = "sm-prod-wdc"
 sm_location                     = "us-south"
 sm_secret_group                 = "Default"
