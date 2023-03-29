@@ -5,6 +5,7 @@ toolchain_resource_group        = "Default"
 toolchain_region                = "us-south"
 toolchain_name                  = "DevSecOps CC Toolchain - Terraform"
 toolchain_description           = "CC Toolchain created with Template for DevSecOps Best Practices"
+enable_external_properties      = false
 
 /*****************************************************/
 /* Variables for Module "Repositories"               */
@@ -43,3 +44,12 @@ sm_resource_group               = "Default"
 #slack_channel_name              = "slack-channel"
 #slack_api_token                 = "slack-token"
 #slack_user_name                 = "slack-user"
+
+/*****************************************************/
+/* Variables for external-properties mode            */
+/*****************************************************/
+# Only used when var.enable_external_properties=true
+# external_properties_repo_url    = ""
+# external_properties_branch      = "main"
+# external_properties_path        = "tekton"
+# vault_secret_id_secret_name     = "vault_secret_id"

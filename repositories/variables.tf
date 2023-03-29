@@ -102,3 +102,15 @@ variable "toolchain_crn" {
 
 variable "repositories_prefix" { 
 }
+
+variable "enable_external_properties" {
+}
+
+variable "external_properties_repo_url" {
+}
+
+variable "external_properties_repo_auth_type" {
+}
+
+variable "external_properties_repo_git_token_secret_name" {
+}
