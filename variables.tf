@@ -492,3 +492,44 @@ variable "environment_tag" {
   description = "Tag name that represents the target environment in the inventory. Example: prod_latest"
   default     = "prod_latest"
 }
+
+variable "vault_secret_id_secret_name" {
+  type        = string
+  description = "Name of the Vault-SecretID secret in the secret provider."
+  default     = "vault_secret_id"
+}
+
+variable "enable_external_properties" {
+  type        = bool
+  default     = false
+}
+
+variable "external_properties_repo_url" {
+  type        = string
+  description = "This repository contains the external properties used when running the CI pipeline."
+  default     = "https://github.ibm.com/one-pipeline/compliance-pipeline-properties.git"
+}
+
+variable "external_properties_branch" {
+  type        = string
+  description = "The branch within the repository that contains the definition of the external properties."
+  default     = "main"
+}
+
+variable "external_properties_path" {
+  type        = string
+  description = "The relative folder path within the repository containing the definition of the external properties."
+  default     = "tekton"
+}
+
+variable "external_properties_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "external_properties_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}

@@ -180,6 +180,25 @@ resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
   }
 }
 
+resource "ibm_cd_toolchain_tool_hostedgit" "external_properties_repo" {
+  count        = var.enable_external_properties ? 1 : 0
+  toolchain_id = var.toolchain_id
+  name         = "external-properties-repo"
+  initialization {
+    type            = "clone_if_not_exists"
+    source_repo_url = var.external_properties_repo_url
+    repo_name       = "compliance-pipeline-properties"
+    owner_id        = var.pipeline_config_group
+  }
+  parameters {
+    toolchain_issues_enabled = false
+    enable_traceability      = false
+    auth_type                = var.external_properties_repo_auth_type
+    api_token                = ((var.external_properties_repo_auth_type == "pat") ? 
+    format("{vault::%s.${var.external_properties_repo_git_token_secret_name}}", var.secret_tool) : "")
+  }
+}
+
 output "app_repo_url" {
   value = ((local.app_repo_git_provider == "githubconsolidated") ? 
   ibm_cd_toolchain_tool_githubconsolidated.app_repo_existing_githubconsolidated[0].parameters[0].repo_url : ibm_cd_toolchain_tool_hostedgit.app_repo_existing_hostedgit[0].parameters[0].repo_url
@@ -204,6 +223,10 @@ output "pipeline_config_repo_branch" {
 output "pipeline_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.pipeline_repo.parameters[0].repo_url
   description = "This repository url contains the tekton definitions for compliance pipelines"
+}
+
+output "external_properties_repo_url" {
+  value = ibm_cd_toolchain_tool_hostedgit.external_properties_repo[0].parameters[0].repo_url
 }
 
 output "inventory_repo_url" {
