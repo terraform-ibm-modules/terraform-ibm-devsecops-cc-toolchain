@@ -507,7 +507,7 @@ variable "enable_external_properties" {
 variable "external_properties_repo_url" {
   type        = string
   description = "This repository contains the external properties used when running the CI pipeline."
-  default     = "https://github.ibm.com/one-pipeline/compliance-pipeline-properties.git"
+  default     = "https://github.com/open-toolchain/compliance-pipeline-properties.git"
 }
 
 variable "external_properties_branch" {
