@@ -53,7 +53,7 @@ resource "ibm_cd_toolchain_tool_pipeline" "cc_pipeline" {
   }
 }
 
-module "pipeline-cc" {
+module "pipeline_cc" {
   source     = "./pipeline-cc"
   depends_on = [module.repositories, module.integrations, module.services]
 
@@ -143,25 +143,4 @@ module "services" {
   kp_resource_group      = var.kp_resource_group
   enable_secrets_manager = var.enable_secrets_manager
   enable_key_protect     = var.enable_key_protect
-}
-
-output "toolchain_id" {
-  value = ibm_cd_toolchain.toolchain_instance.id
-}
-
-output "secrets_manager_instance_id" {
-  value = module.services.sm_instance_guid
-}
-
-output "key_protect_instance_id" {
-  value = module.services.kp_instance_guid
-}
-
-output "cc_pipeline_id" {
-  value = module.pipeline-cc.pipeline_id
-}
-
-output "pipeline_repo_url" {
-  value       = module.repositories.pipeline_repo_url
-  description = "This repository url contains the tekton definitions for compliance pipelines"
 }
