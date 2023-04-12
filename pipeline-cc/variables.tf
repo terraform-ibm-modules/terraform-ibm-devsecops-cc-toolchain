@@ -54,7 +54,7 @@ variable "inventory_repo_url" {
 variable "evidence_repo_url" {
 }
 
-variable "issues_repo_url" {    
+variable "issues_repo_url" {
 }
 
 variable "pipeline_branch" {
@@ -85,9 +85,9 @@ variable "doi_environment" {
 }
 
 variable "doi_toolchain_id" {
-  type = string
+  type        = string
   description = "DevOpsInsights Toolchain ID"
-  default = ""  
+  default     = ""
 }
 
 variable "pipeline_debug" {

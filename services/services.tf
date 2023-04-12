@@ -22,11 +22,11 @@
 ####################################################################################
 
 data "ibm_resource_group" "sm_resource_group" {
-  count             = var.enable_secrets_manager ? 1 : 0
-  name              = var.sm_resource_group
+  count = var.enable_secrets_manager ? 1 : 0
+  name  = var.sm_resource_group
 }
 
-data ibm_resource_instance "secrets_manager_instance" {
+data "ibm_resource_instance" "secrets_manager_instance" {
   count             = var.enable_secrets_manager ? 1 : 0
   service           = "secrets-manager"
   name              = var.sm_name
@@ -40,10 +40,10 @@ output "sm_instance_guid" {
 }
 
 data "ibm_resource_group" "kp_resource_group" {
-  count             = var.enable_key_protect ? 1 : 0
-  name              = var.kp_resource_group
+  count = var.enable_key_protect ? 1 : 0
+  name  = var.kp_resource_group
 }
-data ibm_resource_instance "key_protect_instance" {
+data "ibm_resource_instance" "key_protect_instance" {
   count             = var.enable_key_protect ? 1 : 0
   service           = "kms"
   name              = var.kp_name
@@ -52,6 +52,6 @@ data ibm_resource_instance "key_protect_instance" {
 }
 
 output "kp_instance_guid" {
-  value       = try(data.ibm_resource_instance.key_protect_instance[0].guid,"")
+  value       = try(data.ibm_resource_instance.key_protect_instance[0].guid, "")
   description = "GUID of the Key Protect service instance in IBM Cloud"
 }

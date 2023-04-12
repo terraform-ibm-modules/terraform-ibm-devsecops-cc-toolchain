@@ -89,7 +89,7 @@ variable "ibmcloud_api_key" {
 }
 
 variable "authorization_policy_creation" {
-  }
+}
 
 variable "link_to_doi_toolchain" {
   description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false"
@@ -98,7 +98,7 @@ variable "link_to_doi_toolchain" {
 }
 
 variable "doi_toolchain_id" {
-  type = string
+  type        = string
   description = "DevOpsInsights Toolchain ID to link to"
-  default = ""  
+  default     = ""
 }
