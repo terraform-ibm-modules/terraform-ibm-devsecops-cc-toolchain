@@ -79,28 +79,13 @@ variable "slack_toolchain_unbind" {
 variable "scc_evidence_repo" {
 }
 
-variable "scc_profile" {
-}
-
-variable "scc_scope" {
-}
-
 variable "scc_enable_scc" {
-}
-
-variable "scc_evidence_namespace" {
-}
-
-variable "scc_trigger_scan" {
 }
 
 variable "scc_integration_name" {
 }
 
 variable "ibmcloud_api_key" {
-}
-
-variable "scc_ibmcloud_api_key_secret_name" {
 }
 
 variable "authorization_policy_creation" {

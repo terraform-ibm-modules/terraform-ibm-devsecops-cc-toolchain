@@ -97,12 +97,8 @@ resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
   toolchain_id = var.toolchain_id
   parameters {
     name = var.scc_integration_name
-    evidence_namespace = var.scc_evidence_namespace
+    evidence_namespace = "cc"
     evidence_repo_url = var.scc_evidence_repo
-    trigger_scan = var.scc_trigger_scan
-    scope = var.scc_scope
-    profile = var.scc_profile
-    api_key = format("{vault::%s.${var.scc_ibmcloud_api_key_secret_name}}", var.secret_tool)
   }
 }
 

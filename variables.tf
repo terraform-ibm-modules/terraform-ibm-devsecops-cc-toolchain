@@ -16,12 +16,6 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
-variable "scc_ibmcloud_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider."
-  default     = "ibmcloud-api-key"
-}
-
 variable "issues_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
@@ -235,18 +229,6 @@ variable "slack_toolchain_unbind" {
   default     = true
 }
 
-variable "scc_profile" {
-  type        = string
-  description = "Security and Compliance Profile."
-  default     = "IBM Cloud for Financial Services v0.4.0"
-}
-
-variable "scc_scope" {
-  type        = string
-  description = "Security and Compliance Scope."
-  default     = "DevsecOps Scope"
-}
-
 variable "scc_integration_name" {
   type        = string
   description = "The name of the SCC integration name."
@@ -257,18 +239,6 @@ variable "scc_enable_scc" {
   type        = bool
   description = "Enable the SCC integration."
   default     = false
-}
-
-variable "scc_evidence_namespace" {
-  type        = string
-  description = "The kind of evidence to be displayed, cc or cd."
-  default     = "cc"
-}
-
-variable "scc_trigger_scan" {
-  type        = string
-  description = "Default:  disabled. Can be set to 'enabled'. Note each scan may incur a charge."
-  default     = "disabled"
 }
 
 variable "cos_api_key_secret_name" {
