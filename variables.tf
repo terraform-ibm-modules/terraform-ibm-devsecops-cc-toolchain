@@ -238,7 +238,7 @@ variable "scc_integration_name" {
 variable "scc_enable_scc" {
   type        = bool
   description = "Enable the SCC integration."
-  default     = false
+  default     = true
 }
 
 variable "cos_api_key_secret_name" {
