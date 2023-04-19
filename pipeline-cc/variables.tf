@@ -15,6 +15,12 @@ variable "secret_tool" {
 variable "pipeline_ibmcloud_api_key_secret_name" {
 }
 
+variable "pipeline_dockerconfigjson_secret_name" {
+}
+
+variable "enable_pipeline_dockerconfigjson" {
+}
+
 variable "pipeline_config_repo_existing_url" {
 }
 

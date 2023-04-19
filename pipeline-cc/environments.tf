@@ -185,3 +185,11 @@ resource "ibm_cd_tekton_pipeline_property" "compliance_base_image" {
   value       = var.compliance_base_image
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
+
+resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_dockerjson_config" {
+  count       = (var.enable_pipeline_dockerconfigjson) ? 1 : 0
+  name        = "pipeline-dockerconfigjson"
+  type        = "secure"
+  value       = format("{vault::%s.${var.pipeline_dockerconfigjson_secret_name}}", var.secret_tool)
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
