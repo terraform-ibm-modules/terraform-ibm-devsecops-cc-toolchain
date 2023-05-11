@@ -14,6 +14,12 @@ module "repositories" {
   toolchain_id                                   = ibm_cd_toolchain.toolchain_instance.id
   toolchain_crn                                  = ibm_cd_toolchain.toolchain_instance.crn
   toolchain_region                               = var.toolchain_region
+  default_git_provider                           = var.default_git_provider
+  pipeline_config_repo_git_provider              = var.pipeline_config_repo_git_provider
+  compliance_pipeline_repo_git_provider          = var.compliance_pipeline_repo_git_provider
+  evidence_repo_git_provider                     = var.evidence_repo_git_provider
+  inventory_repo_git_provider                    = var.inventory_repo_git_provider
+  issues_repo_git_provider                       = var.issues_repo_git_provider
   evidence_repo_url                              = var.evidence_repo_url
   inventory_repo_url                             = var.inventory_repo_url
   issues_repo_url                                = var.issues_repo_url
@@ -35,6 +41,7 @@ module "repositories" {
   inventory_repo_git_token_secret_name           = var.inventory_repo_git_token_secret_name
   app_repo_auth_type                             = var.app_repo_auth_type
   app_repo_git_token_secret_name                 = var.app_repo_git_token_secret_name
+  compliance_pipeline_repo_url                   = var.compliance_pipeline_repo_url
   compliance_pipeline_repo_auth_type             = var.compliance_pipeline_repo_auth_type
   compliance_pipeline_repo_git_token_secret_name = var.compliance_pipeline_repo_git_token_secret_name
   pipeline_config_group                          = var.pipeline_config_group
@@ -71,6 +78,7 @@ module "pipeline_cc" {
   issues_repo                           = module.repositories.issues_repo
   pipeline_config_path                  = var.pipeline_config_path
   pipeline_config_repo                  = module.repositories.pipeline_config_repo
+  pipeline_branch                       = var.pipeline_branch
   pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
   pipeline_config_repo_branch           = module.repositories.pipeline_config_repo_branch
@@ -92,6 +100,8 @@ module "pipeline_cc" {
   environment_tag                       = var.environment_tag
   enable_pipeline_dockerconfigjson      = var.enable_pipeline_dockerconfigjson
   pipeline_dockerconfigjson_secret_name = var.pipeline_dockerconfigjson_secret_name
+  tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
+  enable_artifactory                    = var.enable_artifactory
 }
 
 module "integrations" {
@@ -127,6 +137,12 @@ module "integrations" {
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
   secret_tool                   = module.integrations.secret_tool
+  enable_artifactory            = var.enable_artifactory
+  artifactory_dashboard_url     = var.artifactory_dashboard_url
+  artifactory_user              = var.artifactory_user
+  artifactory_repo_name         = var.artifactory_repo_name
+  artifactory_repo_url          = var.artifactory_repo_url
+  artifactory_token_secret_name = var.artifactory_token_secret_name
 }
 
 module "services" {

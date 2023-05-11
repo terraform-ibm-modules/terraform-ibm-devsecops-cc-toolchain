@@ -76,6 +76,12 @@ variable "app_repo_url" {
   default     = ""
 }
 
+variable "compliance_pipeline_repo_url" {
+  type        = string
+  default     = ""
+  description = "Url of pipeline repo template to be cloned"
+}
+
 variable "inventory_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
@@ -175,10 +181,70 @@ variable "enable_pipeline_dockerconfigjson" {
   default     = false
 }
 
+variable "default_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Choose the default git provider for app repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.default_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
+  }
+}
+
 variable "app_repo_git_provider" {
   type        = string
   description = "The type of the Git provider."
   default     = "hostedgit"
+}
+
+variable "compliance_pipeline_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Choose the default git provider for change management repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.compliance_pipeline_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
+  }
+}
+
+variable "pipeline_config_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for pipeline repo config"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.pipeline_config_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for pipeline config repo."
+  }
+}
+
+variable "inventory_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for inventory repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.inventory_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for Inventory repo."
+  }
+}
+
+variable "evidence_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for evidence repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.evidence_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repo."
+  }
+}
+
+variable "issues_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for issue repo "
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.issues_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for issue repo."
+  }
 }
 
 variable "app_repo_branch" {
@@ -385,6 +451,12 @@ variable "pipeline_config_group" {
   default     = ""
 }
 
+variable "pipeline_branch" {
+  type        = string
+  description = "The branch within pipeline definitions repository for Compliance CC Toolchain."
+  default     = "open-v9"
+}
+
 variable "app_group" {
   type        = string
   description = "Specify Git user/group for app repo."
@@ -444,3 +516,41 @@ variable "environment_tag" {
   description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
   default     = "prod_latest"
 }
+
+variable "enable_artifactory" {
+  type        = bool
+  default     = false
+  description = "Set true to enable artifacory for devsecops."
+}
+
+variable "artifactory_dashboard_url" {
+  type        = string
+  default     = ""
+  description = "Type the URL that you want to navigate to when you click the Artifactory integration tile."
+}
+
+variable "artifactory_user" {
+  type        = string
+  description = "Type the User ID or email for your Artifactory repository."
+  default     = ""
+}
+
+variable "artifactory_token_secret_name" {
+  type        = string
+  default     = "artifactory-token"
+  description = "Name of the artifactory token secret in the secret provider."
+}
+
+variable "artifactory_repo_name" {
+  type        = string
+  default     = "wcp-compliance-automation-team-docker-local"
+  description = "Type the name of your Artifactory repository where your docker images are located."
+}
+
+variable "artifactory_repo_url" {
+  type        = string
+  default     = ""
+  description = "Type the URL for your Artifactory release repository."
+}
+
+#################################
