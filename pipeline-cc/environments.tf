@@ -165,7 +165,7 @@ resource "ibm_cd_tekton_pipeline_property" "doi_environment" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "doi_toolchain_id" {
-  name        = "doi_toolchain_id"
+  name        = "doi-toolchain-id"
   type        = "text"
   value       = var.doi_toolchain_id
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
