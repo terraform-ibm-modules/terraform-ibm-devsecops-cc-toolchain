@@ -122,3 +122,15 @@ variable "enable_artifactory" {
 
 variable "tool_artifactory" {
 }
+
+variable  "trigger_timed_name" {
+}
+variable "trigger_timed_enable" {
+}
+variable "trigger_timed_cron_schedule" {
+}
+
+variable  "trigger_manual_name" {
+}
+variable "trigger_manual_enable" {
+}
