@@ -787,6 +787,37 @@ variable "artifactory_repo_url" {
   description = "Type the URL for your Artifactory release repository."
 }
 
+variable "sm_integration_name" {
+  type        = string
+  description = "The name of the Secrets Manager integration."
+  default     = "sm-compliance-secrets"
+}
+
+variable "kp_integration_name" {
+  type        = string
+  description = "The name of the Key Protect integration."
+  default     = "kp-compliance-secrets"
+}
+
+variable "slack_integration_name" {
+  type        = string
+  description = "The name of the Slack integration."
+  default     = "slack-compliance"
+}
+
+####### Event Notifications #################
+variable "event_notifications_tool_name" {
+  type        = string
+  description = "The name of the Event Notifications integration."
+  default     = "Event Notifications"
+}
+
+variable "event_notifications_crn" {
+  type        = string
+  description = "The CRN for the Event Notifications instance."
+  default     = ""
+}
+
 #################################
 variable  "trigger_timed_name" {
   type        = string
@@ -813,4 +844,26 @@ variable "trigger_manual_enable" {
   type        = bool
   description = "Set to `true` to enable the CC pipeline Manual trigger."
   default     = true
+}
+
+variable "trigger_manual_pruner_name" {
+  type        = string
+  description = "The name of the manual Pruner trigger."
+  default     = "Evidence Pruner Manual Trigger"
+}
+variable "trigger_manual_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the manual Pruner trigger."
+  default     = true
+}
+
+variable "trigger_timed_pruner_name" {
+  type        = string
+  description = "The name of the timed Pruner trigger."
+  default     = "Evidence Pruner Timed Trigger"
+}
+variable "trigger_timed_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the timed Pruner trigger."
+  default     = false
 }

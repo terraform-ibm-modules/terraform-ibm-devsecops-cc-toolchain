@@ -114,3 +114,18 @@ variable "artifactory_repo_name" {
 
 variable "artifactory_repo_url" {
 }
+
+variable "sm_integration_name" {
+}
+
+variable "kp_integration_name" {
+}
+
+variable "slack_integration_name" {
+}
+
+variable "event_notifications_tool_name" {
+}
+
+variable "event_notifications_crn" {
+}

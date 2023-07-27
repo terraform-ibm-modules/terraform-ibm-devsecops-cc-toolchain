@@ -218,6 +218,11 @@ module "pipeline_cc" {
   trigger_timed_cron_schedule           = var.trigger_timed_cron_schedule
   trigger_manual_name                   = var.trigger_manual_name
   trigger_manual_enable                 = var.trigger_manual_enable
+  trigger_manual_pruner_name            = var.trigger_manual_pruner_name
+  trigger_manual_pruner_enable          = var.trigger_manual_pruner_enable
+  trigger_timed_pruner_name             = var.trigger_timed_pruner_name
+  trigger_timed_pruner_enable           = var.trigger_timed_pruner_enable
+  enable_pipeline_notifications         = (var.event_notifications_crn != ""  || var.enable_slack) ? true : false
 }
 
 module "integrations" {
@@ -259,6 +264,11 @@ module "integrations" {
   artifactory_repo_name         = var.artifactory_repo_name
   artifactory_repo_url          = var.artifactory_repo_url
   artifactory_token_secret_name = var.artifactory_token_secret_name
+  sm_integration_name           = var.sm_integration_name
+  kp_integration_name           = var.kp_integration_name
+  slack_integration_name        = var.slack_integration_name
+  event_notifications_tool_name = var.event_notifications_tool_name
+  event_notifications_crn       = var.event_notifications_crn
 }
 
 module "services" {
