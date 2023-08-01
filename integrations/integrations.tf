@@ -2,7 +2,7 @@ locals {
   #event notifications crn has the form "crn:v1:bluemix:public:event-notifications:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::"
   #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the event notifications id
   forward_slash_split = try(split("/",var.event_notifications_crn)[1], "")
-  event_notifications_id = try(split(":", local.forward_slash_split)[1])
+  event_notifications_id = try(split(":", local.forward_slash_split)[1], "")
 
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
