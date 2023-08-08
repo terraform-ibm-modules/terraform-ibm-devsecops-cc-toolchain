@@ -819,7 +819,7 @@ variable "event_notifications_crn" {
 }
 
 #################################
-variable  "trigger_timed_name" {
+variable "trigger_timed_name" {
   type        = string
   description = "The name of the CC pipeline Timed trigger."
   default     = "CC Timed Trigger"
@@ -835,7 +835,7 @@ variable "trigger_timed_cron_schedule" {
   default     = "0 4 * * *"
 }
 
-variable  "trigger_manual_name" {
+variable "trigger_manual_name" {
   type        = string
   description = "The name of the CC pipeline Manual trigger."
   default     = "CC Manual Trigger"

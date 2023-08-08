@@ -222,7 +222,7 @@ module "pipeline_cc" {
   trigger_manual_pruner_enable          = var.trigger_manual_pruner_enable
   trigger_timed_pruner_name             = var.trigger_timed_pruner_name
   trigger_timed_pruner_enable           = var.trigger_timed_pruner_enable
-  enable_pipeline_notifications         = (var.event_notifications_crn != ""  || var.enable_slack) ? true : false
+  enable_pipeline_notifications         = (var.event_notifications_crn != "" || var.enable_slack) ? true : false
 }
 
 module "integrations" {

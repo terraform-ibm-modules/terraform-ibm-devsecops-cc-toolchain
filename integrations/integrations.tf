@@ -1,7 +1,7 @@
 locals {
   #event notifications crn has the form "crn:v1:bluemix:public:event-notifications:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::"
   #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the event notifications id
-  forward_slash_split = try(split("/",var.event_notifications_crn)[1], "")
+  forward_slash_split    = try(split("/", var.event_notifications_crn)[1], "")
   event_notifications_id = try(split(":", local.forward_slash_split)[1], "")
 
   sm_integration_name    = var.sm_integration_name
@@ -34,7 +34,7 @@ resource "ibm_iam_authorization_policy" "toolchain_event_notification_auth_polic
   target_service_name         = "event-notifications"
   target_resource_instance_id = local.event_notifications_id
   roles                       = ["Event Source Manager", "Reader"]
-  }
+}
 
 resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
   count        = var.enable_secrets_manager ? 1 : 0
@@ -132,11 +132,11 @@ resource "ibm_cd_toolchain_tool_artifactory" "cd_toolchain_tool_artifactory_inst
 }
 
 resource "ibm_cd_toolchain_tool_eventnotifications" "cd_toolchain_tool_eventnotifications_instance" {
-  count = (var.event_notifications_crn != "") ? 1 : 0
+  count      = (var.event_notifications_crn != "") ? 1 : 0
   depends_on = [ibm_iam_authorization_policy.toolchain_event_notification_auth_policy]
   parameters {
-        name = var.event_notifications_tool_name
-        instance_crn = var.event_notifications_crn
+    name         = var.event_notifications_tool_name
+    instance_crn = var.event_notifications_crn
   }
   toolchain_id = var.toolchain_id
 }
