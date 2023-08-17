@@ -78,7 +78,7 @@ resource "ibm_cd_tekton_pipeline_property" "pipeline_config_branch" {
 resource "ibm_cd_tekton_pipeline_property" "pipeline_config_repo" {
   name        = "pipeline-config-repo"
   type        = "integration"
-  value       = try(var.pipeline_config_repo[0].tool_id, var.app_repo[0].tool_id)
+  value       = try(var.pipeline_config_repo.tool_id, var.app_repo.tool_id)
   path        = "parameters.repo_url"
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
@@ -137,6 +137,7 @@ resource "ibm_cd_tekton_pipeline_property" "ibmcloud_api_key" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cos_api_key" {
+  count       = (var.cos_bucket_name != "") ? 1 : 0
   name        = "cos-api-key"
   type        = "secure"
   value       = format("{vault::%s.${var.cos_api_key_secret_name}}", var.secret_tool)

@@ -1,3 +1,14 @@
+locals {
+  #event notifications crn has the form "crn:v1:bluemix:public:event-notifications:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::"
+  #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the event notifications id
+  forward_slash_split    = try(split("/", var.event_notifications_crn)[1], "")
+  event_notifications_id = try(split(":", local.forward_slash_split)[1], "")
+
+  sm_integration_name    = var.sm_integration_name
+  kp_integration_name    = var.kp_integration_name
+  slack_integration_name = var.slack_integration_name
+}
+
 resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
   count                       = (var.enable_secrets_manager) && (var.authorization_policy_creation != "disabled") ? 1 : 0
   source_service_name         = "toolchain"
@@ -16,10 +27,13 @@ resource "ibm_iam_authorization_policy" "toolchain_keyprotect_auth_policy" {
   roles                       = ["Viewer", "ReaderPlus"]
 }
 
-locals {
-  sm_integration_name    = "sm-compliance-secrets"
-  kp_integration_name    = "kp-compliance-secrets"
-  slack_integration_name = "slack-compliance"
+resource "ibm_iam_authorization_policy" "toolchain_event_notification_auth_policy" {
+  count                       = (var.event_notifications_crn != "") ? 1 : 0
+  source_service_name         = "toolchain"
+  source_resource_instance_id = var.toolchain_id
+  target_service_name         = "event-notifications"
+  target_resource_instance_id = local.event_notifications_id
+  roles                       = ["Event Source Manager", "Reader"]
 }
 
 resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
@@ -113,6 +127,16 @@ resource "ibm_cd_toolchain_tool_artifactory" "cd_toolchain_tool_artifactory_inst
     token           = format("{vault::%s.${var.artifactory_token_secret_name}}", var.secret_tool)
     repository_name = var.artifactory_repo_name
     repository_url  = var.artifactory_repo_url
+  }
+  toolchain_id = var.toolchain_id
+}
+
+resource "ibm_cd_toolchain_tool_eventnotifications" "cd_toolchain_tool_eventnotifications_instance" {
+  count      = (var.event_notifications_crn != "") ? 1 : 0
+  depends_on = [ibm_iam_authorization_policy.toolchain_event_notification_auth_policy]
+  parameters {
+    name         = var.event_notifications_tool_name
+    instance_crn = var.event_notifications_crn
   }
   toolchain_id = var.toolchain_id
 }
