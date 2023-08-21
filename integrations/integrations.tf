@@ -23,7 +23,7 @@ resource "ibm_iam_authorization_policy" "toolchain_keyprotect_auth_policy" {
   source_service_name         = "toolchain"
   source_resource_instance_id = var.toolchain_id
   target_service_name         = "kms"
-  target_resource_instance_id = var.sm_instance_guid
+  target_resource_instance_id = var.kp_instance_guid
   roles                       = ["Viewer", "ReaderPlus"]
 }
 
