@@ -129,7 +129,7 @@ module "pipeline_config_repo" {
   initilization_type    = var.pipeline_config_repo_initilization_type
   repository_url        = var.pipeline_config_repo_existing_url
   source_repository_url = var.pipeline_config_repo_clone_from_url
-  repository_name       = (var.pipeline_config_repo_name != "") ? var.pipeline_config_repo_name : join("-", [var.repositories_prefix, "pipeline_config-repo"])
+  repository_name       = (var.pipeline_config_repo_name != "") ? var.pipeline_config_repo_name : join("-", [var.repositories_prefix, "pipeline-config-repo"])
   is_private_repo       = var.pipeline_config_repo_is_private_repo
   owner_id              = var.pipeline_config_group
   issues_enabled        = var.pipeline_config_repo_issues_enabled
