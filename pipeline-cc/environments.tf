@@ -47,13 +47,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_git-token" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube" {
-  name        = "sonarqube"
-  type        = "text"
-  value       = "{}"
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube-config" {
   name        = "sonarqube-config"
   type        = "text"
