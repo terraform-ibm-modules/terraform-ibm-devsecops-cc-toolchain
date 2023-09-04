@@ -6,7 +6,7 @@ locals {
   )
 
   auth_type       = (var.auth_type == "pat") ? var.auth_type : "oauth"
-  api_token       = (var.auth_type == "pat") ? format("{vault::%s.${var.secret_name}}", var.secret_tool) : ""
+  api_token       = (var.auth_type == "pat") ? var.secret_ref : ""
   repo_url        = (local.initilization_type == "link") ? var.repository_url : ""
   source_repo_url = (local.initilization_type == "link") ? "" : var.source_repository_url
   is_private_repo = (var.is_private_repo) ? true : var.is_private_repo

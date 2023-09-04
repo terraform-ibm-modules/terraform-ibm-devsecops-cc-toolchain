@@ -4,7 +4,7 @@ variable "initilization_type" {
 variable "auth_type" {
 }
 
-variable "secret_name" {
+variable "secret_ref" {
 }
 
 variable "repository_url" {
@@ -44,7 +44,4 @@ variable "git_id" {
 }
 
 variable "default_git_provider" {
-}
-
-variable "secret_tool" {
 }

@@ -52,7 +52,7 @@ variable "secret_tool" {
 variable "enable_slack" {
 }
 
-variable "slack_webhook_secret_name" {
+variable "slack_webhook_secret_ref" {
 }
 
 variable "slack_channel_name" {
@@ -106,7 +106,7 @@ variable "artifactory_dashboard_url" {
 variable "artifactory_user" {
 }
 
-variable "artifactory_token_secret_name" {
+variable "artifactory_token_secret_ref" {
 }
 
 variable "artifactory_repo_name" {
@@ -128,4 +128,22 @@ variable "event_notifications_tool_name" {
 }
 
 variable "event_notifications_crn" {
+}
+
+variable "sonarqube_config" {
+}
+
+variable "sonarqube_integration_name" {
+}
+
+variable "sonarqube_user" {
+}
+
+variable "sonarqube_secret_name" {
+}
+
+variable "sonarqube_is_blind_connection" {
+}
+
+variable "sonarqube_server_url" {
 }

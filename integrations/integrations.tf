@@ -63,7 +63,7 @@ resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
   toolchain_id = var.toolchain_id
   name         = local.slack_integration_name
   parameters {
-    webhook          = format("{vault::%s.${var.slack_webhook_secret_name}}", var.secret_tool)
+    webhook          = var.slack_webhook_secret_ref
     channel_name     = var.slack_channel_name
     team_name        = var.slack_team_name
     pipeline_fail    = var.slack_pipeline_fail
@@ -106,6 +106,18 @@ resource "ibm_cd_toolchain_tool_custom" "cos_integration" {
   }
 }
 
+resource "ibm_cd_toolchain_tool_sonarqube" "cd_toolchain_tool_sonarqube_instance" {
+  count        = (var.sonarqube_config == "custom") ? 1 : 0
+  toolchain_id = var.toolchain_id
+  parameters {
+    name             = var.sonarqube_integration_name
+    user_login       = var.sonarqube_user
+    user_password    = format("{vault::%s.${var.sonarqube_secret_name}}", var.secret_tool)
+    blind_connection = var.sonarqube_is_blind_connection
+    server_url       = var.sonarqube_server_url
+  }
+}
+
 resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
   count        = (var.scc_enable_scc) ? 1 : 0
   toolchain_id = var.toolchain_id
@@ -124,7 +136,7 @@ resource "ibm_cd_toolchain_tool_artifactory" "cd_toolchain_tool_artifactory_inst
     dashboard_url   = var.artifactory_dashboard_url
     type            = "docker"
     user_id         = var.artifactory_user
-    token           = format("{vault::%s.${var.artifactory_token_secret_name}}", var.secret_tool)
+    token           = var.artifactory_token_secret_ref
     repository_name = var.artifactory_repo_name
     repository_url  = var.artifactory_repo_url
   }
@@ -147,7 +159,7 @@ output "ibm_cd_toolchain_tool_artifactory" {
 
 
 output "secret_tool" {
-  value = (var.enable_key_protect) ? local.kp_integration_name : format("%s.%s", local.sm_integration_name, var.sm_secret_group)
+  value = (var.enable_key_protect) ? local.kp_integration_name : local.sm_integration_name
   # Before returning this tool integration name
   # used to construct {vault:: secret references,
   # the authorization_policy must have been successfully created,
@@ -161,4 +173,8 @@ output "secret_tool" {
     ibm_cd_toolchain_tool_keyprotect.keyprotect
   ]
   description = "Used as part of secret references to point to the secret store tool integration"
+}
+
+output "sonarqube_tool" {
+  value = (var.sonarqube_config == "custom") ? ibm_cd_toolchain_tool_sonarqube.cd_toolchain_tool_sonarqube_instance[0].tool_id : null
 }
