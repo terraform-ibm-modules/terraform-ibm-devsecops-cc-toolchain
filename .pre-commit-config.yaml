@@ -1,7 +1,7 @@
 default_stages: [commit]
 repos:
 - repo: https://github.com/ibm/detect-secrets
-  rev: 0.13.1+ibm.60.dss
+  rev: 0.13.1+ibm.58.dss
   hooks:
     - id: detect-secrets # pragma: whitelist secret
       args: [--baseline, .secrets.baseline, --use-all-plugins]
