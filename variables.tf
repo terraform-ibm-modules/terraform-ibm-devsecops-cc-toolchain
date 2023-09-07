@@ -247,6 +247,12 @@ variable "enable_pipeline_dockerconfigjson" {
   default     = false
 }
 
+variable "peer_review_compliance" {
+  type        = string
+  description = "Set to `1` to enable peer review."
+  default     = ""
+}
+
 variable "default_git_provider" {
   type        = string
   default     = "hostedgit"

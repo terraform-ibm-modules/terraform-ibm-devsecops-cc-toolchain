@@ -126,6 +126,9 @@ variable "enable_artifactory" {
 variable "tool_artifactory" {
 }
 
+variable "peer_review_compliance" {
+}
+
 variable "trigger_timed_name" {
 }
 variable "trigger_timed_enable" {

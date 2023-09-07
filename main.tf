@@ -268,6 +268,7 @@ module "pipeline_cc" {
   pipeline_dockerconfigjson_secret_ref = local.dockerconfigjson_secret_ref
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
+  peer_review_compliance               = var.peer_review_compliance
   trigger_timed_name                   = var.trigger_timed_name
   trigger_timed_enable                 = var.trigger_timed_enable
   trigger_timed_cron_schedule          = var.trigger_timed_cron_schedule
