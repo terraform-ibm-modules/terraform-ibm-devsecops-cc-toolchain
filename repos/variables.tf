@@ -1,4 +1,4 @@
-variable "initilization_type" {
+variable "initialization_type" {
 }
 
 variable "auth_type" {
