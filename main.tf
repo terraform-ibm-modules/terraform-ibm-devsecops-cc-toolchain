@@ -18,7 +18,7 @@ locals {
     var.pipeline_config_repo_branch : "master"
   )
 
-  compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
+  compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.clone_from_git_server)
 
   #Secrets
   app_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
@@ -203,7 +203,7 @@ module "app_repo" {
   depends_on            = [module.integrations]
   tool_name             = "app-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = (var.app_repo_git_provider != "") ? var.app_repo_git_provider : var.app_repo_clone_to_git_provider
+  git_provider          = (var.app_repo_existing_git_provider != "") ? var.app_repo_existing_git_provider : var.app_repo_clone_to_git_provider
   initialization_type   = var.app_repo_initialization_type
   repository_url        = var.app_repo_url
   source_repository_url = ""
@@ -327,7 +327,7 @@ module "integrations" {
   event_notifications_tool_name = var.event_notifications_tool_name
   event_notifications_crn       = var.event_notifications_crn
   sonarqube_config              = var.sonarqube_config
-  sonarqube_integration_name     = var.sonarqube_integration_name
+  sonarqube_integration_name    = var.sonarqube_integration_name
   sonarqube_user                = var.sonarqube_user
   sonarqube_secret_name         = var.sonarqube_secret_name
   sonarqube_is_blind_connection = var.sonarqube_is_blind_connection

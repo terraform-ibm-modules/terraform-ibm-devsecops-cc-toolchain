@@ -263,12 +263,6 @@ variable "default_git_provider" {
   }
 }
 
-variable "app_repo_git_provider" {
-  type        = string
-  description = "The type of the Git provider."
-  default     = "hostedgit"
-}
-
 variable "compliance_pipeline_repo_git_provider" {
   type        = string
   default     = "hostedgit"
@@ -461,12 +455,6 @@ variable "compliance_pipeline_repo_issues_enabled" {
   type        = bool
   description = "Set to `true` to enable issues."
   default     = false
-}
-
-variable "app_repo_branch" {
-  type        = string
-  description = "The default branch of the app repo."
-  default     = "master"
 }
 
 variable "app_repo_git_id" {
@@ -766,12 +754,6 @@ variable "compliance_pipeline_repo_secret_group" {
 variable "pipeline_config_repo_secret_group" {
   type        = string
   description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
-  default     = ""
-}
-
-variable "privateworker_credentials_secret_group" {
-  type        = string
-  description = "Secret group prefix for the Private Worker secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
   default     = ""
 }
 
