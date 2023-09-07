@@ -1,14 +1,14 @@
 locals {
-  initilization_type = (
-    (var.initilization_type != "") ? var.initilization_type :
+  initialization_type = (
+    (var.initialization_type != "") ? var.initialization_type :
     (var.repository_url != "") ? "link" :
     (var.source_repository_url != "") ? "clone_if_not_exists" : "new"
   )
 
   auth_type       = (var.auth_type == "pat") ? var.auth_type : "oauth"
   api_token       = (var.auth_type == "pat") ? format("{vault::%s.${var.secret_name}}", var.secret_tool) : ""
-  repo_url        = (local.initilization_type == "link") ? var.repository_url : ""
-  source_repo_url = (local.initilization_type == "link") ? "" : var.source_repository_url
+  repo_url        = (local.initialization_type == "link") ? var.repository_url : ""
+  source_repo_url = (local.initialization_type == "link") ? "" : var.source_repository_url
   is_private_repo = (var.is_private_repo) ? true : var.is_private_repo
   git_provider = (
     (var.git_provider != "") ? var.git_provider :
@@ -31,7 +31,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "repository" {
   toolchain_id = var.toolchain_id
   name         = var.tool_name
   initialization {
-    type            = local.initilization_type
+    type            = local.initialization_type
     source_repo_url = local.source_repo_url
     repo_url        = local.repo_url
     private_repo    = local.is_private_repo
@@ -53,7 +53,7 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "repository" {
   toolchain_id = var.toolchain_id
   name         = var.tool_name
   initialization {
-    type            = local.initilization_type
+    type            = local.initialization_type
     source_repo_url = local.source_repo_url
     repo_url        = local.repo_url
     private_repo    = local.is_private_repo

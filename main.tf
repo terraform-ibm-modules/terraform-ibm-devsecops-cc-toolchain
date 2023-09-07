@@ -37,7 +37,7 @@ module "issues_repo" {
   tool_name             = "issues-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.issues_repo_git_provider
-  initilization_type    = var.issues_repo_initilization_type
+  initialization_type   = var.issues_repo_initialization_type
   repository_url        = var.issues_repo_url
   source_repository_url = ""
   repository_name       = (var.issues_repo_name != "") ? var.issues_repo_name : join("-", [var.repositories_prefix, "issues-repo"])
@@ -59,7 +59,7 @@ module "evidence_repo" {
   tool_name             = "evidence-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.evidence_repo_git_provider
-  initilization_type    = var.evidence_repo_initilization_type
+  initialization_type   = var.evidence_repo_initialization_type
   repository_url        = var.evidence_repo_url
   source_repository_url = ""
   repository_name       = (var.evidence_repo_name != "") ? var.evidence_repo_name : join("-", [var.repositories_prefix, "evidence-repo"])
@@ -81,7 +81,7 @@ module "inventory_repo" {
   tool_name             = "inventory-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.inventory_repo_git_provider
-  initilization_type    = var.inventory_repo_initilization_type
+  initialization_type   = var.inventory_repo_initialization_type
   repository_url        = var.inventory_repo_url
   source_repository_url = ""
   repository_name       = (var.inventory_repo_name != "") ? var.inventory_repo_name : join("-", [var.repositories_prefix, "inventory-repo"])
@@ -103,7 +103,7 @@ module "compliance_pipelines_repo" {
   tool_name             = "pipeline-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.compliance_pipeline_repo_git_provider
-  initilization_type    = "link"
+  initialization_type   = "link"
   repository_url        = local.compliance_repo_url
   source_repository_url = ""
   repository_name       = ""
@@ -126,7 +126,7 @@ module "pipeline_config_repo" {
   tool_name             = "pipeline-config-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.pipeline_config_repo_git_provider
-  initilization_type    = var.pipeline_config_repo_initilization_type
+  initialization_type   = var.pipeline_config_repo_initialization_type
   repository_url        = var.pipeline_config_repo_existing_url
   source_repository_url = var.pipeline_config_repo_clone_from_url
   repository_name       = (var.pipeline_config_repo_name != "") ? var.pipeline_config_repo_name : join("-", [var.repositories_prefix, "pipeline-config-repo"])
@@ -148,7 +148,7 @@ module "app_repo" {
   tool_name             = "app-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = (var.app_repo_git_provider != "") ? var.app_repo_git_provider : var.app_repo_clone_to_git_provider
-  initilization_type    = var.app_repo_initilization_type
+  initialization_type   = var.app_repo_initialization_type
   repository_url        = var.app_repo_url
   source_repository_url = ""
   repository_name       = ""
