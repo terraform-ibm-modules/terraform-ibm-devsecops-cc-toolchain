@@ -2,23 +2,19 @@ locals {
 
   is_staging = length(regexall("^crn:v1:staging:.*$", ibm_cd_toolchain.toolchain_instance.crn)) > 0
   git_dev    = "https://dev.us-south.git.test.cloud.ibm.com"
-  git_mon01  = "https://mon01.git.cloud.ibm.com"
   git_fr2    = "https://private.eu-fr2.git.cloud.ibm.com"
   compliance_pipelines_git_server = (
     (local.is_staging) ? local.git_dev
     : (var.toolchain_region == "eu-fr2") ? local.git_fr2
     : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
   )
-  # in dev/staging, compliance_pipelines_git_server is dev and clone_from_git_server is mon01
-  clone_from_git_server = (
-    (local.is_staging) ? local.git_mon01 : local.compliance_pipelines_git_server
-  )
+
   pipeline_config_repo_branch = (
     (var.pipeline_config_repo_branch != "") ?
     var.pipeline_config_repo_branch : "master"
   )
 
-  compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.clone_from_git_server)
+  compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
 
   #Secrets
   app_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
@@ -79,6 +75,12 @@ locals {
     (var.enable_key_protect) ? module.integrations.secret_tool :
     (var.artifactory_token_secret_group == "") ? format("{vault::%s.${var.artifactory_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.artifactory_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.artifactory_token_secret_group))
+  )
+
+  scc_scc_api_key_secret_ref = (
+    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.scc_scc_api_key_secret_group == "") ? format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
 }
 
@@ -311,6 +313,12 @@ module "integrations" {
   scc_evidence_repo             = var.evidence_repo_url
   scc_enable_scc                = var.scc_enable_scc
   scc_integration_name          = var.scc_integration_name
+  scc_attachment_id             = var.scc_attachment_id
+  scc_instance_crn              = var.scc_instance_crn
+  scc_profile_name              = var.scc_profile_name
+  scc_profile_version           = var.scc_profile_version
+  scc_scc_api_key_secret_ref    = local.scc_scc_api_key_secret_ref
+  scc_use_profile_attachment    = var.scc_use_profile_attachment
   authorization_policy_creation = var.authorization_policy_creation
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id

@@ -122,9 +122,15 @@ resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
   count        = (var.scc_enable_scc) ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
-    name               = var.scc_integration_name
-    evidence_namespace = "cc"
-    evidence_repo_url  = var.scc_evidence_repo
+    name                   = var.scc_integration_name
+    evidence_namespace     = "cc"
+    evidence_repo_url      = var.scc_evidence_repo
+    attachment_id          = var.scc_attachment_id
+    instance_crn           = var.scc_instance_crn
+    profile_name           = var.scc_profile_name
+    profile_version        = var.scc_profile_version
+    scc_api_key            = var.scc_scc_api_key_secret_ref
+    use_profile_attachment = var.scc_use_profile_attachment
   }
 }
 

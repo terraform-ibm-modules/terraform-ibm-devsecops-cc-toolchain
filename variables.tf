@@ -547,6 +547,42 @@ variable "scc_enable_scc" {
   default     = true
 }
 
+variable "scc_attachment_id" {
+  type        = string
+  description = "An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_instance_crn" {
+  type        = string
+  description = "The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. The value must match the regular expression."
+  default     = ""
+}
+
+variable "scc_profile_name" {
+  type        = string
+  description = "The name of a Security and Compliance Center profile. Use the `IBM Cloud for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_profile_version" {
+  type        = string
+  description = "The version of a Security and Compliance Center profile, in SemVer format, like `0.0.0`. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_use_profile_attachment" {
+  type        = string
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
+  default     = "disabled"
+}
+
+variable "scc_scc_api_key_secret_name" {
+  type        = string
+  description = "The Security and Compliance Center api-key secret in the secret provider."
+  default     = "scc-api-key"
+}
+
 variable "cos_api_key_secret_name" {
   type        = string
   description = "COS API key"
@@ -699,67 +735,73 @@ variable "compliance_pipeline_group" {
 
 variable "pipeline_ibmcloud_api_key_secret_group" {
   type        = string
-  description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "scc_scc_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Security and Compliance tool secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "cos_api_key_secret_group" {
   type        = string
-  description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "slack_webhook_secret_group" {
   type        = string
-  description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "pipeline_dockerconfigjson_secret_group" {
   type        = string
-  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "app_repo_secret_group" {
   type        = string
-  description = "Secret group prefix for the App repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the App repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "issues_repo_secret_group" {
   type        = string
-  description = "Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "inventory_repo_secret_group" {
   type        = string
-  description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "evidence_repo_secret_group" {
   type        = string
-  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "compliance_pipeline_repo_secret_group" {
   type        = string
-  description = "Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "pipeline_config_repo_secret_group" {
   type        = string
-  description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
 variable "artifactory_token_secret_group" {
   type        = string
-  description = "Secret group prefix for the Artifactory token secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  description = "Secret group prefix for the Artifactory token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
