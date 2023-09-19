@@ -82,6 +82,12 @@ locals {
     (var.scc_scc_api_key_secret_group == "") ? format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
+
+  pipeline_git_token_secret_ref = (
+    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.pipeline_git_token_secret_group == "") ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_git_token_secret_group))
+  )
 }
 
 data "ibm_resource_group" "resource_group" {
@@ -268,8 +274,10 @@ module "pipeline_cc" {
   environment_tag                      = var.environment_tag
   enable_pipeline_dockerconfigjson     = var.enable_pipeline_dockerconfigjson
   pipeline_dockerconfigjson_secret_ref = local.dockerconfigjson_secret_ref
+  pipeline_git_token_secret_ref        = local.pipeline_git_token_secret_ref
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
+  enable_pipeline_git_token            = var.enable_pipeline_git_token
   peer_review_compliance               = var.peer_review_compliance
   trigger_timed_name                   = var.trigger_timed_name
   trigger_timed_enable                 = var.trigger_timed_enable

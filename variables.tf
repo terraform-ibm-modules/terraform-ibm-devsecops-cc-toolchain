@@ -805,6 +805,12 @@ variable "artifactory_token_secret_group" {
   default     = ""
 }
 
+variable "pipeline_git_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "pipeline_debug" {
   type        = string
   description = "Set to '1' to enable debug logging."
@@ -859,6 +865,12 @@ variable "enable_artifactory" {
   description = "Set true to enable artifacory for devsecops."
 }
 
+variable "enable_pipeline_git_token" {
+  type        = bool
+  description = "Enable to add `git-token` to the pipeline properties."
+  default     = false
+}
+
 variable "artifactory_dashboard_url" {
   type        = string
   default     = ""
@@ -875,6 +887,12 @@ variable "artifactory_token_secret_name" {
   type        = string
   default     = "artifactory-token"
   description = "Name of the artifactory token secret in the secret provider."
+}
+
+variable "pipeline_git_token_secret_name" {
+  type        = string
+  description = "Name of the pipeline Git token secret in the secret provider."
+  default     = "pipeline-git-token"
 }
 
 variable "artifactory_repo_name" {
