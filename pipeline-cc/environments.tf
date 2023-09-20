@@ -73,7 +73,7 @@ resource "ibm_cd_tekton_pipeline_property" "pipeline_config" {
 resource "ibm_cd_tekton_pipeline_property" "pipeline_config_branch" {
   name        = "pipeline-config-branch"
   type        = "text"
-  value       = (var.pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.pipeline_config_repo_branch
+  value       = var.pipeline_config_repo_branch
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 

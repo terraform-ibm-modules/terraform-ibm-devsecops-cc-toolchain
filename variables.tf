@@ -457,6 +457,12 @@ variable "compliance_pipeline_repo_issues_enabled" {
   default     = false
 }
 
+variable "app_repo_branch" {
+  type        = string
+  description = "The default branch of the app repo."
+  default     = "master"
+}
+
 variable "app_repo_git_id" {
   type        = string
   description = "The Git ID of the repository."

@@ -9,11 +9,6 @@ locals {
     : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
   )
 
-  pipeline_config_repo_branch = (
-    (var.pipeline_config_repo_branch != "") ?
-    var.pipeline_config_repo_branch : "master"
-  )
-
   compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
 
   #Secrets
@@ -255,7 +250,7 @@ module "pipeline_cc" {
   pipeline_branch                      = var.pipeline_branch
   pipeline_config_repo_existing_url    = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url  = var.pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch          = local.pipeline_config_repo_branch
+  pipeline_config_repo_branch          = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
   secret_tool                          = module.integrations.secret_tool
   cos_bucket_name                      = var.cos_bucket_name
   cos_api_key_secret_ref               = local.cos_secret_ref
