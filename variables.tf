@@ -211,10 +211,10 @@ variable "app_repo_clone_to_git_id" {
   default     = ""
 }
 
-variable "app_repo_existing_git_provider" {
+variable "app_repo_git_provider" {
   type        = string
   description = "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
-  default     = ""
+  default     = "hostedgit"
 }
 
 variable "compliance_pipeline_repo_auth_type" {
