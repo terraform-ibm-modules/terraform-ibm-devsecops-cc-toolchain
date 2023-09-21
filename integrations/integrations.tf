@@ -129,7 +129,7 @@ resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
     instance_crn           = var.scc_instance_crn
     profile_name           = var.scc_profile_name
     profile_version        = var.scc_profile_version
-    scc_api_key            = var.scc_scc_api_key_secret_ref
+    scc_api_key            = (var.scc_use_profile_attachment == "enabled") ? var.scc_scc_api_key_secret_ref : ""
     use_profile_attachment = var.scc_use_profile_attachment
   }
 }
