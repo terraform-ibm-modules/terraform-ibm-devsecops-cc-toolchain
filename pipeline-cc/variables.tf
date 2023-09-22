@@ -12,13 +12,19 @@ variable "secret_tool" {
   description = "Used as part of secret references to point to the secret store tool integration"
 }
 
-variable "pipeline_ibmcloud_api_key_secret_name" {
+variable "pipeline_ibmcloud_api_key_secret_ref" {
 }
 
-variable "pipeline_dockerconfigjson_secret_name" {
+variable "pipeline_dockerconfigjson_secret_ref" {
+}
+
+variable "pipeline_git_token_secret_ref" {
 }
 
 variable "enable_pipeline_dockerconfigjson" {
+}
+
+variable "enable_pipeline_git_token" {
 }
 
 variable "pipeline_config_repo_existing_url" {
@@ -72,7 +78,7 @@ variable "pipeline_path" {
   default     = "definitions"
 }
 
-variable "cos_api_key_secret_name" {
+variable "cos_api_key_secret_ref" {
 }
 
 variable "cos_bucket_name" {
@@ -111,6 +117,9 @@ variable "opt_in_auto_close" {
 variable "sonarqube_config" {
 }
 
+variable "sonarqube_tool" {
+}
+
 variable "slack_notifications" {
 }
 
@@ -121,6 +130,9 @@ variable "enable_artifactory" {
 }
 
 variable "tool_artifactory" {
+}
+
+variable "peer_review_compliance" {
 }
 
 variable "trigger_timed_name" {

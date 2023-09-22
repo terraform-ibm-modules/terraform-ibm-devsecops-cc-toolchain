@@ -66,8 +66,14 @@ output "app_repo" {
   description = "The Application repo."
   sensitive   = true
 }
+
 output "pipeline_repo_url" {
   value       = module.compliance_pipelines_repo.repository_url
   description = "This repository URL contains the tekton definitions for compliance pipelines."
+}
+
+output "toolchain_url" {
+  value       = ibm_cd_toolchain.toolchain_instance.ui_href
+  description = "The CC toolchain URL."
 }
 ##############################################################################

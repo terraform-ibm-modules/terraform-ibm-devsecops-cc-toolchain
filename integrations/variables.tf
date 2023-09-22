@@ -52,7 +52,7 @@ variable "secret_tool" {
 variable "enable_slack" {
 }
 
-variable "slack_webhook_secret_name" {
+variable "slack_webhook_secret_ref" {
 }
 
 variable "slack_channel_name" {
@@ -85,6 +85,24 @@ variable "scc_enable_scc" {
 variable "scc_integration_name" {
 }
 
+variable "scc_attachment_id" {
+}
+
+variable "scc_instance_crn" {
+}
+
+variable "scc_profile_name" {
+}
+
+variable "scc_profile_version" {
+}
+
+variable "scc_scc_api_key_secret_ref" {
+}
+
+variable "scc_use_profile_attachment" {
+}
+
 variable "ibmcloud_api_key" {
 }
 
@@ -106,7 +124,7 @@ variable "artifactory_dashboard_url" {
 variable "artifactory_user" {
 }
 
-variable "artifactory_token_secret_name" {
+variable "artifactory_token_secret_ref" {
 }
 
 variable "artifactory_repo_name" {
@@ -128,4 +146,22 @@ variable "event_notifications_tool_name" {
 }
 
 variable "event_notifications_crn" {
+}
+
+variable "sonarqube_config" {
+}
+
+variable "sonarqube_integration_name" {
+}
+
+variable "sonarqube_user" {
+}
+
+variable "sonarqube_secret_name" {
+}
+
+variable "sonarqube_is_blind_connection" {
+}
+
+variable "sonarqube_server_url" {
 }
