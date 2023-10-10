@@ -16,6 +16,12 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
+variable "pipeline_doi_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
+  default     = ""
+}
+
 variable "issues_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
@@ -814,6 +820,12 @@ variable "artifactory_token_secret_group" {
 variable "pipeline_git_token_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_doi_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
