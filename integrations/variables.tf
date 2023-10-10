@@ -38,11 +38,6 @@ variable "kp_instance_guid" {
   description = "GUID of the KeyProtect service instance in IBM Cloud"
 }
 
-variable "secret_tool" {
-  type        = string
-  description = "Used as part of secret references to point to the secret store tool integration"
-}
-
 #variable "key_protect_service_auth" {
 #  type        = string
 #  description = "Authorization Permission for the Key Protect Toolchain Service Instance in IBM Cloud"
@@ -157,7 +152,7 @@ variable "sonarqube_integration_name" {
 variable "sonarqube_user" {
 }
 
-variable "sonarqube_secret_name" {
+variable "sonarqube_secret_ref" {
 }
 
 variable "sonarqube_is_blind_connection" {

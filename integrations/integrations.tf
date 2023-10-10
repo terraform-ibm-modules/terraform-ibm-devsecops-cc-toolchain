@@ -112,7 +112,7 @@ resource "ibm_cd_toolchain_tool_sonarqube" "cd_toolchain_tool_sonarqube_instance
   parameters {
     name             = var.sonarqube_integration_name
     user_login       = var.sonarqube_user
-    user_password    = format("{vault::%s.${var.sonarqube_secret_name}}", var.secret_tool)
+    user_password    = var.sonarqube_secret_ref
     blind_connection = var.sonarqube_is_blind_connection
     server_url       = var.sonarqube_server_url
   }

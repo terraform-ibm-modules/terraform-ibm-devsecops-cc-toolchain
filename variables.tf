@@ -817,6 +817,12 @@ variable "pipeline_git_token_secret_group" {
   default     = ""
 }
 
+variable "sonarqube_secret_group" {
+  type        = string
+  description = "Secret group prefix for the SonarQube secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "pipeline_debug" {
   type        = string
   description = "Set to '1' to enable debug logging."

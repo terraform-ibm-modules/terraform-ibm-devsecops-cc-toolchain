@@ -83,6 +83,12 @@ locals {
     (var.pipeline_git_token_secret_group == "") ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_git_token_secret_group))
   )
+
+  sonarqube_secret_ref = (
+    (var.enable_key_protect) ? format("{vault::%s.${var.sonarqube_secret_name}}", module.integrations.secret_tool) :
+    (var.sonarqube_secret_group == "") ? format("{vault::%s.${var.sonarqube_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.sonarqube_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sonarqube_secret_group))
+  )
 }
 
 data "ibm_resource_group" "resource_group" {
@@ -325,7 +331,6 @@ module "integrations" {
   authorization_policy_creation = var.authorization_policy_creation
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
-  secret_tool                   = module.integrations.secret_tool
   enable_artifactory            = var.enable_artifactory
   artifactory_dashboard_url     = var.artifactory_dashboard_url
   artifactory_user              = var.artifactory_user
@@ -340,7 +345,7 @@ module "integrations" {
   sonarqube_config              = var.sonarqube_config
   sonarqube_integration_name    = var.sonarqube_integration_name
   sonarqube_user                = var.sonarqube_user
-  sonarqube_secret_name         = var.sonarqube_secret_name
+  sonarqube_secret_ref          = local.sonarqube_secret_ref
   sonarqube_is_blind_connection = var.sonarqube_is_blind_connection
   sonarqube_server_url          = var.sonarqube_server_url
 }
