@@ -15,6 +15,12 @@ variable "secret_tool" {
 variable "pipeline_ibmcloud_api_key_secret_ref" {
 }
 
+variable "pipeline_doi_api_key_secret_ref" {
+}
+
+variable "link_to_doi_toolchain" {
+}
+
 variable "pipeline_dockerconfigjson_secret_ref" {
 }
 

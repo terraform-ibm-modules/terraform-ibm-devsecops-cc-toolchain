@@ -197,6 +197,14 @@ resource "ibm_cd_tekton_pipeline_property" "compliance_base_image" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_doi_api_key" {
+  count       = var.link_to_doi_toolchain ? 1 : 0
+  name        = "doi-ibmcloud-api-key"
+  type        = "secure"
+  value       = var.pipeline_doi_api_key_secret_ref
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
 resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_dockerjson_config" {
   count       = (var.enable_pipeline_dockerconfigjson) ? 1 : 0
   name        = "pipeline-dockerconfigjson"
