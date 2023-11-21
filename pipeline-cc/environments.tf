@@ -118,7 +118,6 @@ resource "ibm_cd_tekton_pipeline_property" "pipeline_debug" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_peer_review_compliance" {
-  count       = (var.peer_review_compliance == "") ? 0 : 1
   name        = "peer-review-compliance"
   type        = "text"
   value       = var.peer_review_compliance

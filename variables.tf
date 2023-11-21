@@ -256,7 +256,7 @@ variable "enable_pipeline_dockerconfigjson" {
 variable "peer_review_compliance" {
   type        = string
   description = "Set to `1` to enable peer review."
-  default     = ""
+  default     = "1"
 }
 
 variable "default_git_provider" {
@@ -730,7 +730,7 @@ variable "pipeline_config_group" {
 variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CC Toolchain."
-  default     = "open-v9"
+  default     = "open-v10"
 }
 
 variable "app_group" {
