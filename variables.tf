@@ -1042,3 +1042,27 @@ variable "trigger_timed_pruner_enable" {
   description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
 }
+
+variable "opt_in_gosec" {
+  type        = string
+  description = "Enables gosec scans"
+  default     = ""
+}
+
+variable "gosec_private_repository_host" {
+  type        = string
+  description = "Your private repository base URL."
+  default     = ""
+}
+
+variable "gosec_private_repository_ssh_key_secret_name" {
+  type        = string
+  default     = "git-ssh-key"
+  description = "Name of the SSH key token for the private repository in the secret provider."
+}
+
+variable "gosec_private_repository_ssh_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}

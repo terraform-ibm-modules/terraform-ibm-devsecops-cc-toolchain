@@ -95,6 +95,13 @@ locals {
     (var.pipeline_doi_api_key_secret_group == "") ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group))
   )
+
+  gosec_repository_ssh_secret_ref = (
+    (var.enable_key_protect) ? format("{vault::%s.${var.gosec_private_repository_ssh_key_secret_name}}", module.integrations.secret_tool) :
+    (var.gosec_private_repository_ssh_key_secret_group == "") ? format("{vault::%s.${var.gosec_private_repository_ssh_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.gosec_private_repository_ssh_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.gosec_private_repository_ssh_key_secret_group))
+  )
+
 }
 
 data "ibm_resource_group" "resource_group" {
@@ -299,6 +306,9 @@ module "pipeline_cc" {
   sonarqube_tool                       = (module.integrations.sonarqube_tool)
   pipeline_doi_api_key_secret_ref      = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
   link_to_doi_toolchain                = var.link_to_doi_toolchain
+  opt_in_gosec                         = var.opt_in_gosec
+  gosec_private_repository_host        = var.gosec_private_repository_host
+  gosec_repository_ssh_secret_ref      = local.gosec_repository_ssh_secret_ref
 }
 
 module "integrations" {
