@@ -104,6 +104,9 @@ variable "ibmcloud_api_key" {
 variable "authorization_policy_creation" {
 }
 
+variable "enable_insights" {
+}
+
 variable "link_to_doi_toolchain" {
 }
 

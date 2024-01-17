@@ -75,12 +75,12 @@ resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
 }
 
 resource "ibm_cd_toolchain_tool_devopsinsights" "insights_tool" {
-  count        = var.link_to_doi_toolchain ? 0 : 1
+  count        = (var.enable_insights == true) && (var.link_to_doi_toolchain == false) ? 1 : 0
   toolchain_id = var.toolchain_id
 }
 
 resource "ibm_cd_toolchain_tool_custom" "link_to_insights" {
-  count        = var.link_to_doi_toolchain ? 1 : 0
+  count        = (var.enable_insights == true) && (var.link_to_doi_toolchain == true) ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
     type              = "doi-toolchain"

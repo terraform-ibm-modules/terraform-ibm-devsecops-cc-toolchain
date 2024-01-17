@@ -85,6 +85,7 @@ A Terraform module for provisioning the DevSecOps CC toolchains.
 | <a name="input_doi_environment"></a> [doi\_environment](#input\_doi\_environment) | DevOps Insights environment for DevSecOps CD deployment. | `string` | `""` | no |
 | <a name="input_doi_toolchain_id"></a> [doi\_toolchain\_id](#input\_doi\_toolchain\_id) | DevOps Insights Toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_enable_artifactory"></a> [enable\_artifactory](#input\_enable\_artifactory) | Set true to enable artifacory for devsecops. | `bool` | `false` | no |
+| <a name="input_enable_insights"></a> [enable\_insights](#input\_enable\_insights) | Set to `true` to enable the DevOps Insights integration. | `bool` | `true` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to enable Key Protect Integration. | `bool` | `false` | no |
 | <a name="input_enable_pipeline_dockerconfigjson"></a> [enable\_pipeline\_dockerconfigjson](#input\_enable\_pipeline\_dockerconfigjson) | Enable to add the pipeline-dockerconfigjson to the pipeline properties. | `bool` | `false` | no |
 | <a name="input_enable_pipeline_git_token"></a> [enable\_pipeline\_git\_token](#input\_enable\_pipeline\_git\_token) | Enable to add `git-token` to the pipeline properties. | `bool` | `false` | no |

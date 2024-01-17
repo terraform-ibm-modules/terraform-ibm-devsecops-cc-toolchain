@@ -347,6 +347,7 @@ module "integrations" {
   scc_scc_api_key_secret_ref    = local.scc_scc_api_key_secret_ref
   scc_use_profile_attachment    = var.scc_use_profile_attachment
   authorization_policy_creation = var.authorization_policy_creation
+  enable_insights               = var.enable_insights
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
   enable_artifactory            = var.enable_artifactory
