@@ -267,6 +267,7 @@ module "pipeline_cc" {
   pipeline_config_path                 = var.pipeline_config_path
   pipeline_config_repo                 = try(module.pipeline_config_repo[0].repository, "")
   pipeline_branch                      = var.pipeline_branch
+  pipeline_git_tag                     = var.pipeline_git_tag
   pipeline_config_repo_existing_url    = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url  = var.pipeline_config_repo_clone_from_url
   pipeline_config_repo_branch          = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
@@ -348,6 +349,7 @@ module "integrations" {
   scc_use_profile_attachment    = var.scc_use_profile_attachment
   authorization_policy_creation = var.authorization_policy_creation
   enable_insights               = var.enable_insights
+  cos_dashboard_url             = var.cos_dashboard_url
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
   enable_artifactory            = var.enable_artifactory

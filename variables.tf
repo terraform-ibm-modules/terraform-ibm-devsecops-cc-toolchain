@@ -613,6 +613,12 @@ variable "cos_bucket_name" {
   default     = ""
 }
 
+variable "cos_dashboard_url" {
+  type        = string
+  description = "The dashboard URL for the COS toolcard."
+  default     = "https://cloud.ibm.com/catalog/services/cloud-object-storage"
+}
+
 variable "sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
@@ -737,6 +743,12 @@ variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CC Toolchain."
   default     = "open-v10"
+}
+
+variable "pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the CC pipeline definitions repository for Compliance CC Toolchain."
+  default     = ""
 }
 
 variable "app_group" {
@@ -1051,7 +1063,7 @@ variable "trigger_timed_pruner_enable" {
 
 variable "opt_in_gosec" {
   type        = string
-  description = "Enables gosec scans"
+  description = "Enables Gosec scans"
   default     = ""
 }
 
@@ -1069,6 +1081,6 @@ variable "gosec_private_repository_ssh_key_secret_name" {
 
 variable "gosec_private_repository_ssh_key_secret_group" {
   type        = string
-  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  description = "Secret group prefix for the Gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }

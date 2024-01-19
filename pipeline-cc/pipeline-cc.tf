@@ -7,6 +7,7 @@ resource "ibm_cd_tekton_pipeline" "cc_pipeline_instance" {
 }
 
 resource "ibm_cd_tekton_pipeline_definition" "cc_pipeline_definition" {
+  count       = (var.pipeline_git_tag == "") ? 1 : 0
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
   source {
     type = "git"
@@ -14,6 +15,19 @@ resource "ibm_cd_tekton_pipeline_definition" "cc_pipeline_definition" {
       url    = var.pipeline_repo_url
       branch = var.pipeline_branch
       path   = var.pipeline_path
+    }
+  }
+}
+
+resource "ibm_cd_tekton_pipeline_definition" "cc_tekton_definition_tag" {
+  count       = (var.pipeline_git_tag != "") ? 1 : 0
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+  source {
+    type = "git"
+    properties {
+      tag  = var.pipeline_git_tag
+      path = var.pipeline_path
+      url  = var.pipeline_repo_url
     }
   }
 }

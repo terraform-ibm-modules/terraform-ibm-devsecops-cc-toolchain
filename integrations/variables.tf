@@ -131,6 +131,9 @@ variable "artifactory_repo_name" {
 variable "artifactory_repo_url" {
 }
 
+variable "cos_dashboard_url" {
+}
+
 variable "sm_integration_name" {
 }
 
