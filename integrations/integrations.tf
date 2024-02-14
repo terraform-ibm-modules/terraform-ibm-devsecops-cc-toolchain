@@ -4,6 +4,11 @@ locals {
   forward_slash_split    = try(split("/", var.event_notifications_crn)[1], "")
   event_notifications_id = try(split(":", local.forward_slash_split)[1], "")
 
+  #Secrets Manager crn has the form "crn:v1:bluemix:public:secrets-manager:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::
+  #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the Secrets Manager instance id
+  forward_slash_split_sm = try(split("/", var.sm_instance_crn)[1], "")
+  secrets_manager_id     = try(split(":", local.forward_slash_split_sm)[1], "")
+
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
@@ -14,7 +19,7 @@ resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
   source_service_name         = "toolchain"
   source_resource_instance_id = var.toolchain_id
   target_service_name         = "secrets-manager"
-  target_resource_instance_id = var.sm_instance_guid
+  target_resource_instance_id = (var.sm_instance_crn == "") ? var.sm_instance_guid : local.secrets_manager_id
   roles                       = ["Viewer", "SecretsReader"]
 }
 
@@ -37,7 +42,7 @@ resource "ibm_iam_authorization_policy" "toolchain_event_notification_auth_polic
 }
 
 resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
-  count        = var.enable_secrets_manager ? 1 : 0
+  count        = (var.enable_secrets_manager == true && var.sm_instance_crn == "") ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
     name                = local.sm_integration_name
@@ -45,6 +50,16 @@ resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
     resource_group_name = var.sm_resource_group
     instance_name       = var.sm_name
   }
+}
+
+resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager_crn" {
+  count = (var.enable_secrets_manager == true && var.sm_instance_crn != "") ? 1 : 0
+  parameters {
+    name             = local.sm_integration_name
+    instance_id_type = "instance-crn"
+    instance_crn     = var.sm_instance_crn
+  }
+  toolchain_id = var.toolchain_id
 }
 
 resource "ibm_cd_toolchain_tool_keyprotect" "keyprotect" {

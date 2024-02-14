@@ -7,6 +7,9 @@ variable "sm_resource_group" {
 variable "sm_location" {
 }
 
+variable "sm_instance_crn" {
+}
+
 variable "kp_name" {
 }
 

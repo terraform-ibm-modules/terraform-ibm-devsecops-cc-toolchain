@@ -14,8 +14,9 @@ variable "sm_secret_group" {
 }
 
 variable "sm_instance_guid" {
-  type        = string
-  description = "GUID of the Secrets Manager service Instance in IBM Cloud"
+}
+
+variable "sm_instance_crn" {
 }
 
 variable "kp_resource_group" {
@@ -34,15 +35,7 @@ variable "enable_secrets_manager" {
 }
 
 variable "kp_instance_guid" {
-  type        = string
-  description = "GUID of the KeyProtect service instance in IBM Cloud"
 }
-
-#variable "key_protect_service_auth" {
-#  type        = string
-#  description = "Authorization Permission for the Key Protect Toolchain Service Instance in IBM Cloud"
-#  default     = "[\"Viewer\", \"ReaderPlus\"]"
-#}
 
 variable "enable_slack" {
 }

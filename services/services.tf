@@ -22,21 +22,16 @@
 ####################################################################################
 
 data "ibm_resource_group" "sm_resource_group" {
-  count = var.enable_secrets_manager ? 1 : 0
+  count = (var.enable_secrets_manager == true) && (var.sm_instance_crn == "") ? 1 : 0
   name  = var.sm_resource_group
 }
 
 data "ibm_resource_instance" "secrets_manager_instance" {
-  count             = var.enable_secrets_manager ? 1 : 0
+  count             = (var.enable_secrets_manager == true) && (var.sm_instance_crn == "") ? 1 : 0
   service           = "secrets-manager"
   name              = var.sm_name
   resource_group_id = data.ibm_resource_group.sm_resource_group[0].id
   location          = var.sm_location
-}
-
-output "sm_instance_guid" {
-  value       = try(data.ibm_resource_instance.secrets_manager_instance[0].guid, "")
-  description = "GUID of the Secrets Manager service instance in IBM Cloud"
 }
 
 data "ibm_resource_group" "kp_resource_group" {
