@@ -132,6 +132,9 @@ variable "sonarqube_tool" {
 variable "slack_notifications" {
 }
 
+variable "worker_id" {
+}
+
 variable "environment_tag" {
 }
 

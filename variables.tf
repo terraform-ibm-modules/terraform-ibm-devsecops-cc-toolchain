@@ -1084,6 +1084,12 @@ variable "environment_tag" {
   default     = "prod_latest"
 }
 
+variable "worker_id" {
+  type        = string
+  default     = "public"
+  description = "The identifier for the Managed Pipeline worker."
+}
+
 variable "enable_artifactory" {
   type        = bool
   default     = false
