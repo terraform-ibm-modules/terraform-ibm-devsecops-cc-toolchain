@@ -127,6 +127,15 @@ variable "artifactory_repo_url" {
 variable "cos_dashboard_url" {
 }
 
+variable "cos_description" {
+}
+
+variable "cos_documentation_url" {
+}
+
+variable "cos_integration_name" {
+}
+
 variable "sm_integration_name" {
 }
 

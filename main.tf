@@ -374,6 +374,9 @@ module "integrations" {
   authorization_policy_creation = var.authorization_policy_creation
   enable_insights               = var.enable_insights
   cos_dashboard_url             = var.cos_dashboard_url
+  cos_description               = var.cos_description
+  cos_documentation_url         = var.cos_documentation_url
+  cos_integration_name          = var.cos_integration_name
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
   enable_artifactory            = var.enable_artifactory
