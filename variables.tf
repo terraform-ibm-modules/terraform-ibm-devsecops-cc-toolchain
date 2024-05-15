@@ -268,16 +268,19 @@ variable "compliance_pipeline_repo_url" {
 variable "inventory_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "evidence_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "issues_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "pipeline_config_repo_existing_url" {
