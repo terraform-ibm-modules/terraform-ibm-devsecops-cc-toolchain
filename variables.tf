@@ -153,6 +153,23 @@ variable "pipeline_dockerconfigjson_secret_crn" {
   }
 }
 
+variable "enable_pipeline_notifications" {
+  type        = bool
+  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
+  default     = false
+
+}
+
+variable "event_notifications" {
+  type = string
+  description = "To enable event notification, set event_notifications to 1 "
+  default = "0"
+  validation {
+    condition     = contains(["0", "1"], var.event_notifications)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
 variable "slack_webhook_secret_crn" {
   type        = string
   sensitive   = true

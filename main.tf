@@ -326,7 +326,8 @@ module "pipeline_cc" {
   trigger_manual_pruner_enable         = var.trigger_manual_pruner_enable
   trigger_timed_pruner_name            = var.trigger_timed_pruner_name
   trigger_timed_pruner_enable          = var.trigger_timed_pruner_enable
-  enable_pipeline_notifications        = (var.event_notifications_crn != "" || var.enable_slack) ? true : false
+  enable_pipeline_notifications        = var.enable_pipeline_notifications
+  event_notifications                  = var.event_notifications
   sonarqube_tool                       = (module.integrations.sonarqube_tool)
   pipeline_doi_api_key_secret_ref      = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
   link_to_doi_toolchain                = var.link_to_doi_toolchain

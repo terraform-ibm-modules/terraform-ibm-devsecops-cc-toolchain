@@ -131,6 +131,13 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_peer_review_compliance" 
 #   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 # }
 
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_event_notifications" {
+  type        = "text"
+  name        = "event-notifications"
+  value       = var.event_notifications
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
 resource "ibm_cd_tekton_pipeline_property" "slack_notifications" {
   name        = "slack-notifications"
   type        = "text"
