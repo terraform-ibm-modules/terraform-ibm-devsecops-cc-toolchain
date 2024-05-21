@@ -48,7 +48,7 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_git-token" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_sonarqube" {
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube" {
   count       = (var.sonarqube_config == "custom") ? 1 : 0
   name        = "sonarqube"
   type        = "integration"
@@ -204,7 +204,7 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_doi_api_key" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_dockerjson_config" {
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_dockerjson_config" {
   count       = (var.enable_pipeline_dockerconfigjson) ? 1 : 0
   name        = "pipeline-dockerconfigjson"
   type        = "secure"
@@ -241,5 +241,77 @@ resource "ibm_cd_tekton_pipeline_property" "cc_gosec_private_repository_ssh_key"
   name        = "gosec-private-repository-ssh-key"
   type        = "secure"
   value       = var.gosec_repository_ssh_secret_ref
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_host_name" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "zos-hostname"
+  type        = "text"
+  value       = var.zos_host_name
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_ssh_port" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "zos-ssh-port"
+  type        = "text"
+  value       = var.zos_ssh_port
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_user" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "zos-user"
+  type        = "text"
+  value       = var.zos_user
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_url" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "dbb-url"
+  type        = "text"
+  value       = var.zos_dbb_url
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_hlq" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "dbb-hlq"
+  type        = "text"
+  value       = var.zos_dbb_hlq
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_user" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "dbb-user"
+  type        = "text"
+  value       = var.zos_dbb_user
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_secret_name" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "dbb-secret-name"
+  type        = "text"
+  value       = var.zos_secret_key_name
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_secret_info" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "secret-info"
+  type        = "secure"
+  value       = var.zos_secret_info
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_secret_key_name" {
+  count       = (var.deployment_target == "zos") ? 1 : 0
+  name        = "zos-secret-key-name"
+  type        = "secure"
+  value       = var.zos_secret_key_name
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }

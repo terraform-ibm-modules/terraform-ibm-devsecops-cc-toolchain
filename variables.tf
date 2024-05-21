@@ -1297,3 +1297,66 @@ variable "gosec_private_repository_ssh_key_secret_group" {
   description = "Secret group prefix for the Gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
+
+variable "deployment_target" {
+  type        = string
+  description = "The deployment target, 'cluster', 'code-engine' or `zos`."
+  default     = "cluster"
+}
+
+######## ZOS Vars #####################
+variable "zos_user" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_ssh_port" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_host_name" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_secret_key_name" {
+  type        = string
+  description = "API key used to create the toolchains."
+  sensitive   = true
+}
+
+variable "zos_dbb_secret_name" {
+  type        = string
+  description = "API key used to create the toolchains."
+  sensitive   = true
+}
+
+variable "zos_secret_info" {
+  type        = string
+  description = "API key used to create the toolchains."
+  sensitive   = true
+}
+
+variable "zos_dbb_url" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_dbb_hlq" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_dbb_user" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+######## End ZOS Vars #####################

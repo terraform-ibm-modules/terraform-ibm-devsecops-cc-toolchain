@@ -333,6 +333,17 @@ module "pipeline_cc" {
   opt_in_gosec                         = var.opt_in_gosec
   gosec_private_repository_host        = var.gosec_private_repository_host
   gosec_repository_ssh_secret_ref      = local.gosec_repository_ssh_secret_ref
+  deployment_target                    = var.deployment_target
+  zos_user                             = var.zos_user
+  zos_ssh_port                         = var.zos_ssh_port
+  zos_host_name                        = var.zos_host_name
+  zos_secret_key_name                  = var.zos_secret_key_name
+  zos_dbb_secret_name                  = var.zos_dbb_secret_name
+  zos_secret_info                      = var.zos_secret_info
+  zos_dbb_user                         = var.zos_dbb_user
+  zos_dbb_hlq                          = var.zos_dbb_hlq
+  zos_dbb_url                          = var.zos_dbb_url
+
 }
 
 module "integrations" {
