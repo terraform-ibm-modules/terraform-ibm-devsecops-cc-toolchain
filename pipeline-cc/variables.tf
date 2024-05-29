@@ -183,3 +183,9 @@ variable "gosec_private_repository_host" {
 
 variable "gosec_repository_ssh_secret_ref" {
 }
+variable "cra_bom_generate" {
+}
+variable "cra_vulnerability_scan" {
+}
+variable "cra_deploy_analysis" {
+}

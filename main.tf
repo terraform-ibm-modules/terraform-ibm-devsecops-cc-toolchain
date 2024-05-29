@@ -334,6 +334,9 @@ module "pipeline_cc" {
   opt_in_gosec                         = var.opt_in_gosec
   gosec_private_repository_host        = var.gosec_private_repository_host
   gosec_repository_ssh_secret_ref      = local.gosec_repository_ssh_secret_ref
+  cra_bom_generate                     = var.cra_bom_generate
+  cra_vulnerability_scan               = var.cra_vulnerability_scan
+  cra_deploy_analysis                  = var.cra_deploy_analysis
 }
 
 module "integrations" {

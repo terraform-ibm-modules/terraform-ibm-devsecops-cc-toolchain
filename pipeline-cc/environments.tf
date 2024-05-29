@@ -250,3 +250,27 @@ resource "ibm_cd_tekton_pipeline_property" "cc_gosec_private_repository_ssh_key"
   value       = var.gosec_repository_ssh_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
+
+resource "ibm_cd_tekton_pipeline_property" "cc_cra_bom_generate" {
+  name        = "cra-bom-generate"
+  type        = "single_select"
+  enum        = ["0", "1"]
+  value       = var.cra_bom_generate
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_cra_vulnerability_scan" {
+  name        = "cra-vulnerability-scan"
+  type        = "single_select"
+  enum        = ["0", "1"]
+  value       = var.cra_vulnerability_scan
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_cra_deployment_analysis" {
+  name        = "cra-deploy-analysis"
+  type        = "single_select"
+  enum        = ["0", "1"]
+  value       = var.cra_deploy_analysis
+  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
+}
