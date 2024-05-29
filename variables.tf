@@ -813,13 +813,13 @@ variable "cos_bucket_name" {
 variable "cos_dashboard_url" {
   type        = string
   description = "The dashboard URL for the COS toolcard."
-  default     = "https://cloud.ibm.com/catalog/services/cloud-object-storage"
+  default     = "https://cloud.ibm.com/objectstorage"
 }
 
 variable "cos_documentation_url" {
   type        = string
   description = "The documentation URL that appears on the tool card."
-  default     = "https://cloud.ibm.com/catalog/services/cloud-object-storage"
+  default     = "https://cloud.ibm.com/objectstorage"
 }
 
 variable "cos_description" {
