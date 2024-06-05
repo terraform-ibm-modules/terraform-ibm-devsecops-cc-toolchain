@@ -1307,32 +1307,26 @@ variable "deployment_target" {
 ######## ZOS Vars #####################
 variable "zos_user" {
   type        = string
-  description = ""
-  default     = ""
+  description = "z/OS userid."
+  default     = "ibmuser"
 }
 
 variable "zos_ssh_port" {
   type        = string
-  description = ""
-  default     = ""
+  description = "z/OS SSH port."
+  default     = "22"
 }
 
 variable "zos_host_name" {
   type        = string
   description = ""
-  default     = ""
+  default     = "z/OS hotname or IP address."
 }
 
 variable "zos_secret_key_name" {
   type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-}
-
-variable "zos_dbb_secret_name" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
+  description = "z/OS SSH key name."
+  default     = "ssh-auth""
 }
 
 variable "zos_secret_info" {
@@ -1341,21 +1335,15 @@ variable "zos_secret_info" {
   sensitive   = true
 }
 
-variable "zos_dbb_url" {
-  type        = string
-  description = ""
-  default     = ""
-}
-
 variable "zos_dbb_hlq" {
   type        = string
-  description = ""
-  default     = ""
+  description = "z/OS Dependency Based Build (DBB) engine High-Level Qualifier"
+  default     = "IBMUSER.PIPELINE"
 }
 
 variable "zos_dbb_user" {
   type        = string
-  description = ""
+  description = "z/OS Dependency Based Build (DBB) engine userid."
   default     = ""
 }
 

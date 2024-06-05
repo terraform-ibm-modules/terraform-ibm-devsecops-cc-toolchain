@@ -268,14 +268,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_user" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_url" {
-  count       = (var.deployment_target == "zos") ? 1 : 0
-  name        = "dbb-url"
-  type        = "text"
-  value       = var.zos_dbb_url
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_hlq" {
   count       = (var.deployment_target == "zos") ? 1 : 0
   name        = "dbb-hlq"
@@ -289,14 +281,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_user" {
   name        = "dbb-user"
   type        = "text"
   value       = var.zos_dbb_user
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_secret_name" {
-  count       = (var.deployment_target == "zos") ? 1 : 0
-  name        = "dbb-secret-name"
-  type        = "secure"
-  value       = var.zos_dbb_secret_name
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 

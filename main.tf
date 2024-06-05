@@ -338,11 +338,9 @@ module "pipeline_cc" {
   zos_ssh_port                         = var.zos_ssh_port
   zos_host_name                        = var.zos_host_name
   zos_secret_key_name                  = var.zos_secret_key_name
-  zos_dbb_secret_name                  = var.zos_dbb_secret_name
   zos_secret_info                      = var.zos_secret_info
   zos_dbb_user                         = var.zos_dbb_user
   zos_dbb_hlq                          = var.zos_dbb_hlq
-  zos_dbb_url                          = var.zos_dbb_url
 
 }
 

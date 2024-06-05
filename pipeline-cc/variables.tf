@@ -187,9 +187,6 @@ variable "zos_user" {
 variable "zos_host_name" {
 }
 
-variable "zos_dbb_secret_name" {
-}
-
 variable "zos_secret_info" {
 }
 
@@ -197,9 +194,6 @@ variable "zos_secret_key_name" {
 }
 
 variable "zos_ssh_port" {
-}
-
-variable "zos_dbb_url" {
 }
 
 variable "zos_dbb_hlq" {
