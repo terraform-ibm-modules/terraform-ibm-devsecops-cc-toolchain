@@ -284,14 +284,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_dbb_user" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_secret_info" {
-  count       = (var.deployment_target == "zos") ? 1 : 0
-  name        = "secret-info"
-  type        = "secure"
-  value       = var.zos_secret_info
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_zos_secret_key_name" {
   count       = (var.deployment_target == "zos") ? 1 : 0
   name        = "zos-secret-key-name"

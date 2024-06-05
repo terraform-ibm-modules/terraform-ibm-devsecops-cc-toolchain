@@ -1326,13 +1326,7 @@ variable "zos_host_name" {
 variable "zos_secret_key_name" {
   type        = string
   description = "z/OS SSH key name."
-  default     = "ssh-auth""
-}
-
-variable "zos_secret_info" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
+  default     = "ssh-auth"
 }
 
 variable "zos_dbb_hlq" {
