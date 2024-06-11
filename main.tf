@@ -295,7 +295,7 @@ module "pipeline_cc" {
   pipeline_config_repo_branch          = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
   secret_tool                          = module.integrations.secret_tool
   cos_bucket_name                      = var.cos_bucket_name
-  cos_api_key_secret_ref               = local.cos_secret_ref
+  cos_api_key_secret_ref               = (var.cos_bucket_name == "") ? "" : local.cos_secret_ref
   cos_endpoint                         = var.cos_endpoint
   compliance_base_image                = var.compliance_base_image
   doi_toolchain_id                     = var.doi_toolchain_id

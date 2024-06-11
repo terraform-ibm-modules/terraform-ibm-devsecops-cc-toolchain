@@ -153,7 +153,6 @@ resource "ibm_cd_tekton_pipeline_property" "ibmcloud_api_key" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cos_api_key" {
-  count       = (var.cos_bucket_name != "") ? 1 : 0
   name        = "cos-api-key"
   type        = "secure"
   value       = var.cos_api_key_secret_ref
