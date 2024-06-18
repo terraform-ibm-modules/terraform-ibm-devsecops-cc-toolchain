@@ -1,0 +1,54 @@
+[
+    {
+      "pipeline_id": "cc",
+      "git_token_secret_ref": "git-token",
+      "repository_owner": "huayuenh",
+      "mode": "link",
+      "default_branch": "master",
+      "worker_id": "public",
+      "repositories": [
+        {
+          "repository_url": "https://eu-es.git.cloud.ibm.com/huayuenh/hyh-da-es-compliance-evidence-repo",
+          "git_token_secret_ref": "grit-es-token"
+        },
+        {
+          "repository_url": "https://github.ibm.com/HUAYUENH/hyhv2test7-change-repo",
+          "triggers": [
+            {
+              "type": "manual",
+              "name": "Manual Trigger1",
+              "properties": [
+                {
+                  "type": "text",
+                  "name": "param1",
+                  "value": "example1"
+                },
+                {
+                  "type": "secure",
+                  "name": "param2",
+                  "value": "{vault::sm-compliance-secrets.Another.git-token}"
+                }
+              ]
+            },
+            {
+              "type": "manual",
+              "name": "Manual Trigger2",
+              "worker_id": "example1",
+              "properties": [
+                {
+                  "type": "text",
+                  "name": "param1",
+                  "value": "example1"
+                },
+                {
+                  "type": "secure",
+                  "name": "param2",
+                  "value": "{vault::sm-compliance-secrets.OtherGroup.grit-es-token}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]

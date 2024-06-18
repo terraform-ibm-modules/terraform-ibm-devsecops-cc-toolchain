@@ -1348,3 +1348,27 @@ variable "cra_deploy_analysis" {
     error_message = "Must be either \"0\" or \"1\" ."
   }
 }
+
+variable "pipeline_properties" {
+  type        = string
+  description = "Stringified JSON containing the properties. This takes precedence over the properties JSON."
+  default     = ""
+}
+
+variable "pipeline_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
+  default     = ""
+}
+
+variable "repository_properties" {
+  type        = string
+  description = "Stringified JSON containing the repositories and triggers. This takes precedence over the repositories JSON."
+  default     = ""
+}
+
+variable "repository_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
+  default     = ""
+}

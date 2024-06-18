@@ -124,6 +124,37 @@ locals {
     format("{vault::%s.${var.gosec_private_repository_ssh_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.gosec_private_repository_ssh_key_secret_group))
   )
 
+  properties_file_input = try(file("${path.root}/properties.json"), "[]")
+  properties_file_data  = (local.properties_file_input == "") ? "[]" : local.properties_file_input
+  properties_input      = (var.pipeline_properties == "") ? local.properties_file_data : var.pipeline_properties
+  pre_process_prop_data = flatten([for pipeline in jsondecode(local.properties_input) : {
+    pipeline_id = pipeline.pipeline_id # could be `ci`, `pr` or actual pipeline ID
+    properties  = try(pipeline.properties, {})
+    }
+  ])
+
+  config_data = {
+    "secrets_integration_name" = "${var.sm_integration_name}",
+    "secrets_group"            = "${var.sm_secret_group}",
+    "secrets_provider_type" = (
+      (var.enable_key_protect) ? "kp" :
+      (var.enable_secrets_manager) ? "sm" : ""
+    )
+  }
+
+  repos_file_input = try(file("${path.root}/repositories.json"), "[]")
+  repos_file_data  = (local.repos_file_input == "") ? "[]" : local.repos_file_input
+  repos_input      = (var.repository_properties == "") ? local.repos_file_data : var.repository_properties
+  pre_process_repo_data = flatten([for pipeline in jsondecode(local.repos_input) : {
+    pipeline_id          = pipeline.pipeline_id # could be `ci`, `pr` or actual pipeline ID
+    git_token_secret_ref = try(pipeline.git_token_secret_ref, "")
+    repository_owner     = try(pipeline.repository_owner, "")
+    repositories         = try(pipeline.repositories, [])
+    mode                 = try(pipeline.mode, "link")
+    worker_id            = try(pipeline.worker_id, "public")
+    default_branch       = try(pipeline.default_branch, "master")
+    }
+  ])
 }
 
 data "ibm_resource_group" "resource_group" {
@@ -415,4 +446,48 @@ module "services" {
   kp_resource_group      = var.kp_resource_group
   enable_secrets_manager = var.enable_secrets_manager
   enable_key_protect     = var.enable_key_protect
+}
+
+# This is the structure being passed with each loop
+# into `property_data`. It is expected for `properties` to contain property data
+#  {
+#    "pipeline_id": "cc",
+#    "properties": []
+#  }
+
+module "pipeline_properties" {
+  source = "./customizations/pipeline-property-adder"
+  #preprossing the data ensures that a pipeline_id is variable is present
+  for_each = tomap({
+    for t in local.pre_process_prop_data : "${t.pipeline_id}" => t
+  })
+  property_data = each.value
+  # resolve the shorthand to an actual pipeline id
+  pipeline_id = (
+    (lower(each.value.pipeline_id) == "cc") ? module.pipeline_cc.pipeline_id : each.value.pipeline_id
+  )
+  config_data = local.config_data
+}
+
+
+# This is the structure being passed with each loop
+# into `pipeline_repo_data`. It is expected for `repositories` to contain repo data
+#  {
+#    "git_token_secret_ref" = ""
+#    "pipeline_id" = "cc"
+#    "repository_owner" = "test"
+#    "repositories" = []
+#  }
+
+module "repository_properties" {
+  source = "./customizations/repository-adder"
+  #preprossing the data ensures that a pipeline_id is variable is present
+  for_each = tomap({
+    for t in local.pre_process_repo_data : "${t.pipeline_id}" => t
+  })
+  toolchain_id       = ibm_cd_toolchain.toolchain_instance.id
+  pipeline_repo_data = each.value
+  # resolve the shorthand to an actual pipeline id
+  pipeline_id = (lower(each.value.pipeline_id) == "cc") ? module.pipeline_cc.pipeline_id : each.value.pipeline_id
+  config_data = local.config_data
 }
