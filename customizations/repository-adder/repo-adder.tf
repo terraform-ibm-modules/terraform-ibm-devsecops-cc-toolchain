@@ -44,7 +44,7 @@ locals {
 # into `repository_data`
 #   {
 #      "default_branch" = "main"
-#      "git_token_secret_ref" = "ref-to-secret-in-secrets-manager"
+#      "git_token_secret_ref" = "ref"
 #      "mode" = "clone"
 #      "name" = "test_repo"
 #      "owner" = "test"

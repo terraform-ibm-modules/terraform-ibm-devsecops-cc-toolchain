@@ -1,54 +1,63 @@
 [
-    {
-      "pipeline_id": "cc",
-      "git_token_secret_ref": "git-token",
-      "repository_owner": "huayuenh",
-      "mode": "link",
-      "default_branch": "master",
-      "worker_id": "public",
-      "repositories": [
-        {
-          "repository_url": "https://eu-es.git.cloud.ibm.com/huayuenh/hyh-da-es-compliance-evidence-repo",
-          "git_token_secret_ref": "grit-es-token"
-        },
-        {
-          "repository_url": "https://github.ibm.com/HUAYUENH/hyhv2test7-change-repo",
-          "triggers": [
-            {
-              "type": "manual",
-              "name": "Manual Trigger1",
-              "properties": [
-                {
-                  "type": "text",
-                  "name": "param1",
-                  "value": "example1"
-                },
-                {
-                  "type": "secure",
-                  "name": "param2",
-                  "value": "{vault::sm-compliance-secrets.Another.git-token}"
-                }
-              ]
-            },
-            {
-              "type": "manual",
-              "name": "Manual Trigger2",
-              "worker_id": "example1",
-              "properties": [
-                {
-                  "type": "text",
-                  "name": "param1",
-                  "value": "example1"
-                },
-                {
-                  "type": "secure",
-                  "name": "param2",
-                  "value": "{vault::sm-compliance-secrets.OtherGroup.grit-es-token}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "pipeline_id": "cc",
+    "git_token_secret_ref": "{vault::sm-compliance-secrets.Default.git-token}",
+    "repository_owner": "huayuenh",
+    "mode": "link",
+    "default_branch": "master",
+    "repositories": [
+      {
+        "repository_url": "https://eu-es.git.cloud.ibm.com/huayuenh/hyh-da-es-compliance-evidence-repo",
+        "git_token_secret_ref": "grit-es-token"
+      },
+      {
+        "repository_url": "https://github.com/huayuenh/secure-kube-test",
+        "default_branch": "main",
+        "git_token_secret_ref": "github-token"
+      },
+      {
+        "repository_url": "https://github.com/open-toolchain/hello-containers",
+        "default_branch": "master",
+        "mode": "clone",
+        "git_token_secret_ref": "grit-es-token",
+        "repository_owner": "huayuenh",
+        "name": "clone-of-hello-containers",
+        "triggers": [
+          {
+            "type": "manual",
+            "name": "Manual Trigger1",
+            "properties": [
+              {
+                "type": "text",
+                "name": "param1",
+                "value": "example1"
+              },
+              {
+                "type": "secure",
+                "name": "param2",
+                "value": "{vault::sm-compliance-secrets.Another.git-token}"
+              }
+            ]
+          },
+          {
+            "type": "manual",
+            "name": "Manual Trigger2",
+            "worker_id": "example1",
+            "properties": [
+              {
+                "type": "text",
+                "name": "param1",
+                "value": "example1"
+              },
+              {
+                "type": "secure",
+                "name": "param2",
+                "value": "{vault::sm-compliance-secrets.OtherGroup.grit-es-token}"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

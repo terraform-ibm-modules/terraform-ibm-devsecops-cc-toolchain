@@ -81,4 +81,3 @@ resource "ibm_cd_tekton_pipeline_trigger_property" "trigger_property_git_app_nam
   trigger_id  = ibm_cd_tekton_pipeline_trigger.pipeline_scm_trigger[0].trigger_id
   #locked     = local.input_locked
 }
-

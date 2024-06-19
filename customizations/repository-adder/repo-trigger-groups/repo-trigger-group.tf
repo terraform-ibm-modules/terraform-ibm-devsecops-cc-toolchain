@@ -13,7 +13,7 @@ locals {
   mode                 = try(var.repository_data.mode, var.mode)
   worker_id            = try(var.repository_data.worker_id, var.worker_id)
   #if not provided use `hostedgit` as the default.
-  provider     = try(var.repository_data.provider, "hostedgit")
+  provider     = (var.repository_data.provider == "") ? "hostedgit" : var.repository_data.provider
   repo_url_raw = try(trimsuffix(var.repository_data.repository_url, ".git"), "")
 
   git_provider = (
