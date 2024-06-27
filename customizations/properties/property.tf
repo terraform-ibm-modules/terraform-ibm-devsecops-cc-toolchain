@@ -21,7 +21,7 @@ locals {
   input_value      = try(var.property_data.property.value, "")
   input_path       = (local.input_type == "integration") ? try(var.property_data.property.path, null) : null
   input_enum       = try(jsondecode(var.property_data.property.enum), null)
-  input_locked     = try(var.property_data.property.locked, false)
+  input_locked     = try(var.property_data.property.locked, "false")
   input_trigger_id = try(var.trigger_id, "")
 
   secrets_integration_name = try(var.property_data.config_data.secrets_integration_name, "")
@@ -55,6 +55,7 @@ locals {
   #)
 
   #add_property = ((local.is_valid_type == true) && (local.is_name_valid == true) && (local.is_enum == true))
+  resolved_locked = ((local.input_locked == "true") || (local.input_locked == "false")) ? local.input_locked : "false"
 }
 
 resource "ibm_cd_tekton_pipeline_property" "pipeline_property" {
@@ -65,7 +66,7 @@ resource "ibm_cd_tekton_pipeline_property" "pipeline_property" {
   value       = local.resolved_value
   path        = local.resolved_path
   enum        = local.input_enum
-  #locked     = local.input_locked
+  locked      = local.resolved_locked
 }
 
 resource "ibm_cd_tekton_pipeline_trigger_property" "trigger_property" {
@@ -77,5 +78,5 @@ resource "ibm_cd_tekton_pipeline_trigger_property" "trigger_property" {
   path        = local.resolved_path
   enum        = local.input_enum
   trigger_id  = local.input_trigger_id
-  #locked     = local.input_locked
+  locked      = local.resolved_locked
 }
