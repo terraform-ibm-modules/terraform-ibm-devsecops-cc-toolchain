@@ -326,7 +326,6 @@ module "pipeline_cc" {
   pipeline_ibmcloud_api_key_secret_ref = local.pipeline_apikey_secret_ref
   opt_in_dynamic_ui_scan               = var.opt_in_dynamic_ui_scan
   sonarqube_config                     = var.sonarqube_config
-  slack_notifications                  = var.slack_notifications
   worker_id                            = var.worker_id
   enable_pipeline_dockerconfigjson     = var.enable_pipeline_dockerconfigjson
   pipeline_dockerconfigjson_secret_ref = local.dockerconfigjson_secret_ref

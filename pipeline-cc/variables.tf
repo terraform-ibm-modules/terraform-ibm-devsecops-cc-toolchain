@@ -114,9 +114,6 @@ variable "sonarqube_tool" {
 variable "event_notifications" {
 }
 
-variable "slack_notifications" {
-}
-
 variable "worker_id" {
 }
 

@@ -1063,12 +1063,6 @@ variable "sonarqube_config" {
   default     = "default"
 }
 
-variable "slack_notifications" {
-  type        = string
-  description = "The switch that turns the Slack integration on or off."
-  default     = "0"
-}
-
 variable "worker_id" {
   type        = string
   default     = "public"
