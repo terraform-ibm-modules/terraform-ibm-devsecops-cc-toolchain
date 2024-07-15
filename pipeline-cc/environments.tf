@@ -110,4 +110,3 @@ resource "ibm_cd_tekton_pipeline_property" "artifactory-dockerconfigjson" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
   path        = "parameters.docker_config_json"
 }
-
