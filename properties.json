@@ -33,6 +33,11 @@
             "value": ""
         },
         {
+            "name": "opt-in-sonar",
+            "type": "text",
+            "value": "true"
+        },
+        {
           "name": "custom-param3",
           "type": "single_select",
           "value": "0",
