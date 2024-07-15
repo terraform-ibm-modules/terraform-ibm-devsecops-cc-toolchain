@@ -39,9 +39,6 @@ variable "pipeline_config_repo_clone_from_url" {
 variable "pipeline_config_repo_branch" {
 }
 
-variable "pipeline_config_path" {
-}
-
 variable "pipeline_config_repo" {
 }
 

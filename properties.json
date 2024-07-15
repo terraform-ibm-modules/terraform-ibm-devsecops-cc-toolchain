@@ -38,6 +38,11 @@
             "value": "true"
         },
         {
+            "name": "pipeline-config",
+            "type": "text",
+            "value": ".pipeline-config.yaml"
+        },
+        {
           "name": "custom-param3",
           "type": "single_select",
           "value": "0",

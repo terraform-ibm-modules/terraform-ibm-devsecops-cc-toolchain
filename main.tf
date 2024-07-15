@@ -310,7 +310,6 @@ module "pipeline_cc" {
   evidence_repo                        = module.evidence_repo.repository
   inventory_repo                       = module.inventory_repo.repository
   issues_repo                          = module.issues_repo.repository
-  pipeline_config_path                 = var.pipeline_config_path
   pipeline_config_repo                 = try(module.pipeline_config_repo[0].repository, "")
   pipeline_branch                      = var.pipeline_branch
   pipeline_git_tag                     = var.pipeline_git_tag

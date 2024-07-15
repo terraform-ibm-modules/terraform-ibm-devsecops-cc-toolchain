@@ -20,13 +20,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube-config" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "pipeline_config" {
-  name        = "pipeline-config"
-  type        = "text"
-  value       = var.pipeline_config_path
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "pipeline_config_branch" {
   name        = "pipeline-config-branch"
   type        = "text"

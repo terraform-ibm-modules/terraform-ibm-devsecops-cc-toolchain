@@ -307,12 +307,6 @@ variable "pipeline_config_repo_branch" {
   default     = ""
 }
 
-variable "pipeline_config_path" {
-  type        = string
-  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-  default     = ".pipeline-config.yaml"
-}
-
 variable "pipeline_config_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
