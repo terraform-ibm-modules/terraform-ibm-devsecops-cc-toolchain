@@ -13,6 +13,11 @@
           "value": ""
         },
         {
+            "name": "opt-in-auto-close",
+            "type": "text",
+            "value": "1"
+        },
+        {
           "name": "custom-param3",
           "type": "single_select",
           "value": "0",

@@ -1081,12 +1081,6 @@ variable "opt_in_dynamic_scan" {
   default     = ""
 }
 
-variable "opt_in_auto_close" {
-  type        = string
-  description = "Enables auto-closing of issues coming from vulnerabilities, once the vulnerability is no longer detected by the CC pipeline run."
-  default     = "1"
-}
-
 variable "sonarqube_config" {
   type        = string
   description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."

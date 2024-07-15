@@ -329,7 +329,6 @@ module "pipeline_cc" {
   opt_in_dynamic_api_scan              = var.opt_in_dynamic_api_scan
   opt_in_dynamic_ui_scan               = var.opt_in_dynamic_ui_scan
   opt_in_dynamic_scan                  = var.opt_in_dynamic_scan
-  opt_in_auto_close                    = var.opt_in_auto_close
   sonarqube_config                     = var.sonarqube_config
   slack_notifications                  = var.slack_notifications
   worker_id                            = var.worker_id

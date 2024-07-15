@@ -19,13 +19,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-dynamic-ui-scan" 
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-auto-close" {
-  name        = "opt-in-auto-close"
-  type        = "text"
-  value       = var.opt_in_auto_close
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-sonar" {
   name        = "opt-in-sonar"
   type        = "text"

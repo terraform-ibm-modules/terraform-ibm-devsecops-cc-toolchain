@@ -117,9 +117,6 @@ variable "opt_in_dynamic_ui_scan" {
 variable "opt_in_dynamic_scan" {
 }
 
-variable "opt_in_auto_close" {
-}
-
 variable "sonarqube_config" {
 }
 
