@@ -1,10 +1,3 @@
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-dynamic-api-scan" {
-  name        = "opt-in-dynamic-api-scan"
-  type        = "text"
-  value       = var.opt_in_dynamic_api_scan
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-dynamic-scan" {
   name        = "opt-in-dynamic-scan"
   type        = "text"

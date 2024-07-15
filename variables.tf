@@ -1063,12 +1063,6 @@ variable "pipeline_debug" {
   default     = "0"
 }
 
-variable "opt_in_dynamic_api_scan" {
-  type        = string
-  description = "To enable the OWASP Zap API scan. '1' enable or '0' disable."
-  default     = ""
-}
-
 variable "opt_in_dynamic_ui_scan" {
   type        = string
   description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable."

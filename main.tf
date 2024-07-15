@@ -326,7 +326,6 @@ module "pipeline_cc" {
   doi_environment                      = var.doi_environment
   pipeline_ibmcloud_api_key_secret_ref = local.pipeline_apikey_secret_ref
   pipeline_debug                       = var.pipeline_debug
-  opt_in_dynamic_api_scan              = var.opt_in_dynamic_api_scan
   opt_in_dynamic_ui_scan               = var.opt_in_dynamic_ui_scan
   opt_in_dynamic_scan                  = var.opt_in_dynamic_scan
   sonarqube_config                     = var.sonarqube_config

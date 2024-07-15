@@ -18,6 +18,11 @@
             "value": "1"
         },
         {
+            "name": "opt-in-dynamic-api-scan",
+            "type": "text",
+            "value": ""
+        },
+        {
           "name": "custom-param3",
           "type": "single_select",
           "value": "0",
