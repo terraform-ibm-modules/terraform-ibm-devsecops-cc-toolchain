@@ -103,13 +103,6 @@ locals {
     format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group))
   )
 
-  gosec_repository_ssh_secret_ref = (
-    (var.sm_instance_crn != "") ? var.gosec_private_repository_ssh_key_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.gosec_private_repository_ssh_key_secret_name}}", module.integrations.secret_tool) :
-    (var.gosec_private_repository_ssh_key_secret_group == "") ? format("{vault::%s.${var.gosec_private_repository_ssh_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.gosec_private_repository_ssh_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.gosec_private_repository_ssh_key_secret_group))
-  )
-
   properties_file_input = (var.pipeline_properties_filepath == "") ? try(file("${path.root}/properties.json"), "[]") : try(file(var.pipeline_properties_filepath), "[]")
   properties_file_data  = (local.properties_file_input == "") ? "[]" : local.properties_file_input
   properties_input      = (var.pipeline_properties == "") ? local.properties_file_data : var.pipeline_properties
@@ -312,7 +305,6 @@ module "pipeline_cc" {
   cos_bucket_name                      = var.cos_bucket_name
   cos_api_key_secret_ref               = (var.cos_bucket_name == "") ? "" : local.cos_secret_ref
   cos_endpoint                         = var.cos_endpoint
-  compliance_base_image                = var.compliance_base_image
   doi_toolchain_id                     = var.doi_toolchain_id
   pipeline_ibmcloud_api_key_secret_ref = local.pipeline_apikey_secret_ref
   sonarqube_config                     = var.sonarqube_config
@@ -334,11 +326,6 @@ module "pipeline_cc" {
   sonarqube_tool                       = (module.integrations.sonarqube_tool)
   pipeline_doi_api_key_secret_ref      = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
   link_to_doi_toolchain                = var.link_to_doi_toolchain
-  gosec_private_repository_host        = var.gosec_private_repository_host
-  gosec_repository_ssh_secret_ref      = local.gosec_repository_ssh_secret_ref
-  cra_bom_generate                     = var.cra_bom_generate
-  cra_vulnerability_scan               = var.cra_vulnerability_scan
-  cra_deploy_analysis                  = var.cra_deploy_analysis
 }
 
 module "integrations" {
