@@ -93,9 +93,6 @@ variable "doi_toolchain_id" {
   default     = ""
 }
 
-variable "opt_in_dynamic_ui_scan" {
-}
-
 variable "sonarqube_config" {
 }
 

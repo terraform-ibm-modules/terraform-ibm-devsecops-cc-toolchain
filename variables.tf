@@ -1016,12 +1016,6 @@ variable "sonarqube_secret_group" {
   default     = ""
 }
 
-variable "opt_in_dynamic_ui_scan" {
-  type        = string
-  description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
-  default     = ""
-}
-
 variable "sonarqube_config" {
   type        = string
   description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."

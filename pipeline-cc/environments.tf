@@ -1,10 +1,3 @@
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-dynamic-ui-scan" {
-  name        = "opt-in-dynamic-ui-scan"
-  type        = "text"
-  value       = var.opt_in_dynamic_ui_scan
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_sonarqube" {
   count       = (var.sonarqube_config == "custom") ? 1 : 0
   name        = "sonarqube"

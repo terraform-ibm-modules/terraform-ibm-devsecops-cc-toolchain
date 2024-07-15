@@ -316,7 +316,6 @@ module "pipeline_cc" {
   compliance_base_image                = var.compliance_base_image
   doi_toolchain_id                     = var.doi_toolchain_id
   pipeline_ibmcloud_api_key_secret_ref = local.pipeline_apikey_secret_ref
-  opt_in_dynamic_ui_scan               = var.opt_in_dynamic_ui_scan
   sonarqube_config                     = var.sonarqube_config
   worker_id                            = var.worker_id
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
