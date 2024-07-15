@@ -192,17 +192,6 @@ variable "artifactory_token_secret_crn" {
   }
 }
 
-variable "pipeline_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for pipeline Git token property."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_git_token_secret_crn, "crn:") || var.pipeline_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "scc_scc_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -1056,12 +1045,6 @@ variable "artifactory_token_secret_group" {
   default     = ""
 }
 
-variable "pipeline_git_token_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "pipeline_doi_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -1156,12 +1139,6 @@ variable "artifactory_token_secret_name" {
   type        = string
   default     = "artifactory-token"
   description = "Name of the artifactory token secret in the secret provider."
-}
-
-variable "pipeline_git_token_secret_name" {
-  type        = string
-  description = "Name of the pipeline Git token secret in the secret provider."
-  default     = "pipeline-git-token"
 }
 
 variable "artifactory_repo_name" {

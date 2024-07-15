@@ -8,10 +8,9 @@
           "value": "prod_latest"
         },
         {
-          "name": "custom-param2",
+          "name": "git-token",
           "type": "secure",
-          "value": "grit-token",
-          "locked": "true"
+          "value": ""
         },
         {
           "name": "custom-param3",

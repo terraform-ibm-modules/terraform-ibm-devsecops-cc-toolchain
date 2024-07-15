@@ -33,14 +33,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-sonar" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_git-token" {
-  count       = (var.enable_pipeline_git_token) ? 1 : 0
-  name        = "git-token"
-  type        = "secure"
-  value       = var.pipeline_git_token_secret_ref
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_sonarqube" {
   count       = (var.sonarqube_config == "custom") ? 1 : 0
   name        = "sonarqube"

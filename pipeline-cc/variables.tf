@@ -24,9 +24,6 @@ variable "link_to_doi_toolchain" {
 variable "pipeline_dockerconfigjson_secret_ref" {
 }
 
-variable "pipeline_git_token_secret_ref" {
-}
-
 variable "enable_pipeline_dockerconfigjson" {
 }
 
