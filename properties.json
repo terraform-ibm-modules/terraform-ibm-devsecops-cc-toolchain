@@ -43,11 +43,10 @@
             "value": ".pipeline-config.yaml"
         },
         {
-          "name": "custom-param3",
+          "name": "pipeline-debug",
           "type": "single_select",
           "value": "0",
-          "enum": "[0,1,2]",
-          "locked": "false"
+          "enum": "[0,1]"
         }
       ]
     }

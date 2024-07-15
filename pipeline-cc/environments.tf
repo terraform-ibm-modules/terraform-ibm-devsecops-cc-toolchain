@@ -59,14 +59,6 @@ resource "ibm_cd_tekton_pipeline_property" "incident_repo" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "pipeline_debug" {
-  name        = "pipeline-debug"
-  type        = "single_select"
-  enum        = ["0", "1"]
-  value       = var.pipeline_debug
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_peer_review_compliance" {
   name        = "peer-review-compliance"
   type        = "text"

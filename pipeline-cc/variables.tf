@@ -102,9 +102,6 @@ variable "doi_toolchain_id" {
   default     = ""
 }
 
-variable "pipeline_debug" {
-}
-
 variable "opt_in_dynamic_ui_scan" {
 }
 

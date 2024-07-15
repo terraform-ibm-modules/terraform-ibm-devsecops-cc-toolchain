@@ -1051,12 +1051,6 @@ variable "sonarqube_secret_group" {
   default     = ""
 }
 
-variable "pipeline_debug" {
-  type        = string
-  description = "Set to '1' to enable debug logging."
-  default     = "0"
-}
-
 variable "opt_in_dynamic_ui_scan" {
   type        = string
   description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
