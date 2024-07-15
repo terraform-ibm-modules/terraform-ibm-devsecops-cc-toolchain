@@ -68,13 +68,6 @@ locals {
     format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_ibmcloud_api_key_secret_group))
   )
 
-  dockerconfigjson_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_dockerconfigjson_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_dockerconfigjson_secret_name}}", module.integrations.secret_tool) :
-    (var.pipeline_dockerconfigjson_secret_group == "") ? format("{vault::%s.${var.pipeline_dockerconfigjson_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.pipeline_dockerconfigjson_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_dockerconfigjson_secret_group))
-  )
-
   slack_webhook_secret_ref = (
     (var.sm_instance_crn != "") ? var.slack_webhook_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.slack_webhook_secret_name}}", module.integrations.secret_tool) :
@@ -326,8 +319,6 @@ module "pipeline_cc" {
   opt_in_dynamic_ui_scan               = var.opt_in_dynamic_ui_scan
   sonarqube_config                     = var.sonarqube_config
   worker_id                            = var.worker_id
-  enable_pipeline_dockerconfigjson     = var.enable_pipeline_dockerconfigjson
-  pipeline_dockerconfigjson_secret_ref = local.dockerconfigjson_secret_ref
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
   enable_pipeline_git_token            = var.enable_pipeline_git_token

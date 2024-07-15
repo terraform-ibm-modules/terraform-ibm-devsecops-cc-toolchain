@@ -142,17 +142,6 @@ variable "pipeline_ibmcloud_api_key_secret_crn" {
   }
 }
 
-variable "pipeline_dockerconfigjson_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Dockerconfig json secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_dockerconfigjson_secret_crn, "crn:") || var.pipeline_dockerconfigjson_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "enable_pipeline_notifications" {
   type        = bool
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
@@ -419,18 +408,6 @@ variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret in the secret provider."
   default     = "slack-webhook"
-}
-
-variable "pipeline_dockerconfigjson_secret_name" {
-  type        = string
-  description = "Name of the dockerconfigjson secret in the secret provider."
-  default     = "pipeline-dockerconfigjson"
-}
-
-variable "enable_pipeline_dockerconfigjson" {
-  type        = bool
-  description = "Enable to add the pipeline-dockerconfigjson to the pipeline properties."
-  default     = false
 }
 
 variable "peer_review_compliance" {
@@ -982,12 +959,6 @@ variable "cos_api_key_secret_group" {
 variable "slack_webhook_secret_group" {
   type        = string
   description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "pipeline_dockerconfigjson_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
