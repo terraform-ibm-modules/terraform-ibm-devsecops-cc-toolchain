@@ -1116,12 +1116,6 @@ variable "slack_notifications" {
   default     = "0"
 }
 
-variable "environment_tag" {
-  type        = string
-  description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
-  default     = "prod_latest"
-}
-
 variable "worker_id" {
   type        = string
   default     = "public"

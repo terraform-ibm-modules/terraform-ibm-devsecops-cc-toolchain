@@ -33,13 +33,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt-in-sonar" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_environment-tag" {
-  name        = "environment-tag"
-  type        = "text"
-  value       = var.environment_tag
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_git-token" {
   count       = (var.enable_pipeline_git_token) ? 1 : 0
   name        = "git-token"

@@ -1,1 +1,26 @@
-[]
+[
+    {
+      "pipeline_id": "cc",
+      "properties": [
+        {
+          "name": "environment-tag",
+          "type": "text",
+          "value": "prod_latest"
+        },
+        {
+          "name": "custom-param2",
+          "type": "secure",
+          "value": "grit-token",
+          "locked": "true"
+        },
+        {
+          "name": "custom-param3",
+          "type": "single_select",
+          "value": "0",
+          "enum": "[0,1,2]",
+          "locked": "false"
+        }
+      ]
+    }
+  ]
+  

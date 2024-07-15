@@ -138,9 +138,6 @@ variable "slack_notifications" {
 variable "worker_id" {
 }
 
-variable "environment_tag" {
-}
-
 variable "enable_artifactory" {
 }
 

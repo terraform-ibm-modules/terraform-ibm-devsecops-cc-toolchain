@@ -339,7 +339,6 @@ module "pipeline_cc" {
   opt_in_auto_close                    = var.opt_in_auto_close
   sonarqube_config                     = var.sonarqube_config
   slack_notifications                  = var.slack_notifications
-  environment_tag                      = var.environment_tag
   worker_id                            = var.worker_id
   enable_pipeline_dockerconfigjson     = var.enable_pipeline_dockerconfigjson
   pipeline_dockerconfigjson_secret_ref = local.dockerconfigjson_secret_ref
