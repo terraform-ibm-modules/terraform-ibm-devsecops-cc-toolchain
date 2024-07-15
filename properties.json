@@ -23,6 +23,11 @@
             "value": ""
         },
         {
+            "name": "opt-in-dynamic-ui-scan",
+            "type": "text",
+            "value": ""
+        },
+        {
           "name": "custom-param3",
           "type": "single_select",
           "value": "0",

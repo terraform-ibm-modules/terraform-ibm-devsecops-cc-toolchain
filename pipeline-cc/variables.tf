@@ -111,9 +111,6 @@ variable "pipeline_debug" {
 variable "opt_in_dynamic_ui_scan" {
 }
 
-variable "opt_in_dynamic_scan" {
-}
-
 variable "sonarqube_config" {
 }
 
