@@ -1247,12 +1247,6 @@ variable "trigger_timed_pruner_enable" {
   default     = false
 }
 
-variable "opt_in_gosec" {
-  type        = string
-  description = "Enables Gosec scans"
-  default     = ""
-}
-
 variable "gosec_private_repository_host" {
   type        = string
   description = "Your private repository base URL."

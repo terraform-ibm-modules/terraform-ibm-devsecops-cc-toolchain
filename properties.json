@@ -28,6 +28,11 @@
             "value": ""
         },
         {
+            "name": "opt-in-gosec",
+            "type": "text",
+            "value": ""
+        },
+        {
           "name": "custom-param3",
           "type": "single_select",
           "value": "0",

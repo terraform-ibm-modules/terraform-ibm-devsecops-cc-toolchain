@@ -160,9 +160,6 @@ variable "trigger_timed_pruner_enable" {
 variable "enable_pipeline_notifications" {
 }
 
-variable "opt_in_gosec" {
-}
-
 variable "gosec_private_repository_host" {
 }
 
