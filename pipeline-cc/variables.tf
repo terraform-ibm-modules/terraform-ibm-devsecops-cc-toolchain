@@ -93,9 +93,6 @@ variable "cos_endpoint" {
 variable "compliance_base_image" {
 }
 
-variable "doi_environment" {
-}
-
 variable "doi_toolchain_id" {
   type        = string
   description = "DevOpsInsights Toolchain ID"

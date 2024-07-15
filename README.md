@@ -96,7 +96,6 @@ A Terraform module for provisioning the DevSecOps CC toolchains.
 | <a name="input_cra_deploy_analysis"></a> [cra\_deploy\_analysis](#input\_cra\_deploy\_analysis) | Set this flag to `1` for cra deployment analysis to be done. | `string` | `"1"` | no |
 | <a name="input_cra_vulnerability_scan"></a> [cra\_vulnerability\_scan](#input\_cra\_vulnerability\_scan) | Set this flag to `1` and `cra-bom-generate` to `1` for cra vulnerability scan.  If this value is set to 1 and `cra-bom-generate` is set to 0, the scan will be marked as `failure` | `string` | `"1"` | no |
 | <a name="input_default_git_provider"></a> [default\_git\_provider](#input\_default\_git\_provider) | Choose the default git provider for app repo | `string` | `"hostedgit"` | no |
-| <a name="input_doi_environment"></a> [doi\_environment](#input\_doi\_environment) | DevOps Insights environment for DevSecOps CD deployment. | `string` | `""` | no |
 | <a name="input_doi_toolchain_id"></a> [doi\_toolchain\_id](#input\_doi\_toolchain\_id) | DevOps Insights Toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_enable_artifactory"></a> [enable\_artifactory](#input\_enable\_artifactory) | Set true to enable artifacory for devsecops. | `bool` | `false` | no |
 | <a name="input_enable_insights"></a> [enable\_insights](#input\_enable\_insights) | Set to `true` to enable the DevOps Insights integration. | `bool` | `true` | no |

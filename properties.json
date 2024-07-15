@@ -3,6 +3,11 @@
       "pipeline_id": "cc",
       "properties": [
         {
+            "name": "doi-environment",
+            "type": "text",
+            "value": ""
+        },
+        {
           "name": "environment-tag",
           "type": "text",
           "value": "prod_latest"

@@ -895,12 +895,6 @@ variable "authorization_policy_creation" {
   default     = ""
 }
 
-variable "doi_environment" {
-  type        = string
-  description = "DevOps Insights environment for DevSecOps CD deployment."
-  default     = ""
-}
-
 variable "enable_insights" {
   type        = bool
   description = "Set to `true` to enable the DevOps Insights integration."

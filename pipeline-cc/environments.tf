@@ -108,13 +108,6 @@ resource "ibm_cd_tekton_pipeline_property" "cos_endpoint" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "doi_environment" {
-  name        = "doi-environment"
-  type        = "text"
-  value       = var.doi_environment
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "doi_toolchain_id" {
   name        = "doi-toolchain-id"
   type        = "text"
