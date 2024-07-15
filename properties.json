@@ -43,6 +43,11 @@
             "value": "true"
         },
         {
+            "name": "peer-review-compliance",
+            "type": "text",
+            "value": "1"
+        },
+        {
             "name": "pipeline-config",
             "type": "text",
             "value": ".pipeline-config.yaml"

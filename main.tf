@@ -291,7 +291,6 @@ module "pipeline_cc" {
   source     = "./pipeline-cc"
   depends_on = [module.app_repo, module.evidence_repo, module.integrations, module.services]
 
-  ibmcloud_api                         = var.ibmcloud_api
   ibmcloud_api_key                     = var.ibmcloud_api_key
   pipeline_id                          = split("/", ibm_cd_toolchain_tool_pipeline.cc_pipeline.id)[1]
   app_repo_url                         = module.app_repo.repository_url
@@ -321,7 +320,6 @@ module "pipeline_cc" {
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
   enable_pipeline_git_token            = var.enable_pipeline_git_token
-  peer_review_compliance               = var.peer_review_compliance
   trigger_timed_name                   = var.trigger_timed_name
   trigger_timed_enable                 = var.trigger_timed_enable
   trigger_timed_cron_schedule          = var.trigger_timed_cron_schedule

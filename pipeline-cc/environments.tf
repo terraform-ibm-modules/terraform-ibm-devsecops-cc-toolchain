@@ -52,20 +52,6 @@ resource "ibm_cd_tekton_pipeline_property" "incident_repo" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_peer_review_compliance" {
-  name        = "peer-review-compliance"
-  type        = "text"
-  value       = var.peer_review_compliance
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
-# resource "ibm_cd_tekton_pipeline_property" "pipeline_dockerconfigjson" {
-#   name           = "pipeline-dockerconfigjson"
-#   type           = "secure"
-#   value          = ""
-#   pipeline_id    = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-# }
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_event_notifications" {
   type        = "text"
   name        = "event-notifications"
@@ -105,13 +91,6 @@ resource "ibm_cd_tekton_pipeline_property" "doi_toolchain_id" {
   name        = "doi-toolchain-id"
   type        = "text"
   value       = var.doi_toolchain_id
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "ibmcloud_api" {
-  name        = "ibmcloud-api"
-  type        = "text"
-  value       = var.ibmcloud_api
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 

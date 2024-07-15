@@ -224,11 +224,6 @@ variable "gosec_private_repository_ssh_key_secret_crn" {
     error_message = "Must be a CRN or left empty."
   }
 }
-variable "ibmcloud_api" {
-  type        = string
-  description = "IBM Cloud API Endpoint."
-  default     = "https://cloud.ibm.com"
-}
 
 variable "toolchain_region" {
   type        = string
@@ -408,12 +403,6 @@ variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret in the secret provider."
   default     = "slack-webhook"
-}
-
-variable "peer_review_compliance" {
-  type        = string
-  description = "Set to `1` to enable peer review."
-  default     = "1"
 }
 
 variable "default_git_provider" {

@@ -1,9 +1,6 @@
 variable "pipeline_id" {
 }
 
-variable "ibmcloud_api" {
-}
-
 variable "ibmcloud_api_key" {
 }
 
@@ -109,9 +106,6 @@ variable "enable_artifactory" {
 }
 
 variable "tool_artifactory" {
-}
-
-variable "peer_review_compliance" {
 }
 
 variable "trigger_timed_name" {
