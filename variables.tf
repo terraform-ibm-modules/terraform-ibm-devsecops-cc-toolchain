@@ -849,12 +849,6 @@ variable "repositories_prefix" {
   default     = "compliance"
 }
 
-variable "compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code."
-  default     = ""
-}
-
 variable "authorization_policy_creation" {
   type        = string
   description = "Set to disabled if you do not want this policy auto created."

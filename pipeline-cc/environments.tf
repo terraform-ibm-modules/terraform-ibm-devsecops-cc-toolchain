@@ -94,14 +94,6 @@ resource "ibm_cd_tekton_pipeline_property" "doi_toolchain_id" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "compliance_base_image" {
-  count       = (var.compliance_base_image == "") ? 0 : 1
-  name        = "compliance-baseimage"
-  type        = "text"
-  value       = var.compliance_base_image
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_doi_api_key" {
   count       = var.link_to_doi_toolchain ? 1 : 0
   name        = "doi-ibmcloud-api-key"
