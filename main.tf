@@ -118,7 +118,11 @@ locals {
     "secrets_provider_type" = (
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
-    )
+    ),
+    "cos_api_key"      = local.cos_secret_ref,
+    "cos_bucket_name"  = var.cos_bucket_name,
+    "cos_endpoint"     = var.cos_endpoint,
+    "doi_toolchain_id" = var.doi_toolchain_id
   }
 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
@@ -302,10 +306,6 @@ module "pipeline_cc" {
   pipeline_config_repo_clone_from_url  = var.pipeline_config_repo_clone_from_url
   pipeline_config_repo_branch          = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
   secret_tool                          = module.integrations.secret_tool
-  cos_bucket_name                      = var.cos_bucket_name
-  cos_api_key_secret_ref               = (var.cos_bucket_name == "") ? "" : local.cos_secret_ref
-  cos_endpoint                         = var.cos_endpoint
-  doi_toolchain_id                     = var.doi_toolchain_id
   pipeline_ibmcloud_api_key_secret_ref = local.pipeline_apikey_secret_ref
   sonarqube_config                     = var.sonarqube_config
   worker_id                            = var.worker_id

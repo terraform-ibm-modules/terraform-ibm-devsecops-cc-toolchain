@@ -66,34 +66,6 @@ resource "ibm_cd_tekton_pipeline_property" "ibmcloud_api_key" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cos_api_key" {
-  name        = "cos-api-key"
-  type        = "secure"
-  value       = var.cos_api_key_secret_ref
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cos_bucket_name" {
-  name        = "cos-bucket-name"
-  type        = "text"
-  value       = var.cos_bucket_name
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cos_endpoint" {
-  name        = "cos-endpoint"
-  type        = "text"
-  value       = var.cos_endpoint
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "doi_toolchain_id" {
-  name        = "doi-toolchain-id"
-  type        = "text"
-  value       = var.doi_toolchain_id
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_doi_api_key" {
   count       = var.link_to_doi_toolchain ? 1 : 0
   name        = "doi-ibmcloud-api-key"

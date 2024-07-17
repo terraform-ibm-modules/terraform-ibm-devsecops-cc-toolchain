@@ -72,21 +72,6 @@ variable "pipeline_path" {
   default     = "definitions"
 }
 
-variable "cos_api_key_secret_ref" {
-}
-
-variable "cos_bucket_name" {
-}
-
-variable "cos_endpoint" {
-}
-
-variable "doi_toolchain_id" {
-  type        = string
-  description = "DevOpsInsights Toolchain ID"
-  default     = ""
-}
-
 variable "sonarqube_config" {
 }
 
