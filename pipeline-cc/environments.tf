@@ -13,13 +13,6 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_sonarqube-config" {
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "pipeline_config_branch" {
-  name        = "pipeline-config-branch"
-  type        = "text"
-  value       = var.pipeline_config_repo_branch
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "pipeline_config_repo" {
   name        = "pipeline-config-repo"
   type        = "integration"
@@ -56,13 +49,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_event_notifications" {
   type        = "text"
   name        = "event-notifications"
   value       = var.event_notifications
-  pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "ibmcloud_api_key" {
-  name        = "ibmcloud-api-key"
-  type        = "secure"
-  value       = var.pipeline_ibmcloud_api_key_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
 }
 

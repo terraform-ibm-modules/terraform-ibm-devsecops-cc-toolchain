@@ -3,9 +3,29 @@
       "pipeline_id": "cc",
       "properties": [
         {
+          "name": "cos-api-key",
+          "type": "secure",
+          "value": ""
+        },
+        {
+          "name": "cos-bucket-name",
+          "type": "text",
+          "value": ""
+        },
+       {
+          "name": "cos-endpoint",
+          "type": "text",
+          "value": ""
+        },
+        {
             "name": "doi-environment",
             "type": "text",
             "value": ""
+        },
+        {
+          "name": "doi-ibmcloud-api-key",
+          "type": "secure",
+          "value": ""
         },
         {
           "name": "environment-tag",
@@ -18,6 +38,11 @@
           "value": ""
         },
         {
+          "name": "ibmcloud-api-key",
+          "type": "secure",
+          "value": ""
+        },
+        {
             "name": "opt-in-auto-close",
             "type": "text",
             "value": "1"
@@ -26,6 +51,11 @@
             "name": "opt-in-dynamic-api-scan",
             "type": "text",
             "value": ""
+        },
+        {
+          "name": "opt-in-dynamic-scan",
+          "type": "text",
+          "value": ""
         },
         {
             "name": "opt-in-dynamic-ui-scan",
@@ -43,25 +73,25 @@
             "value": "true"
         },
         {
-            "name": "peer-review-compliance",
-            "type": "text",
-            "value": "1"
+          "name": "pipeline-config",
+          "type": "text",
+          "value": ".pipeline-config.yaml"
         },
         {
-            "name": "pipeline-config",
-            "type": "text",
-            "value": ".pipeline-config.yaml"
-        },
-        {
-            "name": "slack-notifications",
-            "type": "text",
-            "value": "0"
+          "name": "pipeline-config-branch",
+          "type": "text",
+          "value": ""
         },
         {
           "name": "pipeline-debug",
           "type": "single_select",
           "value": "0",
           "enum": "[0,1]"
+        },
+        {
+          "name": "slack-notifications",
+          "type": "text",
+          "value": "0"
         }
       ]
     }
