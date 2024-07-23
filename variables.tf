@@ -149,16 +149,6 @@ variable "enable_pipeline_notifications" {
 
 }
 
-variable "event_notifications" {
-  type        = string
-  description = "To enable event notification, set event_notifications to 1 "
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.event_notifications)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
 variable "slack_webhook_secret_crn" {
   type        = string
   sensitive   = true
@@ -986,12 +976,6 @@ variable "sonarqube_secret_group" {
   type        = string
   description = "Secret group prefix for the SonarQube secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
-}
-
-variable "sonarqube_config" {
-  type        = string
-  description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
-  default     = "default"
 }
 
 variable "worker_id" {

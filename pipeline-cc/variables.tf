@@ -9,9 +9,6 @@ variable "secret_tool" {
   description = "Used as part of secret references to point to the secret store tool integration"
 }
 
-variable "pipeline_doi_api_key_secret_ref" {
-}
-
 variable "link_to_doi_toolchain" {
 }
 
@@ -66,13 +63,10 @@ variable "pipeline_path" {
   default     = "definitions"
 }
 
-variable "sonarqube_config" {
-}
-
 variable "sonarqube_tool" {
 }
 
-variable "event_notifications" {
+variable "sonarqube_user" {
 }
 
 variable "worker_id" {

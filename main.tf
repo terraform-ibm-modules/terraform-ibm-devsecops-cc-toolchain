@@ -123,10 +123,11 @@ locals {
     "cos_bucket_name"  = var.cos_bucket_name,
     "cos_endpoint"     = var.cos_endpoint,
     "doi_toolchain_id" = var.doi_toolchain_id,
+    "doi-ibmcloud-api-key" = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
     "ibmcloud_api_key" = local.pipeline_apikey_secret_ref,
     "pipeline_config_repo_branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
   }
-
+ 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
   repos_file_data  = (local.repos_file_input == "") ? "[]" : local.repos_file_input
   repos_input      = (var.repository_properties == "") ? local.repos_file_data : var.repository_properties
@@ -307,7 +308,6 @@ module "pipeline_cc" {
   pipeline_config_repo_existing_url   = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = var.pipeline_config_repo_clone_from_url
   secret_tool                         = module.integrations.secret_tool
-  sonarqube_config                    = var.sonarqube_config
   worker_id                           = var.worker_id
   tool_artifactory                    = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                  = var.enable_artifactory
@@ -322,9 +322,8 @@ module "pipeline_cc" {
   trigger_timed_pruner_name           = var.trigger_timed_pruner_name
   trigger_timed_pruner_enable         = var.trigger_timed_pruner_enable
   enable_pipeline_notifications       = var.enable_pipeline_notifications
-  event_notifications                 = var.event_notifications
   sonarqube_tool                      = (module.integrations.sonarqube_tool)
-  pipeline_doi_api_key_secret_ref     = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
+  sonarqube_user                      = var.sonarqube_user
   link_to_doi_toolchain               = var.link_to_doi_toolchain
 }
 
@@ -384,7 +383,6 @@ module "integrations" {
   slack_integration_name        = var.slack_integration_name
   event_notifications_tool_name = var.event_notifications_tool_name
   event_notifications_crn       = var.event_notifications_crn
-  sonarqube_config              = var.sonarqube_config
   sonarqube_integration_name    = var.sonarqube_integration_name
   sonarqube_user                = var.sonarqube_user
   sonarqube_secret_ref          = local.sonarqube_secret_ref

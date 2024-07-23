@@ -5,82 +5,137 @@
         {
           "name": "cos-api-key",
           "type": "secure",
-          "value": ""
+          "value": "",
+          "locker" : "true"
         },
         {
           "name": "cos-bucket-name",
           "type": "text",
-          "value": ""
+          "value": "",
+          "locker" : "true"
         },
        {
           "name": "cos-endpoint",
           "type": "text",
-          "value": ""
+          "value": "",
+          "locker" : "true"
+        },
+        {
+          "name": "cra-bom-generate",
+          "type": "single_select",
+          "value": "1",
+          "enum": "[0,1]",
+          "locked" : "true"
+        },
+        {
+          "name": "cra-deploy-analysis",
+          "type": "single_select",
+          "value": "1",
+          "enum": "[0,1]",
+          "locked" : "true"
+        },
+        {
+          "name": "cra-vulnerability-scan",
+          "type": "single_select",
+          "value": "1",
+          "enum": "[0,1]",
+          "locked" : "true"
         },
         {
             "name": "doi-environment",
             "type": "text",
-            "value": ""
+            "value": "",
+            "locker" : "true"
         },
         {
           "name": "doi-ibmcloud-api-key",
           "type": "secure",
-          "value": ""
+          "value": "",
+          "locker" : "true"
+        },
+        {
+          "name": "doi-toolchain-id",
+          "type": "text",
+          "value": "",
+          "locked" : "true"
         },
         {
           "name": "environment-tag",
           "type": "text",
-          "value": "prod_latest"
+          "value": "prod_latest",
+          "locker" : "true"
+        },
+        {
+          "name": "event-notifications",
+          "type": "text",
+          "value": "",
+          "locker" : "true"
         },
         {
           "name": "git-token",
           "type": "secure",
-          "value": ""
+          "value": "",
+          "locker" : "true"
         },
         {
           "name": "ibmcloud-api-key",
           "type": "secure",
-          "value": ""
+          "value": "",
+          "locker" : "true"
         },
         {
             "name": "opt-in-auto-close",
             "type": "text",
-            "value": "1"
+            "value": "1",
+            "locker" : "true"
         },
         {
             "name": "opt-in-dynamic-api-scan",
             "type": "text",
-            "value": ""
+            "value": "",
+            "locker" : "true"
         },
         {
           "name": "opt-in-dynamic-scan",
           "type": "text",
-          "value": ""
+          "value": "",
+          "locker" : "true"
         },
         {
             "name": "opt-in-dynamic-ui-scan",
             "type": "text",
-            "value": ""
+            "value": "",
+            "locker" : "true"
         },
         {
             "name": "opt-in-gosec",
             "type": "text",
-            "value": ""
+            "value": "",
+            "locker" : "true"
         },
         {
             "name": "opt-in-sonar",
             "type": "text",
-            "value": "true"
+            "value": "true",
+            "locker" : "true"
+        },
+        {
+          "name": "peer-review-compliance",
+          "type": "text",
+          "value": "1",
+          "locked" : "true"
         },
         {
           "name": "pipeline-config",
           "type": "text",
-          "value": ".pipeline-config.yaml"
+          "value": ".pipeline-config.yaml",
+          "locker" : "true"
         },
         {
           "name": "pipeline-config-branch",
           "type": "text",
-          "value": ""
+          "value": "",
+          "locker" : "true"
         },
         {
           "name": "pipeline-debug",
@@ -91,7 +146,14 @@
         {
           "name": "slack-notifications",
           "type": "text",
-          "value": "0"
+          "value": "0",
+          "locker" : "true"
+        },
+        {
+          "name": "sonarqube-config",
+          "type": "text",
+          "value": "default",
+          "locker" : "true"
         }
       ]
     }
