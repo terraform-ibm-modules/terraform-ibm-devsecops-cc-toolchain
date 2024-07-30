@@ -50,7 +50,7 @@
         {
           "name": "doi-ibmcloud-api-key",
           "type": "secure",
-          "value": "",
+          "value": "ibmcloud-api-key",
           "locker" : "true"
         },
         {
@@ -80,7 +80,7 @@
         {
           "name": "ibmcloud-api-key",
           "type": "secure",
-          "value": "",
+          "value": "ibmcloud-api-key",
           "locker" : "true"
         },
         {
