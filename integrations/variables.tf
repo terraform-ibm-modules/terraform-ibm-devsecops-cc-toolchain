@@ -154,9 +154,6 @@ variable "event_notifications_tool_name" {
 variable "event_notifications_crn" {
 }
 
-variable "sonarqube_config" {
-}
-
 variable "sonarqube_integration_name" {
 }
 

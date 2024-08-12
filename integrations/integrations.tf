@@ -122,7 +122,7 @@ resource "ibm_cd_toolchain_tool_custom" "cos_integration" {
 }
 
 resource "ibm_cd_toolchain_tool_sonarqube" "cd_toolchain_tool_sonarqube_instance" {
-  count        = (var.sonarqube_config == "custom") ? 1 : 0
+  count        = (var.sonarqube_user != "") ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
     name             = var.sonarqube_integration_name

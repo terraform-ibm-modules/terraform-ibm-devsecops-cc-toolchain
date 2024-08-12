@@ -39,7 +39,7 @@ locals {
 
   secret_ref = (
     ((local.input_type == "secure") && (local.is_secret_ref == true)) ? local.input_value :
-    (local.input_type == "secure") ? "${local.secret_ref_prefix}${local.input_value}}" : local.input_value
+    ((local.input_type == "secure") && (local.input_value != "")) ? "${local.secret_ref_prefix}${local.input_value}}" : local.input_value
   )
 
   input_repository_integration_id = (local.input_value == "") ? try(var.property_data.repository_integration_id, "") : local.input_value

@@ -13,7 +13,6 @@ ibmcloud_api_key               = ""
 evidence_repo_url              = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-evidence-locker.git"
 inventory_repo_url             = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
 issues_repo_url                = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
-ibmcloud_api                   = "https://cloud.ibm.com"
 app_repo_url                   = ""
 
 /*****************************************************/

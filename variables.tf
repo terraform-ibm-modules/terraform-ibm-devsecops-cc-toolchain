@@ -142,32 +142,11 @@ variable "pipeline_ibmcloud_api_key_secret_crn" {
   }
 }
 
-variable "pipeline_dockerconfigjson_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Dockerconfig json secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_dockerconfigjson_secret_crn, "crn:") || var.pipeline_dockerconfigjson_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "enable_pipeline_notifications" {
   type        = bool
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
   default     = false
 
-}
-
-variable "event_notifications" {
-  type        = string
-  description = "To enable event notification, set event_notifications to 1 "
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.event_notifications)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 variable "slack_webhook_secret_crn" {
@@ -188,17 +167,6 @@ variable "artifactory_token_secret_crn" {
   default     = ""
   validation {
     condition     = startswith(var.artifactory_token_secret_crn, "crn:") || var.artifactory_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "pipeline_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for pipeline Git token property."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_git_token_secret_crn, "crn:") || var.pipeline_git_token_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
 }
@@ -234,22 +202,6 @@ variable "pipeline_doi_api_key_secret_crn" {
     condition     = startswith(var.pipeline_doi_api_key_secret_crn, "crn:") || var.pipeline_doi_api_key_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
-}
-
-variable "gosec_private_repository_ssh_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Deployment repository Git Token."
-  default     = ""
-  validation {
-    condition     = startswith(var.gosec_private_repository_ssh_key_secret_crn, "crn:") || var.gosec_private_repository_ssh_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-variable "ibmcloud_api" {
-  type        = string
-  description = "IBM Cloud API Endpoint."
-  default     = "https://cloud.ibm.com"
 }
 
 variable "toolchain_region" {
@@ -316,12 +268,6 @@ variable "pipeline_config_repo_branch" {
   type        = string
   description = "Specify a branch of a repository to clone that contains a custom pipeline-config.yaml file."
   default     = ""
-}
-
-variable "pipeline_config_path" {
-  type        = string
-  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-  default     = ".pipeline-config.yaml"
 }
 
 variable "pipeline_config_repo_auth_type" {
@@ -436,24 +382,6 @@ variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret in the secret provider."
   default     = "slack-webhook"
-}
-
-variable "pipeline_dockerconfigjson_secret_name" {
-  type        = string
-  description = "Name of the dockerconfigjson secret in the secret provider."
-  default     = "pipeline-dockerconfigjson"
-}
-
-variable "enable_pipeline_dockerconfigjson" {
-  type        = bool
-  description = "Enable to add the pipeline-dockerconfigjson to the pipeline properties."
-  default     = false
-}
-
-variable "peer_review_compliance" {
-  type        = string
-  description = "Set to `1` to enable peer review."
-  default     = "1"
 }
 
 variable "default_git_provider" {
@@ -900,21 +828,9 @@ variable "repositories_prefix" {
   default     = "compliance"
 }
 
-variable "compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code."
-  default     = ""
-}
-
 variable "authorization_policy_creation" {
   type        = string
   description = "Set to disabled if you do not want this policy auto created."
-  default     = ""
-}
-
-variable "doi_environment" {
-  type        = string
-  description = "DevOps Insights environment for DevSecOps CD deployment."
   default     = ""
 }
 
@@ -1008,12 +924,6 @@ variable "slack_webhook_secret_group" {
   default     = ""
 }
 
-variable "pipeline_dockerconfigjson_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "app_repo_secret_group" {
   type        = string
   description = "Secret group prefix for the App repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -1056,12 +966,6 @@ variable "artifactory_token_secret_group" {
   default     = ""
 }
 
-variable "pipeline_git_token_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "pipeline_doi_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -1072,54 +976,6 @@ variable "sonarqube_secret_group" {
   type        = string
   description = "Secret group prefix for the SonarQube secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
-}
-
-variable "pipeline_debug" {
-  type        = string
-  description = "Set to '1' to enable debug logging."
-  default     = "0"
-}
-
-variable "opt_in_dynamic_api_scan" {
-  type        = string
-  description = "To enable the OWASP Zap API scan. '1' enable or '0' disable."
-  default     = ""
-}
-
-variable "opt_in_dynamic_ui_scan" {
-  type        = string
-  description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
-  default     = ""
-}
-
-variable "opt_in_dynamic_scan" {
-  type        = string
-  description = "To enable the OWASP Zap scan. '1' enable or '0' disable."
-  default     = ""
-}
-
-variable "opt_in_auto_close" {
-  type        = string
-  description = "Enables auto-closing of issues coming from vulnerabilities, once the vulnerability is no longer detected by the CC pipeline run."
-  default     = "1"
-}
-
-variable "sonarqube_config" {
-  type        = string
-  description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
-  default     = "default"
-}
-
-variable "slack_notifications" {
-  type        = string
-  description = "The switch that turns the Slack integration on or off."
-  default     = "0"
-}
-
-variable "environment_tag" {
-  type        = string
-  description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
-  default     = "prod_latest"
 }
 
 variable "worker_id" {
@@ -1162,12 +1018,6 @@ variable "artifactory_token_secret_name" {
   type        = string
   default     = "artifactory-token"
   description = "Name of the artifactory token secret in the secret provider."
-}
-
-variable "pipeline_git_token_secret_name" {
-  type        = string
-  description = "Name of the pipeline Git token secret in the secret provider."
-  default     = "pipeline-git-token"
 }
 
 variable "artifactory_repo_name" {
@@ -1292,61 +1142,6 @@ variable "trigger_timed_pruner_enable" {
   type        = bool
   description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
-}
-
-variable "opt_in_gosec" {
-  type        = string
-  description = "Enables Gosec scans"
-  default     = ""
-}
-
-variable "gosec_private_repository_host" {
-  type        = string
-  description = "Your private repository base URL."
-  default     = ""
-}
-
-variable "gosec_private_repository_ssh_key_secret_name" {
-  type        = string
-  default     = "git-ssh-key"
-  description = "Name of the SSH key token for the private repository in the secret provider."
-}
-
-variable "gosec_private_repository_ssh_key_secret_group" {
-  type        = string
-  description = "Secret group prefix for the Gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cra_bom_generate" {
-  type        = string
-  description = "Set this flag to `1` to generate cra bom"
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.cra_bom_generate)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
-variable "cra_vulnerability_scan" {
-  type        = string
-  description = "Set this flag to `1` and `cra-bom-generate` to `1` for cra vulnerability scan.  If this value is set to 1 and `cra-bom-generate` is set to 0, the scan will be marked as `failure`"
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.cra_vulnerability_scan)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-
-}
-
-variable "cra_deploy_analysis" {
-  type        = string
-  description = "Set this flag to `1` for cra deployment analysis to be done."
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.cra_deploy_analysis)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 variable "pipeline_properties" {
