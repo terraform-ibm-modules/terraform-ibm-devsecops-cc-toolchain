@@ -21,7 +21,8 @@ locals {
   input_value      = try(var.property_data.property.value, "")
   input_path       = (local.input_type == "integration") ? try(var.property_data.property.path, null) : null
   input_enum       = try(jsondecode(var.property_data.property.enum), null)
-  input_locked     = try(var.property_data.property.locked, "false")
+  default_locked   = contains(var.property_data.config_data.default_locked_properties,var.property_data.property.name) ? "true" : "false"
+  input_locked     = try(var.property_data.property.locked, local.default_locked)
   input_trigger_id = try(var.trigger_id, "")
 
   secrets_integration_name = try(var.property_data.config_data.secrets_integration_name, "")

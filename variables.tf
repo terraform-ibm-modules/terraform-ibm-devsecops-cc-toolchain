@@ -1167,3 +1167,10 @@ variable "repository_properties_filepath" {
   description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
   default     = ""
 }
+
+variable "default_locked_properties" {
+  type        = list(string)
+  description = "List of default locked properties"
+  default     = ["pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "print-code-signing-certificate", "event-notifications", "slack-notifications", "ibmcloud-api-key", "evidence-repo", "inventory-repo", "incident-repo", "cluster", "cluster-namespace", "cluster-region", "dev-region", "dev-resource-group", "registry-namespace", "registry-region", "cos-api-key", "cos-bucket-name", "cos-endpoint", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-sonar", "git-token", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "cra-generate-cyclonedx-format", "custom-image-tag", "version", "signing-key", "ibmcloud-api", "sonarqube", "sonarqube-config", "peer-review-compliance", "pipeline-dockerconfigjson", "compliance-baseimage", "artifactory-dockerconfigjson", "opt-in-gosec", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "cra-bom-generate", "cra-vulnerability-scan", "cra-deploy-analysis", "cluster-name", "dev-cluster-namespace", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-engine-build-strategy", "code-engine-build-use-native-docker", "code-engine-build-size", "code-engine-build-timeout", "code-engine-wait-timeout", "context-dir", "dockerfile", "image-name", "registry-domain", "source", "code-engine-binding-resource-group", "code-engine-deployment-type", "cpu", "memory", "ephemeral-storage", "job-maxexecutiontime", "job-retrylimit", "job-instances", "app-port", "app-min-scale", "app-max-scale", "app-deployment-timeout", "app-concurrency", "app-visibility", "env-from-configmaps", "env-from-secrets", "remove-unspecified-references-to-configuration-resources", "service-bindings"]
+}
+

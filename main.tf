@@ -113,6 +113,7 @@ locals {
   ])
 
   config_data = {
+    "default_locked_properties"  = var.default_locked_properties,
     "secrets_integration_name" = var.sm_integration_name,
     "secrets_group"            = var.sm_secret_group,
     "secrets_provider_type" = (
@@ -325,6 +326,7 @@ module "pipeline_cc" {
   sonarqube_tool                      = (module.integrations.sonarqube_tool)
   sonarqube_user                      = var.sonarqube_user
   link_to_doi_toolchain               = var.link_to_doi_toolchain
+  default_locked_properties             = var.default_locked_properties
 }
 
 module "integrations" {

@@ -102,3 +102,5 @@ variable "trigger_timed_pruner_enable" {
 
 variable "enable_pipeline_notifications" {
 }
+variable "default_locked_properties" {
+}
