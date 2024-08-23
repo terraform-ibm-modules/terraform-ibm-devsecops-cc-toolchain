@@ -11,13 +11,16 @@ locals {
   mode = try(var.pipeline_repo_data.mode, "link")
   # Ensure there is a `worker_id` entry. The default is is `public` -> managed worker
   worker_id = try(var.pipeline_repo_data.worker_id, "public")
+  provider  = try(var.pipeline_repo_data.provider, "")
+  git_id    = try(var.pipeline_repo_data.git_id, "")
 
   # Ensure repositories have the same structure
   pre_process_repo_data = flatten([for repository in local.repositories : {
     repository_url       = try(repository.repository_url, "")                               # Required
     default_branch       = try(repository.default_branch, local.default_branch)             # If not set read from parent
     mode                 = try(repository.mode, local.mode)                                 # if not set, read from parent
-    provider             = try(repository.provider, "")                                     # only used when mode is set to clone otherwise determine from repo url
+    provider             = try(repository.provider, local.provider)                         # only used when mode is set to clone otherwise determine from repo url
+    git_id               = try(repository.git_id, local.git_id)                             # custom git id otherwise inferred determine from provided url
     git_token_secret_ref = try(repository.git_token_secret_ref, local.git_token_secret_ref) # if not set, read from parent
     repository_owner     = try(repository.repository_owner, local.repository_owner)         # If not set, read from parent
     name                 = try(repository.name, "")                                         # Only used in clone mode
@@ -53,6 +56,8 @@ locals {
 #      "type" = "manual"
 #      "worker_id" = "public"
 #      "events" = []
+#      "provider" = ""
+#      "git_id"   = ""
 #    }
 
 module "repos_and_triggers" {

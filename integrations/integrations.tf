@@ -33,7 +33,7 @@ resource "ibm_iam_authorization_policy" "toolchain_keyprotect_auth_policy" {
 }
 
 resource "ibm_iam_authorization_policy" "toolchain_event_notification_auth_policy" {
-  count                       = (var.event_notifications_crn != "") ? 1 : 0
+  count                       = ((var.event_notifications_crn != "") && (var.authorization_policy_creation != "disabled")) ? 1 : 0
   source_service_name         = "toolchain"
   source_resource_instance_id = var.toolchain_id
   target_service_name         = "event-notifications"

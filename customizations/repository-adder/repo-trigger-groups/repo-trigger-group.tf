@@ -13,22 +13,30 @@ locals {
   mode                 = try(var.repository_data.mode, var.mode)
   worker_id            = try(var.repository_data.worker_id, var.worker_id)
   #if not provided use `hostedgit` as the default.
-  provider     = (var.repository_data.provider == "") ? "hostedgit" : var.repository_data.provider
   repo_url_raw = try(trimsuffix(var.repository_data.repository_url, ".git"), "")
 
-  git_provider = (
-    (local.mode == "clone") ? local.provider :
-    (strcontains(local.repo_url_raw, "git.cloud.ibm.com")) ? "hostedgit" : "githubconsolidated"
+  # Determine the input repo url to use
+
+  #extend to add support for future providers
+  calculated_provider = (
+    (strcontains(local.repo_url_raw, "github")) ? "githubconsolidated" :
+    (strcontains(local.repo_url_raw, "git.cloud.ibm.com")) ? "hostedgit" : "hostedgit"
+  )
+  #extend to add support for future providers
+  calculated_git_id = (
+    (strcontains(local.repo_url_raw, "github.ibm.com")) ? "integrated" :
+    (strcontains(local.repo_url_raw, "github")) ? "github" :
+    (strcontains(local.repo_url_raw, "git.cloud.ibm.com")) ? "" : ""
   )
 
-  #
-  git_id = (
-    ((local.mode == "clone") && (local.provider == "hostedgit")) ? "" :
-    ((local.mode == "clone") && (local.provider == "githubconsolidated") && (strcontains(local.repo_url_raw, "github.ibm.com"))) ? "integrated" :
-    ((local.mode == "clone") && (local.provider == "githubconsolidated")) ? "github" :
-    (strcontains(local.repo_url_raw, "github.ibm.com")) ? "integrated" :
-    (strcontains(local.repo_url_raw, "github.com")) ? "github" : ""
-  )
+  #If mode = link then use the inferred provider and git_id
+  #If mode = clone then
+
+  #Use specified provider over calculated provider
+  git_provider = (var.repository_data.provider == "") ? local.calculated_provider : var.repository_data.provider
+
+  #Use the specified git id only if a provider is specified
+  git_id = (var.repository_data.provider == "") ? local.calculated_git_id : var.repository_data.git_id
 
   event_listener = (strcontains(local.repo_url_raw, "git.cloud.ibm.com")) ? "ci-listener-gitlab" : "ci-listener"
   # Ensure there is a name for the repository integration. If not use the name of the taken from the `repository_url`

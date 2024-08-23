@@ -27,7 +27,7 @@ locals {
 }
 
 resource "ibm_cd_toolchain_tool_hostedgit" "repository" {
-  count        = local.git_provider != "githubconsolidated" ? 1 : 0
+  count        = local.git_provider == "hostedgit" ? 1 : 0
   toolchain_id = var.toolchain_id
   name         = var.tool_name
   initialization {

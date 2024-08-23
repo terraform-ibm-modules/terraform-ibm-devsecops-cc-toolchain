@@ -5,137 +5,115 @@
         {
           "name": "cos-api-key",
           "type": "secure",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
         {
           "name": "cos-bucket-name",
           "type": "text",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
        {
           "name": "cos-endpoint",
           "type": "text",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
         {
           "name": "cra-bom-generate",
           "type": "single_select",
           "value": "1",
-          "enum": "[0,1]",
-          "locked" : "true"
+          "enum": "[0,1]"
         },
         {
           "name": "cra-deploy-analysis",
           "type": "single_select",
           "value": "1",
-          "enum": "[0,1]",
-          "locked" : "true"
+          "enum": "[0,1]"
         },
         {
           "name": "cra-vulnerability-scan",
           "type": "single_select",
           "value": "1",
-          "enum": "[0,1]",
-          "locked" : "true"
+          "enum": "[0,1]"
         },
         {
             "name": "doi-environment",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
           "name": "doi-ibmcloud-api-key",
           "type": "secure",
-          "value": "ibmcloud-api-key",
-          "locker" : "true"
+          "value": "ibmcloud-api-key"
         },
         {
           "name": "doi-toolchain-id",
           "type": "text",
-          "value": "",
-          "locked" : "true"
+          "value": ""
         },
         {
           "name": "environment-tag",
           "type": "text",
-          "value": "prod_latest",
-          "locker" : "true"
+          "value": "prod_latest"
         },
         {
           "name": "event-notifications",
           "type": "text",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
         {
           "name": "git-token",
           "type": "secure",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
         {
           "name": "ibmcloud-api-key",
           "type": "secure",
-          "value": "ibmcloud-api-key",
-          "locker" : "true"
+          "value": "ibmcloud-api-key"
         },
         {
             "name": "opt-in-auto-close",
             "type": "text",
-            "value": "1",
-            "locker" : "true"
+            "value": "1"
         },
         {
             "name": "opt-in-dynamic-api-scan",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
           "name": "opt-in-dynamic-scan",
           "type": "text",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
         {
             "name": "opt-in-dynamic-ui-scan",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "opt-in-gosec",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "opt-in-sonar",
             "type": "text",
-            "value": "true",
-            "locker" : "true"
+            "value": "true"
         },
         {
           "name": "peer-review-compliance",
           "type": "text",
-          "value": "1",
-          "locked" : "true"
+          "value": "1"
         },
         {
           "name": "pipeline-config",
           "type": "text",
-          "value": ".pipeline-config.yaml",
-          "locker" : "true"
+          "value": ".pipeline-config.yaml"
         },
         {
           "name": "pipeline-config-branch",
           "type": "text",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
         {
           "name": "pipeline-debug",
@@ -146,14 +124,12 @@
         {
           "name": "slack-notifications",
           "type": "text",
-          "value": "0",
-          "locker" : "true"
+          "value": "0"
         },
         {
           "name": "sonarqube-config",
           "type": "text",
-          "value": "default",
-          "locker" : "true"
+          "value": "default"
         }
       ]
     }
