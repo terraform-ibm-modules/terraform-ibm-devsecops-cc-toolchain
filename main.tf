@@ -120,13 +120,13 @@ locals {
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
     ),
-    "cos_api_key"                 = local.cos_secret_ref,
-    "cos_bucket_name"             = var.cos_bucket_name,
-    "cos_endpoint"                = var.cos_endpoint,
-    "doi_toolchain_id"            = var.doi_toolchain_id,
+    "cos-api-key"                 = local.cos_secret_ref,
+    "cos-bucket-name"             = var.cos_bucket_name,
+    "cos-endpoint"                = var.cos_endpoint,
+    "doi-toolchain-id"            = var.doi_toolchain_id,
     "doi-ibmcloud-api-key"        = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
-    "ibmcloud_api_key"            = local.pipeline_apikey_secret_ref,
-    "pipeline_config_repo_branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
+    "ibmcloud-api-key"            = local.pipeline_apikey_secret_ref,
+    "pipeline-config-repo-branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
   }
 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
