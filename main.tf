@@ -120,12 +120,12 @@ locals {
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
     ),
-    "cos-api-key"                 = local.cos_secret_ref,
+    "cos-api-key"                 = var.cos_api_key_secret_name,
     "cos-bucket-name"             = var.cos_bucket_name,
     "cos-endpoint"                = var.cos_endpoint,
     "doi-toolchain-id"            = var.doi_toolchain_id,
     "doi-ibmcloud-api-key"        = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
-    "ibmcloud-api-key"            = local.pipeline_apikey_secret_ref,
+    "ibmcloud-api-key"            = var.pipeline_ibmcloud_api_key_secret_name,
     "pipeline-config-repo-branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
   }
 
