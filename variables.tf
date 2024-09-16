@@ -149,6 +149,12 @@ variable "enable_pipeline_notifications" {
 
 }
 
+variable "environment_tag" {
+  type        = string
+  description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
+  default     = "prod_latest"
+}
+
 variable "slack_webhook_secret_crn" {
   type        = string
   sensitive   = true

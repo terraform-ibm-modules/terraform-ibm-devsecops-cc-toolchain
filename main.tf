@@ -126,6 +126,7 @@ locals {
     "doi-toolchain-id"            = var.doi_toolchain_id,
     "doi-ibmcloud-api-key"        = (var.pipeline_doi_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.pipeline_doi_api_key_secret_name
     "ibmcloud-api-key"            = var.pipeline_ibmcloud_api_key_secret_name,
+    "environment-tag"             = var.environment_tag
     "pipeline-config-repo-branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
   }
 
