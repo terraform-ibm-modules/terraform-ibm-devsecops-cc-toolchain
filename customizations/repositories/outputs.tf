@@ -3,12 +3,18 @@
 ##############################################################################
 
 output "repository_url" {
-  value       = local.git_provider != "githubconsolidated" ? (ibm_cd_toolchain_tool_hostedgit.repository[0].parameters[0].repo_url) : (ibm_cd_toolchain_tool_githubconsolidated.repository[0].parameters[0].repo_url)
+  value = (
+    (local.git_provider == "githubconsolidated") ? (ibm_cd_toolchain_tool_githubconsolidated.repository[0].parameters[0].repo_url) :
+    (local.git_provider == "gitlab") ? (ibm_cd_toolchain_tool_gitlab.repository[0].parameters[0].repo_url) : (ibm_cd_toolchain_tool_hostedgit.repository[0].parameters[0].repo_url)
+  )
   description = "The URL of the this repository."
 }
 
 output "repository" {
-  value       = local.git_provider != "githubconsolidated" ? (ibm_cd_toolchain_tool_hostedgit.repository[0]) : (ibm_cd_toolchain_tool_githubconsolidated.repository[0])
+  value = (
+    (local.git_provider == "githubconsolidated") ? (ibm_cd_toolchain_tool_githubconsolidated.repository[0]) :
+    (local.git_provider == "gitlab") ? (ibm_cd_toolchain_tool_gitlab.repository[0]) : (ibm_cd_toolchain_tool_hostedgit.repository[0])
+  )
   description = "The URL of the this repository."
 }
 

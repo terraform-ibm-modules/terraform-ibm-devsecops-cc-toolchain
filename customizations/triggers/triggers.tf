@@ -11,7 +11,7 @@ locals {
   event_listener      = var.trigger_data.event_listener
   max_concurrent_runs = var.trigger_data.max_concurrent_runs
   trigger_enable      = var.trigger_data.enabled
-
+  worker_id           = var.trigger_data.worker_id
 
   # Events = push, pull_request, pull_request_closed
   input_events      = try(var.trigger_data.events, "")
@@ -51,6 +51,9 @@ resource "ibm_cd_tekton_pipeline_trigger" "pipeline_manual_trigger" {
   event_listener      = local.event_listener
   enabled             = local.trigger_enable
   max_concurrent_runs = local.max_concurrent_runs
+  worker {
+    id = local.worker_id
+  }
 }
 
 # Timed Trigger
@@ -64,6 +67,9 @@ resource "ibm_cd_tekton_pipeline_trigger" "pipeline_timed_trigger" {
   timezone            = local.time_zone
   enabled             = local.trigger_enable
   max_concurrent_runs = local.max_concurrent_runs
+  worker {
+    id = local.worker_id
+  }
 }
 
 # Git Trigger
@@ -83,6 +89,9 @@ resource "ibm_cd_tekton_pipeline_trigger" "pipeline_scm_trigger" {
     }
   }
   max_concurrent_runs = local.max_concurrent_runs
+  worker {
+    id = local.worker_id
+  }
 }
 
 #This is the structure being passed with each loop

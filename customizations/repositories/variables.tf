@@ -45,3 +45,12 @@ variable "git_id" {
 
 variable "default_git_provider" {
 }
+
+variable "blind_connection" {
+}
+
+variable "title" {
+}
+
+variable "root_url" {
+}
