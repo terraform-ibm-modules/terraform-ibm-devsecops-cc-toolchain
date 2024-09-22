@@ -237,8 +237,8 @@ module "compliance_pipelines_repo" {
   git_provider          = var.compliance_pipeline_repo_git_provider
   initialization_type   = "link"
   repository_url        = local.compliance_repo_url
-  source_repository_url = ""
-  repository_name       = ""
+  source_repository_url = (var.clone_compliance_pipelines) ? local.compliance_repo_url : ""
+  repository_name       = "compliance-pipelines"
   is_private_repo       = false
   owner_id              = var.compliance_pipeline_group
   issues_enabled        = var.compliance_pipeline_repo_issues_enabled

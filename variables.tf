@@ -678,6 +678,12 @@ variable "compliance_pipelines_repo_root_url" {
   default     = ""
 }
 
+variable "clone_compliance_pipelines" {
+  type        = bool
+  description = "Setting to `true` will clone the compliance pipeline repository instead of linking to it. This is required for the case where the user opts to use a non IBM hosted repositories."
+  default     = false
+}
+
 variable "compliance_pipeline_repo_issues_enabled" {
   type        = bool
   description = "Set to `true` to enable issues."
