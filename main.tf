@@ -236,7 +236,7 @@ module "compliance_pipelines_repo" {
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.compliance_pipeline_repo_git_provider
   initialization_type   = "link"
-  repository_url        = local.compliance_repo_url
+  repository_url        = (var.clone_compliance_pipelines) ? "" : local.compliance_repo_url
   source_repository_url = (var.clone_compliance_pipelines) ? local.compliance_repo_url : ""
   repository_name       = "compliance-pipelines"
   is_private_repo       = false
