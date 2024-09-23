@@ -678,6 +678,30 @@ variable "compliance_pipelines_repo_root_url" {
   default     = ""
 }
 
+variable "compliance_pipelines_repo_traceability_enabled" {
+  type        = bool
+  description = "Set to `true` to enable traceability."
+  default     = false
+}
+
+variable "compliance_pipelines_repo_is_private_repo" {
+  type        = bool
+  description = "Set to `true` to make repository private."
+  default     = false
+}
+
+variable "compliance_pipelines_repo_initialization_type" {
+  type        = string
+  description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
+  default     = ""
+}
+
+variable "compliance_pipelines_repo_name" {
+  type        = string
+  description = "The repository name."
+  default     = "compliance-pipelines"
+}
+
 variable "clone_compliance_pipelines" {
   type        = bool
   description = "Setting to `true` will clone the compliance pipeline repository instead of linking to it. This is required for the case where the user opts to use a non IBM hosted repositories."
