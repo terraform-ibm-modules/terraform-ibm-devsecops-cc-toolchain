@@ -62,6 +62,10 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "repository" {
     git_id          = var.git_id
     owner_id        = var.owner_id
 
+    blind_connection = (var.blind_connection == "") ? null : var.blind_connection
+    root_url         = (var.root_url == "") ? null : var.root_url
+    title            = (var.title == "") ? null : var.title
+
   }
   parameters {
     toolchain_issues_enabled = local.issues_enabled
@@ -69,9 +73,6 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "repository" {
     integration_owner        = var.integration_owner
     auth_type                = local.auth_type
     api_token                = local.api_token
-    blind_connection         = (var.blind_connection == "") ? null : var.blind_connection
-    root_url                 = (var.root_url == "") ? null : var.root_url
-    title                    = (var.title == "") ? null : var.title
   }
 }
 
@@ -87,6 +88,10 @@ resource "ibm_cd_toolchain_tool_gitlab" "repository" {
     repo_name       = var.repository_name
     git_id          = var.git_id
     owner_id        = var.owner_id
+
+    blind_connection = (var.blind_connection == "") ? null : var.blind_connection
+    root_url         = (var.root_url == "") ? null : var.root_url
+    title            = (var.title == "") ? null : var.title
   }
   parameters {
     toolchain_issues_enabled = local.issues_enabled
@@ -94,8 +99,5 @@ resource "ibm_cd_toolchain_tool_gitlab" "repository" {
     integration_owner        = var.integration_owner
     auth_type                = local.auth_type
     api_token                = local.api_token
-    blind_connection         = (var.blind_connection == "") ? null : var.blind_connection
-    root_url                 = (var.root_url == "") ? null : var.root_url
-    title                    = (var.title == "") ? null : var.title
   }
 }
