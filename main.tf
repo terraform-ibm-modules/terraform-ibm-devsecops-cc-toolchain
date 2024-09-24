@@ -334,6 +334,7 @@ module "pipeline_cc" {
   tool_artifactory                    = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                  = var.enable_artifactory
   enable_pipeline_git_token           = var.enable_pipeline_git_token
+  create_triggers                     = var.create_triggers
   trigger_timed_name                  = var.trigger_timed_name
   trigger_timed_enable                = var.trigger_timed_enable
   trigger_timed_cron_schedule         = var.trigger_timed_cron_schedule

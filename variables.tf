@@ -1239,6 +1239,12 @@ variable "sonarqube_server_url" {
 }
 
 #################################
+variable "create_triggers" {
+  type        = string
+  description = "Set to `true` to create the default triggers associated with the compliance repos and sample app."
+  default     = "true"
+}
+
 variable "trigger_timed_name" {
   type        = string
   description = "The name of the CC pipeline Timed trigger."

@@ -78,6 +78,9 @@ variable "enable_artifactory" {
 variable "tool_artifactory" {
 }
 
+variable "create_triggers" {
+}
+
 variable "trigger_timed_name" {
 }
 variable "trigger_timed_enable" {
