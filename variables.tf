@@ -240,6 +240,18 @@ variable "compliance_pipeline_repo_url" {
   description = "Url of pipeline repo template to be cloned"
 }
 
+variable "compliance_pipeline_existing_repo_url" {
+  type        = string
+  default     = ""
+  description = "The URL of an existing compliance pipelines repository."
+}
+
+variable "compliance_pipeline_source_repo_url" {
+  type        = string
+  default     = ""
+  description = "The URL of a compliance pipelines repository to clone."
+}
+
 variable "inventory_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
@@ -700,12 +712,6 @@ variable "compliance_pipelines_repo_name" {
   type        = string
   description = "The repository name."
   default     = "compliance-pipelines"
-}
-
-variable "clone_compliance_pipelines" {
-  type        = bool
-  description = "Setting to `true` will clone the compliance pipeline repository instead of linking to it. This is required for the case where the user opts to use a non IBM hosted repositories."
-  default     = false
 }
 
 variable "compliance_pipeline_repo_issues_enabled" {
