@@ -348,6 +348,7 @@ module "pipeline_cc" {
   sonarqube_tool                      = (module.integrations.sonarqube_tool)
   sonarqube_user                      = var.sonarqube_user
   link_to_doi_toolchain               = var.link_to_doi_toolchain
+  add_pipeline_definitions            = var.add_pipeline_definitions
   default_locked_properties           = var.default_locked_properties
 }
 

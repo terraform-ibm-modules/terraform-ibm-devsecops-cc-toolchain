@@ -107,3 +107,6 @@ variable "enable_pipeline_notifications" {
 }
 variable "default_locked_properties" {
 }
+
+variable "add_pipeline_definitions" {
+}
