@@ -45,6 +45,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "repository" {
     integration_owner        = var.integration_owner
     auth_type                = local.auth_type
     api_token                = local.api_token
+    # doesn't support custom server
   }
 }
 
@@ -61,6 +62,36 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "repository" {
     git_id          = var.git_id
     owner_id        = var.owner_id
 
+    blind_connection = (var.blind_connection == "") ? null : var.blind_connection
+    root_url         = (var.root_url == "") ? null : var.root_url
+    title            = (var.title == "") ? null : var.title
+
+  }
+  parameters {
+    toolchain_issues_enabled = local.issues_enabled
+    enable_traceability      = local.traceability_enabled
+    integration_owner        = var.integration_owner
+    auth_type                = local.auth_type
+    api_token                = local.api_token
+  }
+}
+
+resource "ibm_cd_toolchain_tool_gitlab" "repository" {
+  count        = local.git_provider == "gitlab" ? 1 : 0
+  toolchain_id = var.toolchain_id
+  name         = var.tool_name
+  initialization {
+    type            = local.initialization_type
+    source_repo_url = local.source_repo_url
+    repo_url        = local.repo_url
+    private_repo    = local.is_private_repo
+    repo_name       = var.repository_name
+    git_id          = var.git_id
+    owner_id        = var.owner_id
+
+    blind_connection = (var.blind_connection == "") ? null : var.blind_connection
+    root_url         = (var.root_url == "") ? null : var.root_url
+    title            = (var.title == "") ? null : var.title
   }
   parameters {
     toolchain_issues_enabled = local.issues_enabled

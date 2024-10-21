@@ -78,6 +78,9 @@ variable "enable_artifactory" {
 variable "tool_artifactory" {
 }
 
+variable "create_triggers" {
+}
+
 variable "trigger_timed_name" {
 }
 variable "trigger_timed_enable" {
@@ -103,4 +106,7 @@ variable "trigger_timed_pruner_enable" {
 variable "enable_pipeline_notifications" {
 }
 variable "default_locked_properties" {
+}
+
+variable "add_pipeline_definitions" {
 }

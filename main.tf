@@ -176,6 +176,9 @@ module "issues_repo" {
   secret_ref            = local.issues_repo_secret_ref
   git_id                = var.issues_repo_git_id
   default_git_provider  = var.default_git_provider
+  blind_connection      = var.issues_repo_blind_connection
+  title                 = var.issues_repo_title
+  root_url              = var.issues_repo_root_url
 }
 
 module "evidence_repo" {
@@ -196,6 +199,9 @@ module "evidence_repo" {
   auth_type             = var.evidence_repo_auth_type
   secret_ref            = local.evidence_repo_secret_ref
   git_id                = var.evidence_repo_git_id
+  blind_connection      = var.evidence_repo_blind_connection
+  title                 = var.evidence_repo_title
+  root_url              = var.evidence_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -217,6 +223,9 @@ module "inventory_repo" {
   auth_type             = var.inventory_repo_auth_type
   secret_ref            = local.inventory_repo_secret_ref
   git_id                = var.inventory_repo_git_id
+  blind_connection      = var.inventory_repo_blind_connection
+  title                 = var.inventory_repo_title
+  root_url              = var.inventory_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -226,18 +235,21 @@ module "compliance_pipelines_repo" {
   tool_name             = "pipeline-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.compliance_pipeline_repo_git_provider
-  initialization_type   = "link"
-  repository_url        = local.compliance_repo_url
-  source_repository_url = ""
-  repository_name       = ""
-  is_private_repo       = false
+  initialization_type   = var.compliance_pipelines_repo_initialization_type
+  repository_url        = (var.compliance_pipeline_existing_repo_url == "") ? local.compliance_repo_url : var.compliance_pipeline_existing_repo_url
+  source_repository_url = var.compliance_pipeline_source_repo_url
+  repository_name       = var.compliance_pipelines_repo_name
+  is_private_repo       = var.compliance_pipelines_repo_is_private_repo
   owner_id              = var.compliance_pipeline_group
   issues_enabled        = var.compliance_pipeline_repo_issues_enabled
-  traceability_enabled  = false
+  traceability_enabled  = var.compliance_pipelines_repo_traceability_enabled
   integration_owner     = var.compliance_pipeline_repo_integration_owner
   auth_type             = var.compliance_pipeline_repo_auth_type
   secret_ref            = local.compliance_pipeline_repo_secret_ref
   git_id                = var.compliance_pipelines_repo_git_id
+  blind_connection      = var.compliance_pipelines_repo_blind_connection
+  title                 = var.compliance_pipelines_repo_title
+  root_url              = var.compliance_pipelines_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -260,6 +272,9 @@ module "pipeline_config_repo" {
   auth_type             = var.pipeline_config_repo_auth_type
   secret_ref            = local.pipeline_config_repo_secret_ref
   git_id                = var.pipeline_config_repo_git_id
+  blind_connection      = var.pipeline_config_repo_blind_connection
+  title                 = var.pipeline_config_repo_title
+  root_url              = var.pipeline_config_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -281,6 +296,9 @@ module "app_repo" {
   auth_type             = var.app_repo_auth_type
   secret_ref            = local.app_repo_secret_ref
   git_id                = (var.app_repo_git_id != "") ? var.app_repo_git_id : var.app_repo_clone_to_git_id
+  blind_connection      = var.app_repo_blind_connection
+  title                 = var.app_repo_title
+  root_url              = var.app_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -316,6 +334,7 @@ module "pipeline_cc" {
   tool_artifactory                    = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                  = var.enable_artifactory
   enable_pipeline_git_token           = var.enable_pipeline_git_token
+  create_triggers                     = var.create_triggers
   trigger_timed_name                  = var.trigger_timed_name
   trigger_timed_enable                = var.trigger_timed_enable
   trigger_timed_cron_schedule         = var.trigger_timed_cron_schedule
@@ -329,6 +348,7 @@ module "pipeline_cc" {
   sonarqube_tool                      = (module.integrations.sonarqube_tool)
   sonarqube_user                      = var.sonarqube_user
   link_to_doi_toolchain               = var.link_to_doi_toolchain
+  add_pipeline_definitions            = var.add_pipeline_definitions
   default_locked_properties           = var.default_locked_properties
 }
 

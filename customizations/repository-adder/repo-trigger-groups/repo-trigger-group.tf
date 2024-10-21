@@ -12,6 +12,9 @@ locals {
   repository_owner     = try(var.repository_data.repository_owner, var.repository_owner)
   mode                 = try(var.repository_data.mode, var.mode)
   worker_id            = try(var.repository_data.worker_id, var.worker_id)
+  blind_connection     = try(var.repository_data.blind_connection, var.blind_connection)
+  root_url             = try(var.repository_data.root_url, var.root_url)
+  title                = try(var.repository_data.title, var.title)
   #if not provided use `hostedgit` as the default.
   repo_url_raw = try(trimsuffix(var.repository_data.repository_url, ".git"), "")
 
@@ -72,6 +75,7 @@ locals {
   #check if provided secret contains the full ref
   is_secret_ref = ((startswith(local.git_token_secret_ref, "{vault::")) || (startswith(local.git_token_secret_ref, "crn:")) || (startswith(local.git_token_secret_ref, "ref://"))) ? true : false
   secret_ref    = (local.is_secret_ref) ? local.git_token_secret_ref : "${local.secret_ref_prefix}${local.git_token_secret_ref}}"
+
 }
 
 # Create a repository integration
@@ -92,6 +96,9 @@ module "app_repo" {
   auth_type             = (local.git_token_secret_ref == "") ? "oauth" : "pat"
   secret_ref            = (local.git_token_secret_ref == "") ? "" : local.secret_ref
   git_id                = local.git_id
+  blind_connection      = local.blind_connection
+  root_url              = local.root_url
+  title                 = local.title
   default_git_provider  = ""
 }
 

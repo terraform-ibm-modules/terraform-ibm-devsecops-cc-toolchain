@@ -46,6 +46,24 @@ variable "create_default" {
   default     = true
 }
 
+variable "blind_connection" {
+  type        = string
+  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
+  default     = ""
+}
+
+variable "title" {
+  type        = string
+  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
+  default     = ""
+}
+
+variable "root_url" {
+  type        = string
+  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
+  default     = ""
+}
+
 variable "repository_data" {
 }
 
