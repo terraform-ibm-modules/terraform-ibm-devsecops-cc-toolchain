@@ -173,3 +173,16 @@ resource "ibm_cd_toolchain_tool_eventnotifications" "cd_toolchain_tool_eventnoti
   }
   toolchain_id = var.toolchain_id
 }
+
+resource "ibm_cd_toolchain_tool_custom" "concert_integration" {
+  count        = (var.enable_concert) ? 1 : 0
+  toolchain_id = var.toolchain_id
+  parameters {
+    type              = "concert"
+    lifecycle_phase   = "MANAGE"
+    documentation_url = var.concert_documentation_url
+    name              = var.concert_integration_name
+    dashboard_url     = var.concert_dashboard_url
+    description       = var.concert_description
+  }
+}

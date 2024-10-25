@@ -127,6 +127,21 @@ variable "artifactory_repo_name" {
 variable "artifactory_repo_url" {
 }
 
+variable "concert_dashboard_url" {
+}
+
+variable "concert_description" {
+}
+
+variable "concert_documentation_url" {
+}
+
+variable "concert_integration_name" {
+}
+
+variable "enable_concert" {
+}
+
 variable "cos_dashboard_url" {
 }
 
