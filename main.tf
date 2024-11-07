@@ -114,20 +114,21 @@ locals {
 
   config_data = {
     "default_locked_properties" = var.default_locked_properties,
-    "secrets_integration_name"  = var.sm_integration_name,
+    "secrets_integration_name"  = (var.enable_key_protect) ? var.kp_integration_name : var.sm_integration_name,
     "secrets_group"             = var.sm_secret_group,
     "secrets_provider_type" = (
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
     ),
-    "cos-api-key"            = var.cos_api_key_secret_name,
+    "cos-api-key"            = (var.cos_api_key_secret_name != "") ? local.cos_secret_ref : "",
     "cos-bucket-name"        = var.cos_bucket_name,
     "cos-endpoint"           = var.cos_endpoint,
     "doi-toolchain-id"       = var.doi_toolchain_id,
-    "doi-ibmcloud-api-key"   = (var.pipeline_doi_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.pipeline_doi_api_key_secret_name
-    "ibmcloud-api-key"       = var.pipeline_ibmcloud_api_key_secret_name,
-    "environment-tag"        = var.environment_tag
-    "pipeline-config-branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch
+    "doi-ibmcloud-api-key"   = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
+    "ibmcloud-api-key"       = local.pipeline_apikey_secret_ref,
+    "environment-tag"        = var.environment_tag,
+    "pipeline-config-branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch,
+    "slack-notifications"    = (var.enable_slack) ? "1" : "0"
   }
 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")

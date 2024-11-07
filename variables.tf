@@ -903,7 +903,7 @@ variable "enable_concert" {
 variable "cos_api_key_secret_name" {
   type        = string
   description = "COS API key"
-  default     = "cos-api-key"
+  default     = ""
 }
 
 variable "cos_endpoint" {

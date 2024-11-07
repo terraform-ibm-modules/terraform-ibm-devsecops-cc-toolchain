@@ -445,7 +445,7 @@
                         {
                             "key": "cos_api_key_secret_name",
                             "type": "string",
-                            "default_value": "cos-api-key",
+                            "default_value": "",
                             "description": "COS API key",
                             "required": false
                         },
