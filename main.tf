@@ -390,6 +390,11 @@ module "integrations" {
   scc_use_profile_attachment    = var.scc_use_profile_attachment
   authorization_policy_creation = var.authorization_policy_creation
   enable_insights               = var.enable_insights
+  enable_concert                = var.enable_concert
+  concert_dashboard_url         = var.concert_dashboard_url
+  concert_description           = var.concert_description
+  concert_documentation_url     = var.concert_documentation_url
+  concert_integration_name      = var.concert_integration_name
   cos_dashboard_url             = var.cos_dashboard_url
   cos_description               = var.cos_description
   cos_documentation_url         = var.cos_documentation_url
