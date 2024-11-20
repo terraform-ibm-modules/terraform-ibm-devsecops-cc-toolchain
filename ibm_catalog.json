@@ -23,79 +23,117 @@
                     "label": "Deploy CC Toolchain",
                     "name": "devsecops_cc",
                     "working_directory": "solutions",
-                    "compliance": {
-                        "authority": "scc-v3",
-                        "controls": [
-                            {
-                                "profile": {
-                                    "id": "",
-                                    "name": "IBM Cloud Framework for Financial Services",
-                                    "version": "1.6.0"
-                                },
-                                "names": [
-                                    "CM-6(c)",
-                                    "CM-3(f)",
-                                    "CM-7(1)(a)",
-                                    "SI-2(b)",
-                                    "CM-9(d)",
-                                    "CM-10(1)",
-                                    "SI-10",
-                                    "CM-2(3)",
-                                    "SA-10(e)",
-                                    "CM-6(1)",
-                                    "CM-3(a)",
-                                    "RA-5(a)",
-                                    "SI-2(2)",
-                                    "SA-10(c)",
-                                    "SA-8",
-                                    "CM-6(b)",
-                                    "SI-2(d)",
-                                    "CM-2(1)(a)",
-                                    "CM-3(b)",
-                                    "CM-9(a)",
-                                    "CM-8(2)",
-                                    "RA-5(1)",
-                                    "RA-5(c)",
-                                    "RA-5(3)",
-                                    "SA-3(d)",
-                                    "CM-4",
-                                    "CM-3(g)",
-                                    "RA-5(2)",
-                                    "CM-3(e)",
-                                    "CM-8(a)",
-                                    "CM-9(b)",
-                                    "CM-6(a)",
-                                    "CM-3(2)",
-                                    "CM-2",
-                                    "SI-2(c)",
-                                    "CM-5",
-                                    "CM-2(1)(b)",
-                                    "RA-5(b)",
-                                    "SA-10(1)",
-                                    "CM-2(2)",
-                                    "SA-15(a)",
-                                    "CM-2(1)(c)",
-                                    "SA-10(b)",
-                                    "RA-5(d)",
-                                    "SA-3(a)",
-                                    "CM-9(c)",
-                                    "SI-2(a)",
-                                    "CM-8(b)",
-                                    "CM-3(c)",
-                                    "CM-7(b)",
-                                    "SI-7",
-                                    "SA-10(d)",
-                                    "CM-4(1)",
-                                    "CM-8(1)",
-                                    "CM-6(d)",
-                                    "CM-3(d)",
-                                    "SA-10(a)"
-                                ]
-                            }
-                        ]
-                    },
+                    "compliance": {},
                     "architecture": {},
                     "configuration": [
+                        {
+                            "key": "toolchain_name",
+                            "type": "string",
+                            "default_value": "DevSecOps CI Toolchain - Terraform",
+                            "description": "Name of the CI Toolchain.",
+                            "required": true
+                        },
+                        {
+                            "key": "toolchain_region",
+                            "type": "string",
+                            "default_value": "us-south",
+                            "description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis.",
+                            "display_name": "Region",
+                            "required": true,
+                            "custom_config": {
+                                "type": "region",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment",
+                                "config_constraints": {
+                                    "filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+                                    "showKinds": [
+                                        "region",
+                                        "zone",
+                                        "dc",
+                                        "location"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "key": "toolchain_resource_group",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis.",
+                            "display_name": "Resource group",
+                            "required": true,
+                            "custom_config": {
+                                "type": "resource_group",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment",
+                                "config_constraints": {
+                                    "identifier": "rg_name"
+                                }
+                            }
+                        },
+                        {
+                            "key": "pipeline_properties",
+                            "type": "string",
+                            "default_value": "[\n  {\n    \"pipeline_id\": \"ci\",\n    \"properties\": [\n      {\n        \"name\": \"cluster-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-bucket-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-endpoint\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-generate-cyclonedx-format\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"custom_image_tag\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"dev-cluster-namespace\",\n        \"type\": \"text\",\n        \"value\": \"dev\"\n      },\n      {\n        \"name\": \"dev-region\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"dev-resource-group\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-environment\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-toolchain-id\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"event-notifications\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-api-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-ui-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-gosec\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-sonar\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"peer-review-compliance\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"print-code-signing-certificate\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"registry-namespace\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"registry-region\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"signing-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"sonarqube-config\",\n        \"type\": \"text\",\n        \"value\": \"default\"\n      },\n      {\n        \"name\": \"version\",\n        \"type\": \"text\",\n        \"value\": \"v1\"\n      }\n    ]\n  },\n  {\n    \"pipeline_id\": \"pr\",\n    \"properties\": [\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      }\n    ]\n  }\n]\n",
+                            "description": "Stringified JSON containing the properties. This takes precedence over the properties JSON.",
+                            "display_name": "JSON",
+                            "required": true,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
+                        },
+                        {
+                            "key": "ibmcloud_api_key",
+                            "type": "password",
+                            "description": "API key used to create the toolchains.",
+                            "required": true
+                        },
+                        {
+                            "key": "sm_location",
+                            "type": "string",
+                            "default_value": "us-south",
+                            "description": "IBM Cloud location/region containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance.",
+                            "display_name": "VPC region",
+                            "required": false,
+                            "custom_config": {
+                                "type": "vpc_region",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment",
+                                "config_constraints": {
+                                    "generationType": "2"
+                                }
+                            }
+                        },
+                        {
+                            "key": "sm_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Secrets Manager instance.",
+                            "required": false
+                        },
+                        {
+                            "key": "sm_name",
+                            "type": "string",
+                            "default_value": "sm-compliance-secrets",
+                            "description": "Name of the Secrets Manager instance where the secrets are stored. Not required if using a Secrets Manager CRN instance.",
+                            "required": false
+                        },
+                        {
+                            "key": "sm_resource_group",
+                            "type": "string",
+                            "default_value": "Default",
+                            "description": "The resource group containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance.",
+                            "required": false
+                        },
+                        {
+                            "key": "sm_secret_group",
+                            "type": "string",
+                            "default_value": "Default",
+                            "description": "Group in Secrets Manager for organizing/grouping secrets.",
+                            "required": false
+                        },
                         {
                             "key": "add_pipeline_definitions",
                             "type": "string",
@@ -1171,13 +1209,6 @@
                             "required": false
                         },
                         {
-                            "key": "pipeline_properties",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Stringified JSON containing the properties. This takes precedence over the properties JSON.",
-                            "required": false
-                        },
-                        {
                             "key": "pipeline_properties_filepath",
                             "type": "string",
                             "default_value": "",
@@ -1351,45 +1382,10 @@
                             "required": false
                         },
                         {
-                            "key": "sm_instance_crn",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The CRN of the Secrets Manager instance.",
-                            "required": false
-                        },
-                        {
                             "key": "sm_integration_name",
                             "type": "string",
                             "default_value": "sm-compliance-secrets",
                             "description": "The name of the Secrets Manager integration.",
-                            "required": false
-                        },
-                        {
-                            "key": "sm_location",
-                            "type": "string",
-                            "default_value": "us-south",
-                            "description": "IBM Cloud location/region containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance.",
-                            "required": false
-                        },
-                        {
-                            "key": "sm_name",
-                            "type": "string",
-                            "default_value": "sm-compliance-secrets",
-                            "description": "Name of the Secrets Manager instance where the secrets are stored. Not required if using a Secrets Manager CRN instance.",
-                            "required": false
-                        },
-                        {
-                            "key": "sm_resource_group",
-                            "type": "string",
-                            "default_value": "Default",
-                            "description": "The resource group containing the Secrets Manager instance for your secrets. Not required if using a Secrets Manager CRN instance.",
-                            "required": false
-                        },
-                        {
-                            "key": "sm_secret_group",
-                            "type": "string",
-                            "default_value": "Default",
-                            "description": "Group in Secrets Manager for organizing/grouping secrets.",
                             "required": false
                         },
                         {
@@ -1445,27 +1441,6 @@
                             "type": "string",
                             "default_value": "Toolchain created with terraform template for DevSecOps CC Best Practices",
                             "description": "Description for the CC Toolchain.",
-                            "required": false
-                        },
-                        {
-                            "key": "toolchain_name",
-                            "type": "string",
-                            "default_value": "DevSecOps CC Toolchain - Terraform",
-                            "description": "Name of the CC Toolchain.",
-                            "required": false
-                        },
-                        {
-                            "key": "toolchain_region",
-                            "type": "string",
-                            "default_value": "us-south",
-                            "description": "IBM Cloud region where the toolchain is created",
-                            "required": false
-                        },
-                        {
-                            "key": "toolchain_resource_group",
-                            "type": "string",
-                            "default_value": "Default",
-                            "description": "Resource group within which the toolchain is created",
                             "required": false
                         },
                         {
