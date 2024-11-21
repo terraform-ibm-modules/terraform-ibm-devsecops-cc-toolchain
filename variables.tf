@@ -1288,7 +1288,7 @@ variable "trigger_timed_name" {
 }
 variable "trigger_timed_enable" {
   type        = bool
-  description = "Set to `true` to enable the CI pipeline Timed trigger."
+  description = "Set to `true` to enable the CC pipeline Timed trigger."
   default     = false
 }
 variable "trigger_timed_cron_schedule" {
