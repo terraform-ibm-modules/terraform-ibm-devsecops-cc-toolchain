@@ -1402,6 +1402,12 @@ variable "repo_group" {
   default     = ""
 }
 
+variable "repo_git_token_crn" {
+  type        = string
+  description = "The CRN of the  Git token secret in the secret provider. Specifying a CRN for the Git Token automatically sets the authentication type to `pat`."
+  default     = ""
+}
+
 variable "repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`."

@@ -166,6 +166,7 @@ module "devsecops_cc_toolchain" {
   repo_root_url                                  = var.repo_root_url
   repo_title                                     = var.repo_title
   repo_group                                     = var.repo_group
+  repo_git_token_crn                             = var.repo_git_token_crn
   repo_git_token_secret_name                     = var.repo_git_token_secret_name
   repo_auth_type                                 = var.repo_auth_type
   repo_integration_owner                         = var.repo_integration_owner

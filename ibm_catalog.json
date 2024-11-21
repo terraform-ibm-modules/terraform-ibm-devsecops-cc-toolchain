@@ -1216,6 +1216,69 @@
                             "required": false
                         },
                         {
+                            "key": "repo_blind_connection",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The Git ID for the compliance repositories.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The Git provider type.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_token_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the  Git token secret in the secret provider. Specifying a CRN for the Git Token automatically sets the authentication type to `pat`.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_token_secret_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_group",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token).",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_integration_owner",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The integration owner of the repository. Applies to all the default compliance repositories but can be overriden by the repository specific variable.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_root_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The Root URL of the server. e.g. https://git.example.com.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_title",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The title of the server. e.g. My Git Enterprise Server.",
+                            "required": false
+                        },
+                        {
                             "key": "repositories_prefix",
                             "type": "string",
                             "default_value": "compliance",
