@@ -85,6 +85,34 @@
                             }
                         },
                         {
+                            "key": "app_repo_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "This Git URL for the application repository.",
+                            "required": true
+                        },
+                        {
+                            "key": "issues_repo_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates.",
+                            "required": true
+                        },
+                        {
+                            "key": "evidence_repo_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates.",
+                            "required": true
+                        },
+                        {
+                            "key": "inventory_repo_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates.",
+                            "required": true
+                        },
+                        {
                             "key": "ibmcloud_api_key",
                             "type": "password",
                             "description": "API key used to create the toolchains.",
@@ -264,13 +292,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable traceability.",
-                            "required": false
-                        },
-                        {
-                            "key": "app_repo_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "This Git URL for the application repository.",
                             "required": false
                         },
                         {
@@ -739,13 +760,6 @@
                             "required": false
                         },
                         {
-                            "key": "evidence_repo_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates.",
-                            "required": false
-                        },
-                        {
                             "key": "ibmcloud_api_key",
                             "type": "password",
                             "description": "API key used to create the toolchains.",
@@ -863,13 +877,6 @@
                             "required": false
                         },
                         {
-                            "key": "inventory_repo_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates.",
-                            "required": false
-                        },
-                        {
                             "key": "issues_group",
                             "type": "string",
                             "default_value": "",
@@ -978,13 +985,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable traceability.",
-                            "required": false
-                        },
-                        {
-                            "key": "issues_repo_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates.",
                             "required": false
                         },
                         {
