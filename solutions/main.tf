@@ -160,6 +160,15 @@ module "devsecops_cc_toolchain" {
   repositories_prefix                            = var.repositories_prefix
   repository_properties_filepath                 = var.repository_properties_filepath
   repository_properties                          = var.repository_properties
+  repo_blind_connection                          = var.repo_blind_connection
+  repo_git_id                                    = var.repo_git_id
+  repo_git_provider                              = var.repo_git_provider
+  repo_root_url                                  = var.repo_root_url
+  repo_title                                     = var.repo_title
+  repo_group                                     = var.repo_group
+  repo_git_token_secret_name                     = var.repo_git_token_secret_name
+  repo_auth_type                                 = var.repo_auth_type
+  repo_integration_owner                         = var.repo_integration_owner
   scc_attachment_id                              = var.scc_attachment_id
   scc_enable_scc                                 = var.scc_enable_scc
   scc_instance_crn                               = var.scc_instance_crn

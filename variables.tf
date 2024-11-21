@@ -291,7 +291,7 @@ variable "pipeline_config_repo_branch" {
 variable "pipeline_config_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "pipeline_config_repo_issues_enabled" {
@@ -357,25 +357,25 @@ variable "pipeline_config_repo_integration_owner" {
 variable "inventory_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "issues_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "evidence_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "app_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "app_repo_integration_owner" {
@@ -405,7 +405,7 @@ variable "app_repo_git_provider" {
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "compliance_pipeline_repo_git_token_secret_name" {
@@ -1364,4 +1364,58 @@ variable "default_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
   default     = ["app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifactory-dockerconfigjson", "cluster", "cluster-name", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-build-size", "code-engine-build-strategy", "code-engine-build-timeout", "code-engine-build-use-native-docker", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-engine-wait-timeout", "compliance-baseimage", "context-dir", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-cluster-namespace", "dev-region", "dev-resource-group", "dockerfile", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "image-name", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-domain", "registry-namespace", "registry-region", "remove-unspecified-references-to-configuration-resources", "service-bindings", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "source", "version"]
+}
+
+variable "repo_blind_connection" {
+  type        = string
+  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
+  default     = ""
+}
+
+variable "repo_git_id" {
+  type        = string
+  description = "The Git ID for the compliance repositories."
+  default     = ""
+}
+
+variable "repo_git_provider" {
+  type        = string
+  description = "The Git provider type."
+  default     = ""
+}
+
+variable "repo_root_url" {
+  type        = string
+  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
+  default     = ""
+}
+
+variable "repo_title" {
+  type        = string
+  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
+  default     = ""
+}
+
+variable "repo_group" {
+  type        = string
+  description = "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token)."
+  default     = ""
+}
+
+variable "repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`."
+  default     = ""
+}
+
+variable "repo_auth_type" {
+  type        = string
+  description = "The auth type for the repo `oauth` or 'pat` (personal access token). Applies to all the default compliance repositories but can be overriden by the repository specific variable."
+  default     = ""
+}
+
+variable "repo_integration_owner" {
+  type        = string
+  description = "The integration owner of the repository. Applies to all the default compliance repositories but can be overriden by the repository specific variable."
+  default     = ""
 }
