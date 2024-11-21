@@ -22,7 +22,7 @@ locals {
   )
 
   issue_repo_secret_name = (var.issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.issues_repo_git_token_secret_name
-  issues_repo_secret_crn  = (var.issues_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.issues_repo_git_token_secret_crn
+  issues_repo_secret_crn = (var.issues_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.issues_repo_git_token_secret_crn
   issues_repo_secret_ref = (
     (var.sm_instance_crn != "") ? local.issues_repo_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${local.issue_repo_secret_name}}", module.integrations.secret_tool) :
@@ -205,7 +205,7 @@ module "issues_repo" {
   depends_on            = [module.integrations]
   tool_name             = "issues-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = var.issues_repo_git_provider
+  git_provider          = (var.issues_repo_git_provider == "") ? var.repo_git_provider : var.issues_repo_git_provider
   initialization_type   = var.issues_repo_initialization_type
   repository_url        = var.issues_repo_url
   source_repository_url = ""
@@ -229,7 +229,7 @@ module "evidence_repo" {
   depends_on            = [module.integrations]
   tool_name             = "evidence-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = var.evidence_repo_git_provider
+  git_provider          = (var.evidence_repo_git_provider == "") ? var.repo_git_provider : var.evidence_repo_git_provider
   initialization_type   = var.evidence_repo_initialization_type
   repository_url        = var.evidence_repo_url
   source_repository_url = ""
@@ -253,7 +253,7 @@ module "inventory_repo" {
   depends_on            = [module.integrations]
   tool_name             = "inventory-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = var.inventory_repo_git_provider
+  git_provider          = (var.inventory_repo_git_provider == "") ? var.repo_git_provider : var.inventory_repo_git_provider
   initialization_type   = var.inventory_repo_initialization_type
   repository_url        = var.inventory_repo_url
   source_repository_url = ""
@@ -277,7 +277,7 @@ module "compliance_pipelines_repo" {
   depends_on            = [module.integrations]
   tool_name             = "pipeline-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = var.compliance_pipeline_repo_git_provider
+  git_provider          = (var.compliance_pipeline_repo_git_provider == "") ? var.repo_git_provider : var.compliance_pipeline_repo_git_provider
   initialization_type   = var.compliance_pipelines_repo_initialization_type
   repository_url        = (var.compliance_pipeline_existing_repo_url == "") ? local.compliance_repo_url : var.compliance_pipeline_existing_repo_url
   source_repository_url = var.compliance_pipeline_source_repo_url
@@ -302,7 +302,7 @@ module "pipeline_config_repo" {
   depends_on            = [module.integrations]
   tool_name             = "pipeline-config-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = var.pipeline_config_repo_git_provider
+  git_provider          = (var.pipeline_config_repo_git_provider == "") ? var.repo_git_provider : var.pipeline_config_repo_git_provider
   initialization_type   = var.pipeline_config_repo_initialization_type
   repository_url        = var.pipeline_config_repo_existing_url
   source_repository_url = var.pipeline_config_repo_clone_from_url
