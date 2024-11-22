@@ -179,7 +179,7 @@
                         {
                             "key": "app_repo_auth_type",
                             "type": "string",
-                            "default_value": "oauth",
+                            "default_value": "",
                             "description": "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'.",
                             "required": false
                         },
@@ -373,7 +373,7 @@
                         {
                             "key": "compliance_pipeline_repo_auth_type",
                             "type": "string",
-                            "default_value": "oauth",
+                            "default_value": "",
                             "description": "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'.",
                             "required": false
                         },
@@ -658,7 +658,7 @@
                         {
                             "key": "evidence_repo_auth_type",
                             "type": "string",
-                            "default_value": "oauth",
+                            "default_value": "",
                             "description": "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'.",
                             "required": false
                         },
@@ -775,7 +775,7 @@
                         {
                             "key": "inventory_repo_auth_type",
                             "type": "string",
-                            "default_value": "oauth",
+                            "default_value": "",
                             "description": "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'.",
                             "required": false
                         },
@@ -886,7 +886,7 @@
                         {
                             "key": "issues_repo_auth_type",
                             "type": "string",
-                            "default_value": "oauth",
+                            "default_value": "",
                             "description": "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'.",
                             "required": false
                         },
@@ -1039,7 +1039,7 @@
                         {
                             "key": "pipeline_config_repo_auth_type",
                             "type": "string",
-                            "default_value": "oauth",
+                            "default_value": "",
                             "description": "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'.",
                             "required": false
                         },
