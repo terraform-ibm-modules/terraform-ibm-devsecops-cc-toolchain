@@ -27,6 +27,12 @@
                     "architecture": {},
                     "configuration": [
                         {
+                            "key": "ibmcloud_api_key",
+                            "type": "password",
+                            "description": "API key used to create the toolchain.",
+                            "required": true
+                        },
+                        {
                             "key": "toolchain_name",
                             "type": "string",
                             "default_value": "DevSecOps CC Toolchain - Terraform",
@@ -113,33 +119,40 @@
                             "required": true
                         },
                         {
-                            "key": "ibmcloud_api_key",
-                            "type": "password",
-                            "description": "API key used to create the toolchains.",
+                            "key": "enable_secrets_manager",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set `true` to enable a Secrets Manager tool integration. If this is enabled then the Secrets Manager instance details are required. See the `sm_` prefixed variables in the optional section. This can be configured using a CRN or using a combination of the Secrets Manager name, region and resource group. An IBMcloud api key is required for running the pipelines. It is recommended that a secrets provider is used for storing the secrets. For a CRN configuration use `pipeline_ibmcloud_api_key_secret_crn` for setting the CRN for the apikey. Alternatively use `pipeline_ibmcloud_api_key_secret_name` for setting the name of the apikey as set in Secrets Manager. This applies to the non CRN configuration of the Secrets tool. ",
                             "required": true
+                        },
+                        {
+                            "key": "sm_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Secrets Manager instance. If the CRN is provided, it will take precendence over the subsequent `sm_` variables. Secrets using a CRN can be set with the variables ending in `secret_crn`",
+                            "required": false
                         },
                         {
                             "key": "sm_location",
                             "type": "string",
                             "default_value": "us-south",
                             "description": "IBM Cloud location/region containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance.",
-                            "display_name": "VPC region",
+                            "display_name": "Region",
                             "required": false,
                             "custom_config": {
-                                "type": "vpc_region",
+                                "type": "region",
                                 "grouping": "deployment",
                                 "original_grouping": "deployment",
                                 "config_constraints": {
-                                    "generationType": "2"
+                                    "filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+                                    "showKinds": [
+                                        "region",
+                                        "zone",
+                                        "dc",
+                                        "location"
+                                    ]
                                 }
                             }
-                        },
-                        {
-                            "key": "sm_instance_crn",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The CRN of the Secrets Manager instance.",
-                            "required": false
                         },
                         {
                             "key": "sm_name",
@@ -614,13 +627,6 @@
                             "required": false
                         },
                         {
-                            "key": "enable_secrets_manager",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to enable Secrets Manager Integration.",
-                            "required": false
-                        },
-                        {
                             "key": "enable_slack",
                             "type": "boolean",
                             "default_value": false,
@@ -762,7 +768,7 @@
                         {
                             "key": "ibmcloud_api_key",
                             "type": "password",
-                            "description": "API key used to create the toolchains.",
+                            "description": "API key used to create the toolchain.",
                             "required": true
                         },
                         {

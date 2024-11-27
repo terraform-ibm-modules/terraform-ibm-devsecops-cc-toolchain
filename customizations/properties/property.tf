@@ -62,12 +62,6 @@ locals {
   #allow set of Terraform variables to set values
 
   special_value = try(var.property_data.config_data[local.input_name], "")
-
-  #construct the secret reference for secrets passed in via variables and not the JSON.
-  resolved_special_value = (
-    ((local.input_type == "secure") && (local.is_secret_ref == true)) ? local.special_value :
-    ((local.input_type == "secure") && (local.special_value != "")) ? "${local.secret_ref_prefix}${local.special_value}}" : local.special_value
-  )
 }
 
 resource "ibm_cd_tekton_pipeline_property" "pipeline_property" {
@@ -75,7 +69,7 @@ resource "ibm_cd_tekton_pipeline_property" "pipeline_property" {
   pipeline_id = var.pipeline_id
   name        = local.input_name
   type        = local.input_type
-  value       = (local.resolved_value == "") ? local.resolved_special_value : local.resolved_value
+  value       = (local.resolved_value == "") ? local.special_value : local.resolved_value
   path        = local.resolved_path
   enum        = local.input_enum
   locked      = local.resolved_locked

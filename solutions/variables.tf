@@ -565,7 +565,7 @@ variable "evidence_repo_url" {
 
 variable "ibmcloud_api_key" {
   type        = string
-  description = "API key used to create the toolchains."
+  description = "API key used to create the toolchain."
   sensitive   = true
 }
 
