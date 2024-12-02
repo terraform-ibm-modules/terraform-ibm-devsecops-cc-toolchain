@@ -66,6 +66,7 @@ module "devsecops_cc_toolchain" {
   enable_key_protect                             = var.enable_key_protect
   enable_pipeline_git_token                      = var.enable_pipeline_git_token
   enable_pipeline_notifications                  = var.enable_pipeline_notifications
+  enable_privateworker                           = var.enable_privateworker
   enable_secrets_manager                         = var.enable_secrets_manager
   enable_slack                                   = var.enable_slack
   environment_tag                                = var.environment_tag
@@ -157,6 +158,10 @@ module "devsecops_cc_toolchain" {
   pipeline_ibmcloud_api_key_secret_name          = var.pipeline_ibmcloud_api_key_secret_name
   pipeline_properties_filepath                   = var.pipeline_properties_filepath
   pipeline_properties                            = var.pipeline_properties
+  privateworker_credentials_secret_crn           = var.privateworker_credentials_secret_crn
+  privateworker_credentials_secret_group         = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name          = var.privateworker_credentials_secret_name
+  privateworker_name                             = var.privateworker_name
   repositories_prefix                            = var.repositories_prefix
   repository_properties_filepath                 = var.repository_properties_filepath
   repository_properties                          = var.repository_properties

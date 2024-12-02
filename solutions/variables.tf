@@ -434,6 +434,12 @@ variable "enable_slack" {
   default     = false
 }
 
+variable "enable_privateworker" {
+  type        = bool
+  default     = false
+  description = "Set to `true` to enable private worker for for the Devsecops CC pipeline."
+}
+
 variable "environment_tag" {
   type        = string
   description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
@@ -1012,6 +1018,35 @@ variable "pipeline_properties" {
   type        = string
   description = "Stringified JSON containing the properties. This takes precedence over the properties JSON."
   default     = ""
+}
+
+variable "privateworker_credentials_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Private Worker secret secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.privateworker_credentials_secret_crn, "crn:") || var.privateworker_credentials_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "privateworker_credentials_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Private Worker secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "privateworker_credentials_secret_name" {
+  type        = string
+  default     = "private-worker-service-api"
+  description = "Name of the privateworker secret in the secret provider."
+}
+
+variable "privateworker_name" {
+  type        = string
+  description = "The name of the private worker integration."
+  default     = "private-worker-tool-01"
 }
 
 variable "repositories_prefix" {

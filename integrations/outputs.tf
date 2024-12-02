@@ -2,6 +2,10 @@
 # Outputs
 ##############################################################################
 
+output "worker_id" {
+  value = (var.enable_privateworker) ? ibm_cd_toolchain_tool_privateworker.cd_toolchain_tool_privateworker_instance[0].tool_id : var.worker_id
+}
+
 output "ibm_cd_toolchain_tool_artifactory" {
   value = (var.enable_artifactory) ? ibm_cd_toolchain_tool_artifactory.cd_toolchain_tool_artifactory_instance[0].tool_id : null
 }

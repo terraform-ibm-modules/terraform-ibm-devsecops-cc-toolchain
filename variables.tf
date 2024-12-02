@@ -155,6 +155,17 @@ variable "environment_tag" {
   default     = "prod_latest"
 }
 
+variable "privateworker_credentials_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Private Worker secret secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.privateworker_credentials_secret_crn, "crn:") || var.privateworker_credentials_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 variable "slack_webhook_secret_crn" {
   type        = string
   sensitive   = true
@@ -996,6 +1007,12 @@ variable "enable_key_protect" {
   default     = false
 }
 
+variable "enable_privateworker" {
+  type        = bool
+  default     = false
+  description = "Set to `true` to enable private worker for for the Devsecops CC pipeline."
+}
+
 variable "enable_secrets_manager" {
   type        = bool
   description = "Set to enable Secrets Manager Integration."
@@ -1152,6 +1169,18 @@ variable "pipeline_doi_api_key_secret_group" {
   default     = ""
 }
 
+variable "privateworker_credentials_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Private Worker secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "privateworker_name" {
+  type        = string
+  description = "The name of the private worker integration."
+  default     = "private-worker-tool-01"
+}
+
 variable "sonarqube_secret_group" {
   type        = string
   description = "Secret group prefix for the SonarQube secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -1228,6 +1257,12 @@ variable "slack_integration_name" {
   type        = string
   description = "The name of the Slack integration."
   default     = "slack-compliance"
+}
+
+variable "privateworker_credentials_secret_name" {
+  type        = string
+  default     = "private-worker-service-api"
+  description = "Name of the privateworker secret in the secret provider."
 }
 
 ####### Event Notifications #################

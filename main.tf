@@ -80,6 +80,13 @@ locals {
     format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_ibmcloud_api_key_secret_group))
   )
 
+  privateworker_secret_ref = (
+    (var.sm_instance_crn != "") ? var.privateworker_credentials_secret_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${var.privateworker_credentials_secret_name}}", module.integrations.secret_tool) :
+    (var.privateworker_credentials_secret_group == "") ? format("{vault::%s.${var.privateworker_credentials_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.privateworker_credentials_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.privateworker_credentials_secret_group))
+  )
+
   slack_webhook_secret_ref = (
     (var.sm_instance_crn != "") ? var.slack_webhook_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.slack_webhook_secret_name}}", module.integrations.secret_tool) :
@@ -373,7 +380,7 @@ module "pipeline_cc" {
   pipeline_config_repo_existing_url   = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = var.pipeline_config_repo_clone_from_url
   secret_tool                         = module.integrations.secret_tool
-  worker_id                           = var.worker_id
+  worker_id                           = module.integrations.worker_id
   tool_artifactory                    = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                  = var.enable_artifactory
   enable_pipeline_git_token           = var.enable_pipeline_git_token
@@ -399,68 +406,72 @@ module "integrations" {
   source     = "./integrations"
   depends_on = [module.services]
 
-  ibmcloud_api_key              = var.ibmcloud_api_key
-  toolchain_id                  = ibm_cd_toolchain.toolchain_instance.id
-  sm_location                   = var.sm_location
-  sm_resource_group             = var.sm_resource_group
-  sm_name                       = var.sm_name
-  sm_instance_guid              = module.services.sm_instance_guid
-  sm_secret_group               = var.sm_secret_group
-  sm_instance_crn               = var.sm_instance_crn
-  kp_location                   = var.kp_location
-  kp_resource_group             = var.kp_resource_group
-  kp_name                       = var.kp_name
-  kp_instance_guid              = module.services.kp_instance_guid
-  enable_secrets_manager        = var.enable_secrets_manager
-  enable_key_protect            = var.enable_key_protect
-  enable_slack                  = var.enable_slack
-  slack_webhook_secret_ref      = local.slack_webhook_secret_ref
-  slack_channel_name            = var.slack_channel_name
-  slack_team_name               = var.slack_team_name
-  slack_pipeline_fail           = var.slack_pipeline_fail
-  slack_pipeline_start          = var.slack_pipeline_start
-  slack_pipeline_success        = var.slack_pipeline_success
-  slack_toolchain_bind          = var.slack_toolchain_bind
-  slack_toolchain_unbind        = var.slack_toolchain_unbind
-  scc_evidence_repo             = var.evidence_repo_url
-  scc_enable_scc                = var.scc_enable_scc
-  scc_integration_name          = var.scc_integration_name
-  scc_attachment_id             = var.scc_attachment_id
-  scc_instance_crn              = var.scc_instance_crn
-  scc_profile_name              = var.scc_profile_name
-  scc_profile_version           = var.scc_profile_version
-  scc_scc_api_key_secret_ref    = local.scc_scc_api_key_secret_ref
-  scc_use_profile_attachment    = var.scc_use_profile_attachment
-  authorization_policy_creation = var.authorization_policy_creation
-  enable_insights               = var.enable_insights
-  enable_concert                = var.enable_concert
-  concert_dashboard_url         = var.concert_dashboard_url
-  concert_description           = var.concert_description
-  concert_documentation_url     = var.concert_documentation_url
-  concert_integration_name      = var.concert_integration_name
-  cos_dashboard_url             = var.cos_dashboard_url
-  cos_description               = var.cos_description
-  cos_documentation_url         = var.cos_documentation_url
-  cos_integration_name          = var.cos_integration_name
-  link_to_doi_toolchain         = var.link_to_doi_toolchain
-  doi_toolchain_id              = var.doi_toolchain_id
-  enable_artifactory            = var.enable_artifactory
-  artifactory_dashboard_url     = var.artifactory_dashboard_url
-  artifactory_integration_name  = var.artifactory_integration_name
-  artifactory_user              = var.artifactory_user
-  artifactory_repo_name         = var.artifactory_repo_name
-  artifactory_repo_url          = var.artifactory_repo_url
-  artifactory_token_secret_ref  = local.artifactory_secret_ref
-  sm_integration_name           = var.sm_integration_name
-  kp_integration_name           = var.kp_integration_name
-  slack_integration_name        = var.slack_integration_name
-  event_notifications_tool_name = var.event_notifications_tool_name
-  event_notifications_crn       = var.event_notifications_crn
-  sonarqube_integration_name    = var.sonarqube_integration_name
-  sonarqube_user                = var.sonarqube_user
-  sonarqube_secret_ref          = local.sonarqube_secret_ref
-  sonarqube_is_blind_connection = var.sonarqube_is_blind_connection
-  sonarqube_server_url          = var.sonarqube_server_url
+  ibmcloud_api_key                     = var.ibmcloud_api_key
+  toolchain_id                         = ibm_cd_toolchain.toolchain_instance.id
+  sm_location                          = var.sm_location
+  sm_resource_group                    = var.sm_resource_group
+  sm_name                              = var.sm_name
+  sm_instance_guid                     = module.services.sm_instance_guid
+  sm_secret_group                      = var.sm_secret_group
+  sm_instance_crn                      = var.sm_instance_crn
+  kp_location                          = var.kp_location
+  kp_resource_group                    = var.kp_resource_group
+  kp_name                              = var.kp_name
+  kp_instance_guid                     = module.services.kp_instance_guid
+  enable_secrets_manager               = var.enable_secrets_manager
+  enable_key_protect                   = var.enable_key_protect
+  enable_slack                         = var.enable_slack
+  slack_webhook_secret_ref             = local.slack_webhook_secret_ref
+  slack_channel_name                   = var.slack_channel_name
+  slack_team_name                      = var.slack_team_name
+  slack_pipeline_fail                  = var.slack_pipeline_fail
+  slack_pipeline_start                 = var.slack_pipeline_start
+  slack_pipeline_success               = var.slack_pipeline_success
+  slack_toolchain_bind                 = var.slack_toolchain_bind
+  slack_toolchain_unbind               = var.slack_toolchain_unbind
+  scc_evidence_repo                    = var.evidence_repo_url
+  scc_enable_scc                       = var.scc_enable_scc
+  scc_integration_name                 = var.scc_integration_name
+  scc_attachment_id                    = var.scc_attachment_id
+  scc_instance_crn                     = var.scc_instance_crn
+  scc_profile_name                     = var.scc_profile_name
+  scc_profile_version                  = var.scc_profile_version
+  scc_scc_api_key_secret_ref           = local.scc_scc_api_key_secret_ref
+  scc_use_profile_attachment           = var.scc_use_profile_attachment
+  authorization_policy_creation        = var.authorization_policy_creation
+  enable_insights                      = var.enable_insights
+  enable_concert                       = var.enable_concert
+  concert_dashboard_url                = var.concert_dashboard_url
+  concert_description                  = var.concert_description
+  concert_documentation_url            = var.concert_documentation_url
+  concert_integration_name             = var.concert_integration_name
+  cos_dashboard_url                    = var.cos_dashboard_url
+  cos_description                      = var.cos_description
+  cos_documentation_url                = var.cos_documentation_url
+  cos_integration_name                 = var.cos_integration_name
+  link_to_doi_toolchain                = var.link_to_doi_toolchain
+  doi_toolchain_id                     = var.doi_toolchain_id
+  enable_privateworker                 = var.enable_privateworker
+  privateworker_credentials_secret_ref = local.privateworker_secret_ref
+  privateworker_name                   = var.privateworker_name
+  worker_id                            = var.worker_id
+  enable_artifactory                   = var.enable_artifactory
+  artifactory_dashboard_url            = var.artifactory_dashboard_url
+  artifactory_integration_name         = var.artifactory_integration_name
+  artifactory_user                     = var.artifactory_user
+  artifactory_repo_name                = var.artifactory_repo_name
+  artifactory_repo_url                 = var.artifactory_repo_url
+  artifactory_token_secret_ref         = local.artifactory_secret_ref
+  sm_integration_name                  = var.sm_integration_name
+  kp_integration_name                  = var.kp_integration_name
+  slack_integration_name               = var.slack_integration_name
+  event_notifications_tool_name        = var.event_notifications_tool_name
+  event_notifications_crn              = var.event_notifications_crn
+  sonarqube_integration_name           = var.sonarqube_integration_name
+  sonarqube_user                       = var.sonarqube_user
+  sonarqube_secret_ref                 = local.sonarqube_secret_ref
+  sonarqube_is_blind_connection        = var.sonarqube_is_blind_connection
+  sonarqube_server_url                 = var.sonarqube_server_url
 }
 
 module "services" {

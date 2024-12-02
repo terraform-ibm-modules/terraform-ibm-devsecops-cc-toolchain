@@ -39,6 +39,17 @@ variable "kp_instance_guid" {
 
 variable "enable_slack" {
 }
+variable "enable_privateworker" {
+}
+
+variable "worker_id" {
+}
+
+variable "privateworker_credentials_secret_ref" {
+}
+
+variable "privateworker_name" {
+}
 
 variable "slack_webhook_secret_ref" {
 }

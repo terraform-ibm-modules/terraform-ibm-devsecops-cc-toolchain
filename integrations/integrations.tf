@@ -164,6 +164,15 @@ resource "ibm_cd_toolchain_tool_artifactory" "cd_toolchain_tool_artifactory_inst
   toolchain_id = var.toolchain_id
 }
 
+resource "ibm_cd_toolchain_tool_privateworker" "cd_toolchain_tool_privateworker_instance" {
+  count = (var.enable_privateworker) ? 1 : 0
+  parameters {
+    name                     = var.privateworker_name
+    worker_queue_credentials = var.privateworker_credentials_secret_ref
+  }
+  toolchain_id = var.toolchain_id
+}
+
 resource "ibm_cd_toolchain_tool_eventnotifications" "cd_toolchain_tool_eventnotifications_instance" {
   count      = (var.event_notifications_crn != "") ? 1 : 0
   depends_on = [ibm_iam_authorization_policy.toolchain_event_notification_auth_policy]
