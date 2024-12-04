@@ -476,7 +476,7 @@
                         {
                             "key": "compliance_pipelines_repo_name",
                             "type": "string",
-                            "default_value": "compliance-pipelines",
+                            "default_value": "",
                             "description": "The repository name.",
                             "required": false
                         },

@@ -722,7 +722,7 @@ variable "compliance_pipelines_repo_initialization_type" {
 variable "compliance_pipelines_repo_name" {
   type        = string
   description = "The repository name."
-  default     = "compliance-pipelines"
+  default     = ""
 }
 
 variable "compliance_pipeline_repo_issues_enabled" {

@@ -284,7 +284,7 @@ variable "compliance_pipelines_repo_is_private_repo" {
 variable "compliance_pipelines_repo_name" {
   type        = string
   description = "The repository name."
-  default     = "compliance-pipelines"
+  default     = ""
 }
 
 variable "compliance_pipelines_repo_root_url" {
