@@ -116,6 +116,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cc_pipeline_timed_pruner_trigger" {
   name           = var.trigger_timed_pruner_name
   event_listener = "prune-evidence-listener"
   cron           = "0 2 * * *"
+  timezone       = "UTC"
   enabled        = var.trigger_timed_pruner_enable #false
 }
 
