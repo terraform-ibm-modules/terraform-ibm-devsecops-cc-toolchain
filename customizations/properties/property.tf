@@ -28,19 +28,25 @@ locals {
   secrets_integration_name = try(var.property_data.config_data.secrets_integration_name, "")
   secrets_group            = try(var.property_data.config_data.secrets_group, "")
   secrets_provider_type    = try(var.property_data.config_data.secrets_provider_type, "")
+  use_legacy_ref           = try(var.property_data.config_data.use_legacy_ref, false)
+  sm_location              = try(var.property_data.config_data.sm_location, "")
+  sm_name                  = try(var.property_data.config_data.sm_name, "")
+  sm_resource_group        = try(var.property_data.config_data.sm_resource_group, "")
 
   #build up secret reference
   secret_ref_prefix = (
     (local.secrets_provider_type == "kp") ? "{vault::${local.secrets_integration_name}." :
     (local.secrets_provider_type == "sm") ? "{vault::${local.secrets_integration_name}.${local.secrets_group}." : ""
   )
+  sm_ref_format_root = "ref://secrets-manager.${local.sm_location}.${local.sm_resource_group}.${local.sm_name}/"
 
   #check if provided secret contains the full ref
   is_secret_ref = ((startswith(local.input_value, "{vault::")) || (startswith(local.input_value, "crn:")) || (startswith(local.input_value, "ref://"))) ? true : false
 
   secret_ref = (
     ((local.input_type == "secure") && (local.is_secret_ref == true)) ? local.input_value :
-    ((local.input_type == "secure") && (local.input_value != "")) ? "${local.secret_ref_prefix}${local.input_value}}" : local.input_value
+    ((local.input_type == "secure") && (local.input_value != "") && (local.use_legacy_ref == true)) ? "${local.secret_ref_prefix}${local.input_value}}" :
+    ((local.input_type == "secure") && (local.input_value != "") && (local.use_legacy_ref == false)) ? "${local.sm_ref_format_root}${local.secrets_group}/${local.input_value}}" : local.input_value
   )
 
   input_repository_integration_id = (local.input_value == "") ? try(var.property_data.repository_integration_id, "") : local.input_value

@@ -1460,3 +1460,9 @@ variable "repo_integration_owner" {
   description = "The integration owner of the repository. Applies to all the default compliance repositories but can be overriden by the repository specific variable."
   default     = ""
 }
+
+variable "use_legacy_ref" {
+  type        = bool
+  description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
+  default     = true
+}
