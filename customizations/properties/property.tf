@@ -45,8 +45,8 @@ locals {
 
   secret_ref = (
     ((local.input_type == "secure") && (local.is_secret_ref == true)) ? local.input_value :
-    ((local.input_type == "secure") && (local.input_value != "") && (local.use_legacy_ref == true)) ? "${local.secret_ref_prefix}${local.input_value}}" :
-    ((local.input_type == "secure") && (local.input_value != "") && (local.use_legacy_ref == false)) ? "${local.sm_ref_format_root}${local.secrets_group}/${local.input_value}}" : local.input_value
+    ((local.input_type == "secure") && (local.input_value != "") && (local.use_legacy_ref == true)) ? "${local.secret_ref_prefix}${local.input_value}" :
+    ((local.input_type == "secure") && (local.input_value != "") && (local.use_legacy_ref == false)) ? "${local.sm_ref_format_root}${local.secrets_group}/${local.input_value}" : local.input_value
   )
 
   input_repository_integration_id = (local.input_value == "") ? try(var.property_data.repository_integration_id, "") : local.input_value
