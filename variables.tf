@@ -851,6 +851,16 @@ variable "scc_attachment_id" {
   default     = ""
 }
 
+variable "scc_evidence_locker_type" {
+  type        = string
+  description = "Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`."
+  default     = ""
+  validation {
+    condition     = contains(["", "evidence-repo", "evidence-bucket"], var.scc_evidence_locker_type)
+    error_message = "Must be either \"evidence-repo\" or \"evidence-bucket\" or left unset."
+  }
+}
+
 variable "scc_instance_crn" {
   type        = string
   description = "The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. The value must match the regular expression."

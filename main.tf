@@ -476,6 +476,7 @@ module "integrations" {
   scc_enable_scc                       = var.scc_enable_scc
   scc_integration_name                 = var.scc_integration_name
   scc_attachment_id                    = var.scc_attachment_id
+  scc_evidence_locker_type             = var.scc_evidence_locker_type
   scc_instance_crn                     = var.scc_instance_crn
   scc_profile_name                     = var.scc_profile_name
   scc_profile_version                  = var.scc_profile_version
