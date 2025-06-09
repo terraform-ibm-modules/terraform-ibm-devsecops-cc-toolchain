@@ -112,11 +112,14 @@ resource "ibm_cd_toolchain_tool_cos" "cos_tool_integration" {
   count        = (var.enable_cos == true && var.use_legacy_cos_tool == false) ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
-    name         = var.cos_integration_name
-    endpoint     = var.cos_endpoint
-    instance_crn = var.cos_instance_crn
-    cos_api_key  = var.cos_api_key_secret_ref
-    bucket_name  = var.cos_bucket_name
+    name                   = var.cos_integration_name
+    endpoint               = var.cos_endpoint
+    instance_crn           = var.cos_instance_crn
+    cos_api_key            = var.cos_api_key_secret_ref
+    bucket_name            = var.cos_bucket_name
+    hmac_access_key_id     = var.cos_hmac_access_key_id_ref
+    hmac_secret_access_key = var.cos_hmac_secret_access_key_ref
+    auth_type              = (var.cos_hmac_access_key_id_ref != "" && var.cos_hmac_secret_access_key_ref != "") ? "hmac" : "apikey"
   }
 }
 

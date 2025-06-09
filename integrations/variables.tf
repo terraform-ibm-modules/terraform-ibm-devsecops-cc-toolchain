@@ -165,6 +165,12 @@ variable "cos_description" {
 variable "cos_documentation_url" {
 }
 
+variable "cos_hmac_access_key_id_ref" {
+}
+
+variable "cos_hmac_secret_access_key_ref" {
+}
+
 variable "cos_integration_name" {
 }
 

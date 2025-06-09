@@ -98,6 +98,20 @@ locals {
     replace("${local.sm_ref_format_root}/${var.cos_api_key_secret_group}/${var.cos_api_key_secret_name}", " ", "%20")
   )
 
+  cos_hmac_access_key_id_ref = (
+    (var.sm_instance_crn != "") ? var.cos_hmac_secret_access_id_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${var.cos_hmac_access_key_id_secret_name}}", module.integrations.secret_tool) :
+    (var.cos_api_key_secret_group == "") ? replace("${local.sm_ref_format_root}${var.sm_secret_group}/${var.cos_hmac_access_key_id_secret_name}", " ", "%20") :
+    replace("${local.sm_ref_format_root}/${var.cos_api_key_secret_group}/${var.cos_hmac_access_key_id_secret_name}", " ", "%20")
+  )
+
+  cos_hmac_secret_access_key_ref = (
+    (var.sm_instance_crn != "") ? var.cos_hmac_access_key_secret_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${var.cos_hmac_secret_access_key_secret_name}}", module.integrations.secret_tool) :
+    (var.cos_api_key_secret_group == "") ? replace("${local.sm_ref_format_root}${var.sm_secret_group}/${var.cos_hmac_secret_access_key_secret_name}", " ", "%20") :
+    replace("${local.sm_ref_format_root}/${var.cos_api_key_secret_group}/${var.cos_hmac_secret_access_key_secret_name}", " ", "%20")
+  )
+
   pipeline_apikey_secret_ref = (
     (var.sm_instance_crn != "") ? var.pipeline_ibmcloud_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", module.integrations.secret_tool) :
@@ -493,6 +507,8 @@ module "integrations" {
   cos_dashboard_url                    = var.cos_dashboard_url
   cos_description                      = var.cos_description
   cos_documentation_url                = var.cos_documentation_url
+  cos_hmac_access_key_id_ref           = (var.cos_hmac_access_key_id_secret_name == "" && var.cos_hmac_secret_access_id_crn == "") ? "" : local.cos_hmac_access_key_id_ref
+  cos_hmac_secret_access_key_ref       = (var.cos_hmac_secret_access_key_secret_name == "" && var.cos_hmac_access_key_secret_crn == "") ? "" : local.cos_hmac_secret_access_key_ref
   cos_integration_name                 = var.cos_integration_name
   cos_api_key_secret_ref               = local.cos_secret_ref
   cos_endpoint                         = var.cos_endpoint

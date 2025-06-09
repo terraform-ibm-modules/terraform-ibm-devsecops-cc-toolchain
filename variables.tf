@@ -131,6 +131,28 @@ variable "cos_api_key_secret_crn" {
   }
 }
 
+variable "cos_hmac_access_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the HMAC Secret Access Key. The HMAC Secret Access Key which is part of an HMAC (Hash Message Authentication Code) credential set. . HMAC is identified by a combination of an Access Key ID and a Secret Access Key."
+  default     = ""
+  validation {
+    condition     = startswith(var.cos_hmac_access_key_secret_crn, "crn:") || var.cos_hmac_access_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cos_hmac_secret_access_id_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the HMAC Access Key ID. The HMAC Access Key ID which is part of an HMAC (Hash Message Authentication Code) credential set. HMAC is identified by a combination of an Access Key ID and a Secret Access Key."
+  default     = ""
+  validation {
+    condition     = startswith(var.cos_hmac_secret_access_id_crn, "crn:") || var.cos_hmac_secret_access_id_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 variable "pipeline_ibmcloud_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -955,6 +977,18 @@ variable "cos_description" {
   type        = string
   description = "The COS description on the tool card."
   default     = "Cloud Object Storage to store evidences within DevSecOps Pipelines"
+}
+
+variable "cos_hmac_access_key_id_secret_name" {
+  type        = string
+  description = "The name of the secret in Secrets Manager for the HMAC Access Key ID."
+  default     = ""
+}
+
+variable "cos_hmac_secret_access_key_secret_name" {
+  type        = string
+  description = "The name of the secret in Secrets Manager for the HMAC Secrte Access Key."
+  default     = ""
 }
 
 variable "cos_integration_name" {
