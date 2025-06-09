@@ -165,6 +165,24 @@ variable "cos_documentation_url" {
 variable "cos_integration_name" {
 }
 
+variable "enable_cos" {
+}
+
+variable "cos_endpoint" {
+}
+
+variable "cos_instance_crn" {
+}
+
+variable "cos_api_key_secret_ref" {
+}
+
+variable "cos_bucket_name" {
+}
+
+variable "use_legacy_cos_tool" {
+}
+
 variable "sm_integration_name" {
 }
 

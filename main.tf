@@ -488,10 +488,16 @@ module "integrations" {
   concert_description                  = var.concert_description
   concert_documentation_url            = var.concert_documentation_url
   concert_integration_name             = var.concert_integration_name
+  enable_cos                           = var.enable_cos
   cos_dashboard_url                    = var.cos_dashboard_url
   cos_description                      = var.cos_description
   cos_documentation_url                = var.cos_documentation_url
   cos_integration_name                 = var.cos_integration_name
+  cos_api_key_secret_ref               = local.cos_secret_ref
+  cos_endpoint                         = var.cos_endpoint
+  cos_instance_crn                     = var.cos_instance_crn
+  cos_bucket_name                      = var.cos_bucket_name
+  use_legacy_cos_tool                  = var.use_legacy_cos_tool
   link_to_doi_toolchain                = var.link_to_doi_toolchain
   doi_toolchain_id                     = var.doi_toolchain_id
   enable_privateworker                 = var.enable_privateworker

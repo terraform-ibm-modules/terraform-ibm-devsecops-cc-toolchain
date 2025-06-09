@@ -953,6 +953,24 @@ variable "cos_integration_name" {
   default     = "Evidence Store"
 }
 
+variable "cos_instance_crn" {
+  type        = string
+  description = "The CRN of the Cloud Object Storage instance."
+  default     = ""
+}
+
+variable "cos_api_key_secret_ref" {
+  type        = string
+  description = "The secret ref to for the COS api key."
+  default     = ""
+}
+
+variable "use_legacy_cos_tool" {
+  type        = bool
+  description = "The custom tool integration for is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`"
+  default     = false
+}
+
 variable "sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
@@ -1029,6 +1047,12 @@ variable "authorization_policy_creation" {
   type        = string
   description = "Set to disabled if you do not want this policy auto created."
   default     = ""
+}
+
+variable "enable_cos" {
+  type        = bool
+  description = "Set to `true` to enable the new COS integration."
+  default     = false
 }
 
 variable "enable_insights" {
