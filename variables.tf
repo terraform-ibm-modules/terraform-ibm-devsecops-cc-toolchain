@@ -1003,12 +1003,6 @@ variable "cos_instance_crn" {
   default     = ""
 }
 
-variable "cos_api_key_secret_ref" {
-  type        = string
-  description = "The secret ref to for the COS api key."
-  default     = ""
-}
-
 variable "use_legacy_cos_tool" {
   type        = bool
   description = "The custom tool integration for is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`"
