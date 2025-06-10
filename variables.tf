@@ -134,7 +134,7 @@ variable "cos_api_key_secret_crn" {
 variable "cos_hmac_access_key_secret_crn" {
   type        = string
   sensitive   = true
-  description = "The CRN for the HMAC Secret Access Key. The HMAC Secret Access Key which is part of an HMAC (Hash Message Authentication Code) credential set. . HMAC is identified by a combination of an Access Key ID and a Secret Access Key."
+  description = "The CRN for the HMAC Secret Access Key. The HMAC Secret Access Key which is part of an HMAC (Hash Message Authentication Code) credential set. HMAC is identified by a combination of an Access Key ID and a Secret Access Key."
   default     = ""
   validation {
     condition     = startswith(var.cos_hmac_access_key_secret_crn, "crn:") || var.cos_hmac_access_key_secret_crn == ""
