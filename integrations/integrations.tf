@@ -119,7 +119,7 @@ resource "ibm_cd_toolchain_tool_cos" "cos_tool_integration" {
     bucket_name            = var.cos_bucket_name
     hmac_access_key_id     = var.cos_hmac_access_key_id_ref
     hmac_secret_access_key = var.cos_hmac_secret_access_key_ref
-    auth_type              = (var.cos_hmac_access_key_id_ref != "" && var.cos_hmac_secret_access_key_ref != "") ? "hmac" : "apikey"
+    auth_type              = (var.cos_hmac_access_key_id_ref != "" && var.cos_hmac_secret_access_key_ref != "") ? "hmac" : null
   }
 }
 
