@@ -1394,6 +1394,12 @@ variable "trigger_timed_cron_schedule" {
   default     = "0 4 * * *"
 }
 
+variable "trigger_timed_timezone" {
+  type        = string
+  description = "Specify the timezone used for this timer trigger, which will ensure the CRON activates this trigger relative to the specified timezone."
+  default     = "UTC"
+}
+
 variable "trigger_manual_name" {
   type        = string
   description = "The name of the CC pipeline Manual trigger."

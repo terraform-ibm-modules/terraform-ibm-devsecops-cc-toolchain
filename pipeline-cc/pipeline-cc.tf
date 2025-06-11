@@ -48,6 +48,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cc_pipeline_timed_trigger" {
   type           = "timer"
   name           = var.trigger_timed_name
   event_listener = "cc-listener"
+  timezone       = var.trigger_timed_timezone
   enabled        = var.trigger_timed_enable
   cron           = var.trigger_timed_cron_schedule
 }

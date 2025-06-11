@@ -445,6 +445,7 @@ module "pipeline_cc" {
   trigger_timed_name                  = var.trigger_timed_name
   trigger_timed_enable                = var.trigger_timed_enable
   trigger_timed_cron_schedule         = var.trigger_timed_cron_schedule
+  trigger_timed_timezone              = var.trigger_timed_timezone
   trigger_manual_name                 = var.trigger_manual_name
   trigger_manual_enable               = var.trigger_manual_enable
   trigger_manual_pruner_name          = var.trigger_manual_pruner_name

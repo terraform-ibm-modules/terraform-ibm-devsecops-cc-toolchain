@@ -88,6 +88,9 @@ variable "trigger_timed_enable" {
 variable "trigger_timed_cron_schedule" {
 }
 
+variable "trigger_timed_timezone" {
+}
+
 variable "trigger_manual_name" {
 }
 variable "trigger_manual_enable" {
