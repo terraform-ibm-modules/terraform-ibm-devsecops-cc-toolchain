@@ -98,6 +98,20 @@ locals {
     replace("${local.sm_ref_format_root}/${var.cos_api_key_secret_group}/${var.cos_api_key_secret_name}", " ", "%20")
   )
 
+  cos_hmac_access_key_id_ref = (
+    (var.sm_instance_crn != "") ? var.cos_hmac_secret_access_id_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${var.cos_hmac_access_key_id_secret_name}}", module.integrations.secret_tool) :
+    (var.cos_api_key_secret_group == "") ? replace("${local.sm_ref_format_root}${var.sm_secret_group}/${var.cos_hmac_access_key_id_secret_name}", " ", "%20") :
+    replace("${local.sm_ref_format_root}/${var.cos_api_key_secret_group}/${var.cos_hmac_access_key_id_secret_name}", " ", "%20")
+  )
+
+  cos_hmac_secret_access_key_ref = (
+    (var.sm_instance_crn != "") ? var.cos_hmac_access_key_secret_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${var.cos_hmac_secret_access_key_secret_name}}", module.integrations.secret_tool) :
+    (var.cos_api_key_secret_group == "") ? replace("${local.sm_ref_format_root}${var.sm_secret_group}/${var.cos_hmac_secret_access_key_secret_name}", " ", "%20") :
+    replace("${local.sm_ref_format_root}/${var.cos_api_key_secret_group}/${var.cos_hmac_secret_access_key_secret_name}", " ", "%20")
+  )
+
   pipeline_apikey_secret_ref = (
     (var.sm_instance_crn != "") ? var.pipeline_ibmcloud_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", module.integrations.secret_tool) :
@@ -431,6 +445,7 @@ module "pipeline_cc" {
   trigger_timed_name                  = var.trigger_timed_name
   trigger_timed_enable                = var.trigger_timed_enable
   trigger_timed_cron_schedule         = var.trigger_timed_cron_schedule
+  trigger_timed_timezone              = var.trigger_timed_timezone
   trigger_manual_name                 = var.trigger_manual_name
   trigger_manual_enable               = var.trigger_manual_enable
   trigger_manual_pruner_name          = var.trigger_manual_pruner_name
@@ -476,6 +491,7 @@ module "integrations" {
   scc_enable_scc                       = var.scc_enable_scc
   scc_integration_name                 = var.scc_integration_name
   scc_attachment_id                    = var.scc_attachment_id
+  scc_evidence_locker_type             = var.scc_evidence_locker_type
   scc_instance_crn                     = var.scc_instance_crn
   scc_profile_name                     = var.scc_profile_name
   scc_profile_version                  = var.scc_profile_version
@@ -488,10 +504,18 @@ module "integrations" {
   concert_description                  = var.concert_description
   concert_documentation_url            = var.concert_documentation_url
   concert_integration_name             = var.concert_integration_name
+  enable_cos                           = var.enable_cos
   cos_dashboard_url                    = var.cos_dashboard_url
   cos_description                      = var.cos_description
   cos_documentation_url                = var.cos_documentation_url
+  cos_hmac_access_key_id_ref           = (var.cos_hmac_access_key_id_secret_name == "" && var.cos_hmac_secret_access_id_crn == "") ? "" : local.cos_hmac_access_key_id_ref
+  cos_hmac_secret_access_key_ref       = (var.cos_hmac_secret_access_key_secret_name == "" && var.cos_hmac_access_key_secret_crn == "") ? "" : local.cos_hmac_secret_access_key_ref
   cos_integration_name                 = var.cos_integration_name
+  cos_api_key_secret_ref               = local.cos_secret_ref
+  cos_endpoint                         = var.cos_endpoint
+  cos_instance_crn                     = var.cos_instance_crn
+  cos_bucket_name                      = var.cos_bucket_name
+  use_legacy_cos_tool                  = var.use_legacy_cos_tool
   link_to_doi_toolchain                = var.link_to_doi_toolchain
   doi_toolchain_id                     = var.doi_toolchain_id
   enable_privateworker                 = var.enable_privateworker

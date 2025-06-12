@@ -131,6 +131,28 @@ variable "cos_api_key_secret_crn" {
   }
 }
 
+variable "cos_hmac_access_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the HMAC Secret Access Key. The HMAC Secret Access Key which is part of an HMAC (Hash Message Authentication Code) credential set. HMAC is identified by a combination of an Access Key ID and a Secret Access Key."
+  default     = ""
+  validation {
+    condition     = startswith(var.cos_hmac_access_key_secret_crn, "crn:") || var.cos_hmac_access_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cos_hmac_secret_access_id_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the HMAC Access Key ID. The HMAC Access Key ID which is part of an HMAC (Hash Message Authentication Code) credential set. HMAC is identified by a combination of an Access Key ID and a Secret Access Key."
+  default     = ""
+  validation {
+    condition     = startswith(var.cos_hmac_secret_access_id_crn, "crn:") || var.cos_hmac_secret_access_id_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 variable "pipeline_ibmcloud_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -851,6 +873,16 @@ variable "scc_attachment_id" {
   default     = ""
 }
 
+variable "scc_evidence_locker_type" {
+  type        = string
+  description = "Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`."
+  default     = ""
+  validation {
+    condition     = contains(["", "evidence-repo", "evidence-bucket"], var.scc_evidence_locker_type)
+    error_message = "Must be either \"evidence-repo\" or \"evidence-bucket\" or left unset."
+  }
+}
+
 variable "scc_instance_crn" {
   type        = string
   description = "The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. The value must match the regular expression."
@@ -947,10 +979,34 @@ variable "cos_description" {
   default     = "Cloud Object Storage to store evidences within DevSecOps Pipelines"
 }
 
+variable "cos_hmac_access_key_id_secret_name" {
+  type        = string
+  description = "The name of the secret in Secrets Manager for the HMAC Access Key ID."
+  default     = ""
+}
+
+variable "cos_hmac_secret_access_key_secret_name" {
+  type        = string
+  description = "The name of the secret in Secrets Manager for the HMAC Secrte Access Key."
+  default     = ""
+}
+
 variable "cos_integration_name" {
   type        = string
   description = "The name of the COS integration."
   default     = "Evidence Store"
+}
+
+variable "cos_instance_crn" {
+  type        = string
+  description = "The CRN of the Cloud Object Storage instance."
+  default     = ""
+}
+
+variable "use_legacy_cos_tool" {
+  type        = bool
+  description = "The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`"
+  default     = false
 }
 
 variable "sm_secret_group" {
@@ -1029,6 +1085,12 @@ variable "authorization_policy_creation" {
   type        = string
   description = "Set to disabled if you do not want this policy auto created."
   default     = ""
+}
+
+variable "enable_cos" {
+  type        = bool
+  description = "Set to `true` to enable the new COS integration."
+  default     = false
 }
 
 variable "enable_insights" {
@@ -1330,6 +1392,12 @@ variable "trigger_timed_cron_schedule" {
   type        = string
   description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
   default     = "0 4 * * *"
+}
+
+variable "trigger_timed_timezone" {
+  type        = string
+  description = "Specify the timezone used for this timer trigger, which will ensure the CRON activates this trigger relative to the specified timezone."
+  default     = "UTC"
 }
 
 variable "trigger_manual_name" {
