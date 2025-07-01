@@ -33,6 +33,9 @@ variable "pipeline_repo_url" {
 variable "inventory_repo" {
 }
 
+variable "evidence_repo_enabled" {
+}
+
 variable "evidence_repo" {
 }
 

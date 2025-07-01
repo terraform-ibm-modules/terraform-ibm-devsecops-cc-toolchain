@@ -17,9 +17,10 @@ resource "ibm_cd_tekton_pipeline_property" "pipeline_config_repo" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "evidence_repo" {
+  count       = (var.evidence_repo_enabled) ? 1 : 0
   name        = "evidence-repo"
   type        = "integration"
-  value       = var.evidence_repo.tool_id
+  value       = try(var.evidence_repo.tool_id, "")
   path        = "parameters.repo_url"
   pipeline_id = ibm_cd_tekton_pipeline.cc_pipeline_instance.pipeline_id
   locked      = contains(var.default_locked_properties, "evidence-repo") ? "true" : "false"
