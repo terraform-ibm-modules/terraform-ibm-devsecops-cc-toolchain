@@ -738,7 +738,7 @@ variable "compliance_pipelines_repo_traceability_enabled" {
 variable "compliance_pipelines_repo_is_private_repo" {
   type        = bool
   description = "Set to `true` to make repository private."
-  default     = false
+  default     = true
 }
 
 variable "compliance_pipelines_repo_initialization_type" {
