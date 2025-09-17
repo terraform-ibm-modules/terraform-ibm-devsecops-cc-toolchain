@@ -1294,7 +1294,7 @@ variable "toolchain_description" {
 
 variable "toolchain_resource_region_override" {
   type        = string
-  description = "IBM Cloud Region for the created resources. If not set resources will be created in the region set in `toolchain_region`."
+  description = "IBM Cloud region for the created resources. If not set resources will be created in the region set in `toolchain_region`."
   default     = ""
 }
 
