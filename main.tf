@@ -1,12 +1,13 @@
 locals {
 
-  is_staging = length(regexall("^crn:v1:staging:.*$", ibm_cd_toolchain.toolchain_instance.crn)) > 0
-  git_dev    = "https://dev.us-south.git.test.cloud.ibm.com"
-  git_fr2    = "https://private.eu-fr2.git.cloud.ibm.com"
+  is_staging               = length(regexall("^crn:v1:staging:.*$", ibm_cd_toolchain.toolchain_instance.crn)) > 0
+  git_dev                  = "https://dev.us-south.git.test.cloud.ibm.com"
+  git_fr2                  = "https://private.eu-fr2.git.cloud.ibm.com"
+  resolved_resource_region = (var.toolchain_resource_region_override == "") ? var.toolchain_region : var.toolchain_resource_region_override
   compliance_pipelines_git_server = (
     (local.is_staging) ? local.git_dev
-    : (var.toolchain_region == "eu-fr2") ? local.git_fr2
-    : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
+    : (local.resolved_resource_region == "eu-fr2") ? local.git_fr2
+    : format("https://%s.git.cloud.ibm.com", local.resolved_resource_region)
   )
 
   compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
