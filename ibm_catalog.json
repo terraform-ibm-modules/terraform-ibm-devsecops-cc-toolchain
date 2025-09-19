@@ -1513,6 +1513,13 @@
                             "required": false
                         },
                         {
+                            "key": "toolchain_resource_region_override",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "IBM Cloud region for the created resources. If not set resources will be created in the region set in `toolchain_region`.",
+                            "required": false
+                        },
+                        {
                             "key": "trigger_manual_enable",
                             "type": "boolean",
                             "default_value": true,

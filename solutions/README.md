@@ -264,6 +264,7 @@ A Terraform module for provisioning the DevSecOps CC toolchains.
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | Name of the CC Toolchain. | `string` | `"DevSecOps CC Toolchain - Terraform"` | no |
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | IBM Cloud region where the toolchain is created | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | Resource group within which the toolchain is created | `string` | `"Default"` | no |
+| <a name="input_toolchain_resource_region_override"></a> [toolchain\_resource\_region\_override](#input\_toolchain\_resource\_region\_override) | IBM Cloud region for the created resources. If not set resources will be created in the region set in `toolchain_region`| `string` | `"Default"` | no |
 | <a name="input_trigger_manual_enable"></a> [trigger\_manual\_enable](#input\_trigger\_manual\_enable) | Set to `true` to enable the CC pipeline Manual trigger. | `bool` | `true` | no |
 | <a name="input_trigger_manual_name"></a> [trigger\_manual\_name](#input\_trigger\_manual\_name) | The name of the CC pipeline Manual trigger. | `string` | `"CC Manual Trigger"` | no |
 | <a name="input_trigger_manual_pruner_enable"></a> [trigger\_manual\_pruner\_enable](#input\_trigger\_manual\_pruner\_enable) | Set to `true` to enable the manual Pruner trigger. | `bool` | `true` | no |

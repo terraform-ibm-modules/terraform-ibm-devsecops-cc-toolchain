@@ -213,6 +213,7 @@ module "devsecops_cc_toolchain" {
   toolchain_name                                 = var.toolchain_name
   toolchain_region                               = var.toolchain_region
   toolchain_resource_group                       = var.toolchain_resource_group
+  toolchain_resource_region_override             = var.toolchain_resource_region_override
   trigger_manual_enable                          = var.trigger_manual_enable
   trigger_manual_name                            = var.trigger_manual_name
   trigger_manual_pruner_enable                   = var.trigger_manual_pruner_enable
