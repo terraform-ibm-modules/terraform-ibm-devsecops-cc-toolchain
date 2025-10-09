@@ -1534,20 +1534,6 @@
                             "required": false
                         },
                         {
-                            "key": "trigger_manual_pruner_enable",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to enable the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "trigger_manual_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Manual Trigger",
-                            "description": "The name of the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "trigger_timed_cron_schedule",
                             "type": "string",
                             "default_value": "0 4 * * *",
@@ -1566,20 +1552,6 @@
                             "type": "string",
                             "default_value": "CC Timed Trigger",
                             "description": "The name of the CC pipeline Timed trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "trigger_timed_pruner_enable",
-                            "type": "boolean",
-                            "default_value": false,
-                            "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "trigger_timed_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Timed Trigger",
-                            "description": "The name of the timed Pruner trigger.",
                             "required": false
                         },
                         {
