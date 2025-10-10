@@ -1522,5 +1522,5 @@ variable "repo_integration_owner" {
 variable "use_legacy_ref" {
   type        = bool
   description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
-  default     = true
+  default     = false
 }
