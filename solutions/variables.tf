@@ -49,7 +49,7 @@ variable "app_repo_git_id" {
 variable "app_repo_git_provider" {
   type        = string
   description = "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
-  default     = "hostedgit"
+  default     = ""
 }
 
 variable "app_repo_git_token_secret_crn" {
@@ -66,7 +66,7 @@ variable "app_repo_git_token_secret_crn" {
 variable "app_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "app_repo_initialization_type" {
@@ -202,10 +202,10 @@ variable "compliance_pipeline_repo_auth_type" {
 
 variable "compliance_pipeline_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Choose the default git provider for change management repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.compliance_pipeline_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.compliance_pipeline_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
   }
 }
@@ -224,7 +224,7 @@ variable "compliance_pipeline_repo_git_token_secret_crn" {
 variable "compliance_pipeline_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "compliance_pipeline_repo_integration_owner" {
@@ -372,10 +372,10 @@ variable "create_triggers" {
 
 variable "default_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Choose the default git provider for app repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.default_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.default_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
   }
 }
@@ -484,10 +484,10 @@ variable "evidence_repo_git_id" {
 
 variable "evidence_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for evidence repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.evidence_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.evidence_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repo."
   }
 }
@@ -506,7 +506,7 @@ variable "evidence_repo_git_token_secret_crn" {
 variable "evidence_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "evidence_repo_initialization_type" {
@@ -601,10 +601,10 @@ variable "inventory_repo_git_id" {
 
 variable "inventory_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for inventory repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.inventory_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.inventory_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for Inventory repo."
   }
 }
@@ -623,7 +623,7 @@ variable "inventory_repo_git_token_secret_crn" {
 variable "inventory_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "inventory_repo_initialization_type" {
@@ -712,10 +712,10 @@ variable "issues_repo_git_id" {
 
 variable "issues_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for issue repo "
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.issues_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.issues_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for issue repo."
   }
 }
@@ -734,7 +734,7 @@ variable "issues_repo_git_token_secret_crn" {
 variable "issues_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "issues_repo_initialization_type" {
@@ -877,10 +877,10 @@ variable "pipeline_config_repo_git_id" {
 
 variable "pipeline_config_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for pipeline repo config"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.pipeline_config_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.pipeline_config_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for pipeline config repo."
   }
 }
@@ -899,7 +899,7 @@ variable "pipeline_config_repo_git_token_secret_crn" {
 variable "pipeline_config_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "pipeline_config_repo_initialization_type" {
@@ -1328,18 +1328,6 @@ variable "trigger_manual_name" {
   default     = "CC Manual Trigger"
 }
 
-variable "trigger_manual_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the manual Pruner trigger."
-  default     = true
-}
-
-variable "trigger_manual_pruner_name" {
-  type        = string
-  description = "The name of the manual Pruner trigger."
-  default     = "Evidence Pruner Manual Trigger"
-}
-
 variable "trigger_timed_cron_schedule" {
   type        = string
   description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
@@ -1356,18 +1344,6 @@ variable "trigger_timed_name" {
   type        = string
   description = "The name of the CC pipeline Timed trigger."
   default     = "CC Timed Trigger"
-}
-
-variable "trigger_timed_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the timed Pruner trigger."
-  default     = false
-}
-
-variable "trigger_timed_pruner_name" {
-  type        = string
-  description = "The name of the timed Pruner trigger."
-  default     = "Evidence Pruner Timed Trigger"
 }
 
 variable "worker_id" {
