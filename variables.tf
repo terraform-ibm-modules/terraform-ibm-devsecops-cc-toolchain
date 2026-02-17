@@ -28,12 +28,6 @@ variable "issues_repo_git_token_secret_name" {
   default     = ""
 }
 
-variable "evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider."
-  default     = ""
-}
-
 variable "inventory_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
@@ -72,17 +66,6 @@ variable "issues_repo_git_token_secret_crn" {
   default     = ""
   validation {
     condition     = startswith(var.issues_repo_git_token_secret_crn, "crn:") || var.issues_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Evidence repository Git Token."
-  default     = ""
-  validation {
-    condition     = startswith(var.evidence_repo_git_token_secret_crn, "crn:") || var.evidence_repo_git_token_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
 }
@@ -297,12 +280,6 @@ variable "inventory_repo_url" {
   default     = ""
 }
 
-variable "evidence_repo_url" {
-  type        = string
-  description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
-  default     = ""
-}
-
 variable "issues_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
@@ -405,12 +382,6 @@ variable "issues_repo_auth_type" {
   default     = ""
 }
 
-variable "evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = ""
-}
-
 variable "app_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
@@ -505,16 +476,6 @@ variable "inventory_repo_git_provider" {
   }
 }
 
-variable "evidence_repo_git_provider" {
-  type        = string
-  default     = ""
-  description = "Git provider for evidence repo"
-  validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.evidence_repo_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repo."
-  }
-}
-
 variable "issues_repo_git_provider" {
   type        = string
   default     = ""
@@ -526,12 +487,6 @@ variable "issues_repo_git_provider" {
 }
 
 variable "issues_repo_integration_owner" {
-  type        = string
-  description = "The name of the integration owner."
-  default     = ""
-}
-
-variable "evidence_repo_integration_owner" {
   type        = string
   description = "The name of the integration owner."
   default     = ""
@@ -646,66 +601,6 @@ variable "issues_repo_initialization_type" {
 }
 
 variable "issues_repo_name" {
-  type        = string
-  description = "The repository name."
-  default     = ""
-}
-
-variable "evidence_repo_issues_enabled" {
-  type        = bool
-  description = "Set to `true` to enable issues."
-  default     = false
-}
-
-variable "evidence_repo_git_id" {
-  type        = string
-  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
-  default     = ""
-}
-
-variable "evidence_repo_blind_connection" {
-  type        = string
-  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
-}
-
-variable "evidence_repo_title" {
-  type        = string
-  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
-  default     = ""
-}
-
-variable "evidence_repo_root_url" {
-  type        = string
-  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
-  default     = ""
-}
-
-variable "evidence_repo_traceability_enabled" {
-  type        = bool
-  description = "Set to `true` to enable traceability."
-  default     = false
-}
-
-variable "evidence_repo_is_private_repo" {
-  type        = bool
-  description = "Set to `true` to make repository private."
-  default     = true
-}
-
-variable "evidence_repo_initialization_type" {
-  type        = string
-  description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
-  default     = ""
-}
-
-variable "evidence_repo_enabled" {
-  type        = bool
-  description = "Set to `true` to enable the evidence repository tool integration."
-  default     = true
-}
-
-variable "evidence_repo_name" {
   type        = string
   description = "The repository name."
   default     = ""
@@ -876,23 +771,13 @@ variable "scc_integration_name" {
 variable "scc_enable_scc" {
   type        = bool
   description = "Enable the SCC integration."
-  default     = true
+  default     = false
 }
 
 variable "scc_attachment_id" {
   type        = string
   description = "An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
   default     = ""
-}
-
-variable "scc_evidence_locker_type" {
-  type        = string
-  description = "Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`."
-  default     = ""
-  validation {
-    condition     = contains(["", "evidence-repo", "evidence-bucket"], var.scc_evidence_locker_type)
-    error_message = "Must be either \"evidence-repo\" or \"evidence-bucket\" or left unset."
-  }
 }
 
 variable "scc_instance_crn" {
@@ -1135,12 +1020,6 @@ variable "inventory_group" {
   default     = ""
 }
 
-variable "evidence_group" {
-  type        = string
-  description = "Specify Git user/group for evidence repo."
-  default     = ""
-}
-
 variable "pipeline_config_group" {
   type        = string
   description = "Specify Git user/group for pipeline config repo."
@@ -1210,12 +1089,6 @@ variable "issues_repo_secret_group" {
 variable "inventory_repo_secret_group" {
   type        = string
   description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -1456,7 +1329,7 @@ variable "repository_properties_filepath" {
 variable "default_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
-  default     = ["app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifactory-dockerconfigjson", "cluster", "cluster-name", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-build-size", "code-engine-build-strategy", "code-engine-build-timeout", "code-engine-build-use-native-docker", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-engine-wait-timeout", "compliance-baseimage", "context-dir", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-cluster-namespace", "dev-region", "dev-resource-group", "dockerfile", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "image-name", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-domain", "registry-namespace", "registry-region", "remove-unspecified-references-to-configuration-resources", "service-bindings", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "source", "version"]
+  default     = ["app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifactory-dockerconfigjson", "cluster", "cluster-name", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-build-size", "code-engine-build-strategy", "code-engine-build-timeout", "code-engine-build-use-native-docker", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-engine-wait-timeout", "compliance-baseimage", "context-dir", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-cluster-namespace", "dev-region", "dev-resource-group", "dockerfile", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "image-name", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-domain", "registry-namespace", "registry-region", "remove-unspecified-references-to-configuration-resources", "service-bindings", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "source", "version"]
 }
 
 variable "repo_blind_connection" {

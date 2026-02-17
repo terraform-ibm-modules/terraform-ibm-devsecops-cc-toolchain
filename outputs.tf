@@ -44,27 +44,6 @@ output "inventory_repo_url" {
   description = "The inventory repository instance URL, with details of which artifact has been built and will be deployed."
 }
 
-output "evidence_repo" {
-  value       = try(module.evidence_repo[0].repository, "")
-  description = "The Evidence repo."
-  sensitive   = true
-}
-
-output "evidence_repo_git_provider" {
-  value       = try(module.evidence_repo[0].repo_provider, "")
-  description = "The evidence repository provider type. Can be 'hostedgit', 'githubconsolidated' etc."
-}
-
-output "evidence_repo_git_id" {
-  value       = try(module.evidence_repo[0].repo_git_id, "")
-  description = "The evidence repository Git ID"
-}
-
-output "evidence_repo_url" {
-  value       = try(module.evidence_repo[0].repository_url, "")
-  description = "The evidence repository instance URL, where evidence of the builds and scans are stored, ready for any compliance audit."
-}
-
 output "issues_repo" {
   value       = module.issues_repo.repository
   description = "The Issues repo."

@@ -75,12 +75,6 @@ variable "slack_toolchain_bind" {
 variable "slack_toolchain_unbind" {
 }
 
-variable "scc_evidence_locker_type" {
-}
-
-variable "scc_evidence_repo" {
-}
-
 variable "scc_enable_scc" {
 }
 
