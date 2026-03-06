@@ -80,7 +80,7 @@
                         {
                             "key": "pipeline_properties",
                             "type": "string",
-                            "default_value": "[\n  {\n    \"pipeline_id\": \"cc\",\n    \"properties\": [\n      {\n        \"name\": \"cos-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-bucket-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n     {\n        \"name\": \"cos-endpoint\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n          \"name\": \"doi-environment\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-toolchain-id\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"environment-tag\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"event-notifications\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-auto-close\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-cra-auto-remediation\",\n        \"type\": \"text\",\n        \"value\": \"true\"\n      },\n\n      {\n        \"name\": \"opt-in-cra-auto-remediation-enabled-repos\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-cra-auto-remediation-force\",\n        \"type\": \"text\",\n        \"value\": \"true\"\n      },\n      {\n          \"name\": \"opt-in-dynamic-api-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-scan\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-dynamic-ui-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-gosec\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-sonar\",\n          \"type\": \"text\",\n          \"value\": \"true\"\n      },\n      {\n        \"name\": \"peer-review-compliance\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"sonarqube-config\",\n        \"type\": \"text\",\n        \"value\": \"default\"\n      }\n    ]\n  }\n]\n",
+                            "default_value": "[\n  {\n    \"pipeline_id\": \"cc\",\n    \"properties\": [\n      {\n        \"name\": \"cos-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-bucket-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n     {\n        \"name\": \"cos-endpoint\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"environment-tag\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"event-notifications\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-auto-close\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-cra-auto-remediation\",\n        \"type\": \"text\",\n        \"value\": \"true\"\n      },\n\n      {\n        \"name\": \"opt-in-cra-auto-remediation-enabled-repos\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-cra-auto-remediation-force\",\n        \"type\": \"text\",\n        \"value\": \"true\"\n      },\n      {\n          \"name\": \"opt-in-dynamic-api-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-scan\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-dynamic-ui-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-gosec\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-sonar\",\n          \"type\": \"text\",\n          \"value\": \"true\"\n      },\n      {\n        \"name\": \"peer-review-compliance\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"sonarqube-config\",\n        \"type\": \"text\",\n        \"value\": \"default\"\n      }\n    ]\n  }\n]\n",
                             "description": "This JSON represents the pipeline properties belonging to the CC pipeline in the CC toolchain. Each element in the JSON represents a seperate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider.",
                             "display_name": "JSON",
                             "required": true,
@@ -573,15 +573,8 @@
                         {
                             "key": "default_locked_properties",
                             "type": "array",
-                            "default_value": "[\"app-concurrency\", \"app-deployment-timeout\", \"app-max-scale\", \"app-min-scale\", \"app-port\", \"app-visibility\", \"artifactory-dockerconfigjson\", \"cluster\", \"cluster-name\", \"cluster-namespace\", \"cluster-region\", \"code-engine-binding-resource-group\", \"code-engine-build-size\", \"code-engine-build-strategy\", \"code-engine-build-timeout\", \"code-engine-build-use-native-docker\", \"code-engine-deployment-type\", \"code-engine-project\", \"code-engine-region\", \"code-engine-resource-group\", \"code-engine-wait-timeout\", \"compliance-baseimage\", \"context-dir\", \"cos-api-key\", \"cos-bucket-name\", \"cos-endpoint\", \"cpu\", \"cra-bom-generate\", \"cra-deploy-analysis\", \"cra-generate-cyclonedx-format\", \"cra-vulnerability-scan\", \"custom-image-tag\", \"dev-cluster-namespace\", \"dev-region\", \"dev-resource-group\", \"dockerfile\", \"doi-environment\", \"doi-ibmcloud-api-key\", \"doi-toolchain-id\", \"env-from-configmaps\", \"env-from-secrets\", \"ephemeral-storage\", \"event-notifications\", \"git-token\", \"gosec-private-repository-host\", \"gosec-private-repository-ssh-key\", \"ibmcloud-api\", \"ibmcloud-api-key\", \"image-name\", \"incident-repo\", \"inventory-repo\", \"job-instances\", \"job-maxexecutiontime\", \"job-retrylimit\", \"memory\", \"opt-in-dynamic-api-scan\", \"opt-in-dynamic-scan\", \"opt-in-dynamic-ui-scan\", \"opt-in-gosec\", \"opt-in-sonar\", \"peer-review-compliance\", \"pipeline-config\", \"pipeline-config-branch\", \"pipeline-config-repo\", \"pipeline-dockerconfigjson\", \"print-code-signing-certificate\", \"registry-domain\", \"registry-namespace\", \"registry-region\", \"remove-unspecified-references-to-configuration-resources\", \"service-bindings\", \"signing-key\", \"slack-notifications\", \"sonarqube\", \"sonarqube-config\", \"source\", \"version\"]",
+                            "default_value": "[\"app-concurrency\", \"app-deployment-timeout\", \"app-max-scale\", \"app-min-scale\", \"app-port\", \"app-visibility\", \"artifactory-dockerconfigjson\", \"cluster\", \"cluster-name\", \"cluster-namespace\", \"cluster-region\", \"code-engine-binding-resource-group\", \"code-engine-build-size\", \"code-engine-build-strategy\", \"code-engine-build-timeout\", \"code-engine-build-use-native-docker\", \"code-engine-deployment-type\", \"code-engine-project\", \"code-engine-region\", \"code-engine-resource-group\", \"code-engine-wait-timeout\", \"compliance-baseimage\", \"context-dir\", \"cos-api-key\", \"cos-bucket-name\", \"cos-endpoint\", \"cpu\", \"cra-bom-generate\", \"cra-deploy-analysis\", \"cra-generate-cyclonedx-format\", \"cra-vulnerability-scan\", \"custom-image-tag\", \"dev-cluster-namespace\", \"dev-region\", \"dev-resource-group\", \"dockerfile\", \"env-from-configmaps\", \"env-from-secrets\", \"ephemeral-storage\", \"event-notifications\", \"git-token\", \"gosec-private-repository-host\", \"gosec-private-repository-ssh-key\", \"ibmcloud-api\", \"ibmcloud-api-key\", \"image-name\", \"incident-repo\", \"inventory-repo\", \"job-instances\", \"job-maxexecutiontime\", \"job-retrylimit\", \"memory\", \"opt-in-dynamic-api-scan\", \"opt-in-dynamic-scan\", \"opt-in-dynamic-ui-scan\", \"opt-in-gosec\", \"opt-in-sonar\", \"peer-review-compliance\", \"pipeline-config\", \"pipeline-config-branch\", \"pipeline-config-repo\", \"pipeline-dockerconfigjson\", \"print-code-signing-certificate\", \"registry-domain\", \"registry-namespace\", \"registry-region\", \"remove-unspecified-references-to-configuration-resources\", \"service-bindings\", \"signing-key\", \"slack-notifications\", \"sonarqube\", \"sonarqube-config\", \"source\", \"version\"]",
                             "description": "List of default locked properties",
-                            "required": false
-                        },
-                        {
-                            "key": "doi_toolchain_id",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "DevOps Insights Toolchain ID to link to.",
                             "required": false
                         },
                         {
@@ -589,13 +582,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set true to enable artifacory for devsecops.",
-                            "required": false
-                        },
-                        {
-                            "key": "enable_insights",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to enable the DevOps Insights integration.",
                             "required": false
                         },
                         {
@@ -904,13 +890,6 @@
                             "required": false
                         },
                         {
-                            "key": "link_to_doi_toolchain",
-                            "type": "boolean",
-                            "default_value": false,
-                            "description": "Enable a link to a DevOps Insights instance in another toolchain, true or false.",
-                            "required": false
-                        },
-                        {
                             "key": "pipeline_branch",
                             "type": "string",
                             "default_value": "open-v10",
@@ -1047,26 +1026,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable traceability.",
-                            "required": false
-                        },
-                        {
-                            "key": "pipeline_doi_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN for the pipeline DOI apikey.",
-                            "required": false
-                        },
-                        {
-                            "key": "pipeline_doi_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "pipeline_doi_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
                             "required": false
                         },
                         {

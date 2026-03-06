@@ -156,15 +156,6 @@ locals {
     replace("${local.sm_ref_format_root}/${var.sonarqube_secret_group}/${var.sonarqube_secret_name}", " ", "%20")
   )
 
-  pipeline_doi_api_key_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_doi_api_key_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", module.integrations.secret_tool) :
-    (var.use_legacy_ref == true && var.pipeline_doi_api_key_secret_group == "") ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    (var.use_legacy_ref == true && var.pipeline_doi_api_key_secret_group != "") ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group)) :
-    (var.pipeline_doi_api_key_secret_group == "") ? replace("${local.sm_ref_format_root}/${var.sm_secret_group}/${var.pipeline_doi_api_key_secret_name}", " ", "%20") :
-    replace("${local.sm_ref_format_root}/${var.pipeline_doi_api_key_secret_group}/${var.pipeline_doi_api_key_secret_name}", " ", "%20")
-  )
-
   issues_repo_auth_type = (
     (var.issues_repo_auth_type != "") ? var.issues_repo_auth_type :
     (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
@@ -214,8 +205,6 @@ locals {
     "cos-api-key"            = (var.cos_api_key_secret_name != "") ? local.cos_secret_ref : "",
     "cos-bucket-name"        = var.cos_bucket_name,
     "cos-endpoint"           = var.cos_endpoint,
-    "doi-toolchain-id"       = var.doi_toolchain_id,
-    "doi-ibmcloud-api-key"   = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
     "ibmcloud-api-key"       = local.pipeline_apikey_secret_ref,
     "environment-tag"        = var.environment_tag,
     "pipeline-config-branch" = (var.pipeline_config_repo_branch == "") ? var.app_repo_branch : var.pipeline_config_repo_branch,
@@ -410,7 +399,6 @@ module "pipeline_cc" {
   enable_pipeline_notifications       = var.enable_pipeline_notifications
   sonarqube_tool                      = (module.integrations.sonarqube_tool)
   sonarqube_user                      = var.sonarqube_user
-  link_to_doi_toolchain               = var.link_to_doi_toolchain
   add_pipeline_definitions            = var.add_pipeline_definitions
   default_locked_properties           = var.default_locked_properties
 }
@@ -451,7 +439,6 @@ module "integrations" {
   scc_scc_api_key_secret_ref           = local.scc_scc_api_key_secret_ref
   scc_use_profile_attachment           = var.scc_use_profile_attachment
   authorization_policy_creation        = var.authorization_policy_creation
-  enable_insights                      = var.enable_insights
   enable_concert                       = var.enable_concert
   concert_dashboard_url                = var.concert_dashboard_url
   concert_description                  = var.concert_description
@@ -469,8 +456,6 @@ module "integrations" {
   cos_instance_crn                     = var.cos_instance_crn
   cos_bucket_name                      = var.cos_bucket_name
   use_legacy_cos_tool                  = var.use_legacy_cos_tool
-  link_to_doi_toolchain                = var.link_to_doi_toolchain
-  doi_toolchain_id                     = var.doi_toolchain_id
   enable_privateworker                 = var.enable_privateworker
   privateworker_credentials_secret_ref = local.privateworker_secret_ref
   privateworker_name                   = var.privateworker_name
