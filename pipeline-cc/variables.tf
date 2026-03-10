@@ -9,9 +9,6 @@ variable "secret_tool" {
   description = "Used as part of secret references to point to the secret store tool integration"
 }
 
-variable "link_to_doi_toolchain" {
-}
-
 variable "enable_pipeline_git_token" {
 }
 
