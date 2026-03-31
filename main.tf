@@ -398,7 +398,7 @@ module "pipeline_cc" {
   trigger_manual_enable               = var.trigger_manual_enable
   enable_pipeline_notifications       = var.enable_pipeline_notifications
   sonarqube_tool                      = (module.integrations.sonarqube_tool)
-  sonarqube_user                      = var.sonarqube_user
+  sonarqube_server_url                = var.sonarqube_server_url
   add_pipeline_definitions            = var.add_pipeline_definitions
   default_locked_properties           = var.default_locked_properties
 }

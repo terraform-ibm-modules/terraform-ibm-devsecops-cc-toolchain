@@ -57,7 +57,7 @@ variable "pipeline_path" {
 variable "sonarqube_tool" {
 }
 
-variable "sonarqube_user" {
+variable "sonarqube_server_url" {
 }
 
 variable "worker_id" {
