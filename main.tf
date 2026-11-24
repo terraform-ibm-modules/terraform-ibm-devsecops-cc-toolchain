@@ -12,6 +12,31 @@ locals {
 
   compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
 
+  issues_repo_auth_type = (
+    (var.issues_repo_auth_type != "") ? var.issues_repo_auth_type :
+    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
+  )
+
+  inventory_repo_auth_type = (
+    (var.inventory_repo_auth_type != "") ? var.inventory_repo_auth_type :
+    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
+  )
+
+  compliance_pipeline_repo_auth_type = (
+    (var.compliance_pipeline_repo_auth_type != "") ? var.compliance_pipeline_repo_auth_type :
+    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
+  )
+
+  pipeline_config_repo_auth_type = (
+    (var.pipeline_config_repo_auth_type != "") ? var.pipeline_config_repo_auth_type :
+    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
+  )
+
+  app_repo_auth_type = (
+    (var.app_repo_auth_type != "") ? var.app_repo_auth_type :
+    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
+  )
+
   #Secrets
 
   # Ref Resolver format notes
@@ -24,8 +49,12 @@ locals {
 
   sm_ref_format_root = "ref://secrets-manager.${var.sm_location}.${var.sm_resource_group}.${var.sm_name}"
 
-  app_repo_secret_name = (var.app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.app_repo_git_token_secret_name
-  app_repo_secret_crn  = (var.app_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.app_repo_git_token_secret_crn
+  app_repo_secret_name_for_git_token              = (var.app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.app_repo_git_token_secret_name
+  app_repo_secret_crn_for_git_token               = (var.app_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.app_repo_git_token_secret_crn
+  app_repo_secret_name_for_github_app_private_key = (var.app_repo_github_app_credential_private_key_secret_name == "") ? var.repo_github_app_credential_private_key_secret_name : var.app_repo_github_app_credential_private_key_secret_name
+  app_repo_secret_crn_for_github_app_private_key  = (var.app_repo_github_app_credential_private_key_crn == "") ? var.repo_github_app_credential_private_key_crn : var.app_repo_github_app_credential_private_key_crn
+  app_repo_secret_name                            = (local.app_repo_auth_type == "pat") ? local.app_repo_secret_name_for_git_token : local.app_repo_secret_name_for_github_app_private_key
+  app_repo_secret_crn                             = (local.app_repo_auth_type == "pat") ? local.app_repo_secret_crn_for_git_token : local.app_repo_secret_crn_for_github_app_private_key
   app_repo_secret_ref = (
     (var.sm_instance_crn != "") ? local.app_repo_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${local.app_repo_secret_name}}", module.integrations.secret_tool) :
@@ -35,8 +64,12 @@ locals {
     replace("${local.sm_ref_format_root}/${var.app_repo_secret_group}/${local.app_repo_secret_name}", " ", "%20")
   )
 
-  issue_repo_secret_name = (var.issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.issues_repo_git_token_secret_name
-  issues_repo_secret_crn = (var.issues_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.issues_repo_git_token_secret_crn
+  issue_repo_secret_name_for_git_token              = (var.issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.issues_repo_git_token_secret_name
+  issues_repo_secret_crn_for_git_token              = (var.issues_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.issues_repo_git_token_secret_crn
+  issue_repo_secret_name_for_github_app_private_key = (var.issues_repo_github_app_credential_private_key_secret_name == "") ? var.repo_github_app_credential_private_key_secret_name : var.issues_repo_github_app_credential_private_key_secret_name
+  issues_repo_secret_crn_for_github_app_private_key = (var.issues_repo_github_app_credential_private_key_crn == "") ? var.repo_github_app_credential_private_key_crn : var.issues_repo_github_app_credential_private_key_crn
+  issue_repo_secret_name                            = (local.issues_repo_auth_type == "pat") ? local.issue_repo_secret_name_for_git_token : local.issue_repo_secret_name_for_github_app_private_key
+  issues_repo_secret_crn                            = (local.issues_repo_auth_type == "pat") ? local.issues_repo_secret_crn_for_git_token : local.issues_repo_secret_crn_for_github_app_private_key
   issues_repo_secret_ref = (
     (var.sm_instance_crn != "") ? local.issues_repo_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${local.issue_repo_secret_name}}", module.integrations.secret_tool) :
@@ -46,8 +79,12 @@ locals {
     replace("${local.sm_ref_format_root}/${var.issues_repo_secret_group}/${local.issue_repo_secret_name}", " ", "%20")
   )
 
-  inventory_repo_secret_name = (var.inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.inventory_repo_git_token_secret_name
-  inventory_repo_secret_crn  = (var.inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.inventory_repo_git_token_secret_crn
+  inventory_repo_secret_name_for_git_token              = (var.inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.inventory_repo_git_token_secret_name
+  inventory_repo_secret_crn_for_git_token               = (var.inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.inventory_repo_git_token_secret_crn
+  inventory_repo_secret_name_for_github_app_private_key = (var.inventory_repo_github_app_credential_private_key_secret_name == "") ? var.repo_github_app_credential_private_key_secret_name : var.inventory_repo_github_app_credential_private_key_secret_name
+  inventory_repo_secret_crn_for_github_app_private_key  = (var.inventory_repo_github_app_credential_private_key_crn == "") ? var.repo_github_app_credential_private_key_crn : var.inventory_repo_github_app_credential_private_key_crn
+  inventory_repo_secret_name                            = (local.inventory_repo_auth_type == "pat") ? local.inventory_repo_secret_name_for_git_token : local.inventory_repo_secret_name_for_github_app_private_key
+  inventory_repo_secret_crn                             = (local.inventory_repo_auth_type == "pat") ? local.inventory_repo_secret_crn_for_git_token : local.inventory_repo_secret_crn_for_github_app_private_key
   inventory_repo_secret_ref = (
     (var.sm_instance_crn != "") ? local.inventory_repo_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${local.inventory_repo_secret_name}}", module.integrations.secret_tool) :
@@ -57,8 +94,12 @@ locals {
     replace("${local.sm_ref_format_root}/${var.inventory_repo_secret_group}/${local.inventory_repo_secret_name}", " ", "%20")
   )
 
-  compliance_pipeline_repo_secret_name = (var.compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.compliance_pipeline_repo_git_token_secret_name
-  compliance_pipeline_repo_secret_crn  = (var.compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.compliance_pipeline_repo_git_token_secret_crn
+  compliance_pipeline_repo_secret_name_for_git_token              = (var.compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.compliance_pipeline_repo_git_token_secret_name
+  compliance_pipeline_repo_secret_crn_for_git_token               = (var.compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.compliance_pipeline_repo_git_token_secret_crn
+  compliance_pipeline_repo_secret_name_for_github_app_private_key = (var.compliance_pipeline_repo_github_app_credential_private_key_secret_name == "") ? var.repo_github_app_credential_private_key_secret_name : var.compliance_pipeline_repo_github_app_credential_private_key_secret_name
+  compliance_pipeline_repo_secret_crn_for_github_app_private_key  = (var.compliance_pipeline_repo_github_app_credential_private_key_crn == "") ? var.repo_github_app_credential_private_key_crn : var.compliance_pipeline_repo_github_app_credential_private_key_crn
+  compliance_pipeline_repo_secret_name                            = (local.compliance_pipeline_repo_auth_type == "pat") ? local.compliance_pipeline_repo_secret_name_for_git_token : local.compliance_pipeline_repo_secret_name_for_github_app_private_key
+  compliance_pipeline_repo_secret_crn                             = (local.compliance_pipeline_repo_auth_type == "pat") ? local.compliance_pipeline_repo_secret_crn_for_git_token : local.compliance_pipeline_repo_secret_crn_for_github_app_private_key
   compliance_pipeline_repo_secret_ref = (
     (var.sm_instance_crn != "") ? local.compliance_pipeline_repo_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${local.compliance_pipeline_repo_secret_name}}", module.integrations.secret_tool) :
@@ -68,8 +109,12 @@ locals {
     replace("${local.sm_ref_format_root}/${var.compliance_pipeline_repo_secret_group}/${local.compliance_pipeline_repo_secret_name}", " ", "%20")
   )
 
-  pipeline_config_repo_secret_name = (var.pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.pipeline_config_repo_git_token_secret_name
-  pipeline_config_repo_secret_crn  = (var.pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.pipeline_config_repo_git_token_secret_crn
+  pipeline_config_repo_secret_name_for_git_token              = (var.pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.pipeline_config_repo_git_token_secret_name
+  pipeline_config_repo_secret_crn_for_git_token               = (var.pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.pipeline_config_repo_git_token_secret_crn
+  pipeline_config_repo_secret_name_for_github_app_private_key = (var.pipeline_config_repo_github_app_credential_private_key_secret_name == "") ? var.repo_github_app_credential_private_key_secret_name : var.pipeline_config_repo_github_app_credential_private_key_secret_name
+  pipeline_config_repo_secret_crn_for_github_app_private_key  = (var.pipeline_config_repo_github_app_credential_private_key_crn == "") ? var.repo_github_app_credential_private_key_crn : var.pipeline_config_repo_github_app_credential_private_key_crn
+  pipeline_config_repo_secret_name                            = (local.pipeline_config_repo_auth_type == "pat") ? local.pipeline_config_repo_secret_name_for_git_token : local.pipeline_config_repo_secret_name_for_github_app_private_key
+  pipeline_config_repo_secret_crn                             = (local.pipeline_config_repo_auth_type == "pat") ? local.pipeline_config_repo_secret_crn_for_git_token : local.pipeline_config_repo_secret_crn_for_github_app_private_key
   pipeline_config_repo_secret_ref = (
     (var.sm_instance_crn != "") ? local.pipeline_config_repo_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${local.pipeline_config_repo_secret_name}}", module.integrations.secret_tool) :
@@ -156,31 +201,6 @@ locals {
     replace("${local.sm_ref_format_root}/${var.sonarqube_secret_group}/${var.sonarqube_secret_name}", " ", "%20")
   )
 
-  issues_repo_auth_type = (
-    (var.issues_repo_auth_type != "") ? var.issues_repo_auth_type :
-    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
-  )
-
-  inventory_repo_auth_type = (
-    (var.inventory_repo_auth_type != "") ? var.inventory_repo_auth_type :
-    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
-  )
-
-  compliance_pipeline_repo_auth_type = (
-    (var.compliance_pipeline_repo_auth_type != "") ? var.compliance_pipeline_repo_auth_type :
-    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
-  )
-
-  pipeline_config_repo_auth_type = (
-    (var.pipeline_config_repo_auth_type != "") ? var.pipeline_config_repo_auth_type :
-    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
-  )
-
-  app_repo_auth_type = (
-    (var.app_repo_auth_type != "") ? var.app_repo_auth_type :
-    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
-  )
-
   properties_file_input = (var.pipeline_properties_filepath == "") ? try(file("${path.root}/properties.json"), "[]") : try(file(var.pipeline_properties_filepath), "[]")
   properties_file_data  = (local.properties_file_input == "") ? "[]" : local.properties_file_input
   properties_input      = (var.pipeline_properties == "") ? local.properties_file_data : var.pipeline_properties
@@ -215,15 +235,19 @@ locals {
   repos_file_data  = (local.repos_file_input == "") ? "[]" : local.repos_file_input
   repos_input      = (var.repository_properties == "") ? local.repos_file_data : var.repository_properties
   pre_process_repo_data = flatten([for pipeline in jsondecode(local.repos_input) : {
-    pipeline_id          = pipeline.pipeline_id # could be `ci`, `pr` or actual pipeline ID
-    git_token_secret_ref = try(pipeline.git_token_secret_ref, "")
-    repository_owner     = try(pipeline.repository_owner, "")
-    repositories         = try(pipeline.repositories, [])
-    mode                 = try(pipeline.mode, "link")
-    worker_id            = try(pipeline.worker_id, "public")
-    default_branch       = try(pipeline.default_branch, "master")
-    provider             = try(pipeline.provider, "")
-    git_id               = try(pipeline.git_id, "")
+    pipeline_id                                  = pipeline.pipeline_id # could be `ci`, `pr` or actual pipeline ID
+    git_token_secret_ref                         = try(pipeline.git_token_secret_ref, "")
+    repository_owner                             = try(pipeline.repository_owner, "")
+    repositories                                 = try(pipeline.repositories, [])
+    mode                                         = try(pipeline.mode, "link")
+    worker_id                                    = try(pipeline.worker_id, "public")
+    default_branch                               = try(pipeline.default_branch, "master")
+    provider                                     = try(pipeline.provider, "")
+    git_id                                       = try(pipeline.git_id, "")
+    auth_type                                    = try(pipeline.auth_type, "")
+    github_app_auth_method                       = try(pipeline.github_app_auth_method, "")
+    github_app_credential_app_id                 = try(pipeline.github_app_credential_app_id, "")
+    github_app_credential_private_key_secret_ref = try(pipeline.github_app_credential_private_key_secret_ref, "")
     }
   ])
 }
@@ -239,124 +263,134 @@ resource "ibm_cd_toolchain" "toolchain_instance" {
 }
 
 module "issues_repo" {
-  source                = "./customizations/repositories"
-  depends_on            = [module.integrations]
-  tool_name             = "issues-repo"
-  toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = (var.issues_repo_git_provider == "") ? var.repo_git_provider : var.issues_repo_git_provider
-  initialization_type   = var.issues_repo_initialization_type
-  repository_url        = var.issues_repo_url
-  source_repository_url = ""
-  repository_name       = (var.issues_repo_name != "") ? var.issues_repo_name : join("-", [var.repositories_prefix, "issues-repo"])
-  is_private_repo       = var.issues_repo_is_private_repo
-  owner_id              = (var.issues_group == "") ? var.repo_group : var.issues_group
-  issues_enabled        = var.issues_repo_issues_enabled
-  traceability_enabled  = var.issues_repo_traceability_enabled
-  integration_owner     = (var.issues_repo_integration_owner == "") ? var.repo_integration_owner : var.issues_repo_integration_owner
-  auth_type             = local.issues_repo_auth_type
-  secret_ref            = local.issues_repo_secret_ref
-  git_id                = (var.issues_repo_git_id == "") ? var.repo_git_id : var.issues_repo_git_id
-  blind_connection      = (var.issues_repo_blind_connection == "") ? var.repo_blind_connection : var.issues_repo_blind_connection
-  title                 = (var.issues_repo_title == "") ? var.repo_title : var.issues_repo_title
-  root_url              = (var.issues_repo_root_url == "") ? var.repo_root_url : var.issues_repo_root_url
-  default_git_provider  = var.default_git_provider
+  source                       = "./customizations/repositories"
+  depends_on                   = [module.integrations]
+  tool_name                    = "issues-repo"
+  toolchain_id                 = ibm_cd_toolchain.toolchain_instance.id
+  git_provider                 = (var.issues_repo_git_provider == "") ? var.repo_git_provider : var.issues_repo_git_provider
+  initialization_type          = var.issues_repo_initialization_type
+  repository_url               = var.issues_repo_url
+  source_repository_url        = ""
+  repository_name              = (var.issues_repo_name != "") ? var.issues_repo_name : join("-", [var.repositories_prefix, "issues-repo"])
+  is_private_repo              = var.issues_repo_is_private_repo
+  owner_id                     = (var.issues_group == "") ? var.repo_group : var.issues_group
+  issues_enabled               = var.issues_repo_issues_enabled
+  traceability_enabled         = var.issues_repo_traceability_enabled
+  integration_owner            = (var.issues_repo_integration_owner == "") ? var.repo_integration_owner : var.issues_repo_integration_owner
+  auth_type                    = local.issues_repo_auth_type
+  secret_ref                   = local.issues_repo_secret_ref
+  git_id                       = (var.issues_repo_git_id == "") ? var.repo_git_id : var.issues_repo_git_id
+  blind_connection             = (var.issues_repo_blind_connection == "") ? var.repo_blind_connection : var.issues_repo_blind_connection
+  title                        = (var.issues_repo_title == "") ? var.repo_title : var.issues_repo_title
+  root_url                     = (var.issues_repo_root_url == "") ? var.repo_root_url : var.issues_repo_root_url
+  default_git_provider         = var.default_git_provider
+  github_app_auth_method       = (var.issues_repo_github_app_auth_method != "") ? var.issues_repo_github_app_auth_method : var.repo_github_app_auth_method
+  github_app_credential_app_id = (var.issues_repo_github_app_credential_app_id != "") ? var.issues_repo_github_app_credential_app_id : var.repo_github_app_credential_app_id
 }
 
 module "inventory_repo" {
-  source                = "./customizations/repositories"
-  depends_on            = [module.integrations]
-  tool_name             = "inventory-repo"
-  toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = (var.inventory_repo_git_provider == "") ? var.repo_git_provider : var.inventory_repo_git_provider
-  initialization_type   = var.inventory_repo_initialization_type
-  repository_url        = var.inventory_repo_url
-  source_repository_url = ""
-  repository_name       = (var.inventory_repo_name != "") ? var.inventory_repo_name : join("-", [var.repositories_prefix, "inventory-repo"])
-  is_private_repo       = var.inventory_repo_is_private_repo
-  owner_id              = (var.inventory_group == "") ? var.repo_group : var.inventory_group
-  issues_enabled        = var.inventory_repo_issues_enabled
-  traceability_enabled  = var.inventory_repo_traceability_enabled
-  integration_owner     = (var.inventory_repo_integration_owner == "") ? var.repo_integration_owner : var.inventory_repo_integration_owner
-  auth_type             = local.inventory_repo_auth_type
-  secret_ref            = local.inventory_repo_secret_ref
-  git_id                = (var.inventory_repo_git_id == "") ? var.repo_git_id : var.inventory_repo_git_id
-  blind_connection      = (var.inventory_repo_blind_connection == "") ? var.repo_blind_connection : var.inventory_repo_blind_connection
-  title                 = (var.inventory_repo_title == "") ? var.repo_title : var.inventory_repo_title
-  root_url              = (var.inventory_repo_root_url == "") ? var.repo_root_url : var.inventory_repo_root_url
-  default_git_provider  = var.default_git_provider
+  source                       = "./customizations/repositories"
+  depends_on                   = [module.integrations]
+  tool_name                    = "inventory-repo"
+  toolchain_id                 = ibm_cd_toolchain.toolchain_instance.id
+  git_provider                 = (var.inventory_repo_git_provider == "") ? var.repo_git_provider : var.inventory_repo_git_provider
+  initialization_type          = var.inventory_repo_initialization_type
+  repository_url               = var.inventory_repo_url
+  source_repository_url        = ""
+  repository_name              = (var.inventory_repo_name != "") ? var.inventory_repo_name : join("-", [var.repositories_prefix, "inventory-repo"])
+  is_private_repo              = var.inventory_repo_is_private_repo
+  owner_id                     = (var.inventory_group == "") ? var.repo_group : var.inventory_group
+  issues_enabled               = var.inventory_repo_issues_enabled
+  traceability_enabled         = var.inventory_repo_traceability_enabled
+  integration_owner            = (var.inventory_repo_integration_owner == "") ? var.repo_integration_owner : var.inventory_repo_integration_owner
+  auth_type                    = local.inventory_repo_auth_type
+  secret_ref                   = local.inventory_repo_secret_ref
+  git_id                       = (var.inventory_repo_git_id == "") ? var.repo_git_id : var.repo_git_id
+  blind_connection             = (var.inventory_repo_blind_connection == "") ? var.repo_blind_connection : var.inventory_repo_blind_connection
+  title                        = (var.inventory_repo_title == "") ? var.repo_title : var.inventory_repo_title
+  root_url                     = (var.inventory_repo_root_url == "") ? var.repo_root_url : var.repo_root_url
+  default_git_provider         = var.default_git_provider
+  github_app_auth_method       = (var.inventory_repo_github_app_auth_method != "") ? var.inventory_repo_github_app_auth_method : var.repo_github_app_auth_method
+  github_app_credential_app_id = (var.inventory_repo_github_app_credential_app_id != "") ? var.inventory_repo_github_app_credential_app_id : var.repo_github_app_credential_app_id
 }
 
 module "compliance_pipelines_repo" {
-  source                = "./customizations/repositories"
-  depends_on            = [module.integrations]
-  tool_name             = "pipeline-repo"
-  toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = (var.compliance_pipeline_repo_git_provider == "") ? var.repo_git_provider : var.compliance_pipeline_repo_git_provider
-  initialization_type   = var.compliance_pipelines_repo_initialization_type
-  repository_url        = (var.compliance_pipeline_existing_repo_url == "") ? local.compliance_repo_url : var.compliance_pipeline_existing_repo_url
-  source_repository_url = var.compliance_pipeline_source_repo_url
-  repository_name       = var.compliance_pipelines_repo_name
-  is_private_repo       = var.compliance_pipelines_repo_is_private_repo
-  owner_id              = (var.compliance_pipeline_group == "") ? var.repo_group : var.compliance_pipeline_group
-  issues_enabled        = var.compliance_pipeline_repo_issues_enabled
-  traceability_enabled  = var.compliance_pipelines_repo_traceability_enabled
-  integration_owner     = (var.compliance_pipeline_repo_integration_owner == "") ? var.repo_integration_owner : var.compliance_pipeline_repo_integration_owner
-  auth_type             = local.compliance_pipeline_repo_auth_type
-  secret_ref            = local.compliance_pipeline_repo_secret_ref
-  git_id                = (var.compliance_pipelines_repo_git_id == "") ? var.repo_git_id : var.compliance_pipelines_repo_git_id
-  blind_connection      = (var.compliance_pipelines_repo_blind_connection == "") ? var.repo_blind_connection : var.compliance_pipelines_repo_blind_connection
-  title                 = (var.compliance_pipelines_repo_title == "") ? var.repo_title : var.compliance_pipelines_repo_title
-  root_url              = (var.compliance_pipelines_repo_root_url == "") ? var.repo_root_url : var.compliance_pipelines_repo_root_url
-  default_git_provider  = var.default_git_provider
+  source                       = "./customizations/repositories"
+  depends_on                   = [module.integrations]
+  tool_name                    = "pipeline-repo"
+  toolchain_id                 = ibm_cd_toolchain.toolchain_instance.id
+  git_provider                 = (var.compliance_pipeline_repo_git_provider == "") ? var.repo_git_provider : var.compliance_pipeline_repo_git_provider
+  initialization_type          = var.compliance_pipelines_repo_initialization_type
+  repository_url               = (var.compliance_pipeline_existing_repo_url == "") ? local.compliance_repo_url : var.compliance_pipeline_existing_repo_url
+  source_repository_url        = var.compliance_pipeline_source_repo_url
+  repository_name              = var.compliance_pipelines_repo_name
+  is_private_repo              = var.compliance_pipelines_repo_is_private_repo
+  owner_id                     = (var.compliance_pipeline_group == "") ? var.repo_group : var.compliance_pipeline_group
+  issues_enabled               = var.compliance_pipeline_repo_issues_enabled
+  traceability_enabled         = var.compliance_pipelines_repo_traceability_enabled
+  integration_owner            = (var.compliance_pipeline_repo_integration_owner == "") ? var.repo_integration_owner : var.compliance_pipeline_repo_integration_owner
+  auth_type                    = local.compliance_pipeline_repo_auth_type
+  secret_ref                   = local.compliance_pipeline_repo_secret_ref
+  git_id                       = (var.compliance_pipelines_repo_git_id == "") ? var.repo_git_id : var.compliance_pipelines_repo_git_id
+  blind_connection             = (var.compliance_pipelines_repo_blind_connection == "") ? var.repo_blind_connection : var.compliance_pipelines_repo_blind_connection
+  title                        = (var.compliance_pipelines_repo_title == "") ? var.repo_title : var.compliance_pipelines_repo_title
+  root_url                     = (var.compliance_pipelines_repo_root_url == "") ? var.repo_root_url : var.compliance_pipelines_repo_root_url
+  default_git_provider         = var.default_git_provider
+  github_app_auth_method       = (var.compliance_pipeline_repo_github_app_auth_method != "") ? var.compliance_pipeline_repo_github_app_auth_method : var.repo_github_app_auth_method
+  github_app_credential_app_id = (var.compliance_pipeline_repo_github_app_credential_app_id != "") ? var.compliance_pipeline_repo_github_app_credential_app_id : var.repo_github_app_credential_app_id
 }
 
 module "pipeline_config_repo" {
-  count                 = ((var.pipeline_config_repo_existing_url == "") && (var.pipeline_config_repo_clone_from_url == "")) ? 0 : 1
-  source                = "./customizations/repositories"
-  depends_on            = [module.integrations]
-  tool_name             = "pipeline-config-repo"
-  toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = (var.pipeline_config_repo_git_provider == "") ? var.repo_git_provider : var.pipeline_config_repo_git_provider
-  initialization_type   = var.pipeline_config_repo_initialization_type
-  repository_url        = var.pipeline_config_repo_existing_url
-  source_repository_url = var.pipeline_config_repo_clone_from_url
-  repository_name       = (var.pipeline_config_repo_name != "") ? var.pipeline_config_repo_name : join("-", [var.repositories_prefix, "pipeline-config-repo"])
-  is_private_repo       = var.pipeline_config_repo_is_private_repo
-  owner_id              = (var.pipeline_config_group == "") ? var.repo_group : var.pipeline_config_group
-  issues_enabled        = var.pipeline_config_repo_issues_enabled
-  traceability_enabled  = var.pipeline_config_repo_traceability_enabled
-  integration_owner     = (var.pipeline_config_repo_integration_owner == "") ? var.repo_integration_owner : var.pipeline_config_repo_integration_owner
-  auth_type             = local.pipeline_config_repo_auth_type
-  secret_ref            = local.pipeline_config_repo_secret_ref
-  git_id                = (var.pipeline_config_repo_git_id == "") ? var.repo_git_id : var.pipeline_config_repo_git_id
-  blind_connection      = (var.pipeline_config_repo_blind_connection == "") ? var.repo_blind_connection : var.pipeline_config_repo_blind_connection
-  title                 = (var.pipeline_config_repo_title == "") ? var.repo_title : var.pipeline_config_repo_title
-  root_url              = (var.pipeline_config_repo_root_url == "") ? var.repo_root_url : var.pipeline_config_repo_root_url
-  default_git_provider  = var.default_git_provider
+  count                        = ((var.pipeline_config_repo_existing_url == "") && (var.pipeline_config_repo_clone_from_url == "")) ? 0 : 1
+  source                       = "./customizations/repositories"
+  depends_on                   = [module.integrations]
+  tool_name                    = "pipeline-config-repo"
+  toolchain_id                 = ibm_cd_toolchain.toolchain_instance.id
+  git_provider                 = (var.pipeline_config_repo_git_provider == "") ? var.repo_git_provider : var.pipeline_config_repo_git_provider
+  initialization_type          = var.pipeline_config_repo_initialization_type
+  repository_url               = var.pipeline_config_repo_existing_url
+  source_repository_url        = var.pipeline_config_repo_clone_from_url
+  repository_name              = (var.pipeline_config_repo_name != "") ? var.pipeline_config_repo_name : join("-", [var.repositories_prefix, "pipeline-config-repo"])
+  is_private_repo              = var.pipeline_config_repo_is_private_repo
+  owner_id                     = (var.pipeline_config_group == "") ? var.repo_group : var.pipeline_config_group
+  issues_enabled               = var.pipeline_config_repo_issues_enabled
+  traceability_enabled         = var.pipeline_config_repo_traceability_enabled
+  integration_owner            = (var.pipeline_config_repo_integration_owner == "") ? var.repo_integration_owner : var.pipeline_config_repo_integration_owner
+  auth_type                    = local.pipeline_config_repo_auth_type
+  secret_ref                   = local.pipeline_config_repo_secret_ref
+  git_id                       = (var.pipeline_config_repo_git_id == "") ? var.repo_git_id : var.pipeline_config_repo_git_id
+  blind_connection             = (var.pipeline_config_repo_blind_connection == "") ? var.repo_blind_connection : var.pipeline_config_repo_blind_connection
+  title                        = (var.pipeline_config_repo_title == "") ? var.repo_title : var.pipeline_config_repo_title
+  root_url                     = (var.pipeline_config_repo_root_url == "") ? var.repo_root_url : var.pipeline_config_repo_root_url
+  default_git_provider         = var.default_git_provider
+  github_app_auth_method       = (var.pipeline_config_repo_github_app_auth_method != "") ? var.pipeline_config_repo_github_app_auth_method : var.repo_github_app_auth_method
+  github_app_credential_app_id = (var.pipeline_config_repo_github_app_credential_app_id != "") ? var.pipeline_config_repo_github_app_credential_app_id : var.repo_github_app_credential_app_id
 }
 
 module "app_repo" {
-  source                = "./customizations/repositories"
-  depends_on            = [module.integrations]
-  tool_name             = "app-repo"
-  toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
-  git_provider          = (var.app_repo_git_provider != "") ? var.app_repo_git_provider : var.app_repo_clone_to_git_provider
-  initialization_type   = var.app_repo_initialization_type
-  repository_url        = var.app_repo_url
-  source_repository_url = ""
-  repository_name       = ""
-  is_private_repo       = var.app_repo_is_private_repo
-  owner_id              = (var.app_group == "") ? var.repo_group : var.app_group
-  issues_enabled        = var.app_repo_issues_enabled
-  traceability_enabled  = var.app_repo_traceability_enabled
-  integration_owner     = (var.app_repo_integration_owner == "") ? var.repo_integration_owner : var.app_repo_integration_owner
-  auth_type             = local.app_repo_auth_type
-  secret_ref            = local.app_repo_secret_ref
-  git_id                = (var.app_repo_git_id != "") ? var.app_repo_git_id : var.app_repo_clone_to_git_id
-  blind_connection      = (var.app_repo_blind_connection == "") ? var.repo_blind_connection : var.app_repo_blind_connection
-  title                 = (var.app_repo_title == "") ? var.repo_title : var.app_repo_title
-  root_url              = (var.app_repo_root_url == "") ? var.repo_root_url : var.app_repo_root_url
-  default_git_provider  = var.default_git_provider
+  source                       = "./customizations/repositories"
+  depends_on                   = [module.integrations]
+  tool_name                    = "app-repo"
+  toolchain_id                 = ibm_cd_toolchain.toolchain_instance.id
+  git_provider                 = (var.app_repo_git_provider != "") ? var.app_repo_git_provider : var.app_repo_clone_to_git_provider
+  initialization_type          = var.app_repo_initialization_type
+  repository_url               = var.app_repo_url
+  source_repository_url        = ""
+  repository_name              = ""
+  is_private_repo              = var.app_repo_is_private_repo
+  owner_id                     = (var.app_group == "") ? var.repo_group : var.app_group
+  issues_enabled               = var.app_repo_issues_enabled
+  traceability_enabled         = var.app_repo_traceability_enabled
+  integration_owner            = (var.app_repo_integration_owner == "") ? var.repo_integration_owner : var.app_repo_integration_owner
+  auth_type                    = local.app_repo_auth_type
+  secret_ref                   = local.app_repo_secret_ref
+  git_id                       = (var.app_repo_git_id != "") ? var.app_repo_git_id : var.app_repo_clone_to_git_id
+  blind_connection             = (var.app_repo_blind_connection == "") ? var.repo_blind_connection : var.app_repo_blind_connection
+  title                        = (var.app_repo_title == "") ? var.repo_title : var.app_repo_title
+  root_url                     = (var.app_repo_root_url == "") ? var.repo_root_url : var.app_repo_root_url
+  default_git_provider         = var.default_git_provider
+  github_app_auth_method       = (var.app_repo_github_app_auth_method != "") ? var.app_repo_github_app_auth_method : var.repo_github_app_auth_method
+  github_app_credential_app_id = (var.app_repo_github_app_credential_app_id != "") ? var.app_repo_github_app_credential_app_id : var.repo_github_app_credential_app_id
 }
 
 resource "ibm_cd_toolchain_tool_pipeline" "cc_pipeline" {

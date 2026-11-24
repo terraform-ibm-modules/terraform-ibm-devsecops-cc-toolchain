@@ -10,3 +10,4 @@ workspaces
 provider.tf
 /solutions/*.tfstate
 /solutions/*.tfstate.backup
+repositories.json

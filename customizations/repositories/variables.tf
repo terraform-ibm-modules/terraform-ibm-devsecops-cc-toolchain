@@ -7,6 +7,12 @@ variable "auth_type" {
 variable "secret_ref" {
 }
 
+variable "github_app_auth_method" {
+}
+
+variable "github_app_credential_app_id" {
+}
+
 variable "repository_url" {
 }
 

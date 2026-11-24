@@ -5,11 +5,14 @@ locals {
     (var.source_repository_url != "") ? "clone_if_not_exists" : "new"
   )
 
-  auth_type       = (var.auth_type == "pat") ? var.auth_type : "oauth"
-  api_token       = (var.auth_type == "pat") ? var.secret_ref : ""
-  repo_url        = (local.initialization_type == "link") ? var.repository_url : ""
-  source_repo_url = (local.initialization_type == "link") ? "" : var.source_repository_url
-  is_private_repo = (var.is_private_repo) ? true : var.is_private_repo
+  auth_type                         = (var.auth_type != "") ? var.auth_type : "oauth"
+  api_token                         = (var.auth_type == "pat") ? var.secret_ref : ""
+  github_app_auth_method            = (var.auth_type == "github_app") ? var.github_app_auth_method : "managed"
+  github_app_credential_app_id      = ((var.auth_type == "github_app") && (var.github_app_auth_method == "custom")) ? var.github_app_credential_app_id : ""
+  github_app_credential_private_key = ((var.auth_type == "github_app") && (var.github_app_auth_method == "custom")) ? var.secret_ref : ""
+  repo_url                          = (local.initialization_type == "link") ? var.repository_url : ""
+  source_repo_url                   = (local.initialization_type == "link") ? "" : var.source_repository_url
+  is_private_repo                   = (var.is_private_repo) ? true : var.is_private_repo
   git_provider = (
     (var.git_provider != "") ? var.git_provider :
     (var.default_git_provider != "") ? var.default_git_provider : "hostedgit"
@@ -68,11 +71,14 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "repository" {
 
   }
   parameters {
-    toolchain_issues_enabled = local.issues_enabled
-    enable_traceability      = local.traceability_enabled
-    integration_owner        = var.integration_owner
-    auth_type                = local.auth_type
-    api_token                = local.api_token
+    toolchain_issues_enabled          = local.issues_enabled
+    enable_traceability               = local.traceability_enabled
+    integration_owner                 = var.integration_owner
+    auth_type                         = local.auth_type
+    api_token                         = local.api_token
+    github_app_auth_method            = local.github_app_auth_method
+    github_app_credential_app_id      = local.github_app_credential_app_id
+    github_app_credential_private_key = local.github_app_credential_private_key
   }
 }
 

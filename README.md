@@ -19,25 +19,40 @@ A Terraform module for provisioning the DevSecOps CC toolchains.
 ### Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.82.1 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 2.10.0 |
 
 ### Modules
 
-No modules.
+| Name | Source | Version |
+| ---- | ------ | ------- |
+| <a name="module_app_repo"></a> [app\_repo](#module\_app\_repo) | ./customizations/repositories | n/a |
+| <a name="module_compliance_pipelines_repo"></a> [compliance\_pipelines\_repo](#module\_compliance\_pipelines\_repo) | ./customizations/repositories | n/a |
+| <a name="module_integrations"></a> [integrations](#module\_integrations) | ./integrations | n/a |
+| <a name="module_inventory_repo"></a> [inventory\_repo](#module\_inventory\_repo) | ./customizations/repositories | n/a |
+| <a name="module_issues_repo"></a> [issues\_repo](#module\_issues\_repo) | ./customizations/repositories | n/a |
+| <a name="module_pipeline_cc"></a> [pipeline\_cc](#module\_pipeline\_cc) | ./pipeline-cc | n/a |
+| <a name="module_pipeline_config_repo"></a> [pipeline\_config\_repo](#module\_pipeline\_config\_repo) | ./customizations/repositories | n/a |
+| <a name="module_pipeline_properties"></a> [pipeline\_properties](#module\_pipeline\_properties) | ./customizations/pipeline-property-adder | n/a |
+| <a name="module_repository_properties"></a> [repository\_properties](#module\_repository\_properties) | ./customizations/repository-adder | n/a |
+| <a name="module_services"></a> [services](#module\_services) | ./services | n/a |
 
 ### Resources
 
-No resources.
+| Name | Type |
+| ---- | ---- |
+| [ibm_cd_toolchain.toolchain_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_toolchain) | resource |
+| [ibm_cd_toolchain_tool_pipeline.cc_pipeline](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_toolchain_tool_pipeline) | resource |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_add_pipeline_definitions"></a> [add\_pipeline\_definitions](#input\_add\_pipeline\_definitions) | Set to `true` to add pipeline definitions. | `string` | `"true"` | no |
 | <a name="input_app_group"></a> [app\_group](#input\_app\_group) | Specify Git user/group for app repo. | `string` | `""` | no |
-| <a name="input_app_repo_auth_type"></a> [app\_repo\_auth\_type](#input\_app\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `""` | no |
+| <a name="input_app_repo_auth_type"></a> [app\_repo\_auth\_type](#input\_app\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. `oauth`, `pat` or `github_app`. | `string` | `""` | no |
 | <a name="input_app_repo_blind_connection"></a> [app\_repo\_blind\_connection](#input\_app\_repo\_blind\_connection) | Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server. | `string` | `""` | no |
 | <a name="input_app_repo_branch"></a> [app\_repo\_branch](#input\_app\_repo\_branch) | The default branch of the app repo. | `string` | `"master"` | no |
 | <a name="input_app_repo_clone_to_git_id"></a> [app\_repo\_clone\_to\_git\_id](#input\_app\_repo\_clone\_to\_git\_id) | Custom server GUID, or other options for 'git\_id' field in the browser UI. | `string` | `""` | no |
@@ -46,6 +61,10 @@ No resources.
 | <a name="input_app_repo_git_provider"></a> [app\_repo\_git\_provider](#input\_app\_repo\_git\_provider) | By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'. | `string` | `""` | no |
 | <a name="input_app_repo_git_token_secret_crn"></a> [app\_repo\_git\_token\_secret\_crn](#input\_app\_repo\_git\_token\_secret\_crn) | The CRN for the app repository Git Token. | `string` | `""` | no |
 | <a name="input_app_repo_git_token_secret_name"></a> [app\_repo\_git\_token\_secret\_name](#input\_app\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
+| <a name="input_app_repo_github_app_auth_method"></a> [app\_repo\_github\_app\_auth\_method](#input\_app\_repo\_github\_app\_auth\_method) | The GitHub App authorization method for app-repo. E.g. `custom` or `managed` | `string` | `""` | no |
+| <a name="input_app_repo_github_app_credential_app_id"></a> [app\_repo\_github\_app\_credential\_app\_id](#input\_app\_repo\_github\_app\_credential\_app\_id) | The GitHub App App ID for app-repo | `string` | `""` | no |
+| <a name="input_app_repo_github_app_credential_private_key_crn"></a> [app\_repo\_github\_app\_credential\_private\_key\_crn](#input\_app\_repo\_github\_app\_credential\_private\_key\_crn) | CRN of the GitHub App private key secret in the secret provider for app-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
+| <a name="input_app_repo_github_app_credential_private_key_secret_name"></a> [app\_repo\_github\_app\_credential\_private\_key\_secret\_name](#input\_app\_repo\_github\_app\_credential\_private\_key\_secret\_name) | Name of the GitHub App private key secret in the secret provider for app-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
 | <a name="input_app_repo_initialization_type"></a> [app\_repo\_initialization\_type](#input\_app\_repo\_initialization\_type) | The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`. | `string` | `""` | no |
 | <a name="input_app_repo_integration_owner"></a> [app\_repo\_integration\_owner](#input\_app\_repo\_integration\_owner) | The name of the integration owner. | `string` | `""` | no |
 | <a name="input_app_repo_is_private_repo"></a> [app\_repo\_is\_private\_repo](#input\_app\_repo\_is\_private\_repo) | Set to `true` to make repository private. | `bool` | `true` | no |
@@ -66,10 +85,14 @@ No resources.
 | <a name="input_authorization_policy_creation"></a> [authorization\_policy\_creation](#input\_authorization\_policy\_creation) | Set to disabled if you do not want this policy auto created. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_existing_repo_url"></a> [compliance\_pipeline\_existing\_repo\_url](#input\_compliance\_pipeline\_existing\_repo\_url) | The URL of an existing compliance pipelines repository. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_group"></a> [compliance\_pipeline\_group](#input\_compliance\_pipeline\_group) | Specify Git user/group for compliance pipline repo. | `string` | `""` | no |
-| <a name="input_compliance_pipeline_repo_auth_type"></a> [compliance\_pipeline\_repo\_auth\_type](#input\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `""` | no |
+| <a name="input_compliance_pipeline_repo_auth_type"></a> [compliance\_pipeline\_repo\_auth\_type](#input\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. `oauth`, `pat` or `github_app`. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_git_provider"></a> [compliance\_pipeline\_repo\_git\_provider](#input\_compliance\_pipeline\_repo\_git\_provider) | Choose the default git provider for change management repo | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_git_token_secret_crn"></a> [compliance\_pipeline\_repo\_git\_token\_secret\_crn](#input\_compliance\_pipeline\_repo\_git\_token\_secret\_crn) | The CRN for the Compliance Pipeline repository Git Token. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_git_token_secret_name"></a> [compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
+| <a name="input_compliance_pipeline_repo_github_app_auth_method"></a> [compliance\_pipeline\_repo\_github\_app\_auth\_method](#input\_compliance\_pipeline\_repo\_github\_app\_auth\_method) | The GitHub App authorization method for compliance-pipeline-repo. E.g. `custom` or `managed` | `string` | `""` | no |
+| <a name="input_compliance_pipeline_repo_github_app_credential_app_id"></a> [compliance\_pipeline\_repo\_github\_app\_credential\_app\_id](#input\_compliance\_pipeline\_repo\_github\_app\_credential\_app\_id) | The GitHub App App ID for compliance-pipeline-repo | `string` | `""` | no |
+| <a name="input_compliance_pipeline_repo_github_app_credential_private_key_crn"></a> [compliance\_pipeline\_repo\_github\_app\_credential\_private\_key\_crn](#input\_compliance\_pipeline\_repo\_github\_app\_credential\_private\_key\_crn) | CRN of the GitHub App private key secret in the secret provider for compliance-pipeline-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
+| <a name="input_compliance_pipeline_repo_github_app_credential_private_key_secret_name"></a> [compliance\_pipeline\_repo\_github\_app\_credential\_private\_key\_secret\_name](#input\_compliance\_pipeline\_repo\_github\_app\_credential\_private\_key\_secret\_name) | Name of the GitHub App private key secret in the secret provider for compliance-pipeline-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_integration_owner"></a> [compliance\_pipeline\_repo\_integration\_owner](#input\_compliance\_pipeline\_repo\_integration\_owner) | The name of the integration owner. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_issues_enabled"></a> [compliance\_pipeline\_repo\_issues\_enabled](#input\_compliance\_pipeline\_repo\_issues\_enabled) | Set to `true` to enable issues. | `bool` | `false` | no |
 | <a name="input_compliance_pipeline_repo_secret_group"></a> [compliance\_pipeline\_repo\_secret\_group](#input\_compliance\_pipeline\_repo\_secret\_group) | Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
@@ -98,7 +121,7 @@ No resources.
 | <a name="input_cos_hmac_access_key_id_secret_name"></a> [cos\_hmac\_access\_key\_id\_secret\_name](#input\_cos\_hmac\_access\_key\_id\_secret\_name) | The name of the secret in Secrets Manager for the HMAC Access Key ID. | `string` | `""` | no |
 | <a name="input_cos_hmac_access_key_secret_crn"></a> [cos\_hmac\_access\_key\_secret\_crn](#input\_cos\_hmac\_access\_key\_secret\_crn) | The CRN for the HMAC Secret Access Key. The HMAC Secret Access Key which is part of an HMAC (Hash Message Authentication Code) credential set. HMAC is identified by a combination of an Access Key ID and a Secret Access Key. | `string` | `""` | no |
 | <a name="input_cos_hmac_secret_access_id_crn"></a> [cos\_hmac\_secret\_access\_id\_crn](#input\_cos\_hmac\_secret\_access\_id\_crn) | The CRN for the HMAC Access Key ID. The HMAC Access Key ID which is part of an HMAC (Hash Message Authentication Code) credential set. HMAC is identified by a combination of an Access Key ID and a Secret Access Key. | `string` | `""` | no |
-| <a name="input_cos_hmac_secret_access_key_secret_name"></a> [cos\_hmac\_secret\_access\_key\_secret\_name](#input\_cos\_hmac\_secret\_access\_key\_secret\_name) | The name of the secret in Secrets Manager for the HMAC Secrte Access Key. | `string` | `""` | no |
+| <a name="input_cos_hmac_secret_access_key_secret_name"></a> [cos\_hmac\_secret\_access\_key\_secret\_name](#input\_cos\_hmac\_secret\_access\_key\_secret\_name) | The name of the secret in Secrets Manager for the HMAC Secret Access Key. | `string` | `""` | no |
 | <a name="input_cos_instance_crn"></a> [cos\_instance\_crn](#input\_cos\_instance\_crn) | The CRN of the Cloud Object Storage instance. | `string` | `""` | no |
 | <a name="input_cos_integration_name"></a> [cos\_integration\_name](#input\_cos\_integration\_name) | The name of the COS integration. | `string` | `"Evidence Store"` | no |
 | <a name="input_create_triggers"></a> [create\_triggers](#input\_create\_triggers) | Set to `true` to create the default triggers associated with the compliance repos and sample app. | `string` | `"true"` | no |
@@ -118,12 +141,16 @@ No resources.
 | <a name="input_event_notifications_tool_name"></a> [event\_notifications\_tool\_name](#input\_event\_notifications\_tool\_name) | The name of the Event Notifications integration. | `string` | `"Event Notifications"` | no |
 | <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | API key used to create the toolchain. | `string` | n/a | yes |
 | <a name="input_inventory_group"></a> [inventory\_group](#input\_inventory\_group) | Specify Git user/group for inventory repo. | `string` | `""` | no |
-| <a name="input_inventory_repo_auth_type"></a> [inventory\_repo\_auth\_type](#input\_inventory\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `""` | no |
+| <a name="input_inventory_repo_auth_type"></a> [inventory\_repo\_auth\_type](#input\_inventory\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. `oauth`, `pat` or `github_app`. | `string` | `""` | no |
 | <a name="input_inventory_repo_blind_connection"></a> [inventory\_repo\_blind\_connection](#input\_inventory\_repo\_blind\_connection) | Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server. | `string` | `""` | no |
 | <a name="input_inventory_repo_git_id"></a> [inventory\_repo\_git\_id](#input\_inventory\_repo\_git\_id) | Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server. | `string` | `""` | no |
 | <a name="input_inventory_repo_git_provider"></a> [inventory\_repo\_git\_provider](#input\_inventory\_repo\_git\_provider) | Git provider for inventory repo | `string` | `""` | no |
 | <a name="input_inventory_repo_git_token_secret_crn"></a> [inventory\_repo\_git\_token\_secret\_crn](#input\_inventory\_repo\_git\_token\_secret\_crn) | The CRN for the Inventory repository Git Token. | `string` | `""` | no |
 | <a name="input_inventory_repo_git_token_secret_name"></a> [inventory\_repo\_git\_token\_secret\_name](#input\_inventory\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
+| <a name="input_inventory_repo_github_app_auth_method"></a> [inventory\_repo\_github\_app\_auth\_method](#input\_inventory\_repo\_github\_app\_auth\_method) | The GitHub App authorization method for inventory-repo. E.g. `custom` or `managed` | `string` | `""` | no |
+| <a name="input_inventory_repo_github_app_credential_app_id"></a> [inventory\_repo\_github\_app\_credential\_app\_id](#input\_inventory\_repo\_github\_app\_credential\_app\_id) | The GitHub App App ID for inventory-repo | `string` | `""` | no |
+| <a name="input_inventory_repo_github_app_credential_private_key_crn"></a> [inventory\_repo\_github\_app\_credential\_private\_key\_crn](#input\_inventory\_repo\_github\_app\_credential\_private\_key\_crn) | CRN of the GitHub App private key secret in the secret provider for inventory-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
+| <a name="input_inventory_repo_github_app_credential_private_key_secret_name"></a> [inventory\_repo\_github\_app\_credential\_private\_key\_secret\_name](#input\_inventory\_repo\_github\_app\_credential\_private\_key\_secret\_name) | Name of the GitHub App private key secret in the secret provider for inventory-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
 | <a name="input_inventory_repo_initialization_type"></a> [inventory\_repo\_initialization\_type](#input\_inventory\_repo\_initialization\_type) | The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`. | `string` | `""` | no |
 | <a name="input_inventory_repo_integration_owner"></a> [inventory\_repo\_integration\_owner](#input\_inventory\_repo\_integration\_owner) | The name of the integration owner. | `string` | `""` | no |
 | <a name="input_inventory_repo_is_private_repo"></a> [inventory\_repo\_is\_private\_repo](#input\_inventory\_repo\_is\_private\_repo) | Set to `true` to make repository private. | `bool` | `true` | no |
@@ -135,12 +162,16 @@ No resources.
 | <a name="input_inventory_repo_traceability_enabled"></a> [inventory\_repo\_traceability\_enabled](#input\_inventory\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
 | <a name="input_inventory_repo_url"></a> [inventory\_repo\_url](#input\_inventory\_repo\_url) | This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates. | `string` | `""` | no |
 | <a name="input_issues_group"></a> [issues\_group](#input\_issues\_group) | Specify Git user/group for issues repo. | `string` | `""` | no |
-| <a name="input_issues_repo_auth_type"></a> [issues\_repo\_auth\_type](#input\_issues\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `""` | no |
+| <a name="input_issues_repo_auth_type"></a> [issues\_repo\_auth\_type](#input\_issues\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. `oauth`, `pat` or `github_app`. | `string` | `""` | no |
 | <a name="input_issues_repo_blind_connection"></a> [issues\_repo\_blind\_connection](#input\_issues\_repo\_blind\_connection) | Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server. | `string` | `""` | no |
 | <a name="input_issues_repo_git_id"></a> [issues\_repo\_git\_id](#input\_issues\_repo\_git\_id) | Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server. | `string` | `""` | no |
 | <a name="input_issues_repo_git_provider"></a> [issues\_repo\_git\_provider](#input\_issues\_repo\_git\_provider) | Git provider for issue repo | `string` | `""` | no |
 | <a name="input_issues_repo_git_token_secret_crn"></a> [issues\_repo\_git\_token\_secret\_crn](#input\_issues\_repo\_git\_token\_secret\_crn) | The CRN for the Issues repository Git Token. | `string` | `""` | no |
 | <a name="input_issues_repo_git_token_secret_name"></a> [issues\_repo\_git\_token\_secret\_name](#input\_issues\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
+| <a name="input_issues_repo_github_app_auth_method"></a> [issues\_repo\_github\_app\_auth\_method](#input\_issues\_repo\_github\_app\_auth\_method) | The GitHub App authorization method for issues-repo. E.g. `custom` or `managed` | `string` | `""` | no |
+| <a name="input_issues_repo_github_app_credential_app_id"></a> [issues\_repo\_github\_app\_credential\_app\_id](#input\_issues\_repo\_github\_app\_credential\_app\_id) | The GitHub App App ID for issues-repo | `string` | `""` | no |
+| <a name="input_issues_repo_github_app_credential_private_key_crn"></a> [issues\_repo\_github\_app\_credential\_private\_key\_crn](#input\_issues\_repo\_github\_app\_credential\_private\_key\_crn) | CRN of the GitHub App private key secret in the secret provider for issues-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
+| <a name="input_issues_repo_github_app_credential_private_key_secret_name"></a> [issues\_repo\_github\_app\_credential\_private\_key\_secret\_name](#input\_issues\_repo\_github\_app\_credential\_private\_key\_secret\_name) | Name of the GitHub App private key secret in the secret provider for issues-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
 | <a name="input_issues_repo_initialization_type"></a> [issues\_repo\_initialization\_type](#input\_issues\_repo\_initialization\_type) | The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`. | `string` | `""` | no |
 | <a name="input_issues_repo_integration_owner"></a> [issues\_repo\_integration\_owner](#input\_issues\_repo\_integration\_owner) | The name of the integration owner. | `string` | `""` | no |
 | <a name="input_issues_repo_is_private_repo"></a> [issues\_repo\_is\_private\_repo](#input\_issues\_repo\_is\_private\_repo) | Set to `true` to make repository private. | `bool` | `true` | no |
@@ -157,7 +188,7 @@ No resources.
 | <a name="input_kp_resource_group"></a> [kp\_resource\_group](#input\_kp\_resource\_group) | The resource group containing the Key Protect instance for your secrets. | `string` | `"Default"` | no |
 | <a name="input_pipeline_branch"></a> [pipeline\_branch](#input\_pipeline\_branch) | The branch within pipeline definitions repository for Compliance CC Toolchain. | `string` | `"open-v10"` | no |
 | <a name="input_pipeline_config_group"></a> [pipeline\_config\_group](#input\_pipeline\_config\_group) | Specify Git user/group for pipeline config repo. | `string` | `""` | no |
-| <a name="input_pipeline_config_repo_auth_type"></a> [pipeline\_config\_repo\_auth\_type](#input\_pipeline\_config\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `""` | no |
+| <a name="input_pipeline_config_repo_auth_type"></a> [pipeline\_config\_repo\_auth\_type](#input\_pipeline\_config\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. `oauth`, `pat` or `github_app`. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_blind_connection"></a> [pipeline\_config\_repo\_blind\_connection](#input\_pipeline\_config\_repo\_blind\_connection) | Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_branch"></a> [pipeline\_config\_repo\_branch](#input\_pipeline\_config\_repo\_branch) | Specify a branch of a repository to clone that contains a custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_clone_from_url"></a> [pipeline\_config\_repo\_clone\_from\_url](#input\_pipeline\_config\_repo\_clone\_from\_url) | Specify a repository to clone that contains a custom pipeline-config.yaml file. | `string` | `""` | no |
@@ -166,6 +197,10 @@ No resources.
 | <a name="input_pipeline_config_repo_git_provider"></a> [pipeline\_config\_repo\_git\_provider](#input\_pipeline\_config\_repo\_git\_provider) | Git provider for pipeline repo config | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_git_token_secret_crn"></a> [pipeline\_config\_repo\_git\_token\_secret\_crn](#input\_pipeline\_config\_repo\_git\_token\_secret\_crn) | The CRN for the Pipeline Config repository Git Token. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_git_token_secret_name"></a> [pipeline\_config\_repo\_git\_token\_secret\_name](#input\_pipeline\_config\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
+| <a name="input_pipeline_config_repo_github_app_auth_method"></a> [pipeline\_config\_repo\_github\_app\_auth\_method](#input\_pipeline\_config\_repo\_github\_app\_auth\_method) | The GitHub App authorization method for pipeline-config-repo. E.g. `custom` or `managed` | `string` | `""` | no |
+| <a name="input_pipeline_config_repo_github_app_credential_app_id"></a> [pipeline\_config\_repo\_github\_app\_credential\_app\_id](#input\_pipeline\_config\_repo\_github\_app\_credential\_app\_id) | The GitHub App App ID for pipeline-config-repo | `string` | `""` | no |
+| <a name="input_pipeline_config_repo_github_app_credential_private_key_crn"></a> [pipeline\_config\_repo\_github\_app\_credential\_private\_key\_crn](#input\_pipeline\_config\_repo\_github\_app\_credential\_private\_key\_crn) | CRN of the GitHub App private key secret in the secret provider for pipeline-config-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
+| <a name="input_pipeline_config_repo_github_app_credential_private_key_secret_name"></a> [pipeline\_config\_repo\_github\_app\_credential\_private\_key\_secret\_name](#input\_pipeline\_config\_repo\_github\_app\_credential\_private\_key\_secret\_name) | Name of the GitHub App private key secret in the secret provider for pipeline-config-repo. Only used when auth method is `github_app`. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_initialization_type"></a> [pipeline\_config\_repo\_initialization\_type](#input\_pipeline\_config\_repo\_initialization\_type) | The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_integration_owner"></a> [pipeline\_config\_repo\_integration\_owner](#input\_pipeline\_config\_repo\_integration\_owner) | The name of the integration owner. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_is_private_repo"></a> [pipeline\_config\_repo\_is\_private\_repo](#input\_pipeline\_config\_repo\_is\_private\_repo) | Set to `true` to make repository private. | `bool` | `true` | no |
@@ -185,12 +220,16 @@ No resources.
 | <a name="input_privateworker_credentials_secret_group"></a> [privateworker\_credentials\_secret\_group](#input\_privateworker\_credentials\_secret\_group) | Secret group prefix for the Private Worker secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_privateworker_credentials_secret_name"></a> [privateworker\_credentials\_secret\_name](#input\_privateworker\_credentials\_secret\_name) | Name of the privateworker secret in the secret provider. | `string` | `"private-worker-service-api"` | no |
 | <a name="input_privateworker_name"></a> [privateworker\_name](#input\_privateworker\_name) | The name of the private worker integration. | `string` | `"private-worker-tool-01"` | no |
-| <a name="input_repo_auth_type"></a> [repo\_auth\_type](#input\_repo\_auth\_type) | The auth type for the repo `oauth` or 'pat` (personal access token). Applies to all the default compliance repositories but can be overriden by the repository specific variable.` | `string` | `""` | no |
+| <a name="input_repo_auth_type"></a> [repo\_auth\_type](#input\_repo\_auth\_type) | The auth type for the repo `oauth`, `pat` or `github_app` (personal access token). Applies to all the default compliance repositories but can be overriden by the repository specific variable. | `string` | `""` | no |
 | <a name="input_repo_blind_connection"></a> [repo\_blind\_connection](#input\_repo\_blind\_connection) | Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server. | `string` | `""` | no |
 | <a name="input_repo_git_id"></a> [repo\_git\_id](#input\_repo\_git\_id) | The Git ID for the compliance repositories. | `string` | `""` | no |
 | <a name="input_repo_git_provider"></a> [repo\_git\_provider](#input\_repo\_git\_provider) | The Git provider type. | `string` | `""` | no |
 | <a name="input_repo_git_token_crn"></a> [repo\_git\_token\_crn](#input\_repo\_git\_token\_crn) | The CRN of the  Git token secret in the secret provider. Specifying a CRN for the Git Token automatically sets the authentication type to `pat`. | `string` | `""` | no |
 | <a name="input_repo_git_token_secret_name"></a> [repo\_git\_token\_secret\_name](#input\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`. | `string` | `""` | no |
+| <a name="input_repo_github_app_auth_method"></a> [repo\_github\_app\_auth\_method](#input\_repo\_github\_app\_auth\_method) | The GitHub App authorization method. E.g. `custom` or `managed` | `string` | `""` | no |
+| <a name="input_repo_github_app_credential_app_id"></a> [repo\_github\_app\_credential\_app\_id](#input\_repo\_github\_app\_credential\_app\_id) | The GitHub App App ID | `string` | `""` | no |
+| <a name="input_repo_github_app_credential_private_key_crn"></a> [repo\_github\_app\_credential\_private\_key\_crn](#input\_repo\_github\_app\_credential\_private\_key\_crn) | CRN of the GitHub App private key secret in the secret provider. Only used when auth method is `github_app`. | `string` | `""` | no |
+| <a name="input_repo_github_app_credential_private_key_secret_name"></a> [repo\_github\_app\_credential\_private\_key\_secret\_name](#input\_repo\_github\_app\_credential\_private\_key\_secret\_name) | Name of the GitHub App private key secret in the secret provider. Only used when auth method is `github_app`. | `string` | `""` | no |
 | <a name="input_repo_group"></a> [repo\_group](#input\_repo\_group) | Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). | `string` | `""` | no |
 | <a name="input_repo_integration_owner"></a> [repo\_integration\_owner](#input\_repo\_integration\_owner) | The integration owner of the repository. Applies to all the default compliance repositories but can be overriden by the repository specific variable. | `string` | `""` | no |
 | <a name="input_repo_root_url"></a> [repo\_root\_url](#input\_repo\_root\_url) | (Optional) The Root URL of the server. e.g. https://git.example.com. | `string` | `""` | no |
@@ -250,7 +289,7 @@ No resources.
 ### Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_app_repo"></a> [app\_repo](#output\_app\_repo) | The Application repo. |
 | <a name="output_app_repo_git_id"></a> [app\_repo\_git\_id](#output\_app\_repo\_git\_id) | The app repo Git ID. |
 | <a name="output_app_repo_git_provider"></a> [app\_repo\_git\_provider](#output\_app\_repo\_git\_provider) | The app repo provider 'hostedgit', 'githubconsolidated' etc. |

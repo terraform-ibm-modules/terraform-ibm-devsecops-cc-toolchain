@@ -10,6 +10,30 @@ variable "pipeline_id" {
   default     = ""
 }
 
+variable "auth_type" {
+  type        = string
+  description = "Select the method of authentication that will be used to access the git provider. `oauth`, `pat` or `github_app`. This is the top level setting can be overridden with a local setting from `repository_data`."
+  default     = ""
+}
+
+variable "github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for pipeline-config-repo. E.g. 'custom' or 'managed'. Only used when auth method is `github_app`. This is the top level setting can be overridden with a local setting from `repository_data`."
+  default     = "managed"
+}
+
+variable "github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID. Only used when auth method is `github_app`. This is the top level setting can be overridden with a local setting from `repository_data`."
+  default     = ""
+}
+
+variable "github_app_credential_private_key_secret_ref" {
+  type        = string
+  description = "The secret ref to the Secrets Manager secret for the GitHub App private key secret. Only used when auth method is `github_app`. This is the top level setting can be overridden with a local setting from `repository_data`."
+  default     = ""
+}
+
 variable "git_token_secret_ref" {
   type        = string
   description = "The secret ref to the Secrets Manager secret for the Git Token. This is the top level setting can be overridden with a local setting from `repository_data`."

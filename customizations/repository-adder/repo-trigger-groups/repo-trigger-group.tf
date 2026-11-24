@@ -7,14 +7,15 @@ locals {
   # `default_branch`
   # `worker_id`
 
-  git_token_secret_ref = try(var.repository_data.git_token_secret_ref, var.git_token_secret_ref)
-  default_branch       = try(var.repository_data.default_branch, var.default_branch)
-  repository_owner     = try(var.repository_data.repository_owner, var.repository_owner)
-  mode                 = try(var.repository_data.mode, var.mode)
-  worker_id            = try(var.repository_data.worker_id, var.worker_id)
-  blind_connection     = try(var.repository_data.blind_connection, var.blind_connection)
-  root_url             = try(var.repository_data.root_url, var.root_url)
-  title                = try(var.repository_data.title, var.title)
+  git_token_secret_ref                         = try(var.repository_data.git_token_secret_ref, var.git_token_secret_ref)
+  github_app_credential_private_key_secret_ref = try(var.repository_data.github_app_credential_private_key_secret_ref, var.github_app_credential_private_key_secret_ref)
+  default_branch                               = try(var.repository_data.default_branch, var.default_branch)
+  repository_owner                             = try(var.repository_data.repository_owner, var.repository_owner)
+  mode                                         = try(var.repository_data.mode, var.mode)
+  worker_id                                    = try(var.repository_data.worker_id, var.worker_id)
+  blind_connection                             = try(var.repository_data.blind_connection, var.blind_connection)
+  root_url                                     = try(var.repository_data.root_url, var.root_url)
+  title                                        = try(var.repository_data.title, var.title)
   #if not provided use `hostedgit` as the default.
   repo_url_raw = try(trimsuffix(var.repository_data.repository_url, ".git"), "")
 
@@ -67,39 +68,49 @@ locals {
     }
   ])
 
+  auth_type = try(var.repository_data.auth_type, var.auth_type, (local.git_token_secret_ref != "") ? "pat" : "oauth")
+
+  github_app_auth_method       = (local.auth_type == "github_app") ? try(var.repository_data.github_app_auth_method, var.github_app_auth_method, "managed") : "managed"
+  github_app_credential_app_id = (local.github_app_auth_method == "custom") ? try(var.repository_data.github_app_credential_app_id, var.github_app_credential_app_id, "") : ""
+
+  #
+  selected_secret = (local.auth_type == "pat") ? local.git_token_secret_ref : (local.auth_type == "github_app" ? local.github_app_credential_private_key_secret_ref : "")
+
   secret_ref_prefix = (
     (var.config_data.secrets_provider_type == "kp") ? "{vault::${var.config_data.secrets_integration_name}." :
     (var.config_data.secrets_provider_type == "sm") ? "{vault::${var.config_data.secrets_integration_name}.${var.config_data.secrets_group}." : ""
   )
 
   #check if provided secret contains the full ref
-  is_secret_ref = ((startswith(local.git_token_secret_ref, "{vault::")) || (startswith(local.git_token_secret_ref, "crn:")) || (startswith(local.git_token_secret_ref, "ref://"))) ? true : false
-  secret_ref    = (local.is_secret_ref) ? local.git_token_secret_ref : "${local.secret_ref_prefix}${local.git_token_secret_ref}}"
+  is_secret_ref = ((startswith(local.selected_secret, "{vault::")) || (startswith(local.selected_secret, "crn:")) || (startswith(local.selected_secret, "ref://"))) ? true : false
+  secret_ref    = (local.is_secret_ref) ? local.selected_secret : "${local.secret_ref_prefix}${local.selected_secret}}"
 
 }
 
 # Create a repository integration
 module "app_repo" {
-  source                = "../../repositories"
-  tool_name             = local.repo_name
-  toolchain_id          = var.toolchain_id
-  git_provider          = local.git_provider
-  initialization_type   = (local.mode == "clone") ? "clone_if_not_exists" : "link"
-  repository_url        = local.repo_url_raw
-  source_repository_url = local.repo_url_raw
-  repository_name       = local.repo_name
-  is_private_repo       = true
-  owner_id              = local.repository_owner
-  issues_enabled        = true
-  traceability_enabled  = false
-  integration_owner     = ""
-  auth_type             = (local.git_token_secret_ref == "") ? "oauth" : "pat"
-  secret_ref            = (local.git_token_secret_ref == "") ? "" : local.secret_ref
-  git_id                = local.git_id
-  blind_connection      = local.blind_connection
-  root_url              = local.root_url
-  title                 = local.title
-  default_git_provider  = ""
+  source                       = "../../repositories"
+  tool_name                    = local.repo_name
+  toolchain_id                 = var.toolchain_id
+  git_provider                 = local.git_provider
+  initialization_type          = (local.mode == "clone") ? "clone_if_not_exists" : "link"
+  repository_url               = local.repo_url_raw
+  source_repository_url        = local.repo_url_raw
+  repository_name              = local.repo_name
+  is_private_repo              = true
+  owner_id                     = local.repository_owner
+  issues_enabled               = true
+  traceability_enabled         = false
+  integration_owner            = ""
+  auth_type                    = local.auth_type
+  secret_ref                   = (local.selected_secret == "") ? "" : local.secret_ref
+  git_id                       = local.git_id
+  blind_connection             = local.blind_connection
+  root_url                     = local.root_url
+  title                        = local.title
+  default_git_provider         = ""
+  github_app_auth_method       = local.github_app_auth_method
+  github_app_credential_app_id = local.github_app_credential_app_id
 }
 
 
