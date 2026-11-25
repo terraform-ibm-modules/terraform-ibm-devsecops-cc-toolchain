@@ -305,10 +305,10 @@ module "inventory_repo" {
   integration_owner            = (var.inventory_repo_integration_owner == "") ? var.repo_integration_owner : var.inventory_repo_integration_owner
   auth_type                    = local.inventory_repo_auth_type
   secret_ref                   = local.inventory_repo_secret_ref
-  git_id                       = (var.inventory_repo_git_id == "") ? var.repo_git_id : var.repo_git_id
+  git_id                       = (var.inventory_repo_git_id == "") ? var.repo_git_id : var.inventory_repo_git_id
   blind_connection             = (var.inventory_repo_blind_connection == "") ? var.repo_blind_connection : var.inventory_repo_blind_connection
   title                        = (var.inventory_repo_title == "") ? var.repo_title : var.inventory_repo_title
-  root_url                     = (var.inventory_repo_root_url == "") ? var.repo_root_url : var.repo_root_url
+  root_url                     = (var.inventory_repo_root_url == "") ? var.repo_root_url : var.inventory_repo_root_url
   default_git_provider         = var.default_git_provider
   github_app_auth_method       = (var.inventory_repo_github_app_auth_method != "") ? var.inventory_repo_github_app_auth_method : var.repo_github_app_auth_method
   github_app_credential_app_id = (var.inventory_repo_github_app_credential_app_id != "") ? var.inventory_repo_github_app_credential_app_id : var.repo_github_app_credential_app_id

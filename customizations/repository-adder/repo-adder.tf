@@ -50,7 +50,7 @@ locals {
       enabled             = try(trigger.enabled, true)
       default_branch      = try(trigger.default_branch, "")
       event_listener      = try(trigger.event_listener, "")
-      pipeline_id         = try(trigger.pipeline_id, "ci")
+      pipeline_id         = try(trigger.pipeline_id, "cc")
       events              = try(trigger.events, "[]")
       timezone            = try(trigger.timezone, "")
       max_concurrent_runs = try(trigger.max_concurrent_runs, 1)
